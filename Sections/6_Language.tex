@@ -1,0 +1,27 @@
+\section{Language and Referencing Guide}
+
+This document uses several tools to ensure consistent and high\-/quality language and references. This section provides guidance on correctly referencing sections, figures, code, and literature, as well as on proper punctuation and quotation practices.
+
+\subsection{Referencing}
+
+Cross\-/referencing is done using the \texttt{cleveref} package, which automatically includes the type of reference (e.g., figure, algorithm, listing) in the citation. For example, \cref{lst:fibonacci} shows how to calculate Fibonacci numbers while \cref{fig:theway} displays an image. Algorithms and procedures are referenced similarly, such as \cref{alg:expBySquaring} and \cref{pro:mult}.
+
+References to academic works should be made using \verb|\cite| or \verb|\textcite|. For example, \cite{xx00} discusses some of the concepts used here while \textcite{xx00} provides an in\-/depth explanation. The difference is that \verb|\textcite| integrates the citation naturally into the sentence structure.
+
+\subsection{Hyphenation and Punctuation}
+
+Different dashes are used for different purposes in English typesetting:
+
+\begin{itemize}
+    \item \textbf{Hyphen (\-/)} is used to join words, as in \enquote{well\-/known algorithm}.
+    \item \textbf{En dash (\-/\-/)} is used for numeric ranges, such as \enquote{pages 10\--20} or \enquote{January\--March}.
+    \item \textbf{Em dash (\-/\-/\-/)} is used as a parenthetical break \--- like this \--- in a sentence.
+\end{itemize}
+
+\subsection{Quotations}
+
+To ensure proper quotation formatting across languages and document styles, the \texttt{csquotes} package should be used. It provides the \verb|\enquote| command, which automatically adapts to the chosen language. For example: \enquote{This is a correctly formatted quote.}
+
+\subsection{The \texttt{glossaries} Package}
+
+The \texttt{glossaries} package is useful for defining acronyms. Here are some examples: \glspl{api}, \gls{cpu}, \gls{os}, \gls{dr}, \gls{etc}. The results can be seen after the appendix.

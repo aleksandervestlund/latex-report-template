@@ -1,0 +1,424 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{packages}
+
+% +---------------------------------+
+% |        Table of Contents        |
+% +---------------------------------+
+% | 1. Page setup                   |
+% | 2. Document structure           |
+% | 3. Mathematics                  |
+% | 4. Figures and tables           |
+% | 5. Code                         |
+% | 6. Algorithms                   |
+% | 7. Bibliography                 |
+% | 8. Referencing                  |
+% | 9. General                      |
+% | 10. Page layout and formatting  |
+% | 11. Numbering within sections   |
+% | 12. Language                    |
+% +---------------------------------+
+
+% ----------- Page setup ------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[babel]{microtype}
+\usepackage{lmodern}
+\usepackage[
+    a4paper,
+    total={
+        150mm,
+        245mm,
+        footskip=14mm,
+    },
+]{geometry}
+\usepackage[onehalfspacing]{setspace}
+\setlength{\parskip}{0.8em}
+\pdfgentounicode=1
+\sloppy
+
+% ------- Document structure --------
+\usepackage{etoolbox}
+\patchcmd{\abstract}{\small}{}{}{}
+
+\newcommand{\keywordsname}{Keywords}
+\newcommand{\keywords}[1]{
+    \textbf{\emph{\keywordsname}} \--- #1
+}
+
+\newcommand{\frontmatter}{
+    \pagenumbering{roman}
+}
+\newcommand{\mainmatter}{
+    \newpage
+    \pagenumbering{arabic}
+}
+
+\usepackage{appendix}
+\newcommand{\addappendix}{
+    \phantomsection
+    \newpage
+    \appendix
+    \section*{\appendixname}
+    \addcontentsline{toc}{section}{\appendixname}
+    \renewcommand{\thesubsection}{\Alph{subsection}}
+}
+
+\usepackage{afterpage}
+\newcommand{\blankinfo}{This page was intentionally left blank}
+\newcommand{\blankpage}{
+    \phantomsection
+    \newpage
+    \hbox{}
+    \vfill
+    \centerline{\MakeUppercase{\blankinfo}}
+    \vfill
+    \thispagestyle{empty}
+    \addtocounter{page}{-1}
+    \newpage
+}
+
+% ----------- Mathematics -----------
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{calc}
+\usepackage{cancel}
+\usepackage{commath}
+\usepackage{faktor}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{nicefrac}
+\usepackage{thmtools}
+
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Var}{Var}
+
+% Both English and Norwegian versions
+\declaretheorem[numberwithin=section]{
+    corollary,korollar,
+    lemma,
+    theorem,teorem  % Cannot have trailing comma
+}
+\declaretheorem[style=remark]{
+    remark,merk
+}
+\declaretheorem{
+    exercise,oppgave
+}
+
+\let\abs\relax
+\let\norm\relax
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+
+\makeatletter
+\DeclareRobustCommand{\dd}{\relax\ifmmode\daux\relax\fi}
+\newcommand*{\daux}{\mathop{} \! {\operator@font d}}
+\makeatother
+
+% "=" with "def" on top (definition equal sign)
+\DeclareRobustCommand{\defeq}{\relax\ifmmode\mathrel{\mathpalette\defeqaux\relax}\fi}
+\newcommand*{\defeqaux}{\overset{\text{def}}{=}}
+
+% "=" with wide "^"
+\DeclareRobustCommand{\whateq}{\relax\ifmmode\mathrel{\mathpalette\whateqaux\relax}\fi}
+\newcommand*{\whateqaux}{\widehat{=}}
+
+% "=" with normal "^"
+\DeclareRobustCommand{\hateq}{\relax\ifmmode\mathrel{\mathpalette\hateqaux\relax}\fi}
+\newcommand*{\hateqaux}{\hat{=}}
+
+% ":=" command
+\DeclareRobustCommand{\coleq}{\relax\ifmmode\mathrel{\mathpalette\coleqaux\relax}\fi}
+\newcommand*{\coleqaux}{\vcentcolon=}
+
+% "=" with "m" on top (measured by)
+\DeclareRobustCommand{\meq}{\relax\ifmmode\mathrel{\mathpalette\meqaux\relax}\fi}
+\newcommand*{\meqaux}{\overset{\text{m}}{=}}
+
+% "=" with "?" on top (uncertainty)
+\DeclareRobustCommand{\qmeq}{\relax\ifmmode\mathrel{\mathpalette\qmeqaux\relax}\fi}
+\newcommand*{\qmeqaux}{\overset{\text{?}}{=}}
+
+\newcommand{\perm}[2]{{}^{#1}P_{#2}}
+\newcommand{\comb}[2]{{}^{#1}C_{#2}}
+\newcommand{\bigO}[1]{\mathcal{O} \! \left ( #1 \right ) }
+\newcommand{\compl}[1]{{}^\mathsf{c} \! #1}
+\newcommand{\expected}[1]{\mathbb{E} \! \left ( #1 \right ) }
+\newcommand{\naturalnumbers}{\mathbb{N}}
+\newcommand{\integer}{\mathbb{Z}}
+\newcommand{\fraction}{\mathbb{Q}}
+\newcommand{\real}{\mathbb{R}}
+\newcommand{\complex}{\mathbb{C}}
+\newcommand{\laplace}{\mathscr{L}}
+
+% ------- Figures and tables --------
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{tabularray}
+\usepackage[
+    figureposition=bottom,
+    font=onehalfspacing,
+    labelfont=bf,
+    tableposition=top,
+]{caption}
+\usepackage{subcaption}
+\usepackage[nottoc]{tocbibind}
+\usepackage{tablefootnote}
+\usepackage[
+    dvipsnames,
+    table,
+    xcdraw,
+]{xcolor}
+
+\usepackage{floatrow}
+\floatsetup[figure]{capposition=bottom}
+\floatsetup[subfigure]{capposition=bottom}
+\floatsetup[table]{capposition=top}
+
+\usepackage[export]{adjustbox}
+\usepackage{float}  % Must load after floatrow
+\usepackage{lscape}
+\usepackage{longtable}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage[section]{placeins}
+
+\usepackage{makecell}
+\renewcommand{\theadfont}{\bfseries}
+
+\newcommand{\HRule}{
+    \rule{\linewidth}{0.5mm}
+}
+\newcommand{\ntnulogo}{Images/NTNU_logo_EN.png}
+\newcommand{\snulogo}{Images/SNU_logo.png}
+
+\makeatletter
+\renewcommand*{\listof}[2]{
+    \@ifundefined{ext@#1}{\float@error{#1}}{
+        \expandafter\let\csname l@#1\endcsname \l@figure
+        \float@listhead{#2}
+        \addcontentsline{toc}{section}{#2}
+        \begingroup
+            \@starttoc{\@nameuse{ext@#1}}
+        \endgroup
+    }
+}
+\makeatother
+
+% -------------- Code ---------------
+\usepackage{listings}
+\usepackage{xpatch}
+\usepackage{dirtree}
+
+\usepackage{minted}
+\setminted{
+    breaklines,
+    mathescape,
+    style=default,
+}
+\fvset{baselinestretch=1}
+
+\usepackage[most]{tcolorbox}
+\tcbset{
+    enhanced,
+    hyphenationfix,
+    oversize,
+}
+
+% Ignore warnings
+\BeforeBeginEnvironment{minted}{\begin{tcolorbox}}
+\AfterEndEnvironment{minted}{\end{tcolorbox}}
+\xpretocmd{\inputminted}{\begin{tcolorbox}}{}{}
+\xapptocmd{\inputminted}{\end{tcolorbox}}{}{}
+
+% ----------- Algorithms ------------
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{fancyvrb}
+\usepackage{morewrites}
+
+\usepackage{newfloat}
+\newfloat{procedure}{tbp}{lop}
+\newcommand{\listprocedurename}{List of Procedures}
+\newcommand{\listofprocedures}{\listof{procedure}{\listprocedurename}}
+
+% ---------- Bibliography -----------
+\usepackage[
+    backend=biber,
+    dashed=false,
+    dateabbrev=false,
+    doi,
+    giveninits,
+    isbn,
+    maxbibnames=99,
+    maxcitenames=2,
+    sortcites,
+    style=ext-authoryear-ecomp,
+    uniquename=init,
+    urldate=long,
+]{biblatex}
+\addbibresource{references.bib}
+\DeclareNameAlias{sortname}{family-given}
+\DeclareDelimFormat{nameyeardelim}{\addcomma\space}
+\DeclareOuterCiteDelims{cite}{\bibopenbracket}{\bibclosebracket}
+\DeclareInnerCiteDelims{textcite}{\bibopenbracket}{\bibclosebracket}
+
+% ----------- Referencing -----------
+\usepackage[
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+]{hyperref}
+\usepackage[main=]{babel}
+
+\usepackage[
+    nameinlink,
+    noabbrev,
+]{cleveref}  % Must load after amsmath, babel and hyperref
+\crefname{subsection}{subsection}{subsections}
+\crefname{subsubsection}{subsubsection}{subsubsections}
+\newcommand{\creflastconjunction}{ og~}
+
+\makeatletter
+\cref@addlanguagedefs{american}{
+    \crefformat{procedure}{procedure~#2#1#3}
+    \crefrangeformat{procedure}{procedures~#3#1#4 to~#5#2#6}
+    \crefmultiformat{procedure}{procedures~#2#1#3}{ and~#2#1#3]}{, #2#1#3}{, and~#2#1#3}
+}
+\cref@addlanguagedefs{british}{
+    \crefformat{procedure}{procedure~#2#1#3}
+    \crefrangeformat{procedure}{procedures~#3#1#4 to~#5#2#6}
+    \crefmultiformat{procedure}{procedures~#2#1#3}{ and~#2#1#3]}{, #2#1#3}{, and~#2#1#3}
+}
+\cref@addlanguagedefs{norsk}{
+    \crefformat{procedure}{prosedyre~#2#1#3}
+    \crefrangeformat{procedure}{prosedyrer~#3#1#4 til~#5#2#6}
+    \crefmultiformat{procedure}{prosedyrer~#2#1#3}{ og~#2#1#3]}{, #2#1#3}{ og~#2#1#3}
+}
+\makeatother
+
+\usepackage[
+    abbreviations,
+    acronyms,
+    % nomain,
+    shortcuts,
+    symbols,
+    translate=babel,
+]{glossaries-extra}  % Must load after hyperref
+
+\usepackage{glossary-superragged}  % For style=superragged3col
+\setglossarystyle{superragged3col}  % More styles: https://www.dickimaw-books.com/gallery/glossaries-styles/
+
+\newcommand{\symboltype}{symbols}
+\newcommand{\initialismtype}{initialism}
+\newcommand{\initialismname}{Initialisms}
+\newglossary*{\initialismtype}{\initialismname}
+\NewDocumentCommand{\newinitialism}{O{} m m m}{
+    \newabbreviation[type=\initialismtype,#1]{#2}{#3}{#4}
+}
+
+\setabbreviationstyle{long-short}
+\setabbreviationstyle[\acronymtype]{long-short}
+
+% \GlsXtrEnableEntryCounting{\acronymtype,abbreviation}{2}
+
+% TODO: Add to glossary table
+\glsaddkey{unit}{\glsentrytext{\glslabel}}{\glsentryunit}{\GLsentryunit}{\glsunit}{\Glsunit}{\GLSunit}
+\glssetnoexpandfield{unit}
+
+\glsaddkey{value}{\glsentrytext{\glslabel}}{\glsentryvalue}{\GLsentryvalue}{\glsvalue}{\Glsvalue}{\GLSvalue}
+\glssetnoexpandfield{value}
+
+% ------------- General -------------
+\usepackage[
+    shortcuts,
+    wordspacearound,
+]{extdash}
+\usepackage[per-mode=symbol]{siunitx}
+
+\newcommand{\datestring}{Date}
+\usepackage[
+    level,
+    nodayofweek,
+]{datetime}
+
+\usepackage{booktabs}
+\usepackage{comment}
+\usepackage{csquotes}  % Must load after minted
+\usepackage{lipsum}
+\usepackage{pdfpages}
+
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=(\arabic*)}
+\setlist[enumerate,2]{label=(\alph*)}
+
+\usepackage{url}
+\urlstyle{same}
+
+% --- Page layout and formatting ----
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.1ex}
+\renewcommand{\footrulewidth}{0.1ex}
+\fancyfoot[C]{\thepage}
+
+\newcommand{\romannumeralupper}[1]{
+    \MakeUppercase{\romannumeral{#1}}
+}
+
+% ---- Numbering within sections ----
+% \setcounter{secnumdepth}{0}
+\makeatletter
+\ifnum\c@secnumdepth > 0
+    \usepackage{chngcntr}
+    \counterwithin{figure}{section}
+    \counterwithin{table}{section}
+    \counterwithin{algorithm}{section}
+    \counterwithin{listing}{section}
+    \counterwithin{procedure}{section}
+\fi
+\makeatother
+
+% ------------ Language -------------
+\addto{\captionsamerican}{
+    \floatname{procedure}{Procedure}
+    \renewcommand{\contentsname}{Table of Contents}
+    \renewcommand{\abbreviationsname}{Abbreviations}
+    \renewcommand{\creflastconjunction}{, and~}
+}
+\addto{\captionsbritish}{
+    \floatname{procedure}{Procedure}
+    \renewcommand{\contentsname}{Table of Contents}
+    \renewcommand{\abbreviationsname}{Abbreviations}
+    \renewcommand{\creflastconjunction}{, and~}
+}
+\addto{\captionsnorsk}{
+    \floatname{procedure}{Prosedyre}
+    \renewcommand{\listprocedurename}{Prosedyrer}
+    \renewcommand{\keywordsname}{Nøkkelord}
+    \renewcommand{\contentsname}{Innholdsfortegnelse}
+    \renewcommand{\appendixname}{Vedlegg}
+    \renewcommand{\algorithmname}{Algoritme}
+    \renewcommand{\listalgorithmname}{Algoritmer}
+    \renewcommand{\listingscaption}{Opplisting}
+    \renewcommand{\listoflistingscaption}{Opplistinger}
+    \renewcommand{\listtheoremname}{Teoremer}
+    \renewcommand{\initialismname}{Forbokstavord}
+    \renewcommand{\blankinfo}{Denne siden er med hensikt blank}
+    \renewcommand{\datestring}{Dato}
+    \renewcommand{\ntnulogo}{Images/NTNU_logo_NB.png}
+    \renewenvironment{theorem}{\begin{teorem}}{\end{teorem}}
+    \renewenvironment{corollary}{\begin{korollar}}{\end{korollar}}
+    \renewenvironment{exercise}{\begin{oppgave}}{\end{oppgave}}
+    \renewenvironment{remark}{\begin{merk}}{\end{merk}}
+    \setlength{\parindent}{0em}
+}

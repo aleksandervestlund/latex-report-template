@@ -1,0 +1,40 @@
+\section{Algorithm Examples}
+
+This section demonstrates how to typeset algorithms and procedures using the \texttt{algorithm} and \texttt{algorithmicx} packages. These environments help describe step\-/by\-/step logic in a readable and consistent format. We show both a procedure and an algorithm with complexity analysis. Procedures are useful for defining reusable logic or utility operations, while algorithms describe complete workflows. The pseudocode supports conditional logic, loops, return values, and comments. \Cref{pro:mult} performs a single multiplication and therefore runs in constant time, $\bigO{1}$.
+
+\begin{procedure}[H]
+    \caption{Multiply two integers.}
+    \begin{algorithmic}[1]
+        \Procedure{Multiply}{$x, y$}
+            \State $product \gets x \cdot y$
+            \State \Return $product$
+        \EndProcedure
+    \end{algorithmic}
+    \label{pro:mult}
+\end{procedure}
+
+\Cref{alg:expBySquaring} uses the exponentiation\-/by\-/squaring technique to compute powers efficiently. This algorithm has a runtime of $\bigO{\log n}$ due to halving the exponent at each iteration.
+
+\begin{algorithm}[H]
+    \caption{Exponentiation by squaring.}
+    \label{alg:expBySquaring}
+    \begin{algorithmic}[1]
+        \Function{Power}{$x, n$}
+            \Require $n \geq 0$
+            \Ensure $y = x^n$
+            \State $y \gets 1$
+            \State $X \gets x$
+            \State $N \gets n$
+            \While{$N \neq 0$}
+                \If{$N$ is even}
+                    \State $X \gets X \cdot X$
+                    \State $N \gets \nicefrac{N}{2}$ \Comment{Divide exponent by 2}
+                \Else
+                    \State $y \gets y \cdot X$
+                    \State $N \gets N - 1$
+                \EndIf
+            \EndWhile
+            \State \Return $y$
+        \EndFunction
+    \end{algorithmic}
+\end{algorithm}

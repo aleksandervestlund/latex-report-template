@@ -1,0 +1,107 @@
+\section{Figures and Tables}
+
+In this section, we demonstrate how to include and format both figures and tables using \LaTeX. Note that by convention, table captions are placed above the table, while figure captions are placed below the image. This reflects common typesetting standards to help readers interpret the content before or after viewing it. Examples are shown in \cref{fig:theway,fig:subfigures,table:standard,table:budget}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{Images/the_way.jpg}
+    \caption{A single image example using \texttt{graphicx}.}
+    \label{fig:theway}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \caption{A 2x2 grid of subfigures using the \texttt{subcaption} package.}
+    \label{fig:subfigures}
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/the_way.jpg}
+        \subcaption{Top\-/left subfigure.}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/the_way.jpg}
+        \subcaption{Top\-/right subfigure.}
+    \end{subfigure}
+    \vskip\baselineskip
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/the_way.jpg}
+        \subcaption{Bottom\-/left subfigure.}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/the_way.jpg}
+        \subcaption{Bottom\-/right subfigure.}
+    \end{subfigure}
+\end{figure}
+
+\begin{table}
+    \centering
+    \begin{tabular}{lcr}
+        \toprule
+        \thead{Item} & \thead{Quantity} & \thead{Price (\texteuro)} \\
+        \midrule
+        Apples & 3 kg & 4.50 \\
+        Bananas & 1.5 kg & 2.10 \\
+        Oranges & 2 kg & 3.20 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Example of a standard table.}
+    \label{table:standard}
+\end{table}
+
+\begin{landscape}
+    \setlength{\tabcolsep}{2pt}
+    \renewcommand{\arraystretch}{1.19}
+    \scriptsize
+    \begin{longtable}{ | l *{13}{| r} | }
+        \caption{Budget \texttt{longtable} example.} \label{table:budget} \\
+        \hline
+        & \multicolumn{4}{c|}{\textbf{YEAR 1}} & \multicolumn{4}{c|}{\textbf{YEAR 2}} & \multicolumn{4}{c|}{\textbf{YEAR 3}} & \\
+        \hline
+        \textbf{Period} & \multicolumn{1}{c|}{\textbf{Q1}} & \multicolumn{1}{c|}{\textbf{Q2}} & \multicolumn{1}{c|}{\textbf{Q3}} & \multicolumn{1}{c|}{\textbf{Q4}} & \multicolumn{1}{c|}{\textbf{Q1}} & \multicolumn{1}{c|}{\textbf{Q2}} & \multicolumn{1}{c|}{\textbf{Q3}} & \multicolumn{1}{c|}{\textbf{Q4}} & \multicolumn{1}{c|}{\textbf{Q1}} & \multicolumn{1}{c|}{\textbf{Q2}} & \multicolumn{1}{c|}{\textbf{Q3}} & \multicolumn{1}{c|}{\textbf{Q4}} & \multicolumn{1}{c|}{\textbf{Total}} \\
+        \hline
+        \endfirsthead
+        \hline
+        \endfoot
+        \hline
+
+        \hline
+        \textbf{Operating revenues:} &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+        Revenues (Hardware) & 0 & 0 & 140,000 & 630,000 & 1,470,000 & 2,660,000 & 4,130,000 & 5,600,000 & 6,790,000 & 7,630,000 & 8,120,000 & 8,400,000 & 45,570,000 \\
+        Revenues (Software license) & 0 & 0 & 10,500 & 57,750 & 168,000 & 367,500 & 677,250 & 1,097,250 & 1,606,500 & 2,178,750 & 2,787,750 & 3,417,750 & 12,369,000 \\
+        \textbf{Total operating revenues} & \textbf{0} & \textbf{0} & \textbf{150,500} & \textbf{687,750} & \textbf{1,638,000} & \textbf{3,027,500} & \textbf{4,807,250} & \textbf{6,697,250} & \textbf{8,396,500} & \textbf{9,808,750} & \textbf{10,907,750} & \textbf{11,817,750} & \textbf{57,939,000} \\
+        \hline
+        \textbf{Variable costs:} &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+        Production (Hardware) & 0 & 0 & 60,000 & 270,000 & 630,000 & 1,140,000 & 1,770,000 & 2,400,000 & 2,910,000 & 3,270,000 & 3,480,000 & 3,600,000 & 19,530,000 \\
+        Installation & 0 & 0 & 80,000 & 360,000 & 840,000 & 1,520,000 & 2,360,000 & 3,200,000 & 3,880,000 & 4,360,000 & 4,640,000 & 4,800,000 & 26,040,000 \\
+        \textbf{Sum variable costs} & \textbf{0} & \textbf{0} & \textbf{140,000} & \textbf{630,000} & \textbf{1,470,000} & \textbf{2,660,000} & \textbf{4,130,000} & \textbf{5,600,000} & \textbf{6,790,000} & \textbf{7,630,000} & \textbf{8,120,000} & \textbf{8,400,000} & \textbf{45,570,000} \\
+        \hline
+        \textbf{GROSS MARGIN} & \textbf{0} & \textbf{0} & \textbf{10,500} & \textbf{57,750} & \textbf{168,000} & \textbf{367,500} & \textbf{677,250} & \textbf{1,097,250} & \textbf{1,606,500} & \textbf{2,178,750} & \textbf{2,787,750} & \textbf{3,417,750} & \textbf{12,369,000} \\
+        \hline
+        \textbf{Indirect costs:} &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+        Insurance & 9,000 & 9,000 & 9,000 & 9,000 & 9,405 & 9,405 & 9,405 & 9,405 & 9,828 & 9,828 & 9,828 & 9,828 & 112,933 \\
+        Office equipment & 11,520 & 11,520 & 11,520 & 11,520 & 11,520 & 11,520 & 11,520 & 11,520 & 11,520 & 11,520 & 11,520 & 11,520 & 138,240 \\
+        Seminars & 0 & 0 & 0 & 0 & 40,000 & 0 & 0 & 0 & 40,000 & 0 & 0 & 0 & 80,000 \\
+        Rent of premises & 135,000 & 135,000 & 135,000 & 135,000 & 141,075 & 141,075 & 141,075 & 141,075 & 147,423 & 147,423 & 147,423 & 147,423 & 1,693,994 \\
+        Salaries & 0 & 0 & 828,125 & 828,125 & 865,391 & 865,391 & 865,391 & 865,391 & 904,333 & 904,333 & 904,333 & 904,333 & 8,735,145 \\
+        Marketing & 0 & 40,000 & 40,000 & 20,000 & 10,000 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 110,000 \\
+        Accounting/audit & 2,500 & 2,500 & 2,500 & 2,500 & 2,613 & 2,613 & 2,613 & 2,613 & 2,730 & 2,730 & 2,730 & 2,730 & 31,370 \\
+        Travel expenses & 0 & 0 & 150,000 & 300,000 & 150,000 & 150,000 & 150,000 & 75,000 & 75,000 & 75,000 & 75,000 & 75,000 & 1,275,000 \\
+        Cleaning & 11,700 & 11,700 & 11,700 & 11,700 & 12,227 & 12,227 & 12,227 & 12,227 & 12,777 & 12,777 & 12,777 & 12,777 & 146,813 \\
+        Electricity & 3,900 & 3,900 & 3,900 & 3,900 & 4,076 & 4,076 & 4,076 & 4,076 & 4,259 & 4,259 & 4,259 & 4,259 & 48,938 \\
+        Telephone & 12,750 & 12,750 & 12,750 & 12,750 & 13,324 & 13,324 & 13,324 & 13,324 & 13,923 & 13,923 & 13,923 & 13,923 & 159,988 \\
+        Development cost & 500,000 & 1,000,000 & 750,000 & 250,000 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 2,500,000 \\
+        Other operating costs & 3,000 & 3,000 & 3,000 & 3,000 & 3,135 & 3,135 & 3,135 & 3,135 & 3,276 & 3,276 & 3,276 & 3,276 & 37,644 \\
+        Other & 7,500 & 7,500 & 7,500 & 7,500 & 7,838 & 7,838 & 7,838 & 7,838 & 8,190 & 8,190 & 8,190 & 8,190 & 94,111 \\
+        \textbf{Total indirect costs} & \textbf{696,870} & \textbf{1,236,870} & \textbf{1,964,995} & \textbf{1,594,995} & \textbf{1,270,601} & \textbf{1,220,601} & \textbf{1,220,601} & \textbf{1,145,601} & \textbf{1,233,260} & \textbf{1,193,260} & \textbf{1,193,260} & \textbf{1,193,260} & \textbf{15,164,176} \\
+        \hline
+        \textbf{OPERATING RESULT} & \textbf{-696,870} & \textbf{-1,236,870} & \textbf{-1,954,495} & \textbf{-1,537,245} & \textbf{-1,102,601} & \textbf{-853,101} & \textbf{-543,351} & \textbf{-48,351} & \textbf{373,240} & \textbf{985,490} & \textbf{1,594,490} & \textbf{2,224,490} & \textbf{-2,795,176} \\
+        \hline
+    \end{longtable}
+\end{landscape}
+
+\blankpage

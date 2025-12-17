@@ -1,0 +1,37 @@
+\documentclass[12pt,american]{article}  % Change to "american", "british" or "norsk"
+\usepackage{packages}  % Loading "packages.sty"
+\usepackage{glossary}  % Loading "glossary.sty"
+
+\begin{document}
+    \input{Sections/00_Title}
+    
+    \frontmatter
+    \input{Sections/01_Frontmatter}
+    
+    \newpage
+    \tableofcontents
+    \listoffigures
+    \listoftables
+    \listofalgorithms
+    \listoflistings
+    \listofprocedures
+    \listoftheorems
+    
+    \mainmatter
+    \input{Sections/1_Introduction}
+    \input{Sections/2_Math-Examples}
+    \input{Sections/3_Figures-and-Tables}
+    \input{Sections/4_Code-Examples}
+    \input{Sections/5_Algorithm-Example}
+    \input{Sections/6_Language}
+    
+    \addappendix
+    \input{Sections/98_Appendix}
+
+    \phantomsection
+    \newpage
+    \input{Sections/99_Glossaries}
+    
+    \newpage
+    \printbibliography[heading=bibintoc]
+\end{document}

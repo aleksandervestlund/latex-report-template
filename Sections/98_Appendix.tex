@@ -1,0 +1,23 @@
+This appendix contains supplementary material that may be helpful for advanced users or those modifying the document. Although not essential to the main flow, these extras provide useful reference points.
+
+\section{File Structure}
+
+This template assumes the following file layout:
+
+\dirtree{%
+    .1 ..
+    .2 main.tex\DTcomment{Your main file}.
+    .2 packages.sty\DTcomment{Contains package imports and commands}.
+    .2 references.bib\DTcomment{Your bibliography file}.
+    .2 glossary.sty\DTcomment{Your glossary file}.
+    .2 Sections\DTcomment{Folder for text}.
+    .3 00\_Title\DTcomment{Title page}.
+    .3 98\_Appendix\DTcomment{Appendix}.
+    .3 99\_Glossaries\DTcomment{Glossaries}.
+    .2 Images\DTcomment{Folder for images}.
+    .3 NTNU\_logo\_EN.png\DTcomment{\textbackslash ntnulogo}.
+    .3 NTNU\_logo\_NB.png\DTcomment{\textbackslash ntnulogo and language set to Norwegian}.
+    .3 SNU\_logo.png\DTcomment{\textbackslash snulogo}.
+    .2 Code\DTcomment{Folder for code snippets}.
+    .3 HelloWorld.m\DTcomment{Example}.
+}

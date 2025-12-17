@@ -1,0 +1,67 @@
+\section{Code Examples}
+
+This section demonstrates how to include source code using the \texttt{minted} package, which provides syntax highlighting for a wide range of languages. Code is typically presented in a \texttt{listing} environment and can be customised with captions and labels for cross\-/referencing. The \texttt{minted} package also supports inputting external files and allows for inline maths, though care must be taken when combining code and mathematical symbols. Furthermore, the \texttt{simplebox} command can be used to highlight key blocks, notes, or particularly important code for readability and emphasis.
+
+The use of \gls{recursion} in this algorithm makes it efficient in solving \gls{fibonacci}. Its time \gls{complexity} is $\bigO{n}$.
+
+\begin{listing}[H]
+    \begin{minted}{python}
+from collections.abc import Generator
+
+# This is an example. The next line is 68 characters long
+# 123456789012345678901234567890123456789012345678901234567890123456
+class Math:
+    @staticmethod
+    def fib(n: int) -> Generator[int, None, None]:
+        """Fibonacci series up to n."""
+        a, b = 0, 1
+        
+        while a < n:
+            yield a
+            a, b = b, a + b
+
+result = sum(Math.fib(42))
+print(f"The answer is {result}")
+    \end{minted}
+    \caption{Python implementation of the Fibonacci sequence.}
+    \label{lst:fibonacci}
+\end{listing}
+
+External files can also be included, making it easy to manage larger projects:
+
+\begin{listing}[H]
+    \inputminted{Matlab}{Code/HelloWorld.m}
+    \caption{A simple MATLAB programme.}
+    \label{lst:matlabHelloWorld}
+\end{listing}
+
+Mathematical expressions can be embedded in code blocks, but should be commented on properly or placed in strings to avoid confusion with the syntax:
+
+\begin{listing}[H]
+    \begin{minted}{python}
+test
+$A \wedge B$
+test
+# $A \wedge B$
+test
+|$A \wedge B$|
+test
+    \end{minted}
+    \caption{Using math inside \texttt{minted} environments.}
+    \label{lst:mathMinted}
+\end{listing}
+
+The following example shows how one might embed \LaTeX\-/style maths within comments and strings in C\#:
+
+\begin{listing}[H]
+    \begin{minted}{csharp}
+string title = "This is a Unicode $\pi$ in the sky"
+/*
+Defined as $\pi=\lim_{n\to\infty}\frac{P_n}{d}$ where $P$ is the perimeter of an $n$-sided
+regular polygon circumscribing a circle of diameter $d$.
+*/
+const double pi = 3.1415926535
+    \end{minted}
+    \caption{Using mathematical notation in C\# code comments and strings.}
+    \label{lst:csharpMath}
+\end{listing}
