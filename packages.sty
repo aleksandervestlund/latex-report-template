@@ -21,6 +21,7 @@
 % ----------- Page setup ------------
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage[main=]{babel}
 \usepackage[babel]{microtype}
 \usepackage{lmodern}
 \usepackage[
@@ -35,6 +36,9 @@
 \setlength{\parskip}{0.8em}
 \pdfgentounicode=1
 \sloppy
+
+\usepackage{silence}
+\WarningFilter{latex}{Command \showhyphens has changed.}
 
 % ------- Document structure --------
 \usepackage{etoolbox}
@@ -212,7 +216,6 @@
 
 % -------------- Code ---------------
 \usepackage{listings}
-\usepackage{xpatch}
 \usepackage{dirtree}
 
 \usepackage{minted}
@@ -231,16 +234,19 @@
 }
 
 % Ignore warnings
+\let\oldinputminted\inputminted
 \BeforeBeginEnvironment{minted}{\begin{tcolorbox}}
 \AfterEndEnvironment{minted}{\end{tcolorbox}}
-\xpretocmd{\inputminted}{\begin{tcolorbox}}{}{}
-\xapptocmd{\inputminted}{\end{tcolorbox}}{}{}
+
+\RenewDocumentCommand{\inputminted}{O{} m m}{
+    \begin{tcolorbox}
+        \oldinputminted[#1]{#2}{#3}
+    \end{tcolorbox}
+}
 
 % ----------- Algorithms ------------
 \usepackage{algorithm}
-\usepackage{algorithmicx}
 \usepackage{algpseudocode}
-\usepackage{fancyvrb}
 \usepackage{morewrites}
 
 \usepackage{newfloat}
@@ -277,7 +283,6 @@
     linkcolor=black,
     urlcolor=black,
 ]{hyperref}
-\usepackage[main=]{babel}
 
 \usepackage[
     nameinlink,
@@ -305,17 +310,17 @@
 }
 \makeatother
 
+% More styles: https://www.dickimaw-books.com/gallery/glossaries-styles/
 \usepackage[
     abbreviations,
     acronyms,
     % nomain,
     shortcuts,
+    style=altlong4col,
     symbols,
     translate=babel,
 ]{glossaries-extra}  % Must load after hyperref
-
-\usepackage{glossary-superragged}  % For style=superragged3col
-\setglossarystyle{superragged3col}  % More styles: https://www.dickimaw-books.com/gallery/glossaries-styles/
+\renewcommand{\glossarypreamble}{\glsfindwidesttoplevelname[\currentglossary]}
 
 \newcommand{\symboltype}{symbols}
 \newcommand{\initialismtype}{initialism}
