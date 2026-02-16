@@ -1,6 +1,6 @@
 \section{Figures and Tables}
 
-In this section, we demonstrate how to include and format both figures and tables using \LaTeX. Note that by convention, table captions are placed above the table, while figure captions are placed below the image. This reflects common typesetting standards to help readers interpret the content before or after viewing it. Examples are shown in \cref{fig:theway,fig:subfigures,table:standard,table:budget}.
+In this section, we demonstrate how to include and format both figures and tables using \LaTeX. Note that by convention, table captions are placed above the table, while figure captions are placed below the image. This reflects common typesetting standards to help readers interpret the content before or after viewing it. Examples are shown in \cref{fig:theway,fig:subfigures,tab:standard,tab:budget}.
 
 \begin{figure}
     \centering
@@ -50,7 +50,7 @@ In this section, we demonstrate how to include and format both figures and table
         \bottomrule
     \end{tabular}
     \caption{Example of a standard table.}
-    \label{table:standard}
+    \label{tab:standard}
 \end{table}
 
 \begin{landscape}
@@ -58,7 +58,7 @@ In this section, we demonstrate how to include and format both figures and table
     \renewcommand{\arraystretch}{1.19}
     \scriptsize
     \begin{longtable}{ | l *{13}{| r} | }
-        \caption{Budget \texttt{longtable} example.} \label{table:budget} \\
+        \caption{Budget \texttt{longtable} example.} \label{tab:budget} \\
         \hline
         & \multicolumn{4}{c|}{\textbf{YEAR 1}} & \multicolumn{4}{c|}{\textbf{YEAR 2}} & \multicolumn{4}{c|}{\textbf{YEAR 3}} & \\
         \hline
@@ -105,3 +105,4 @@ In this section, we demonstrate how to include and format both figures and table
 \end{landscape}
 
 \blankpage
+

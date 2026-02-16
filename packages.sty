@@ -22,7 +22,11 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[main=]{babel}
-\usepackage[babel]{microtype}
+\usepackage[
+    babel,
+    expansion,
+    protrusion,
+]{microtype}
 \usepackage{lmodern}
 \usepackage[
     a4paper,
@@ -82,12 +86,14 @@
 }
 
 % ----------- Mathematics -----------
+\usepackage{latexsym}
+\usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{bm}
 \usepackage{calc}
-\usepackage{cancel}
+\usepackage[makeroom]{cancel}
 \usepackage{commath}
 \usepackage{faktor}
 \usepackage{mathrsfs}
@@ -98,26 +104,34 @@
 \DeclareMathOperator{\lcm}{lcm}
 \DeclareMathOperator{\Cov}{Cov}
 \DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Dec}{Dec}
+\DeclareMathOperator{\Enc}{Enc}
 
 % Both English and Norwegian versions
 \declaretheorem[numberwithin=section]{
     corollary,korollar,
     lemma,
+    principle,prinsipp,
     theorem,teorem  % Cannot have trailing comma
 }
 \declaretheorem[style=remark]{
     remark,merk
 }
 \declaretheorem{
-    exercise,oppgave
+    exercise,oppgave,
+    example,eksempel
 }
 
-\let\abs\relax
-\let\norm\relax
-\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
-\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+
+\newcommand{\cif}[1]{\mbox{if $#1$}}
+\newcommand{\cwhen}[1]{\mbox{when $#1$}}
+\newcommand{\cotherw}{\mbox{otherwise}}
+
+\newlength{\savearraycolsep}
+\newcommand{\narrowarray}[1]{\setlength{\savearraycolsep}{\arraycolsep}\setlength{\arraycolsep}{#1\arraycolsep}}
+\newcommand{\normalarray}{\setlength{\arraycolsep}{\savearraycolsep}}
 
 \makeatletter
 \DeclareRobustCommand{\dd}{\relax\ifmmode\daux\relax\fi}
@@ -127,38 +141,50 @@
 % "=" with "def" on top (definition equal sign)
 \DeclareRobustCommand{\defeq}{\relax\ifmmode\mathrel{\mathpalette\defeqaux\relax}\fi}
 \newcommand*{\defeqaux}{\overset{\text{def}}{=}}
-
 % "=" with wide "^"
 \DeclareRobustCommand{\whateq}{\relax\ifmmode\mathrel{\mathpalette\whateqaux\relax}\fi}
 \newcommand*{\whateqaux}{\widehat{=}}
-
 % "=" with normal "^"
 \DeclareRobustCommand{\hateq}{\relax\ifmmode\mathrel{\mathpalette\hateqaux\relax}\fi}
 \newcommand*{\hateqaux}{\hat{=}}
-
 % ":=" command
 \DeclareRobustCommand{\coleq}{\relax\ifmmode\mathrel{\mathpalette\coleqaux\relax}\fi}
 \newcommand*{\coleqaux}{\vcentcolon=}
-
 % "=" with "m" on top (measured by)
 \DeclareRobustCommand{\meq}{\relax\ifmmode\mathrel{\mathpalette\meqaux\relax}\fi}
 \newcommand*{\meqaux}{\overset{\text{m}}{=}}
-
 % "=" with "?" on top (uncertainty)
 \DeclareRobustCommand{\qmeq}{\relax\ifmmode\mathrel{\mathpalette\qmeqaux\relax}\fi}
 \newcommand*{\qmeqaux}{\overset{\text{?}}{=}}
 
 \newcommand{\perm}[2]{{}^{#1}P_{#2}}
 \newcommand{\comb}[2]{{}^{#1}C_{#2}}
-\newcommand{\bigO}[1]{\mathcal{O} \! \left ( #1 \right ) }
+\renewcommand{\choose}[2]{\dbinom{#1}{#2}}
+\newcommand{\bigO}[1]{\mathcal{O} \! \del{#1}}
 \newcommand{\compl}[1]{{}^\mathsf{c} \! #1}
-\newcommand{\expected}[1]{\mathbb{E} \! \left ( #1 \right ) }
-\newcommand{\naturalnumbers}{\mathbb{N}}
-\newcommand{\integer}{\mathbb{Z}}
-\newcommand{\fraction}{\mathbb{Q}}
-\newcommand{\real}{\mathbb{R}}
+\newcommand{\expect}[1]{\mathbb{E} \! \del{#1}}
+\newcommand{\expectsq}[1]{\mathbb{E}^2 \! \del{#1}}
+\newcommand{\prob}[1]{\Pr \! \del{#1}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\fractions}{\mathbb{Q}}
+\newcommand{\reals}{\mathbb{R}}
 \newcommand{\complex}{\mathbb{C}}
+\newcommand{\field}{\mathbb{F}}
 \newcommand{\laplace}{\mathscr{L}}
+
+\newcommand{\goesto}{\rightarrow}
+\newcommand{\percent}[1]{#1\%}
+\newcommand{\matx}[2]{\del{\!\!\!\begin{array}{*{#1}{c}}#2\end{array}\!\!\!}}
+\newcommand{\Adj}{\mathop{\rm Adj}\nolimits}
+\newcommand{\transpose}{^{\mbox{\scriptsize \sf T}}}
+\newcommand{\amortized}[1]{\widehat{#1}}
+
+\usepackage{newunicodechar}
+\newunicodechar{≠}{\neq}
+\newunicodechar{≈}{\approx}
+\newunicodechar{≤}{\leq}
+\newunicodechar{≥}{\geq}
 
 % ------- Figures and tables --------
 \usepackage{graphicx}
@@ -172,7 +198,11 @@
 ]{caption}
 \usepackage{subcaption}
 \usepackage[nottoc]{tocbibind}
+
 \usepackage{tablefootnote}
+\newcommand{\footnotenonumber}[1]{{\def\thempfn{}\footnotetext{#1}}}
+\newcommand{\footnotetight}[1]{\footnote{\renewcommand\baselinestretch{1}\footnotesize #1}}
+
 \usepackage[
     dvipsnames,
     table,
@@ -184,6 +214,19 @@
 \floatsetup[subfigure]{capposition=bottom}
 \floatsetup[table]{capposition=top}
 
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{1}
+\setcounter{totalnumber}{5}
+\setcounter{dbltopnumber}{2}
+
+\renewcommand{\topfraction}{.7}
+\renewcommand{\bottomfraction}{.3}
+\renewcommand{\textfraction}{.1}
+\renewcommand{\floatpagefraction}{.7}
+\renewcommand{\dbltopfraction}{.7}
+\renewcommand{\dblfloatpagefraction}{.7}
+
+\usepackage{xspace}
 \usepackage[export]{adjustbox}
 \usepackage{float}  % Must load after floatrow
 \usepackage{lscape}
@@ -198,6 +241,7 @@
 \newcommand{\HRule}{
     \rule{\linewidth}{0.5mm}
 }
+\newcommand{\mitlogo}{Images/MIT_logo.png}
 \newcommand{\ntnulogo}{Images/NTNU_logo_EN.png}
 \newcommand{\snulogo}{Images/SNU_logo.png}
 
@@ -217,6 +261,7 @@
 % -------------- Code ---------------
 \usepackage{listings}
 \usepackage{dirtree}
+\DeclareSymbolFont{largesymbols}{OMX}{cmex}{m}{n}
 
 \usepackage{minted}
 \setminted{
@@ -234,10 +279,10 @@
 }
 
 % Ignore warnings
-\let\oldinputminted\inputminted
 \BeforeBeginEnvironment{minted}{\begin{tcolorbox}}
 \AfterEndEnvironment{minted}{\end{tcolorbox}}
 
+\let\oldinputminted\inputminted
 \RenewDocumentCommand{\inputminted}{O{} m m}{
     \begin{tcolorbox}
         \oldinputminted[#1]{#2}{#3}
@@ -245,6 +290,7 @@
 }
 
 % ----------- Algorithms ------------
+% Alternatively, check out clrscode4e
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{morewrites}
@@ -310,6 +356,20 @@
 }
 \makeatother
 
+\newcommand{\alglabel}[1]{\label{alg:#1}}
+\newcommand{\corlabel}[1]{\label{cor:#1}}
+\newcommand{\eqlabel}[1]{\label{eq:#1}}
+\newcommand{\figlabel}[1]{\label{fig:#1}}
+\newcommand{\lemlabel}[1]{\label{lem:#1}}
+\newcommand{\lstlabel}[1]{\label{lst:#1}}
+\newcommand{\prolabel}[1]{\label{pro:#1}}
+\newcommand{\seclabel}[1]{\label{sec:#1}}
+\newcommand{\subseclabel}[1]{\label{subsec:#1}}
+\newcommand{\subsubseclabel}[1]{\label{subsubsec:#1}}
+\newcommand{\tablabel}[1]{\label{tab:#1}}
+\newcommand{\thmlabel}[1]{\label{thm:#1}}
+
+\PassOptionsToPackage{lang-warn=false}{datatool-base}
 % More styles: https://www.dickimaw-books.com/gallery/glossaries-styles/
 \usepackage[
     abbreviations,
@@ -364,7 +424,7 @@
 \setlist[enumerate,1]{label=(\arabic*)}
 \setlist[enumerate,2]{label=(\alph*)}
 
-\usepackage{url}
+\usepackage{xurl}
 \urlstyle{same}
 
 % --- Page layout and formatting ----
@@ -424,5 +484,10 @@
     \renewenvironment{corollary}{\begin{korollar}}{\end{korollar}}
     \renewenvironment{exercise}{\begin{oppgave}}{\end{oppgave}}
     \renewenvironment{remark}{\begin{merk}}{\end{merk}}
+    \renewenvironment{principle}{\begin{prinsipp}}{\end{prinsipp}}
     \setlength{\parindent}{0em}
 }
+
+\ifthenelse{\equal{\languagename}{norsk}}{
+    \usepackage{icomma}
+}{}

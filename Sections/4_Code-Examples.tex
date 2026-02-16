@@ -8,8 +8,8 @@ The use of \gls{recursion} in this algorithm makes it efficient in solving \gls{
     \begin{minted}{python}
 from collections.abc import Generator
 
-# This is an example. The next line is 68 characters long
-# 123456789012345678901234567890123456789012345678901234567890123456
+# This is an example. The next line is 67 (65 + 2) characters long:
+# 12345678901234567890123456789012345678901234567890123456789012345
 class Math:
     @staticmethod
     def fib(n: int) -> Generator[int, None, None]:
@@ -56,10 +56,9 @@ The following example shows how one might embed \LaTeX\-/style maths within comm
 \begin{listing}[H]
     \begin{minted}{csharp}
 string title = "This is a Unicode $\pi$ in the sky"
-/*
-Defined as $\pi=\lim_{n\to\infty}\frac{P_n}{d}$ where $P$ is the perimeter of an $n$-sided
-regular polygon circumscribing a circle of diameter $d$.
-*/
+/**
+ * Defined as $\pi=\lim_{n\to\infty}\frac{P_n}{d}$ where $P$ is the perimeter of an $n$-sided regular polygon circumscribing a circle of diameter $d$.
+ */
 const double pi = 3.1415926535
     \end{minted}
     \caption{Using mathematical notation in C\# code comments and strings.}

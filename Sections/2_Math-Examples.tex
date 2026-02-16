@@ -41,25 +41,25 @@ The number of permutations of $r$ items from a set of $n$ elements is given by:
 The number of combinations (binomial coefficient) is:
 
 \begin{equation}
-    \comb{n}{r} = \frac{n!}{r!(n - r)!}
+    \choose{n}{r} = \comb{n}{r} = \frac{n!}{r!(n - r)!}
 \end{equation}
 
 We can also use floor and ceiling functions:
 
 \begin{equation}
-    \ceil{1.2} = 2 \qquad \floor{2.2} = 2
+    \ceil*{1.2} = 2 \qquad \floor*{2.2} = 2
 \end{equation}
 
 Expected value notation:
 
 \begin{equation}
-    \expected{X} = \sum_{x \in \mathcal{X}} x \cdot P(X = x)
+    \expect{X} = \sum_{x \in \mathcal{X}} x \cdot P(X = x)
 \end{equation}
 
 Variance:
 
 \begin{equation}
-    \Var(X) = \sigma^2(X) = \expected{(X - \expected{X})^2} = \sum_{x \in \mathcal{X}} (x - \expected{X})^2 \cdot P(X = x)
+    \Var(X) = \sigma^2(X) = \expect{(X - \expect{X})^2} = \sum_{x \in \mathcal{X}} (x - \expect{X})^2 \cdot P(X = x)
 \end{equation}
 
 Some commonly used mathematical sets and transforms:
