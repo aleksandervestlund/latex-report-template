@@ -28,6 +28,7 @@
     protrusion,
 ]{microtype}
 \usepackage{lmodern}
+\DeclareSymbolFont{largesymbols}{OMX}{cmex}{m}{n}
 \usepackage[
     a4paper,
     total={
@@ -37,6 +38,7 @@
     },
 ]{geometry}
 \usepackage[onehalfspacing]{setspace}
+
 \setlength{\parskip}{0.8em}
 \pdfgentounicode=1
 \sloppy
@@ -101,12 +103,6 @@
 \usepackage{nicefrac}
 \usepackage{thmtools}
 
-\DeclareMathOperator{\lcm}{lcm}
-\DeclareMathOperator{\Cov}{Cov}
-\DeclareMathOperator{\Var}{Var}
-\DeclareMathOperator{\Dec}{Dec}
-\DeclareMathOperator{\Enc}{Enc}
-
 % Both English and Norwegian versions
 \declaretheorem[numberwithin=section]{
     corollary,korollar,
@@ -118,12 +114,19 @@
     remark,merk
 }
 \declaretheorem{
+    case,tilfelle,
+    definition,definisjon,
     exercise,oppgave,
-    example,eksempel
+    example,eksempel,
+    invariant,
+    property,egenskap,
+    step,trinn
 }
 
-\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
-\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\newcommand{\proofsketchtext}{Proof Sketch}
+\newcommand{\proofideatext}{Proof Idea}
+\newenvironment{proofsketch}{\noindent\textsc{\proofsketchtext.}\hspace{0.5em}}{\qed}
+\newenvironment{proofidea}{\noindent\textsc{\proofideatext.}\hspace{0.5em}}
 
 \newcommand{\cif}[1]{\mbox{if $#1$}}
 \newcommand{\cwhen}[1]{\mbox{when $#1$}}
@@ -140,31 +143,55 @@
 
 % "=" with "def" on top (definition equal sign)
 \DeclareRobustCommand{\defeq}{\relax\ifmmode\mathrel{\mathpalette\defeqaux\relax}\fi}
-\newcommand*{\defeqaux}{\overset{\text{def}}{=}}
+\newcommand*{\defeqaux}[2]{\overset{\text{def}}{=}}
 % "=" with wide "^"
 \DeclareRobustCommand{\whateq}{\relax\ifmmode\mathrel{\mathpalette\whateqaux\relax}\fi}
-\newcommand*{\whateqaux}{\widehat{=}}
+\newcommand*{\whateqaux}[2]{\widehat{=}}
 % "=" with normal "^"
 \DeclareRobustCommand{\hateq}{\relax\ifmmode\mathrel{\mathpalette\hateqaux\relax}\fi}
-\newcommand*{\hateqaux}{\hat{=}}
+\newcommand*{\hateqaux}[2]{\hat{=}}
 % ":=" command
 \DeclareRobustCommand{\coleq}{\relax\ifmmode\mathrel{\mathpalette\coleqaux\relax}\fi}
-\newcommand*{\coleqaux}{\vcentcolon=}
+\newcommand*{\coleqaux}[2]{\vcentcolon=}
 % "=" with "m" on top (measured by)
 \DeclareRobustCommand{\meq}{\relax\ifmmode\mathrel{\mathpalette\meqaux\relax}\fi}
-\newcommand*{\meqaux}{\overset{\text{m}}{=}}
+\newcommand*{\meqaux}[2]{\overset{\text{m}}{=}}
 % "=" with "?" on top (uncertainty)
 \DeclareRobustCommand{\qmeq}{\relax\ifmmode\mathrel{\mathpalette\qmeqaux\relax}\fi}
-\newcommand*{\qmeqaux}{\overset{\text{?}}{=}}
+\newcommand*{\qmeqaux}[2]{\overset{\text{?}}{=}}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+\DeclareMathOperator{\Adj}{Adj}
+\DeclareMathOperator{\lcm}{lcm}
+
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Var}{Var}
+
+\DeclareMathOperator{\D}{D}
+\DeclareMathOperator{\Dec}{Dec}
+\DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\Enc}{Enc}
+
+\DeclareMathOperator{\Extend}{Extend}
+\DeclareMathOperator{\Seal}{Seal}
+\DeclareMathOperator{\Unseal}{Unseal}
 
 \newcommand{\perm}[2]{{}^{#1}P_{#2}}
-\newcommand{\comb}[2]{{}^{#1}C_{#2}}
 \renewcommand{\choose}[2]{\dbinom{#1}{#2}}
+\newcommand{\comb}[2]{{}^{#1}C_{#2}}
+
+\newcommand{\amortized}[1]{\widehat{#1}}
 \newcommand{\bigO}[1]{\mathcal{O} \! \del{#1}}
 \newcommand{\compl}[1]{{}^\mathsf{c} \! #1}
+\newcommand{\defn}[1]{\textit{\textbf{\boldmath #1}}}
 \newcommand{\expect}[1]{\mathbb{E} \! \del{#1}}
 \newcommand{\expectsq}[1]{\mathbb{E}^2 \! \del{#1}}
+\newcommand{\matx}[2]{\del{\!\!\!\begin{array}{*{#1}{c}}#2\end{array}\!\!\!}}
+\newcommand{\percent}[1]{#1\%}
 \newcommand{\prob}[1]{\Pr \! \del{#1}}
+
 \newcommand{\naturals}{\mathbb{N}}
 \newcommand{\integers}{\mathbb{Z}}
 \newcommand{\fractions}{\mathbb{Q}}
@@ -174,17 +201,25 @@
 \newcommand{\laplace}{\mathscr{L}}
 
 \newcommand{\goesto}{\rightarrow}
-\newcommand{\percent}[1]{#1\%}
-\newcommand{\matx}[2]{\del{\!\!\!\begin{array}{*{#1}{c}}#2\end{array}\!\!\!}}
-\newcommand{\Adj}{\mathop{\rm Adj}\nolimits}
+\newcommand{\nequiv}{\not\equiv}
 \newcommand{\transpose}{^{\mbox{\scriptsize \sf T}}}
-\newcommand{\amortized}[1]{\widehat{#1}}
+\newcommand{\xor}{\oplus}
 
 \usepackage{newunicodechar}
 \newunicodechar{≠}{\neq}
 \newunicodechar{≈}{\approx}
 \newunicodechar{≤}{\leq}
 \newunicodechar{≥}{\geq}
+
+\usepackage{aliascnt}
+
+\newaliascnt{inq}{equation}
+\aliascntresetthe{inq}
+
+\makeatletter
+\def\inequality{$$\refstepcounter{inq}}
+\def\endinequality{\eqno \hbox{\@eqnnum}$$\@ignoretrue}
+\makeatother
 
 % ------- Figures and tables --------
 \usepackage{graphicx}
@@ -219,12 +254,12 @@
 \setcounter{totalnumber}{5}
 \setcounter{dbltopnumber}{2}
 
-\renewcommand{\topfraction}{.7}
-\renewcommand{\bottomfraction}{.3}
-\renewcommand{\textfraction}{.1}
-\renewcommand{\floatpagefraction}{.7}
-\renewcommand{\dbltopfraction}{.7}
-\renewcommand{\dblfloatpagefraction}{.7}
+\renewcommand{\topfraction}{0.7}
+\renewcommand{\bottomfraction}{0.3}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.7}
+\renewcommand{\dbltopfraction}{0.7}
+\renewcommand{\dblfloatpagefraction}{0.7}
 
 \usepackage{xspace}
 \usepackage[export]{adjustbox}
@@ -261,7 +296,6 @@
 % -------------- Code ---------------
 \usepackage{listings}
 \usepackage{dirtree}
-\DeclareSymbolFont{largesymbols}{OMX}{cmex}{m}{n}
 
 \usepackage{minted}
 \setminted{
@@ -290,7 +324,7 @@
 }
 
 % ----------- Algorithms ------------
-% Alternatively, check out clrscode4e
+% Alternatively, check out clrscode4e: https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/11599/clrscode4e.pdf
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{morewrites}
@@ -305,9 +339,9 @@
     backend=biber,
     dashed=false,
     dateabbrev=false,
-    doi,
-    giveninits,
-    isbn,
+    doi=true,
+    giveninits=true,
+    isbn=true,
     maxbibnames=99,
     maxcitenames=2,
     sortcites,
@@ -331,35 +365,63 @@
 ]{hyperref}
 
 \usepackage[
+    % capitalise,
     nameinlink,
     noabbrev,
 ]{cleveref}  % Must load after amsmath, babel and hyperref
 \crefname{subsection}{subsection}{subsections}
 \crefname{subsubsection}{subsubsection}{subsubsections}
+\creflabelformat{inq}{#2\textup{(#1)}#3}
 \newcommand{\creflastconjunction}{ og~}
 
 \makeatletter
 \cref@addlanguagedefs{american}{
-    \crefformat{procedure}{procedure~#2#1#3}
-    \crefrangeformat{procedure}{procedures~#3#1#4 to~#5#2#6}
-    \crefmultiformat{procedure}{procedures~#2#1#3}{ and~#2#1#3]}{, #2#1#3}{, and~#2#1#3}
+    \if@cref@capitalise
+        \crefname{inq}{Inequality}{Inequalities}
+        \crefformat{procedure}{Procedure~#2#1#3}
+        \crefrangeformat{procedure}{Procedures~#3#1#4 to~#5#2#6}
+        \crefmultiformat{procedure}{Procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+    \else
+        \crefname{inq}{inequality}{inequalities}
+        \crefformat{procedure}{procedure~#2#1#3}
+        \crefrangeformat{procedure}{procedures~#3#1#4 to~#5#2#6}
+        \crefmultiformat{procedure}{procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+    \fi
 }
 \cref@addlanguagedefs{british}{
-    \crefformat{procedure}{procedure~#2#1#3}
-    \crefrangeformat{procedure}{procedures~#3#1#4 to~#5#2#6}
-    \crefmultiformat{procedure}{procedures~#2#1#3}{ and~#2#1#3]}{, #2#1#3}{, and~#2#1#3}
+    \if@cref@capitalise
+        \crefname{inq}{Inequality}{Inequalities}
+        \crefformat{procedure}{Procedure~#2#1#3}
+        \crefrangeformat{procedure}{Procedures~#3#1#4 to~#5#2#6}
+        \crefmultiformat{procedure}{Procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+    \else
+        \crefname{inq}{inequality}{inequalities}
+        \crefformat{procedure}{procedure~#2#1#3}
+        \crefrangeformat{procedure}{procedures~#3#1#4 to~#5#2#6}
+        \crefmultiformat{procedure}{procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+    \fi
 }
 \cref@addlanguagedefs{norsk}{
-    \crefformat{procedure}{prosedyre~#2#1#3}
-    \crefrangeformat{procedure}{prosedyrer~#3#1#4 til~#5#2#6}
-    \crefmultiformat{procedure}{prosedyrer~#2#1#3}{ og~#2#1#3]}{, #2#1#3}{ og~#2#1#3}
+    \if@cref@capitalise
+        \crefname{inq}{Ulikhet}{Ulikheter}
+        \crefformat{procedure}{Prosedyre~#2#1#3}
+        \crefrangeformat{procedure}{Prosedyrer~#3#1#4 til~#5#2#6}
+        \crefmultiformat{procedure}{Prosedyrer~#2#1#3}{ og~#2#1#3}{, #2#1#3}{, og~#2#1#3}
+    \else
+        \crefname{inq}{ulikhet}{ulikheter}
+        \crefformat{procedure}{prosedyre~#2#1#3}
+        \crefrangeformat{procedure}{prosedyrer~#3#1#4 til~#5#2#6}
+        \crefmultiformat{procedure}{prosedyrer~#2#1#3}{ og~#2#1#3}{, #2#1#3}{ og~#2#1#3}
+    \fi
 }
 \makeatother
 
 \newcommand{\alglabel}[1]{\label{alg:#1}}
+\newcommand{\caselabel}[1]{\label{case:#1}}
 \newcommand{\corlabel}[1]{\label{cor:#1}}
 \newcommand{\eqlabel}[1]{\label{eq:#1}}
 \newcommand{\figlabel}[1]{\label{fig:#1}}
+\newcommand{\ineqlabel}[1]{\label{ineq:#1}}
 \newcommand{\lemlabel}[1]{\label{lem:#1}}
 \newcommand{\lstlabel}[1]{\label{lst:#1}}
 \newcommand{\prolabel}[1]{\label{pro:#1}}
@@ -391,15 +453,7 @@
 
 \setabbreviationstyle{long-short}
 \setabbreviationstyle[\acronymtype]{long-short}
-
 % \GlsXtrEnableEntryCounting{\acronymtype,abbreviation}{2}
-
-% TODO: Add to glossary table
-\glsaddkey{unit}{\glsentrytext{\glslabel}}{\glsentryunit}{\GLsentryunit}{\glsunit}{\Glsunit}{\GLSunit}
-\glssetnoexpandfield{unit}
-
-\glsaddkey{value}{\glsentrytext{\glslabel}}{\glsentryvalue}{\GLsentryvalue}{\glsvalue}{\Glsvalue}{\GLSvalue}
-\glssetnoexpandfield{value}
 
 % ------------- General -------------
 \usepackage[
@@ -479,12 +533,19 @@
     \renewcommand{\initialismname}{Forbokstavord}
     \renewcommand{\blankinfo}{Denne siden er med hensikt blank}
     \renewcommand{\datestring}{Dato}
+    \renewcommand{\proofsketchtext}{Bevisutkast}
+    \renewcommand{\proofideatext}{Bevisidé}
     \renewcommand{\ntnulogo}{Images/NTNU_logo_NB.png}
-    \renewenvironment{theorem}{\begin{teorem}}{\end{teorem}}
+    \renewenvironment{case}{\begin{tilfelle}}{\end{tilfelle}}
     \renewenvironment{corollary}{\begin{korollar}}{\end{korollar}}
+    \renewenvironment{definition}{\begin{definisjon}}{\end{definisjon}}
+    \renewenvironment{example}{\begin{eksempel}}{\end{eksempel}}
     \renewenvironment{exercise}{\begin{oppgave}}{\end{oppgave}}
-    \renewenvironment{remark}{\begin{merk}}{\end{merk}}
     \renewenvironment{principle}{\begin{prinsipp}}{\end{prinsipp}}
+    \renewenvironment{property}{\begin{egenskap}}{\end{egenskap}}
+    \renewenvironment{remark}{\begin{merk}}{\end{merk}}
+    \renewenvironment{theorem}{\begin{teorem}}{\end{teorem}}
+    \renewenvironment{step}{\begin{trinn}}{\end{trinn}}
     \setlength{\parindent}{0em}
 }
 
