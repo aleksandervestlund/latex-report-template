@@ -23,19 +23,19 @@
 \usepackage[T1]{fontenc}
 \usepackage[main=]{babel}
 \usepackage[
-    babel,
-    expansion,
-    protrusion,
+  babel,
+  expansion,
+  protrusion,
 ]{microtype}
 \usepackage{lmodern}
 \DeclareSymbolFont{largesymbols}{OMX}{cmex}{m}{n}
 \usepackage[
-    a4paper,
-    total={
-        150mm,
-        245mm,
-        footskip=14mm,
-    },
+  a4paper,
+  total={
+    150mm,
+    245mm,
+    footskip=14mm,
+  },
 ]{geometry}
 \usepackage[onehalfspacing]{setspace}
 
@@ -52,39 +52,39 @@
 
 \newcommand{\keywordsname}{Keywords}
 \newcommand{\keywords}[1]{
-    \textbf{\emph{\keywordsname}} \--- #1
+  \textbf{\emph{\keywordsname}} \--- #1
 }
 
 \newcommand{\frontmatter}{
-    \pagenumbering{roman}
+  \pagenumbering{roman}
 }
 \newcommand{\mainmatter}{
-    \newpage
-    \pagenumbering{arabic}
+  \newpage
+  \pagenumbering{arabic}
 }
 
 \usepackage{appendix}
 \newcommand{\addappendix}{
-    \phantomsection
-    \newpage
-    \appendix
-    \section*{\appendixname}
-    \addcontentsline{toc}{section}{\appendixname}
-    \renewcommand{\thesubsection}{\Alph{subsection}}
+  \phantomsection
+  \newpage
+  \appendix
+  \section*{\appendixname}
+  \addcontentsline{toc}{section}{\appendixname}
+  \renewcommand{\thesubsection}{\Alph{subsection}}
 }
 
 \usepackage{afterpage}
 \newcommand{\blankinfo}{This page was intentionally left blank}
 \newcommand{\blankpage}{
-    \phantomsection
-    \newpage
-    \hbox{}
-    \vfill
-    \centerline{\MakeUppercase{\blankinfo}}
-    \vfill
-    \thispagestyle{empty}
-    \addtocounter{page}{-1}
-    \newpage
+  \phantomsection
+  \newpage
+  \hbox{}
+  \vfill
+  \centerline{\MakeUppercase{\blankinfo}}
+  \vfill
+  \thispagestyle{empty}
+  \addtocounter{page}{-1}
+  \newpage
 }
 
 % ----------- Mathematics -----------
@@ -105,22 +105,22 @@
 
 % Both English and Norwegian versions
 \declaretheorem[numberwithin=section]{
-    corollary,korollar,
-    lemma,
-    principle,prinsipp,
-    theorem,teorem  % Cannot have trailing comma
+  corollary,korollar,
+  lemma,
+  principle,prinsipp,
+  theorem,teorem  % Cannot have trailing comma
 }
 \declaretheorem[style=remark]{
-    remark,merk
+  remark,merk
 }
 \declaretheorem{
-    case,tilfelle,
-    definition,definisjon,
-    exercise,oppgave,
-    example,eksempel,
-    invariant,
-    property,egenskap,
-    step,trinn
+  case,tilfelle,
+  definition,definisjon,
+  exercise,oppgave,
+  example,eksempel,
+  invariant,
+  property,egenskap,
+  step,trinn
 }
 
 \newcommand{\proofsketchtext}{Proof Sketch}
@@ -226,10 +226,10 @@
 \usepackage{wrapfig}
 \usepackage{tabularray}
 \usepackage[
-    figureposition=bottom,
-    font=onehalfspacing,
-    labelfont=bf,
-    tableposition=top,
+  figureposition=bottom,
+  font=onehalfspacing,
+  labelfont=bf,
+  tableposition=top,
 ]{caption}
 \usepackage{subcaption}
 \usepackage[nottoc]{tocbibind}
@@ -239,9 +239,9 @@
 \newcommand{\footnotetight}[1]{\footnote{\renewcommand\baselinestretch{1}\footnotesize #1}}
 
 \usepackage[
-    dvipsnames,
-    table,
-    xcdraw,
+  dvipsnames,
+  table,
+  xcdraw,
 ]{xcolor}
 
 \usepackage{floatrow}
@@ -274,7 +274,7 @@
 \renewcommand{\theadfont}{\bfseries}
 
 \newcommand{\HRule}{
-    \rule{\linewidth}{0.5mm}
+  \rule{\linewidth}{0.5mm}
 }
 \newcommand{\mitlogo}{Images/MIT_logo.png}
 \newcommand{\ntnulogo}{Images/NTNU_logo_EN.png}
@@ -282,14 +282,14 @@
 
 \makeatletter
 \renewcommand*{\listof}[2]{
-    \@ifundefined{ext@#1}{\float@error{#1}}{
-        \expandafter\let\csname l@#1\endcsname \l@figure
-        \float@listhead{#2}
-        \addcontentsline{toc}{section}{#2}
-        \begingroup
-            \@starttoc{\@nameuse{ext@#1}}
-        \endgroup
-    }
+  \@ifundefined{ext@#1}{\float@error{#1}}{
+    \expandafter\let\csname l@#1\endcsname \l@figure
+    \float@listhead{#2}
+    \addcontentsline{toc}{section}{#2}
+    \begingroup
+      \@starttoc{\@nameuse{ext@#1}}
+    \endgroup
+  }
 }
 \makeatother
 
@@ -299,17 +299,17 @@
 
 \usepackage{minted}
 \setminted{
-    breaklines,
-    mathescape,
-    style=default,
+  breaklines,
+  mathescape,
+  style=default,
 }
 \fvset{baselinestretch=1}
 
 \usepackage[most]{tcolorbox}
 \tcbset{
-    enhanced,
-    hyphenationfix,
-    oversize,
+  enhanced,
+  hyphenationfix,
+  oversize,
 }
 
 % Ignore warnings
@@ -318,9 +318,9 @@
 
 \let\oldinputminted\inputminted
 \RenewDocumentCommand{\inputminted}{O{} m m}{
-    \begin{tcolorbox}
-        \oldinputminted[#1]{#2}{#3}
-    \end{tcolorbox}
+  \begin{tcolorbox}
+    \oldinputminted[#1]{#2}{#3}
+  \end{tcolorbox}
 }
 
 % ----------- Algorithms ------------
@@ -336,18 +336,18 @@
 
 % ---------- Bibliography -----------
 \usepackage[
-    backend=biber,
-    dashed=false,
-    dateabbrev=false,
-    doi=true,
-    giveninits=true,
-    isbn=true,
-    maxbibnames=99,
-    maxcitenames=2,
-    sortcites,
-    style=ext-authoryear-ecomp,
-    uniquename=init,
-    urldate=long,
+  backend=biber,
+  dashed=false,
+  dateabbrev=false,
+  doi=true,
+  giveninits=true,
+  isbn=true,
+  maxbibnames=99,
+  maxcitenames=2,
+  sortcites,
+  style=ext-authoryear-ecomp,
+  uniquename=init,
+  urldate=long,
 ]{biblatex}
 \addbibresource{references.bib}
 \DeclareNameAlias{sortname}{family-given}
@@ -357,17 +357,17 @@
 
 % ----------- Referencing -----------
 \usepackage[
-    colorlinks,
-    citecolor=black,
-    filecolor=black,
-    linkcolor=black,
-    urlcolor=black,
+  colorlinks,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=black,
 ]{hyperref}
 
 \usepackage[
-    % capitalise,
-    nameinlink,
-    noabbrev,
+  % capitalise,
+  nameinlink,
+  noabbrev,
 ]{cleveref}  % Must load after amsmath, babel and hyperref
 \crefname{subsection}{subsection}{subsections}
 \crefname{subsubsection}{subsubsection}{subsubsections}
@@ -376,43 +376,43 @@
 
 \makeatletter
 \cref@addlanguagedefs{american}{
-    \if@cref@capitalise
-        \crefname{inq}{Inequality}{Inequalities}
-        \crefformat{procedure}{Procedure~#2#1#3}
-        \crefrangeformat{procedure}{Procedures~#3#1#4 to~#5#2#6}
-        \crefmultiformat{procedure}{Procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
-    \else
-        \crefname{inq}{inequality}{inequalities}
-        \crefformat{procedure}{procedure~#2#1#3}
-        \crefrangeformat{procedure}{procedures~#3#1#4 to~#5#2#6}
-        \crefmultiformat{procedure}{procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
-    \fi
+  \if@cref@capitalise
+    \crefname{inq}{Inequality}{Inequalities}
+    \crefformat{procedure}{Procedure~#2#1#3}
+    \crefrangeformat{procedure}{Procedures~#3#1#4 to~#5#2#6}
+    \crefmultiformat{procedure}{Procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+  \else
+    \crefname{inq}{inequality}{inequalities}
+    \crefformat{procedure}{procedure~#2#1#3}
+    \crefrangeformat{procedure}{procedures~#3#1#4 to~#5#2#6}
+    \crefmultiformat{procedure}{procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+  \fi
 }
 \cref@addlanguagedefs{british}{
-    \if@cref@capitalise
-        \crefname{inq}{Inequality}{Inequalities}
-        \crefformat{procedure}{Procedure~#2#1#3}
-        \crefrangeformat{procedure}{Procedures~#3#1#4 to~#5#2#6}
-        \crefmultiformat{procedure}{Procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
-    \else
-        \crefname{inq}{inequality}{inequalities}
-        \crefformat{procedure}{procedure~#2#1#3}
-        \crefrangeformat{procedure}{procedures~#3#1#4 to~#5#2#6}
-        \crefmultiformat{procedure}{procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
-    \fi
+  \if@cref@capitalise
+    \crefname{inq}{Inequality}{Inequalities}
+    \crefformat{procedure}{Procedure~#2#1#3}
+    \crefrangeformat{procedure}{Procedures~#3#1#4 to~#5#2#6}
+    \crefmultiformat{procedure}{Procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+  \else
+    \crefname{inq}{inequality}{inequalities}
+    \crefformat{procedure}{procedure~#2#1#3}
+    \crefrangeformat{procedure}{procedures~#3#1#4 to~#5#2#6}
+    \crefmultiformat{procedure}{procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+  \fi
 }
 \cref@addlanguagedefs{norsk}{
-    \if@cref@capitalise
-        \crefname{inq}{Ulikhet}{Ulikheter}
-        \crefformat{procedure}{Prosedyre~#2#1#3}
-        \crefrangeformat{procedure}{Prosedyrer~#3#1#4 til~#5#2#6}
-        \crefmultiformat{procedure}{Prosedyrer~#2#1#3}{ og~#2#1#3}{, #2#1#3}{, og~#2#1#3}
-    \else
-        \crefname{inq}{ulikhet}{ulikheter}
-        \crefformat{procedure}{prosedyre~#2#1#3}
-        \crefrangeformat{procedure}{prosedyrer~#3#1#4 til~#5#2#6}
-        \crefmultiformat{procedure}{prosedyrer~#2#1#3}{ og~#2#1#3}{, #2#1#3}{ og~#2#1#3}
-    \fi
+  \if@cref@capitalise
+    \crefname{inq}{Ulikhet}{Ulikheter}
+    \crefformat{procedure}{Prosedyre~#2#1#3}
+    \crefrangeformat{procedure}{Prosedyrer~#3#1#4 til~#5#2#6}
+    \crefmultiformat{procedure}{Prosedyrer~#2#1#3}{ og~#2#1#3}{, #2#1#3}{, og~#2#1#3}
+  \else
+    \crefname{inq}{ulikhet}{ulikheter}
+    \crefformat{procedure}{prosedyre~#2#1#3}
+    \crefrangeformat{procedure}{prosedyrer~#3#1#4 til~#5#2#6}
+    \crefmultiformat{procedure}{prosedyrer~#2#1#3}{ og~#2#1#3}{, #2#1#3}{ og~#2#1#3}
+  \fi
 }
 \makeatother
 
@@ -434,13 +434,13 @@
 \PassOptionsToPackage{lang-warn=false}{datatool-base}
 % More styles: https://www.dickimaw-books.com/gallery/glossaries-styles/
 \usepackage[
-    abbreviations,
-    acronyms,
-    % nomain,
-    shortcuts,
-    style=altlong4col,
-    symbols,
-    translate=babel,
+  abbreviations,
+  acronyms,
+  % nomain,
+  shortcuts,
+  style=altlong4col,
+  symbols,
+  translate=babel,
 ]{glossaries-extra}  % Must load after hyperref
 
 \newcommand{\symboltype}{symbols}
@@ -448,7 +448,7 @@
 \newcommand{\initialismname}{Initialisms}
 \newglossary*{\initialismtype}{\initialismname}
 \NewDocumentCommand{\newinitialism}{O{} m m m}{
-    \newabbreviation[type=\initialismtype,#1]{#2}{#3}{#4}
+  \newabbreviation[type=\initialismtype,#1]{#2}{#3}{#4}
 }
 
 \setabbreviationstyle{long-short}
@@ -457,15 +457,15 @@
 
 % ------------- General -------------
 \usepackage[
-    shortcuts,
-    wordspacearound,
+  shortcuts,
+  wordspacearound,
 ]{extdash}
 \usepackage[per-mode=symbol]{siunitx}
 
 \newcommand{\datestring}{Date}
 \usepackage[
-    level,
-    nodayofweek,
+  level,
+  nodayofweek,
 ]{datetime}
 
 \usepackage{booktabs}
@@ -490,65 +490,65 @@
 \fancyfoot[C]{\thepage}
 
 \newcommand{\romannumeralupper}[1]{
-    \MakeUppercase{\romannumeral{#1}}
+  \MakeUppercase{\romannumeral{#1}}
 }
 
 % ---- Numbering within sections ----
 % \setcounter{secnumdepth}{0}
 \makeatletter
 \ifnum\c@secnumdepth > 0
-    \usepackage{chngcntr}
-    \counterwithin{figure}{section}
-    \counterwithin{table}{section}
-    \counterwithin{algorithm}{section}
-    \counterwithin{listing}{section}
-    \counterwithin{procedure}{section}
+  \usepackage{chngcntr}
+  \counterwithin{figure}{section}
+  \counterwithin{table}{section}
+  \counterwithin{algorithm}{section}
+  \counterwithin{listing}{section}
+  \counterwithin{procedure}{section}
 \fi
 \makeatother
 
 % ------------ Language -------------
 \addto{\captionsamerican}{
-    \floatname{procedure}{Procedure}
-    \renewcommand{\contentsname}{Table of Contents}
-    \renewcommand{\abbreviationsname}{Abbreviations}
-    \renewcommand{\creflastconjunction}{, and~}
+  \floatname{procedure}{Procedure}
+  \renewcommand{\contentsname}{Table of Contents}
+  \renewcommand{\abbreviationsname}{Abbreviations}
+  \renewcommand{\creflastconjunction}{, and~}
 }
 \addto{\captionsbritish}{
-    \floatname{procedure}{Procedure}
-    \renewcommand{\contentsname}{Table of Contents}
-    \renewcommand{\abbreviationsname}{Abbreviations}
-    \renewcommand{\creflastconjunction}{, and~}
+  \floatname{procedure}{Procedure}
+  \renewcommand{\contentsname}{Table of Contents}
+  \renewcommand{\abbreviationsname}{Abbreviations}
+  \renewcommand{\creflastconjunction}{, and~}
 }
 \addto{\captionsnorsk}{
-    \floatname{procedure}{Prosedyre}
-    \renewcommand{\listprocedurename}{Prosedyrer}
-    \renewcommand{\keywordsname}{Nøkkelord}
-    \renewcommand{\contentsname}{Innholdsfortegnelse}
-    \renewcommand{\appendixname}{Vedlegg}
-    \renewcommand{\algorithmname}{Algoritme}
-    \renewcommand{\listalgorithmname}{Algoritmer}
-    \renewcommand{\listingscaption}{Opplisting}
-    \renewcommand{\listoflistingscaption}{Opplistinger}
-    \renewcommand{\listtheoremname}{Teoremer}
-    \renewcommand{\initialismname}{Forbokstavord}
-    \renewcommand{\blankinfo}{Denne siden er med hensikt blank}
-    \renewcommand{\datestring}{Dato}
-    \renewcommand{\proofsketchtext}{Bevisutkast}
-    \renewcommand{\proofideatext}{Bevisidé}
-    \renewcommand{\ntnulogo}{Images/NTNU_logo_NB.png}
-    \renewenvironment{case}{\begin{tilfelle}}{\end{tilfelle}}
-    \renewenvironment{corollary}{\begin{korollar}}{\end{korollar}}
-    \renewenvironment{definition}{\begin{definisjon}}{\end{definisjon}}
-    \renewenvironment{example}{\begin{eksempel}}{\end{eksempel}}
-    \renewenvironment{exercise}{\begin{oppgave}}{\end{oppgave}}
-    \renewenvironment{principle}{\begin{prinsipp}}{\end{prinsipp}}
-    \renewenvironment{property}{\begin{egenskap}}{\end{egenskap}}
-    \renewenvironment{remark}{\begin{merk}}{\end{merk}}
-    \renewenvironment{theorem}{\begin{teorem}}{\end{teorem}}
-    \renewenvironment{step}{\begin{trinn}}{\end{trinn}}
-    \setlength{\parindent}{0em}
+  \floatname{procedure}{Prosedyre}
+  \renewcommand{\listprocedurename}{Prosedyrer}
+  \renewcommand{\keywordsname}{Nøkkelord}
+  \renewcommand{\contentsname}{Innholdsfortegnelse}
+  \renewcommand{\appendixname}{Vedlegg}
+  \renewcommand{\algorithmname}{Algoritme}
+  \renewcommand{\listalgorithmname}{Algoritmer}
+  \renewcommand{\listingscaption}{Opplisting}
+  \renewcommand{\listoflistingscaption}{Opplistinger}
+  \renewcommand{\listtheoremname}{Teoremer}
+  \renewcommand{\initialismname}{Forbokstavord}
+  \renewcommand{\blankinfo}{Denne siden er med hensikt blank}
+  \renewcommand{\datestring}{Dato}
+  \renewcommand{\proofsketchtext}{Bevisutkast}
+  \renewcommand{\proofideatext}{Bevisidé}
+  \renewcommand{\ntnulogo}{Images/NTNU_logo_NB.png}
+  \renewenvironment{case}{\begin{tilfelle}}{\end{tilfelle}}
+  \renewenvironment{corollary}{\begin{korollar}}{\end{korollar}}
+  \renewenvironment{definition}{\begin{definisjon}}{\end{definisjon}}
+  \renewenvironment{example}{\begin{eksempel}}{\end{eksempel}}
+  \renewenvironment{exercise}{\begin{oppgave}}{\end{oppgave}}
+  \renewenvironment{principle}{\begin{prinsipp}}{\end{prinsipp}}
+  \renewenvironment{property}{\begin{egenskap}}{\end{egenskap}}
+  \renewenvironment{remark}{\begin{merk}}{\end{merk}}
+  \renewenvironment{theorem}{\begin{teorem}}{\end{teorem}}
+  \renewenvironment{step}{\begin{trinn}}{\end{trinn}}
+  \setlength{\parindent}{0em}
 }
 
 \ifthenelse{\equal{\languagename}{norsk}}{
-    \usepackage{icomma}
+  \usepackage{icomma}
 }{}
