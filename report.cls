@@ -6,7 +6,6 @@
 
 \LoadClass[12pt]{article}
 \RequirePackage{packages}
-\RequirePackage{glossary}
 
 \typeout{}
 \typeout{*** Document class 'report' loaded ***}
