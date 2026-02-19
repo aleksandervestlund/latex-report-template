@@ -4,7 +4,7 @@ This document uses several tools to ensure consistent and high\-/quality languag
 
 \subsection{Referencing}
 
-Cross\-/referencing is done using the \texttt{cleveref} package, which automatically includes the type of reference (e.g., figure, algorithm, listing) in the citation. For example, \cref{lst:fibonacci} shows how to calculate Fibonacci numbers while \cref{fig:theway} displays an image. Algorithms and procedures are referenced similarly, such as \cref{alg:expBySquaring} and \cref{pro:mult}.
+Cross\-/referencing is done using the \texttt{cleveref} package, which automatically includes the type of reference (e.g., figure, algorithm, listing) in the citation. For example, \cref{lst:fibonacci} shows how to calculate Fibonacci numbers while \cref{fig:theway} displays an image. Algorithms and procedures are referenced similarly, such as \cref{alg:expBySquaring} and \cref{pro:mult}. \Cref{fig:theway,fig:subfigures,lst:csharpMath,lst:mathMinted,lst:matlabHelloWorld,tab:budget,tab:standard}.
 
 References to academic works should be made using \verb|\cite| or \verb|\textcite|. For example, \cite{xx00} discusses some of the concepts used here while \textcite{xx00} provides an in\-/depth explanation. The difference is that \verb|\textcite| integrates the citation naturally into the sentence structure.
 
@@ -24,4 +24,4 @@ To ensure proper quotation formatting across languages and document styles, the 
 
 \subsection{The \texttt{glossaries} Package}
 
-The \texttt{glossaries} package is useful for defining acronyms. Here are some examples: \glspl{api}, \gls{cpu}, \gls{os}, \gls{dr}, \gls{etc}. The results can be seen after the appendix.
+The \texttt{glossaries} package is useful for defining acronyms. Here are some examples: \glspl{api}, \gls{os}, \gls{dr}, \gls{etc}. The results can be seen after the appendix.

@@ -3,101 +3,86 @@
 This section demonstrates various mathematical features supported by the template. Every package listed under the \enquote{Mathematics} category in \texttt{packages.sty} is represented here with a usage example. Some of these examples are purely illustrative and are not necessarily mathematically meaningful.
 
 The \gls{gcd} and \gls{lcm} are fundamental concepts in number theory. The \gls{lcm} of two numbers is the smallest number that is a multiple of both.
-
-\begin{equation}
+\begin{equation*}
     \gcd(a, b) = \mathit{\glsxtrshort{gcd}}(a, b)
-\end{equation}
-\begin{equation}
+\end{equation*}
+\begin{equation*}
     \lcm(a, b) = \mathit{\glsxtrshort{lcm}}(a, b)
-\end{equation}
+\end{equation*}
 
 We begin with examples of custom\-/defined relation symbols:
-
-\begin{equation}
+\begin{equation*}
     x \defeq y + z
-\end{equation}
-\begin{equation}
+\end{equation*}
+\begin{equation*}
     a \whateq b
-\end{equation}
-\begin{equation}
+\end{equation*}
+\begin{equation*}
     p \hateq q
-\end{equation}
-\begin{equation}
+\end{equation*}
+\begin{equation*}
     f \coleq g
-\end{equation}
-\begin{equation}
+\end{equation*}
+\begin{equation*}
     M \meq N
-\end{equation}
-\begin{equation}
-    U \qmeq V
-\end{equation}
+\end{equation*}
+\begin{equation*}
+    U \qmeq V\transpose
+\end{equation*}
 
 The number of permutations of $r$ items from a set of $n$ elements is given by:
-
-\begin{equation}
+\begin{equation*}
     \perm{n}{r} = \frac{n!}{(n - r)!}
-\end{equation}
+\end{equation*}
 
 The number of combinations (binomial coefficient) is:
-
-\begin{equation}
+\begin{equation*}
     \choose{n}{r} = \comb{n}{r} = \frac{n!}{r!(n - r)!}
-\end{equation}
+\end{equation*}
 
 We can also use floor and ceiling functions:
-
-\begin{equation}
+\begin{equation*}
     \ceil*{1.2} = 2 \qquad \floor*{2.2} = 2
-\end{equation}
-
-\begin{equation}
-    \Adj(1)
-\end{equation}
+\end{equation*}
 
 Expected value notation:
-
-\begin{equation}
+\begin{equation*}
     \expect{X} = \sum_{x \in \mathcal{X}} x \cdot P(X = x)
-\end{equation}
+\end{equation*}
 
 Variance:
-
-\begin{equation}
+\begin{equation*}
     \Var(X) = \sigma^2(X) = \expect{(X - \expect{X})^2} = \sum_{x \in \mathcal{X}} (x - \expect{X})^2 \cdot P(X = x)
-\end{equation}
+\end{equation*}
 
 Some commonly used mathematical sets and transforms:
-
-\begin{equation}
+\begin{equation*}
     \gls{N} \subset \gls{Z} \subset \gls{Q} \subset \gls{R} \subset \gls{C}, \quad \laplace, \quad \compl{A}
-\end{equation}
+\end{equation*}
 
 Equations, partially to demonstrate \texttt{glossaries\-/extra}:
-
-\begin{equation}
+\begin{equation*}
     E = m\gls{c}^2
-\end{equation}
+\end{equation*}
 
 A piecewise\-/defined function can be written as:
-
-\begin{equation}
+\begin{equation*}
     f(x) = 
     \begin{cases}
-        x^2 & \text{, } x \geq 0, \\
-        -x  & \text{, } x < 0
+        x^2 & \cif{x \geq 0} \\
+        -x  & \cotherwise
     \end{cases}
-\end{equation}
+\end{equation*}
 
 We can use symbols such as $\forall$, $\exists$, $\Rightarrow$, $\nexists$, and $\neg$ for logic notation.
 
 We also use \texttt{mathclap} to fix spacing issues:
-
-\begin{equation}
+\begin{equation*}
     \sum_{1 \leq i < j \leq n} a_{ij}
-\end{equation}
-\begin{equation}
+\end{equation*}
+\begin{equation*}
     \sum_{\mathclap{1 \leq i < j \leq n}} a_{ij}
-\end{equation}
+\end{equation*}
 
 \begin{theorem}[Intervals]
     Let $f$ be a continuous function in a closed interval $[a,b]$. Then $f$ is bounded and attains its bounds on $[a,b]$.
@@ -108,14 +93,13 @@ We also use \texttt{mathclap} to fix spacing issues:
 \end{proof}
 
 Bold vector notation using \texttt{bm}:
-\begin{equation}
+\begin{equation*}
     \bm{F} = m \bm{a}
-\end{equation}
+\end{equation*}
 
 We can cancel out terms to simplify expressions:
-
-\begin{equation}
+\begin{equation*}
     \frac{\cancel{a} \cdot b}{\cancel{a}} = b
-\end{equation}
+\end{equation*}
 
 The \texttt{nicefrac} package provides better inline fractions to write text: $\nicefrac{a}{b}$ is cleaner than $\frac{a}{b}$ or $a/b$.

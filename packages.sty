@@ -19,17 +19,17 @@
 % +---------------------------------+
 
 % ----------- Page setup ------------
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[main=]{babel}
-\usepackage[
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[main=]{babel}
+\RequirePackage[
   babel,
   expansion,
   protrusion,
 ]{microtype}
-\usepackage{lmodern}
+\RequirePackage{lmodern}
 \DeclareSymbolFont{largesymbols}{OMX}{cmex}{m}{n}
-\usepackage[
+\RequirePackage[
   a4paper,
   total={
     150mm,
@@ -37,17 +37,17 @@
     footskip=14mm,
   },
 ]{geometry}
-\usepackage[onehalfspacing]{setspace}
+\RequirePackage[onehalfspacing]{setspace}
 
 \setlength{\parskip}{0.8em}
 \pdfgentounicode=1
 \sloppy
 
-\usepackage{silence}
+\RequirePackage{silence}
 \WarningFilter{latex}{Command \showhyphens has changed.}
 
 % ------- Document structure --------
-\usepackage{etoolbox}
+\RequirePackage{etoolbox}
 \patchcmd{\abstract}{\small}{}{}{}
 
 \newcommand{\keywordsname}{Keywords}
@@ -63,7 +63,7 @@
   \pagenumbering{arabic}
 }
 
-\usepackage{appendix}
+\RequirePackage{appendix}
 \newcommand{\addappendix}{
   \phantomsection
   \newpage
@@ -73,7 +73,7 @@
   \renewcommand{\thesubsection}{\Alph{subsection}}
 }
 
-\usepackage{afterpage}
+\RequirePackage{afterpage}
 \newcommand{\blankinfo}{This page was intentionally left blank}
 \newcommand{\blankpage}{
   \phantomsection
@@ -88,58 +88,66 @@
 }
 
 % ----------- Mathematics -----------
-\usepackage{latexsym}
-\usepackage{amsfonts}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{bm}
-\usepackage{calc}
-\usepackage[makeroom]{cancel}
-\usepackage{commath}
-\usepackage{faktor}
-\usepackage{mathrsfs}
-\usepackage{mathtools}
-\usepackage{nicefrac}
-\usepackage{thmtools}
+\RequirePackage{latexsym}
+\RequirePackage{amsfonts}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{bm}
+\RequirePackage{calc}
+\RequirePackage[makeroom]{cancel}
+\RequirePackage{commath}
+\RequirePackage[
+  ISO,
+  mleftright,
+  spaced=1,
+]{diffcoeff}
+\RequirePackage{faktor}
+\RequirePackage{mathrsfs}
+\RequirePackage{mathtools}
+\RequirePackage{nicefrac}
+\RequirePackage{thmtools}
 
 % Both English and Norwegian versions
 \declaretheorem[numberwithin=section]{
+  assumption,antagelse,
+  case,tilfelle,
+  claim,påstand,
   corollary,korollar,
+  definition,definisjon,
+  example,eksempel,
+  exercise,oppgave,
+  fact,faktum,
+  invariant,
   lemma,
+  observation,observasjon,
   principle,prinsipp,
+  property,egenskap,
+  proposition,forslag,
+  problem,
+  step,trinn,
   theorem,teorem  % Cannot have trailing comma
 }
 \declaretheorem[style=remark]{
   remark,merk
 }
-\declaretheorem{
-  case,tilfelle,
-  definition,definisjon,
-  exercise,oppgave,
-  example,eksempel,
-  invariant,
-  property,egenskap,
-  step,trinn
-}
 
-\newcommand{\proofsketchtext}{Proof Sketch}
 \newcommand{\proofideatext}{Proof Idea}
-\newenvironment{proofsketch}{\noindent\textsc{\proofsketchtext.}\hspace{0.5em}}{\qed}
-\newenvironment{proofidea}{\noindent\textsc{\proofideatext.}\hspace{0.5em}}
+\newcommand{\proofsketchtext}{Proof Sketch}
+\newenvironment{proofidea}
+  {\renewcommand{\qedsymbol}{}\begin{proof}[\proofideatext]}
+  {\end{proof}}
+\newenvironment{proofsketch}
+  {\begin{proof}[\proofsketchtext]}
+  {\end{proof}}
 
-\newcommand{\cif}[1]{\mbox{if $#1$}}
-\newcommand{\cwhen}[1]{\mbox{when $#1$}}
-\newcommand{\cotherw}{\mbox{otherwise}}
+\newcommand{\cif}[1]{\text{if $#1$}}
+\newcommand{\cwhen}[1]{\text{when $#1$}}
+\newcommand{\cotherwise}{\text{otherwise}}
 
 \newlength{\savearraycolsep}
 \newcommand{\narrowarray}[1]{\setlength{\savearraycolsep}{\arraycolsep}\setlength{\arraycolsep}{#1\arraycolsep}}
 \newcommand{\normalarray}{\setlength{\arraycolsep}{\savearraycolsep}}
-
-\makeatletter
-\DeclareRobustCommand{\dd}{\relax\ifmmode\daux\relax\fi}
-\newcommand*{\daux}{\mathop{} \! {\operator@font d}}
-\makeatother
 
 % "=" with "def" on top (definition equal sign)
 \DeclareRobustCommand{\defeq}{\relax\ifmmode\mathrel{\mathpalette\defeqaux\relax}\fi}
@@ -169,28 +177,33 @@
 \DeclareMathOperator{\Cov}{Cov}
 \DeclareMathOperator{\Var}{Var}
 
-\DeclareMathOperator{\D}{D}
 \DeclareMathOperator{\Dec}{Dec}
-\DeclareMathOperator{\E}{E}
 \DeclareMathOperator{\Enc}{Enc}
 
 \DeclareMathOperator{\Extend}{Extend}
 \DeclareMathOperator{\Seal}{Seal}
 \DeclareMathOperator{\Unseal}{Unseal}
 
+\DeclareMathOperator{\poly}{\mathsf{poly}}
+\DeclareMathOperator{\polylog}{\mathsf{polylog}}
+
 \newcommand{\perm}[2]{{}^{#1}P_{#2}}
-\renewcommand{\choose}[2]{\dbinom{#1}{#2}}
 \newcommand{\comb}[2]{{}^{#1}C_{#2}}
+\renewcommand{\choose}[2]{\dbinom{#1}{#2}}
+
+\newcommand{\littleo}[1]{o \! \del{#1}}
+\newcommand{\bigO}[1]{\mathcal{O} \! \del{#1}}
+\newcommand{\bigTheta}[1]{\Theta \! \del{#1}}
+\newcommand{\bigOmega}[1]{\Omega \! \del{#1}}
+\newcommand{\littleomega}[1]{\omega \! \del{#1}}
 
 \newcommand{\amortized}[1]{\widehat{#1}}
-\newcommand{\bigO}[1]{\mathcal{O} \! \del{#1}}
 \newcommand{\compl}[1]{{}^\mathsf{c} \! #1}
 \newcommand{\defn}[1]{\textit{\textbf{\boldmath #1}}}
 \newcommand{\expect}[1]{\mathbb{E} \! \del{#1}}
 \newcommand{\expectsq}[1]{\mathbb{E}^2 \! \del{#1}}
 \newcommand{\matx}[2]{\del{\!\!\!\begin{array}{*{#1}{c}}#2\end{array}\!\!\!}}
 \newcommand{\percent}[1]{#1\%}
-\newcommand{\prob}[1]{\Pr \! \del{#1}}
 
 \newcommand{\naturals}{\mathbb{N}}
 \newcommand{\integers}{\mathbb{Z}}
@@ -202,49 +215,48 @@
 
 \newcommand{\goesto}{\rightarrow}
 \newcommand{\nequiv}{\not\equiv}
-\newcommand{\transpose}{^{\mbox{\scriptsize \sf T}}}
-\newcommand{\xor}{\oplus}
+\newcommand{\transpose}{^{\mathsf{T}}}
+\newcommand{\xor}{\mathbin{\oplus}}
 
-\usepackage{newunicodechar}
+\RequirePackage{newunicodechar}
 \newunicodechar{≠}{\neq}
 \newunicodechar{≈}{\approx}
 \newunicodechar{≤}{\leq}
 \newunicodechar{≥}{\geq}
 
-\usepackage{aliascnt}
-
-\newaliascnt{inq}{equation}
-\aliascntresetthe{inq}
+\RequirePackage{aliascnt}
+\newaliascnt{ineq}{equation}
+\aliascntresetthe{ineq}
 
 \makeatletter
-\def\inequality{$$\refstepcounter{inq}}
+\def\inequality{$$\refstepcounter{ineq}}
 \def\endinequality{\eqno \hbox{\@eqnnum}$$\@ignoretrue}
 \makeatother
 
 % ------- Figures and tables --------
-\usepackage{graphicx}
-\usepackage{wrapfig}
-\usepackage{tabularray}
-\usepackage[
+\RequirePackage{graphicx}
+\RequirePackage{wrapfig}
+\RequirePackage{tabularray}
+\RequirePackage[
   figureposition=bottom,
   font=onehalfspacing,
   labelfont=bf,
   tableposition=top,
 ]{caption}
-\usepackage{subcaption}
-\usepackage[nottoc]{tocbibind}
+\RequirePackage{subcaption}
+\RequirePackage[nottoc]{tocbibind}
 
-\usepackage{tablefootnote}
+\RequirePackage{tablefootnote}
 \newcommand{\footnotenonumber}[1]{{\def\thempfn{}\footnotetext{#1}}}
 \newcommand{\footnotetight}[1]{\footnote{\renewcommand\baselinestretch{1}\footnotesize #1}}
 
-\usepackage[
+\RequirePackage[
   dvipsnames,
   table,
   xcdraw,
 ]{xcolor}
 
-\usepackage{floatrow}
+\RequirePackage{floatrow}
 \floatsetup[figure]{capposition=bottom}
 \floatsetup[subfigure]{capposition=bottom}
 \floatsetup[table]{capposition=top}
@@ -261,16 +273,16 @@
 \renewcommand{\dbltopfraction}{0.7}
 \renewcommand{\dblfloatpagefraction}{0.7}
 
-\usepackage{xspace}
-\usepackage[export]{adjustbox}
-\usepackage{float}  % Must load after floatrow
-\usepackage{lscape}
-\usepackage{longtable}
-\usepackage{multicol}
-\usepackage{multirow}
-\usepackage[section]{placeins}
+\RequirePackage{xspace}
+\RequirePackage[export]{adjustbox}
+\RequirePackage{float}  % Must load after floatrow
+\RequirePackage{lscape}
+\RequirePackage{longtable}
+\RequirePackage{multicol}
+\RequirePackage{multirow}
+\RequirePackage[section]{placeins}
 
-\usepackage{makecell}
+\RequirePackage{makecell}
 \renewcommand{\theadfont}{\bfseries}
 
 \newcommand{\HRule}{
@@ -294,10 +306,10 @@
 \makeatother
 
 % -------------- Code ---------------
-\usepackage{listings}
-\usepackage{dirtree}
+\RequirePackage{listings}
+\RequirePackage{dirtree}
 
-\usepackage{minted}
+\RequirePackage{minted}
 \setminted{
   breaklines,
   mathescape,
@@ -305,7 +317,7 @@
 }
 \fvset{baselinestretch=1}
 
-\usepackage[most]{tcolorbox}
+\RequirePackage[most]{tcolorbox}
 \tcbset{
   enhanced,
   hyphenationfix,
@@ -325,17 +337,17 @@
 
 % ----------- Algorithms ------------
 % Alternatively, check out clrscode4e: https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/11599/clrscode4e.pdf
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-\usepackage{morewrites}
+\RequirePackage{algorithm}
+\RequirePackage{algpseudocode}
+\RequirePackage{morewrites}
 
-\usepackage{newfloat}
+\RequirePackage{newfloat}
 \newfloat{procedure}{tbp}{lop}
 \newcommand{\listprocedurename}{List of Procedures}
 \newcommand{\listofprocedures}{\listof{procedure}{\listprocedurename}}
 
 % ---------- Bibliography -----------
-\usepackage[
+\RequirePackage[
   backend=biber,
   dashed=false,
   dateabbrev=false,
@@ -344,7 +356,7 @@
   isbn=true,
   maxbibnames=99,
   maxcitenames=2,
-  sortcites,
+  sortcites=true,
   style=ext-authoryear-ecomp,
   uniquename=init,
   urldate=long,
@@ -356,33 +368,37 @@
 \DeclareInnerCiteDelims{textcite}{\bibopenbracket}{\bibclosebracket}
 
 % ----------- Referencing -----------
-\usepackage[
+\RequirePackage[
+  unicode,
   colorlinks,
   citecolor=black,
   filecolor=black,
   linkcolor=black,
   urlcolor=black,
 ]{hyperref}
+\RequirePackage[norefs]{refcheck}
 
-\usepackage[
+\RequirePackage[
   % capitalise,
   nameinlink,
   noabbrev,
 ]{cleveref}  % Must load after amsmath, babel and hyperref
 \crefname{subsection}{subsection}{subsections}
 \crefname{subsubsection}{subsubsection}{subsubsections}
-\creflabelformat{inq}{#2\textup{(#1)}#3}
+\creflabelformat{ineq}{#2\textup{(#1)}#3}
+
 \newcommand{\creflastconjunction}{ og~}
+\newcommand{\creflastgroupconjunction}{ og~}
 
 \makeatletter
 \cref@addlanguagedefs{american}{
   \if@cref@capitalise
-    \crefname{inq}{Inequality}{Inequalities}
+    \crefname{ineq}{Inequality}{Inequalities}
     \crefformat{procedure}{Procedure~#2#1#3}
     \crefrangeformat{procedure}{Procedures~#3#1#4 to~#5#2#6}
     \crefmultiformat{procedure}{Procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
   \else
-    \crefname{inq}{inequality}{inequalities}
+    \crefname{ineq}{inequality}{inequalities}
     \crefformat{procedure}{procedure~#2#1#3}
     \crefrangeformat{procedure}{procedures~#3#1#4 to~#5#2#6}
     \crefmultiformat{procedure}{procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
@@ -390,12 +406,12 @@
 }
 \cref@addlanguagedefs{british}{
   \if@cref@capitalise
-    \crefname{inq}{Inequality}{Inequalities}
+    \crefname{ineq}{Inequality}{Inequalities}
     \crefformat{procedure}{Procedure~#2#1#3}
     \crefrangeformat{procedure}{Procedures~#3#1#4 to~#5#2#6}
     \crefmultiformat{procedure}{Procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
   \else
-    \crefname{inq}{inequality}{inequalities}
+    \crefname{ineq}{inequality}{inequalities}
     \crefformat{procedure}{procedure~#2#1#3}
     \crefrangeformat{procedure}{procedures~#3#1#4 to~#5#2#6}
     \crefmultiformat{procedure}{procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
@@ -403,18 +419,28 @@
 }
 \cref@addlanguagedefs{norsk}{
   \if@cref@capitalise
-    \crefname{inq}{Ulikhet}{Ulikheter}
+    \crefname{ineq}{Ulikhet}{Ulikheter}
     \crefformat{procedure}{Prosedyre~#2#1#3}
     \crefrangeformat{procedure}{Prosedyrer~#3#1#4 til~#5#2#6}
     \crefmultiformat{procedure}{Prosedyrer~#2#1#3}{ og~#2#1#3}{, #2#1#3}{, og~#2#1#3}
   \else
-    \crefname{inq}{ulikhet}{ulikheter}
+    \crefname{ineq}{ulikhet}{ulikheter}
     \crefformat{procedure}{prosedyre~#2#1#3}
     \crefrangeformat{procedure}{prosedyrer~#3#1#4 til~#5#2#6}
     \crefmultiformat{procedure}{prosedyrer~#2#1#3}{ og~#2#1#3}{, #2#1#3}{ og~#2#1#3}
   \fi
 }
+\newcommand{\refcheckize}[1]{
+  \expandafter\let\csname @@\string#1\endcsname#1
+  \expandafter\DeclareRobustCommand\csname relax\string#1\endcsname[1]{
+    \csname @@\string#1\endcsname{##1}\@for\@temp:=##1\do{\wrtusdrf{\@temp}\wrtusdrf{{\@temp}}}
+  }
+  \expandafter\let\expandafter#1\csname relax\string#1\endcsname
+}
 \makeatother
+
+\refcheckize{\cref}
+\refcheckize{\Cref}
 
 \newcommand{\alglabel}[1]{\label{alg:#1}}
 \newcommand{\caselabel}[1]{\label{case:#1}}
@@ -433,7 +459,7 @@
 
 \PassOptionsToPackage{lang-warn=false}{datatool-base}
 % More styles: https://www.dickimaw-books.com/gallery/glossaries-styles/
-\usepackage[
+\RequirePackage[
   abbreviations,
   acronyms,
   % nomain,
@@ -453,36 +479,37 @@
 
 \setabbreviationstyle{long-short}
 \setabbreviationstyle[\acronymtype]{long-short}
-% \GlsXtrEnableEntryCounting{\acronymtype,abbreviation}{2}
+
+% \GlsXtrEnableEntryCounting{\acronymtype,abbreviation}{2}  % Requires \makeglossaries and not \makenoidxglossaries
 
 % ------------- General -------------
-\usepackage[
+\RequirePackage[
   shortcuts,
   wordspacearound,
 ]{extdash}
-\usepackage[per-mode=symbol]{siunitx}
+\RequirePackage[per-mode=symbol]{siunitx}
 
 \newcommand{\datestring}{Date}
-\usepackage[
+\RequirePackage[
   level,
   nodayofweek,
 ]{datetime}
 
-\usepackage{booktabs}
-\usepackage{comment}
-\usepackage{csquotes}  % Must load after minted
-\usepackage{lipsum}
-\usepackage{pdfpages}
+\RequirePackage{booktabs}
+\RequirePackage{comment}
+\RequirePackage{csquotes}  % Must load after minted
+\RequirePackage{lipsum}
+\RequirePackage{pdfpages}
 
-\usepackage{enumitem}
+\RequirePackage{enumitem}
 \setlist[enumerate,1]{label=(\arabic*)}
 \setlist[enumerate,2]{label=(\alph*)}
 
-\usepackage{xurl}
+\RequirePackage{xurl}
 \urlstyle{same}
 
 % --- Page layout and formatting ----
-\usepackage{fancyhdr}
+\RequirePackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
 \renewcommand{\headrulewidth}{0.1ex}
@@ -497,7 +524,7 @@
 % \setcounter{secnumdepth}{0}
 \makeatletter
 \ifnum\c@secnumdepth > 0
-  \usepackage{chngcntr}
+  \RequirePackage{chngcntr}
   \counterwithin{figure}{section}
   \counterwithin{table}{section}
   \counterwithin{algorithm}{section}
@@ -512,43 +539,50 @@
   \renewcommand{\contentsname}{Table of Contents}
   \renewcommand{\abbreviationsname}{Abbreviations}
   \renewcommand{\creflastconjunction}{, and~}
+  \renewcommand{\creflastgroupconjunction}{, and~}
 }
 \addto{\captionsbritish}{
   \floatname{procedure}{Procedure}
   \renewcommand{\contentsname}{Table of Contents}
   \renewcommand{\abbreviationsname}{Abbreviations}
   \renewcommand{\creflastconjunction}{, and~}
+  \renewcommand{\creflastgroupconjunction}{, and~}
 }
 \addto{\captionsnorsk}{
   \floatname{procedure}{Prosedyre}
-  \renewcommand{\listprocedurename}{Prosedyrer}
-  \renewcommand{\keywordsname}{Nøkkelord}
-  \renewcommand{\contentsname}{Innholdsfortegnelse}
-  \renewcommand{\appendixname}{Vedlegg}
   \renewcommand{\algorithmname}{Algoritme}
+  \renewcommand{\appendixname}{Vedlegg}
+  \renewcommand{\blankinfo}{Denne siden er med hensikt blank}
+  \renewcommand{\contentsname}{Innholdsfortegnelse}
+  \renewcommand{\datestring}{Dato}
+  \renewcommand{\initialismname}{Forbokstavord}
+  \renewcommand{\keywordsname}{Nøkkelord}
   \renewcommand{\listalgorithmname}{Algoritmer}
   \renewcommand{\listingscaption}{Opplisting}
   \renewcommand{\listoflistingscaption}{Opplistinger}
+  \renewcommand{\listprocedurename}{Prosedyrer}
   \renewcommand{\listtheoremname}{Teoremer}
-  \renewcommand{\initialismname}{Forbokstavord}
-  \renewcommand{\blankinfo}{Denne siden er med hensikt blank}
-  \renewcommand{\datestring}{Dato}
-  \renewcommand{\proofsketchtext}{Bevisutkast}
   \renewcommand{\proofideatext}{Bevisidé}
-  \renewcommand{\ntnulogo}{Images/NTNU_logo_NB.png}
+  \renewcommand{\proofsketchtext}{Bevisutkast}
+  \renewenvironment{assumption}{\begin{antagelse}}{\end{antagelse}}
   \renewenvironment{case}{\begin{tilfelle}}{\end{tilfelle}}
+  \renewenvironment{claim}{\begin{påstand}}{\end{påstand}}
   \renewenvironment{corollary}{\begin{korollar}}{\end{korollar}}
   \renewenvironment{definition}{\begin{definisjon}}{\end{definisjon}}
   \renewenvironment{example}{\begin{eksempel}}{\end{eksempel}}
   \renewenvironment{exercise}{\begin{oppgave}}{\end{oppgave}}
+  \renewenvironment{fact}{\begin{faktum}}{\end{faktum}}
+  \renewenvironment{observation}{\begin{observasjon}}{\end{observasjon}}
   \renewenvironment{principle}{\begin{prinsipp}}{\end{prinsipp}}
   \renewenvironment{property}{\begin{egenskap}}{\end{egenskap}}
+  \renewenvironment{proposition}{\begin{forslag}}{\end{forslag}}
   \renewenvironment{remark}{\begin{merk}}{\end{merk}}
   \renewenvironment{theorem}{\begin{teorem}}{\end{teorem}}
   \renewenvironment{step}{\begin{trinn}}{\end{trinn}}
+  \renewcommand{\ntnulogo}{Images/NTNU_logo_NB.png}
   \setlength{\parindent}{0em}
 }
 
 \ifthenelse{\equal{\languagename}{norsk}}{
-  \usepackage{icomma}
+  \RequirePackage{icomma}
 }{}
