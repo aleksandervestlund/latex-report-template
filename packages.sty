@@ -49,6 +49,7 @@
 
 \RequirePackage{silence}
 \WarningFilter{latex}{Command \showhyphens has changed.}
+\WarningFilter{latex}{Command `\theH}
 
 % ------- Document structure --------
 \RequirePackage{etoolbox}
@@ -153,24 +154,12 @@
 \newcommand{\narrowarray}[1]{\setlength{\savearraycolsep}{\arraycolsep}\setlength{\arraycolsep}{#1\arraycolsep}}
 \newcommand{\normalarray}{\setlength{\arraycolsep}{\savearraycolsep}}
 
-% "=" with "def" on top (definition equal sign)
-\DeclareRobustCommand{\defeq}{\relax\ifmmode\mathrel{\mathpalette\defeqaux\relax}\fi}
-\newcommand*{\defeqaux}[2]{\overset{\text{def}}{=}}
-% "=" with wide "^"
-\DeclareRobustCommand{\whateq}{\relax\ifmmode\mathrel{\mathpalette\whateqaux\relax}\fi}
-\newcommand*{\whateqaux}[2]{\widehat{=}}
-% "=" with normal "^"
-\DeclareRobustCommand{\hateq}{\relax\ifmmode\mathrel{\mathpalette\hateqaux\relax}\fi}
-\newcommand*{\hateqaux}[2]{\hat{=}}
-% ":=" command
-\DeclareRobustCommand{\coleq}{\relax\ifmmode\mathrel{\mathpalette\coleqaux\relax}\fi}
-\newcommand*{\coleqaux}[2]{\vcentcolon=}
-% "=" with "m" on top (measured by)
-\DeclareRobustCommand{\meq}{\relax\ifmmode\mathrel{\mathpalette\meqaux\relax}\fi}
-\newcommand*{\meqaux}[2]{\overset{\text{m}}{=}}
-% "=" with "?" on top (uncertainty)
-\DeclareRobustCommand{\qmeq}{\relax\ifmmode\mathrel{\mathpalette\qmeqaux\relax}\fi}
-\newcommand*{\qmeqaux}[2]{\overset{\text{?}}{=}}
+\newcommand{\coleq}{\mathrel{\vcentcolon =}}
+\newcommand{\defeq}{\mathrel{\overset{\text{def}}{=}}}
+\newcommand{\hateq}{\mathrel{\hat{=}}}
+\newcommand{\meq}{\mathrel{\overset{\text{m}}{=}}}
+\newcommand{\qmeq}{\mathrel{\overset{\text{?}}{=}}}
+\newcommand{\whateq}{\mathrel{\widehat{=}}}
 
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
@@ -183,11 +172,16 @@
 
 \DeclareMathOperator{\Dec}{Dec}
 \DeclareMathOperator{\Enc}{Enc}
+\DeclareMathOperator{\Eval}{Eval}
+\DeclareMathOperator{\Gen}{Gen}
+\DeclareMathOperator{\Inv}{Inv}
+\DeclareMathOperator{\KeyGen}{KeyGen}
 
 \DeclareMathOperator{\Extend}{Extend}
 \DeclareMathOperator{\Seal}{Seal}
 \DeclareMathOperator{\Unseal}{Unseal}
 
+\DeclareMathOperator{\negl}{\mathsf{negl}}
 \DeclareMathOperator{\poly}{\mathsf{poly}}
 \DeclareMathOperator{\polylog}{\mathsf{polylog}}
 
@@ -280,12 +274,11 @@
 \RequirePackage{xspace}
 \RequirePackage[export]{adjustbox}
 \RequirePackage{float}  % Must load after floatrow
-\RequirePackage{lscape}
 \RequirePackage{longtable}
+\RequirePackage{lscape}
 \RequirePackage{multicol}
 \RequirePackage{multirow}
 \RequirePackage[section]{placeins}
-
 \RequirePackage{makecell}
 \renewcommand{\theadfont}{\bfseries}
 
@@ -315,7 +308,7 @@
 
 \RequirePackage{minted}
 \setminted{
-  breaklines,
+  breaklines=true,
   mathescape,
   style=default,
 }
@@ -344,6 +337,24 @@
 \RequirePackage{algorithm}
 \RequirePackage{algpseudocode}
 \RequirePackage{morewrites}
+
+% TODO: Investigate \theH warnings
+\RequirePackage[
+  advantage,
+  adversary,
+  asymptotics,
+  events,
+  ff,
+  keys,
+  lambda,
+  landau,
+  mm,
+  notions,
+  operators,
+  primitives,
+  probability,
+  sets,
+]{cryptocode}
 
 \RequirePackage{newfloat}
 \newfloat{procedure}{tbp}{lop}
@@ -380,15 +391,14 @@
   linkcolor=black,
   urlcolor=black,
 ]{hyperref}
-\RequirePackage[norefs]{refcheck}
+\RequirePackage[norefs]{refcheck}  % Remove "norefs" for debugging
 
+% TODO: Switch to zref-clever when it supports Norwegian
 \RequirePackage[
-  % capitalise,
+  capitalise,
   nameinlink,
   noabbrev,
 ]{cleveref}  % Must load after amsmath, babel and hyperref
-\crefname{subsection}{subsection}{subsections}
-\crefname{subsubsection}{subsubsection}{subsubsections}
 \creflabelformat{ineq}{#2\textup{(#1)}#3}
 
 \newcommand{\creflastconjunction}{ og~}
@@ -398,11 +408,15 @@
 \cref@addlanguagedefs{american}{
   \if@cref@capitalise
     \crefname{ineq}{Inequality}{Inequalities}
+    \crefname{subsection}{Subsection}{Subsections}
+    \crefname{subsubsection}{Subsubsection}{Subsubsections}
     \crefformat{procedure}{Procedure~#2#1#3}
     \crefrangeformat{procedure}{Procedures~#3#1#4 to~#5#2#6}
     \crefmultiformat{procedure}{Procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
   \else
     \crefname{ineq}{inequality}{inequalities}
+    \crefname{subsection}{subsection}{subsections}
+    \crefname{subsubsection}{subsubsection}{subsubsections}
     \crefformat{procedure}{procedure~#2#1#3}
     \crefrangeformat{procedure}{procedures~#3#1#4 to~#5#2#6}
     \crefmultiformat{procedure}{procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
@@ -411,11 +425,15 @@
 \cref@addlanguagedefs{british}{
   \if@cref@capitalise
     \crefname{ineq}{Inequality}{Inequalities}
+    \crefname{subsection}{Subsection}{Subsections}
+    \crefname{subsubsection}{Subsubsection}{Subsubsections}
     \crefformat{procedure}{Procedure~#2#1#3}
     \crefrangeformat{procedure}{Procedures~#3#1#4 to~#5#2#6}
     \crefmultiformat{procedure}{Procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
   \else
     \crefname{ineq}{inequality}{inequalities}
+    \crefname{subsection}{subsection}{subsections}
+    \crefname{subsubsection}{subsubsection}{subsubsections}
     \crefformat{procedure}{procedure~#2#1#3}
     \crefrangeformat{procedure}{procedures~#3#1#4 to~#5#2#6}
     \crefmultiformat{procedure}{procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
@@ -424,11 +442,15 @@
 \cref@addlanguagedefs{norsk}{
   \if@cref@capitalise
     \crefname{ineq}{Ulikhet}{Ulikheter}
+    \crefname{subsection}{Underseksjon}{Underseksjoner}
+    \crefname{subsubsection}{Underunderseksjon}{Underunderseksjon}
     \crefformat{procedure}{Prosedyre~#2#1#3}
     \crefrangeformat{procedure}{Prosedyrer~#3#1#4 til~#5#2#6}
     \crefmultiformat{procedure}{Prosedyrer~#2#1#3}{ og~#2#1#3}{, #2#1#3}{, og~#2#1#3}
   \else
     \crefname{ineq}{ulikhet}{ulikheter}
+    \crefname{subsection}{underseksjon}{underseksjoner}
+    \crefname{subsubsection}{underunderseksjon}{underunderseksjon}
     \crefformat{procedure}{prosedyre~#2#1#3}
     \crefrangeformat{procedure}{prosedyrer~#3#1#4 til~#5#2#6}
     \crefmultiformat{procedure}{prosedyrer~#2#1#3}{ og~#2#1#3}{, #2#1#3}{ og~#2#1#3}
@@ -485,12 +507,31 @@
   \newabbreviation[type=\initialismtype,#1]{#2}{#3}{#4}
 }
 
-\loadglsentries{glossary}
+\loadglsentries{glossary}  % Loading "glossary.tex"
 
 \setabbreviationstyle{long-short}
 \setabbreviationstyle[\acronymtype]{long-short}
 
+\setlength{\glsdescwidth}{0.61\linewidth}  % Minmax this
 % \GlsXtrEnableEntryCounting{\acronymtype,abbreviation}{2}  % Requires \makeglossaries and not \makenoidxglossaries
+
+\renewcommand{\printglossaries}{
+  \iflanguage{norsk}{
+    \renewcommand{\abbreviationsname}{Forkortelser}
+    \renewcommand{\acronymname}{Akronymer}
+    \printglossary[type=\acronymtype]
+    \printglossary[type=\initialismtype]
+    \printglossary[type=\glsxtrabbrvtype]
+    \printglossary
+    \printglossary[type=\symboltype]
+  }{
+    \printglossary[type=\glsxtrabbrvtype]
+    \printglossary[type=\acronymtype]
+    \printglossary
+    \printglossary[type=\initialismtype]
+    \printglossary[type=\symboltype]
+  }
+}
 
 % ------------- General -------------
 \RequirePackage[
@@ -509,6 +550,7 @@
 \RequirePackage{comment}
 \RequirePackage{csquotes}  % Must load after minted
 \RequirePackage{lipsum}
+\RequirePackage{paralist}
 \RequirePackage{pdfpages}
 
 \RequirePackage{enumitem}
@@ -526,7 +568,7 @@
 \renewcommand{\footrulewidth}{0.1ex}
 \fancyfoot[C]{\thepage}
 
-\newcommand{\romannumeralupper}[1]{
+\newcommand{\Romannumeral}[1]{
   \MakeUppercase{\romannumeral{#1}}
 }
 
@@ -534,12 +576,11 @@
 % \setcounter{secnumdepth}{0}
 \makeatletter
 \ifnum\c@secnumdepth > 0
-  \RequirePackage{chngcntr}
-  \counterwithin{figure}{section}
-  \counterwithin{table}{section}
-  \counterwithin{algorithm}{section}
-  \counterwithin{listing}{section}
-  \counterwithin{procedure}{section}
+  \numberwithin{figure}{section}
+  \numberwithin{table}{section}
+  \numberwithin{algorithm}{section}
+  \numberwithin{listing}{section}
+  \numberwithin{procedure}{section}
 \fi
 \makeatother
 

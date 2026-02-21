@@ -1,11 +1,13 @@
-\documentclass[american]{report}  % Change to "american", "british" or "norsk"
+\documentclass[12pt,american]{article}  % Change to "american", "british" or "norsk"
+\usepackage{packages}  % Loading "packages.sty"
 
 \begin{document}
     \input{Sections/00_Title}
 
     \frontmatter
     \input{Sections/01_Frontmatter}
-    
+
+    \phantomsection
     \newpage
     \tableofcontents
     \listoffigures
@@ -14,7 +16,7 @@
     \listoflistings
     \listofprocedures
     \listoftheorems
-    
+
     \mainmatter
     \input{Sections/1_Introduction}
     \input{Sections/2_Math-Examples}
@@ -22,14 +24,15 @@
     \input{Sections/4_Code-Examples}
     \input{Sections/5_Algorithm-Example}
     \input{Sections/6_Language}
-    
+
     \addappendix
-    \input{Sections/98_Appendix}
+    \input{Sections/99_Appendix}
 
     \phantomsection
     \newpage
-    \input{Sections/99_Glossaries}
-    
+    \printglossaries
+
     \newpage
+    \nocite{*}
     \printbibliography[heading=bibintoc]
 \end{document}
