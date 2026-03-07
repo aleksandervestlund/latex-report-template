@@ -4,15 +4,15 @@
 % +---------------------------------+
 % |        Table of Contents        |
 % +---------------------------------+
-% | 1. Page setup                   |
-% | 2. Document structure           |
-% | 3. Mathematics                  |
-% | 4. Figures and tables           |
-% | 5. Code                         |
-% | 6. Algorithms                   |
-% | 7. Bibliography                 |
-% | 8. Referencing                  |
-% | 9. General                      |
+% |  1. Page setup                  |
+% |  2. Document structure          |
+% |  3. Mathematics                 |
+% |  4. Figures and tables          |
+% |  5. Code                        |
+% |  6. Algorithms                  |
+% |  7. Bibliography                |
+% |  8. Referencing                 |
+% |  9. General                     |
 % | 10. Page layout and formatting  |
 % | 11. Numbering within sections   |
 % | 12. Language                    |
@@ -32,14 +32,15 @@
   protrusion,
 ]{microtype}
 \RequirePackage{lmodern}
-\DeclareSymbolFont{largesymbols}{OMX}{cmex}{m}{n}
 \RequirePackage[
   a4paper,
-  total={
-    150mm,
-    245mm,
-    footskip=14mm,
-  },
+  left=30mm,
+  right=30mm,
+  top=26mm,
+  bottom=26mm,
+  footskip=14mm,
+  marginparsep=0mm,
+  marginparwidth=20mm,
 ]{geometry}
 \RequirePackage[onehalfspacing]{setspace}
 
@@ -90,6 +91,18 @@
   \thispagestyle{empty}
   \addtocounter{page}{-1}
   \newpage
+}
+
+\RequirePackage[
+  dvipsnames,
+  table,
+  xcdraw,
+]{xcolor}
+\RequirePackage[obeyFinal]{todonotes}
+\let\oldtodo\todo
+\renewcommand{\todo}[1]{%
+  \oldtodo{#1}%
+  \PackageWarningNoLine{todonotes}{TODO (page \thepage): \detokenize{#1}}%
 }
 
 % ----------- Mathematics -----------
@@ -166,6 +179,8 @@
 
 \DeclareMathOperator{\Adj}{Adj}
 \DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\logtwo}{log_2}
+\DeclareMathOperator{\logten}{log_{10}}
 
 \DeclareMathOperator{\Cov}{Cov}
 \DeclareMathOperator{\Var}{Var}
@@ -173,13 +188,14 @@
 \DeclareMathOperator{\Dec}{Dec}
 \DeclareMathOperator{\Enc}{Enc}
 \DeclareMathOperator{\Eval}{Eval}
+\DeclareMathOperator{\Extend}{Extend}
 \DeclareMathOperator{\Gen}{Gen}
 \DeclareMathOperator{\Inv}{Inv}
 \DeclareMathOperator{\KeyGen}{KeyGen}
-
-\DeclareMathOperator{\Extend}{Extend}
 \DeclareMathOperator{\Seal}{Seal}
+\DeclareMathOperator{\Sign}{Sign}
 \DeclareMathOperator{\Unseal}{Unseal}
+\DeclareMathOperator{\Verify}{Verify}
 
 \DeclareMathOperator{\negl}{\mathsf{negl}}
 \DeclareMathOperator{\poly}{\mathsf{poly}}
@@ -217,10 +233,17 @@
 \newcommand{\xor}{\mathbin{\oplus}}
 
 \RequirePackage{newunicodechar}
-\newunicodechar{≠}{\neq}
 \newunicodechar{≈}{\approx}
-\newunicodechar{≤}{\leq}
+\newunicodechar{∆}{\Delta}
 \newunicodechar{≥}{\geq}
+\newunicodechar{∫}{\int}
+\newunicodechar{≤}{\leq}
+\newunicodechar{µ}{\mu}
+\newunicodechar{≠}{\neq}
+\newunicodechar{π}{\pi}
+\newunicodechar{∏}{\Pi}
+\newunicodechar{±}{\pm}
+\newunicodechar{∑}{\Sigma}
 
 \RequirePackage{aliascnt}
 \newaliascnt{ineq}{equation}
@@ -247,12 +270,6 @@
 \RequirePackage{tablefootnote}
 \newcommand{\footnotenonumber}[1]{{\def\thempfn{}\footnotetext{#1}}}
 \newcommand{\footnotetight}[1]{\footnote{\renewcommand\baselinestretch{1}\footnotesize #1}}
-
-\RequirePackage[
-  dvipsnames,
-  table,
-  xcdraw,
-]{xcolor}
 
 \RequirePackage{floatrow}
 \floatsetup[figure]{capposition=bottom}
@@ -443,14 +460,14 @@
   \if@cref@capitalise
     \crefname{ineq}{Ulikhet}{Ulikheter}
     \crefname{subsection}{Underseksjon}{Underseksjoner}
-    \crefname{subsubsection}{Underunderseksjon}{Underunderseksjon}
+    \crefname{subsubsection}{Underunderseksjon}{Underunderseksjoner}
     \crefformat{procedure}{Prosedyre~#2#1#3}
     \crefrangeformat{procedure}{Prosedyrer~#3#1#4 til~#5#2#6}
     \crefmultiformat{procedure}{Prosedyrer~#2#1#3}{ og~#2#1#3}{, #2#1#3}{, og~#2#1#3}
   \else
     \crefname{ineq}{ulikhet}{ulikheter}
     \crefname{subsection}{underseksjon}{underseksjoner}
-    \crefname{subsubsection}{underunderseksjon}{underunderseksjon}
+    \crefname{subsubsection}{underunderseksjon}{underunderseksjoner}
     \crefformat{procedure}{prosedyre~#2#1#3}
     \crefrangeformat{procedure}{prosedyrer~#3#1#4 til~#5#2#6}
     \crefmultiformat{procedure}{prosedyrer~#2#1#3}{ og~#2#1#3}{, #2#1#3}{ og~#2#1#3}
@@ -507,13 +524,13 @@
   \newabbreviation[type=\initialismtype,#1]{#2}{#3}{#4}
 }
 
-\loadglsentries{glossary}  % Loading "glossary.tex"
-
 \setabbreviationstyle{long-short}
 \setabbreviationstyle[\acronymtype]{long-short}
 
+\loadglsentries{glossary}  % Loading "glossary.tex"
+
 \setlength{\glsdescwidth}{0.61\linewidth}  % Minmax this
-% \GlsXtrEnableEntryCounting{\acronymtype,abbreviation}{2}  % Requires \makeglossaries and not \makenoidxglossaries
+% \GlsXtrEnableEntryCounting{\acronymtype,abbreviation}{2}
 
 \renewcommand{\printglossaries}{
   \iflanguage{norsk}{
