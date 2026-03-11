@@ -160,7 +160,6 @@
   {\end{proof}}
 
 \newcommand{\cif}[1]{\text{if $#1$}}
-\newcommand{\cwhen}[1]{\text{when $#1$}}
 \newcommand{\cotherwise}{\text{otherwise}}
 
 \newlength{\savearraycolsep}
@@ -218,6 +217,7 @@
 \newcommand{\expectsq}[1]{\mathbb{E}^2 \! \del{#1}}
 \newcommand{\matx}[2]{\del{\!\!\!\begin{array}{*{#1}{c}}#2\end{array}\!\!\!}}
 \newcommand{\percent}[1]{#1\%}
+\newcommand{\gaussian}[2]{\mathcal{N} \! \del{#1,#2}}
 
 \newcommand{\naturals}{\mathbb{N}}
 \newcommand{\integers}{\mathbb{Z}}
@@ -236,9 +236,9 @@
 \newcommand{\nperp}{\centernot\perp}
 \newcommand{\npropto}{\centernot\propto}
 \newcommand{\nsubset}{\centernot\subset}
-\newcommand{\nsubsetneq}{\not\subsetneq}
+\newcommand{\nsubsetneq}{\centernot\subsetneq}
 \newcommand{\nsupset}{\centernot\supset}
-\newcommand{\nsupsetneq}{\not\supsetneq}
+\newcommand{\nsupsetneq}{\centernot\supsetneq}
 
 \newcommand{\goesto}{\rightarrow}
 \newcommand{\transpose}{^{\mathsf{T}}}
@@ -246,14 +246,16 @@
 \newcommand{\xor}{\mathbin{\oplus}}
 
 \RequirePackage{newunicodechar}
+\newunicodechar{≈}{\approx}
 \newunicodechar{∆}{\Delta}
 \newunicodechar{≥}{\geq}
-\newunicodechar{≠}{\neq}
 \newunicodechar{∞}{\infty}
 \newunicodechar{∫}{\int}
 \newunicodechar{≤}{\leq}
+\newunicodechar{≠}{\neq}
 \newunicodechar{Ω}{\Omega}
 \newunicodechar{∂}{\partial}
+\newunicodechar{π}{\pi}
 \newunicodechar{∏}{\Pi}
 \newunicodechar{∑}{\Sigma}
 \newunicodechar{∨}{\vee}
@@ -265,7 +267,7 @@
 
 \makeatletter
 \def\inequality{$$\refstepcounter{ineq}}
-\def\endinequality{\eqno \hbox{\@eqnnum}$$\@ignoretrue}
+\def\endinequality{\eqno\hbox{\@eqnnum}$$\@ignoretrue}
 \makeatother
 
 % ------- Figures and tables --------
@@ -309,6 +311,7 @@
 \RequirePackage{lscape}
 \RequirePackage{multicol}
 \RequirePackage{multirow}
+\RequirePackage{flafter}
 \RequirePackage[section]{placeins}
 \RequirePackage{makecell}
 \renewcommand{\theadfont}{\bfseries}
@@ -607,6 +610,7 @@
 % \setcounter{secnumdepth}{0}
 \makeatletter
 \ifnum\c@secnumdepth > 0
+  \numberwithin{equation}{section}
   \numberwithin{figure}{section}
   \numberwithin{table}{section}
   \numberwithin{algorithm}{section}
