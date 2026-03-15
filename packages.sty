@@ -23,13 +23,17 @@
   l2tabu,
   orthodox,
 ]{nag}
-\RequirePackage[utf8]{inputenc}
-\RequirePackage[T1]{fontenc}
 \RequirePackage[main=]{babel}
 \RequirePackage[
   babel,
-  expansion,
-  protrusion,
+  expansion=true,
+  factor=1100,
+  kerning=true,
+  protrusion=true,
+  shrink=10,
+  step=1,
+  stretch=10,
+  tracking=true,
 ]{microtype}
 \RequirePackage{lmodern}
 \RequirePackage[
@@ -43,6 +47,14 @@
   marginparwidth=20mm,
 ]{geometry}
 \RequirePackage[onehalfspacing]{setspace}
+
+\RequirePackage{iftex}
+\ifPDFTeX
+  \RequirePackage[utf8]{inputenc}
+  \RequirePackage[T1]{fontenc}
+\else
+  \RequirePackage{fontspec}
+\fi
 
 \setlength{\parskip}{0.8em}
 \pdfgentounicode=1
@@ -144,7 +156,7 @@
   proposition,forslag,
   problem,
   step,trinn,
-  theorem,teorem  % Cannot have trailing comma
+  theorem,teorem % Cannot have trailing comma
 }
 \declaretheorem[style=remark]{
   remark,merk
@@ -166,11 +178,10 @@
 \newcommand{\narrowarray}[1]{\setlength{\savearraycolsep}{\arraycolsep}\setlength{\arraycolsep}{#1\arraycolsep}}
 \newcommand{\normalarray}{\setlength{\arraycolsep}{\savearraycolsep}}
 
-\newcommand{\coleq}{\mathrel{\vcentcolon =}}
-\newcommand{\defeq}{\mathrel{\overset{\text{def}}{=}}}
+\newcommand{\defeq}{\overset{\mathrm{def}}{=}}
+\newcommand{\meq}{\overset{\mathrm{m}}{=}}
+\newcommand{\qmeq}{\overset{?}{=}}
 \newcommand{\hateq}{\mathrel{\hat{=}}}
-\newcommand{\meq}{\mathrel{\overset{\text{m}}{=}}}
-\newcommand{\qmeq}{\mathrel{\overset{\text{?}}{=}}}
 \newcommand{\whateq}{\mathrel{\widehat{=}}}
 
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
@@ -180,51 +191,48 @@
 \DeclareMathOperator{\lcm}{lcm}
 \DeclareMathOperator{\logtwo}{log_2}
 \DeclareMathOperator{\logten}{log_{10}}
+\DeclareMathOperator{\sinc}{sinc}
 
 \DeclareMathOperator{\Cov}{Cov}
 \DeclareMathOperator{\Var}{Var}
 
-\DeclareMathOperator{\Dec}{Dec}
-\DeclareMathOperator{\Enc}{Enc}
-\DeclareMathOperator{\Eval}{Eval}
+\DeclareMathOperator{\Com}{Com}
 \DeclareMathOperator{\Extend}{Extend}
 \DeclareMathOperator{\Gen}{Gen}
-\DeclareMathOperator{\Inv}{Inv}
-\DeclareMathOperator{\KeyGen}{KeyGen}
 \DeclareMathOperator{\Seal}{Seal}
-\DeclareMathOperator{\Sign}{Sign}
 \DeclareMathOperator{\Unseal}{Unseal}
-\DeclareMathOperator{\Verify}{Verify}
 
-\DeclareMathOperator{\negl}{\mathsf{negl}}
-\DeclareMathOperator{\poly}{\mathsf{poly}}
 \DeclareMathOperator{\polylog}{\mathsf{polylog}}
 
-\newcommand{\perm}[2]{{}^{#1}P_{#2}}
-\newcommand{\comb}[2]{{}^{#1}C_{#2}}
-\renewcommand{\choose}[2]{\dbinom{#1}{#2}}
+\newcommand{\perm}[2]{{}^{#1}P_{#2}} % n, r
+\newcommand{\comb}[2]{{}^{#1}C_{#2}} % n, r
+\renewcommand{\choose}[2]{\dbinom{#1}{#2}} % n, r
 
-\newcommand{\littleo}[1]{o \! \del{#1}}
-\newcommand{\bigO}[1]{\mathcal{O} \! \del{#1}}
-\newcommand{\bigTheta}[1]{\Theta \! \del{#1}}
-\newcommand{\bigOmega}[1]{\Omega \! \del{#1}}
 \newcommand{\littleomega}[1]{\omega \! \del{#1}}
 
 \newcommand{\amortized}[1]{\widehat{#1}}
-\newcommand{\compl}[1]{{}^\mathsf{c} \! #1}
 \newcommand{\defn}[1]{\textit{\textbf{\boldmath #1}}}
-\newcommand{\expect}[1]{\mathbb{E} \! \del{#1}}
 \newcommand{\expectsq}[1]{\mathbb{E}^2 \! \del{#1}}
-\newcommand{\matx}[2]{\del{\!\!\!\begin{array}{*{#1}{c}}#2\end{array}\!\!\!}}
 \newcommand{\percent}[1]{#1\%}
-\newcommand{\gaussian}[2]{\mathcal{N} \! \del{#1,#2}}
 
-\newcommand{\naturals}{\mathbb{N}}
-\newcommand{\integers}{\mathbb{Z}}
-\newcommand{\fractions}{\mathbb{Q}}
-\newcommand{\reals}{\mathbb{R}}
-\newcommand{\complex}{\mathbb{C}}
-\newcommand{\field}{\mathbb{F}}
+% If you find a replacement, let me know
+\newcommand{\getsr}{\mathbin{\tikz[baseline=-0.45ex]{
+  \node at (0,0) {$\gets$};
+  \node at (0.05,0.15) {$\scriptscriptstyle R$};
+}}}
+
+\newcommand{\binomial}[2]{\mathrm{Bin} \! \del{#1, #2}} % n, p
+\newcommand{\chisq}[1]{\chi^2_{#1}} % nu
+\newcommand{\exponential}[1]{\mathrm{Exp} \! \del{#1}} % lambda
+\newcommand{\hypergeometric}[3]{\mathrm{h} \! \del{#1, #2, #3}} % N, k, n
+\newcommand{\gammadist}[2]{\mathrm{Ga} \! \del{#1, #2}} % alpha, beta
+\newcommand{\gaussian}[2]{\mathcal{N} \! \del{#1, #2}} % mu, sigma^2
+\newcommand{\geometric}[1]{\mathrm{Geom} \! \del{#1}} % p
+\newcommand{\negativebinomial}[2]{\mathrm{NegBin} \! \del{#1, #2}} % k, p
+\newcommand{\poisson}[1]{\mathrm{Pois} \! \del{#1}} % mu=lambda*t
+\newcommand{\studentt}[1]{t_{#1}} % nu
+\newcommand{\uniform}[2]{\mathrm{Unif} \! \del{#1, #2}} % a, b
+
 \newcommand{\fourier}{\mathcal{F}}
 \newcommand{\laplace}{\mathscr{L}}
 
@@ -240,10 +248,10 @@
 \newcommand{\nsupset}{\centernot\supset}
 \newcommand{\nsupsetneq}{\centernot\supsetneq}
 
+\newcommand{\compl}{{}^\mathsf{c}\!}
 \newcommand{\goesto}{\rightarrow}
-\newcommand{\transpose}{^{\mathsf{T}}}
+\newcommand{\transpose}{{}^{\mathsf{T}}}
 \newcommand{\inv}{^{-1}}
-\newcommand{\xor}{\mathbin{\oplus}}
 
 \RequirePackage{newunicodechar}
 \newunicodechar{≈}{\approx}
@@ -272,7 +280,6 @@
 
 % ------- Figures and tables --------
 \RequirePackage{graphicx}
-\RequirePackage{wrapfig}
 \RequirePackage{tabularray}
 \RequirePackage[
   figureposition=bottom,
@@ -280,8 +287,11 @@
   labelfont=bf,
   tableposition=top,
 ]{caption}
-\RequirePackage{subcaption}
+\RequirePackage[list=true]{subcaption}
 \RequirePackage[nottoc]{tocbibind}
+
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.18}
 
 \RequirePackage{tablefootnote}
 \newcommand{\footnotenonumber}[1]{{\def\thempfn{}\footnotetext{#1}}}
@@ -304,9 +314,12 @@
 \renewcommand{\dbltopfraction}{0.7}
 \renewcommand{\dblfloatpagefraction}{0.7}
 
+\setlength{\textfloatsep}{12pt plus 2pt minus 2pt}
+\setlength{\intextsep}{10pt plus 2pt minus 2pt}
+
 \RequirePackage{xspace}
 \RequirePackage[export]{adjustbox}
-\RequirePackage{float}  % Must load after floatrow
+\RequirePackage{float} % Must load after floatrow
 \RequirePackage{longtable}
 \RequirePackage{lscape}
 \RequirePackage{multicol}
@@ -319,9 +332,11 @@
 \newcommand{\HRule}{
   \rule{\linewidth}{0.5mm}
 }
-\newcommand{\mitlogo}{Images/MIT_logo.png}
-\newcommand{\ntnulogo}{Images/NTNU_logo_EN.png}
-\newcommand{\snulogo}{Images/SNU_logo.png}
+
+\graphicspath{{Images/}}
+\newcommand{\mitlogo}{MIT_logo.png}
+\newcommand{\ntnulogo}{NTNU_logo_EN.png}
+\newcommand{\snulogo}{SNU_logo.png}
 
 \makeatletter
 \renewcommand*{\listof}[2]{
@@ -342,6 +357,7 @@
 
 \RequirePackage{minted}
 \setminted{
+  autogobble=true,
   breaklines=true,
   mathescape,
   style=default,
@@ -372,24 +388,6 @@
 \RequirePackage{algpseudocode}
 \RequirePackage{morewrites}
 
-% TODO: Investigate \theH warnings
-\RequirePackage[
-  advantage,
-  adversary,
-  asymptotics,
-  events,
-  ff,
-  keys,
-  lambda,
-  landau,
-  mm,
-  notions,
-  operators,
-  primitives,
-  probability,
-  sets,
-]{cryptocode}
-
 \RequirePackage{newfloat}
 \newfloat{procedure}{tbp}{lop}
 \newcommand{\listprocedurename}{List of Procedures}
@@ -419,20 +417,43 @@
 % ----------- Referencing -----------
 \RequirePackage[
   unicode,
+  breaklinks=true,
   colorlinks,
   citecolor=black,
   filecolor=black,
   linkcolor=black,
   urlcolor=black,
 ]{hyperref}
-\RequirePackage[norefs]{refcheck}  % Remove "norefs" for debugging
+\RequirePackage{bookmark}
+\RequirePackage[norefs]{refcheck} % Remove "norefs" for debugging
+
+\RequirePackage[
+  advantage,
+  adversary,
+  asymptotics,
+  complexity,
+  events,
+  ff,
+  keys,
+  lambda,
+  landau,
+  logic,
+  mm,
+  notions,
+  operators,
+  oracles,
+  primitives,
+  probability,
+  sets,
+]{cryptocode}
+\let\AC\relax % Conflicts with glossaries-extra
 
 % TODO: Switch to zref-clever when it supports Norwegian
 \RequirePackage[
   capitalise,
   nameinlink,
   noabbrev,
-]{cleveref}  % Must load after amsmath, babel and hyperref
+]{cleveref} % Must load after amsmath, babel and hyperref
 \creflabelformat{ineq}{#2\textup{(#1)}#3}
 
 \newcommand{\creflastconjunction}{ og~}
@@ -531,7 +552,7 @@
   style=altlong4col,
   symbols,
   translate=babel,
-]{glossaries-extra}  % Must load after hyperref
+]{glossaries-extra} % Must load after hyperref
 
 \newcommand{\symboltype}{symbols}
 \newcommand{\initialismtype}{initialism}
@@ -544,9 +565,9 @@
 \setabbreviationstyle{long-short}
 \setabbreviationstyle[\acronymtype]{long-short}
 
-\loadglsentries{glossary}  % Loading "glossary.tex"
+\loadglsentries{glossary} % Loading "glossary.tex"
 
-\setlength{\glsdescwidth}{0.61\linewidth}  % Minmax this
+\setlength{\glsdescwidth}{0.61\linewidth} % Minmax this
 % \GlsXtrEnableEntryCounting{\acronymtype,abbreviation}{2}
 
 \renewcommand{\printglossaries}{
@@ -573,6 +594,7 @@
   wordspacearound,
 ]{extdash}
 \RequirePackage[per-mode=symbol]{siunitx}
+\DeclareSIUnit{\nothing}{\relax}
 
 \newcommand{\datestring}{Date}
 \RequirePackage[
@@ -580,9 +602,10 @@
   nodayofweek,
 ]{datetime}
 
+\RequirePackage{array}
 \RequirePackage{booktabs}
 \RequirePackage{comment}
-\RequirePackage{csquotes}  % Must load after minted
+\RequirePackage{csquotes} % Must load after minted
 \RequirePackage{lipsum}
 \RequirePackage{paralist}
 \RequirePackage{pdfpages}
@@ -590,6 +613,7 @@
 \RequirePackage{enumitem}
 \setlist[enumerate,1]{label=(\arabic*)}
 \setlist[enumerate,2]{label=(\alph*)}
+\setlist[enumerate,3]{label=(\roman*)}
 
 \RequirePackage{xurl}
 \urlstyle{same}
@@ -665,7 +689,7 @@
   \renewenvironment{remark}{\begin{merk}}{\end{merk}}
   \renewenvironment{theorem}{\begin{teorem}}{\end{teorem}}
   \renewenvironment{step}{\begin{trinn}}{\end{trinn}}
-  \renewcommand{\ntnulogo}{Images/NTNU_logo_NB.png}
+  \renewcommand{\ntnulogo}{NTNU_logo_NB.png}
   \setlength{\parindent}{0em}
 }
 
