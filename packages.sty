@@ -204,34 +204,45 @@
 
 \DeclareMathOperator{\polylog}{\mathsf{polylog}}
 
+\newcommand{\dell}[1]{\!\del{#1}}
+\newcommand{\dellr}[1]{\!\del{#1}\!}
+
+\newcommand{\sigmasq}{\sigma^2}
 \newcommand{\perm}[2]{{}^{#1}P_{#2}} % n, r
 \newcommand{\comb}[2]{{}^{#1}C_{#2}} % n, r
 \renewcommand{\choose}[2]{\dbinom{#1}{#2}} % n, r
 
-\newcommand{\littleomega}[1]{\omega \! \del{#1}}
-
+\newcommand{\littleomega}[1]{\omega\dell{#1}}
 \newcommand{\amortized}[1]{\widehat{#1}}
 \newcommand{\defn}[1]{\textit{\textbf{\boldmath #1}}}
-\newcommand{\expectsq}[1]{\mathbb{E}^2 \! \del{#1}}
+\newcommand{\expectsq}[1]{\mathbb{E}^2\!\del{#1}}
 \newcommand{\percent}[1]{#1\%}
 
 % If you find a replacement, let me know
-\newcommand{\getsr}{\mathbin{\tikz[baseline=-0.45ex]{
-  \node at (0,0) {$\gets$};
-  \node at (0.05,0.15) {$\scriptscriptstyle R$};
-}}}
+\newcommand{\getsr}{
+  \mathrel{
+    \tikz[
+      baseline=-0.45ex,
+      inner sep=0pt,
+      outer sep=0pt,
+    ]{
+      \node at (0, 0) {$\leftarrow$};
+      \node at (0.05, 0.15) {$\scriptscriptstyle R$};
+    }
+  }
+}
 
-\newcommand{\binomial}[2]{\mathrm{Bin} \! \del{#1, #2}} % n, p
+\newcommand{\binomial}[2]{\mathrm{Bin}\dell{#1, #2}} % n, p
 \newcommand{\chisq}[1]{\chi^2_{#1}} % nu
-\newcommand{\exponential}[1]{\mathrm{Exp} \! \del{#1}} % lambda
-\newcommand{\hypergeometric}[3]{\mathrm{h} \! \del{#1, #2, #3}} % N, k, n
-\newcommand{\gammadist}[2]{\mathrm{Ga} \! \del{#1, #2}} % alpha, beta
-\newcommand{\gaussian}[2]{\mathcal{N} \! \del{#1, #2}} % mu, sigma^2
-\newcommand{\geometric}[1]{\mathrm{Geom} \! \del{#1}} % p
-\newcommand{\negativebinomial}[2]{\mathrm{NegBin} \! \del{#1, #2}} % k, p
-\newcommand{\poisson}[1]{\mathrm{Pois} \! \del{#1}} % mu=lambda*t
+\newcommand{\exponential}[1]{\mathrm{Exp}\dell{#1}} % lambda
+\newcommand{\hypergeometric}[3]{\mathrm{h}\dell{#1, #2, #3}} % N, k, n
+\newcommand{\gammadist}[2]{\mathrm{Ga}\dell{#1, #2}} % alpha, beta
+\newcommand{\gaussian}[2]{\mathcal{N}\dell{#1, #2}} % mu, sigma^2
+\newcommand{\geometric}[1]{\mathrm{Geom}\dell{#1}} % p
+\newcommand{\negativebinomial}[2]{\mathrm{NegBin}\dell{#1, #2}} % k, p
+\newcommand{\poisson}[1]{\mathrm{Pois}\dell{#1}} % mu=lambda*t
 \newcommand{\studentt}[1]{t_{#1}} % nu
-\newcommand{\uniform}[2]{\mathrm{Unif} \! \del{#1, #2}} % a, b
+\newcommand{\uniform}[2]{\mathrm{Unif}\dell{#1, #2}} % a, b
 
 \newcommand{\fourier}{\mathcal{F}}
 \newcommand{\laplace}{\mathscr{L}}
@@ -331,6 +342,9 @@
 
 \newcommand{\HRule}{
   \rule{\linewidth}{0.5mm}
+}
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}
 }
 
 \graphicspath{{Images/}}
@@ -566,23 +580,25 @@
 \setabbreviationstyle[\acronymtype]{long-short}
 
 \loadglsentries{glossary} % Loading "glossary.tex"
-
-\setlength{\glsdescwidth}{0.61\linewidth} % Minmax this
 % \GlsXtrEnableEntryCounting{\acronymtype,abbreviation}{2}
+
+% Minmax these
+\setlength{\glsdescwidth}{0.58\linewidth}
+\setlength{\glspagelistwidth}{0.14\linewidth}
 
 \renewcommand{\printglossaries}{
   \iflanguage{norsk}{
     \renewcommand{\abbreviationsname}{Forkortelser}
     \renewcommand{\acronymname}{Akronymer}
+    \printglossary
     \printglossary[type=\acronymtype]
     \printglossary[type=\initialismtype]
     \printglossary[type=\glsxtrabbrvtype]
-    \printglossary
     \printglossary[type=\symboltype]
   }{
+    \printglossary
     \printglossary[type=\glsxtrabbrvtype]
     \printglossary[type=\acronymtype]
-    \printglossary
     \printglossary[type=\initialismtype]
     \printglossary[type=\symboltype]
   }
@@ -603,17 +619,23 @@
 ]{datetime}
 
 \RequirePackage{array}
-\RequirePackage{booktabs}
 \RequirePackage{comment}
 \RequirePackage{csquotes} % Must load after minted
 \RequirePackage{lipsum}
 \RequirePackage{paralist}
 \RequirePackage{pdfpages}
 
+\RequirePackage{booktabs}
+\UseTblrLibrary{booktabs}
+
 \RequirePackage{enumitem}
+\setlistdepth{5}
 \setlist[enumerate,1]{label=(\arabic*)}
 \setlist[enumerate,2]{label=(\alph*)}
 \setlist[enumerate,3]{label=(\roman*)}
+\setlist[enumerate,4]{label=(\Alph*)}
+\setlist[enumerate,5]{label=(\Roman*)}
+\renewlist{enumerate}{enumerate}{5}
 
 \RequirePackage{xurl}
 \urlstyle{same}
@@ -627,7 +649,7 @@
 \fancyfoot[C]{\thepage}
 
 \newcommand{\Romannumeral}[1]{
-  \MakeUppercase{\romannumeral{#1}}
+  \MakeUppercase{\romannumeral #1}
 }
 
 % ---- Numbering within sections ----

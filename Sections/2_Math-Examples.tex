@@ -4,10 +4,10 @@ This section demonstrates various mathematical features supported by the templat
 
 The \gls{gcd} and \gls{lcm} are fundamental concepts in number theory. The \gls{lcm} of two numbers is the smallest number that is a multiple of both.
 \begin{equation*}
-    \gcd(a, b) = \mathit{\glsxtrshort{gcd}}(a, b)
+    \gcd\dellr{a, b} = \mathit{\glsxtrshort{gcd}}\dellr{a, b}
 \end{equation*}
 \begin{equation*}
-    \lcm(a, b) = \mathit{\glsxtrshort{lcm}}(a, b)
+    \lcm\dellr{a, b} = \mathit{\glsxtrshort{lcm}}\dellr{a, b}
 \end{equation*}
 
 We begin with examples of custom\-/defined relation symbols:
@@ -32,12 +32,12 @@ We begin with examples of custom\-/defined relation symbols:
 
 The number of permutations of $r$ items from a set of $n$ elements is given by:
 \begin{equation*}
-    \perm{n}{r} = \frac{n!}{(n - r)!}
+    \perm{n}{r} = \frac{n!}{\dell{n - r}!}
 \end{equation*}
 
 The number of combinations (binomial coefficient) is:
 \begin{equation*}
-    \choose{n}{r} = \comb{n}{r} = \frac{n!}{r!(n - r)!}
+    \choose{n}{r} = \comb{n}{r} = \frac{n!}{r!\dell{n - r}!}
 \end{equation*}
 
 We can also use floor and ceiling functions:
@@ -47,12 +47,12 @@ We can also use floor and ceiling functions:
 
 Expected value notation:
 \begin{equation*}
-    \expect{X} = \sum_{x \in \mathcal{X}} x \cdot P(X = x)
+    \expect{X} = \sum_{x \in \mathcal{X}} x \cdot \prob{X = x}
 \end{equation*}
 
 Variance:
 \begin{equation*}
-    \Var(X) = \sigma^2(X) = \expect{(X - \expect{X})^2} = \sum_{x \in \mathcal{X}} (x - \expect{X})^2 \cdot P(X = x)
+    \Var\dellr{X} = \sigmasq\dellr{X} = \expect{\dell{X - \expect{X}}^2} = \sum_{x \in \mathcal{X}} \dell{x - \expect{X}}^2 \cdot \prob{X = x}
 \end{equation*}
 
 Some commonly used mathematical sets and transforms:
@@ -67,8 +67,7 @@ Equations, partially to demonstrate \texttt{glossaries\-/extra}:
 
 A piecewise\-/defined function can be written as:
 \begin{equation*}
-    f(x) = 
-    \begin{cases}
+    f\dellr{x} = \begin{cases}
         x^2 & \cif{x \geq 0} \\
         -x  & \cotherwise
     \end{cases}
