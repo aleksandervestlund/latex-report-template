@@ -111,11 +111,7 @@
   xcdraw,
 ]{xcolor}
 \RequirePackage[obeyFinal]{todonotes}
-\let\oldtodo\todo
-\renewcommand{\todo}[1]{%
-  \oldtodo{#1}%
-  \PackageWarningNoLine{todonotes}{TODO (page \thepage): \detokenize{#1}}%
-}
+\pretocmd{\todo}{\PackageWarningNoLine{todonotes}{TODO (page \thepage)}}{}{}
 
 % ----------- Mathematics -----------
 \RequirePackage{latexsym}
@@ -204,18 +200,27 @@
 
 \DeclareMathOperator{\polylog}{\mathsf{polylog}}
 
-\newcommand{\dell}[1]{\!\del{#1}}
-\newcommand{\dellr}[1]{\!\del{#1}\!}
-
+\newcommand{\compl}{{}^\mathsf{c}\!}
+\newcommand{\goesto}{\rightarrow}
+\newcommand{\inv}{^{-1}}
+\newcommand{\transpose}{^{\mathsf{T}}}
 \newcommand{\sigmasq}{\sigma^2}
-\newcommand{\perm}[2]{{}^{#1}P_{#2}} % n, r
-\newcommand{\comb}[2]{{}^{#1}C_{#2}} % n, r
-\renewcommand{\choose}[2]{\dbinom{#1}{#2}} % n, r
 
-\newcommand{\littleomega}[1]{\omega\dell{#1}}
+\newcommand{\dell}[1]{\!\del{#1}}
+\newcommand{\dellr}[1]{\dell{#1}\!}
+\newcommand{\delr}[1]{\del{#1}\!}
+
 \newcommand{\amortized}[1]{\widehat{#1}}
+\newcommand{\perm}[2]{{}^{#1}P_{#2}}
+\newcommand{\comb}[2]{{}^{#1}C_{#2}}
+\renewcommand{\choose}[2]{\dbinom{#1}{#2}}
 \newcommand{\defn}[1]{\textit{\textbf{\boldmath #1}}}
-\newcommand{\expectsq}[1]{\mathbb{E}^2\!\del{#1}}
+\newcommand{\expectsq}[1]{\mathbb{E}^2\dell{#1}}
+\newcommand{\fourier}[1]{\mathcal{F}\dell{#1}}
+\newcommand{\fourierinv}[1]{\mathcal{F}\inv\dell{#1}}
+\newcommand{\laplace}[1]{\mathscr{L}\dell{#1}}
+\newcommand{\laplaceinv}[1]{\mathscr{L}\inv\dell{#1}}
+\newcommand{\littleomega}[1]{\omega\dell{#1}}
 \newcommand{\percent}[1]{#1\%}
 
 % If you find a replacement, let me know
@@ -244,9 +249,6 @@
 \newcommand{\studentt}[1]{t_{#1}} % nu
 \newcommand{\uniform}[2]{\mathrm{Unif}\dell{#1, #2}} % a, b
 
-\newcommand{\fourier}{\mathcal{F}}
-\newcommand{\laplace}{\mathscr{L}}
-
 \usepackage{centernot}
 \newcommand{\napprox}{\centernot\approx}
 \newcommand{\ndashv}{\centernot\dashv}
@@ -258,11 +260,6 @@
 \newcommand{\nsubsetneq}{\centernot\subsetneq}
 \newcommand{\nsupset}{\centernot\supset}
 \newcommand{\nsupsetneq}{\centernot\supsetneq}
-
-\newcommand{\compl}{{}^\mathsf{c}\!}
-\newcommand{\goesto}{\rightarrow}
-\newcommand{\transpose}{{}^{\mathsf{T}}}
-\newcommand{\inv}{^{-1}}
 
 \RequirePackage{newunicodechar}
 \newunicodechar{≈}{\approx}
@@ -459,7 +456,7 @@
   primitives,
   probability,
   sets,
-]{cryptocode}
+]{cryptocode} % Must load after hyperref and before cleveref
 \let\AC\relax % Conflicts with glossaries-extra
 
 % TODO: Switch to zref-clever when it supports Norwegian
@@ -525,6 +522,7 @@
     \crefmultiformat{procedure}{prosedyrer~#2#1#3}{ og~#2#1#3}{, #2#1#3}{ og~#2#1#3}
   \fi
 }
+
 \newcommand{\refcheckize}[1]{%
   \expandafter\let\csname @@\string#1\endcsname#1%
   \expandafter\DeclareRobustCommand\csname relax\string#1\endcsname[1]{%
@@ -540,21 +538,6 @@
 
 \refcheckize{\cref}
 \refcheckize{\Cref}
-
-\newcommand{\alglabel}[1]{\label{alg:#1}}
-\newcommand{\caselabel}[1]{\label{case:#1}}
-\newcommand{\corlabel}[1]{\label{cor:#1}}
-\newcommand{\eqlabel}[1]{\label{eq:#1}}
-\newcommand{\figlabel}[1]{\label{fig:#1}}
-\newcommand{\ineqlabel}[1]{\label{ineq:#1}}
-\newcommand{\lemlabel}[1]{\label{lem:#1}}
-\newcommand{\lstlabel}[1]{\label{lst:#1}}
-\newcommand{\prolabel}[1]{\label{pro:#1}}
-\newcommand{\seclabel}[1]{\label{sec:#1}}
-\newcommand{\subseclabel}[1]{\label{subsec:#1}}
-\newcommand{\subsubseclabel}[1]{\label{subsubsec:#1}}
-\newcommand{\tablabel}[1]{\label{tab:#1}}
-\newcommand{\thmlabel}[1]{\label{thm:#1}}
 
 \PassOptionsToPackage{lang-warn=false}{datatool-base}
 % More styles: https://www.dickimaw-books.com/gallery/glossaries-styles/
@@ -648,8 +631,8 @@
 \renewcommand{\footrulewidth}{0.1ex}
 \fancyfoot[C]{\thepage}
 
-\newcommand{\Romannumeral}[1]{
-  \MakeUppercase{\romannumeral #1}
+\newcommand{\Romannumeral}[1]{%
+  \MakeUppercase{\romannumeral #1}%
 }
 
 % ---- Numbering within sections ----
