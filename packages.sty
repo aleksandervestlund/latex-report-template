@@ -28,8 +28,6 @@
   babel,
   expansion=true,
   factor=1100,
-  kerning=true,
-  protrusion=true,
   shrink=10,
   step=1,
   stretch=10,
@@ -49,20 +47,40 @@
 \RequirePackage[onehalfspacing]{setspace}
 
 \RequirePackage{iftex}
-\ifPDFTeX
+\ifPDFTeX % pdfLaTeX
   \RequirePackage[utf8]{inputenc}
   \RequirePackage[T1]{fontenc}
-\else
+  \RequirePackage{morewrites}
+  \pdfgentounicode=1
+  \microtypesetup{
+    expansion=true,
+    kerning=true,
+    protrusion=true,
+  }
+\else\ifLuaTeX % LuaLaTeX
   \RequirePackage{fontspec}
-\fi
+  \microtypesetup{
+    expansion=true,
+    kerning=false,
+    protrusion=false,
+  }
+\else\ifXeTeX % XeLaTeX
+  \RequirePackage{fontspec}
+  \RequirePackage{morewrites}
+  \microtypesetup{
+    expansion=false,
+    kerning=false,
+    protrusion=false,
+  }
+\fi\fi\fi
 
 \setlength{\parskip}{0.8em}
-\pdfgentounicode=1
 \sloppy
 
 \RequirePackage{silence}
 \WarningFilter{latex}{Command \showhyphens has changed.}
 \WarningFilter{latex}{Command `\theH}
+\WarningFilter{tablefootnote}{LuaTeX and hyperref}
 
 % ------- Document structure --------
 \RequirePackage{etoolbox}
@@ -77,14 +95,14 @@
   \pagenumbering{roman}
 }
 \newcommand{\mainmatter}{
-  \newpage
+  \clearpage
   \pagenumbering{arabic}
 }
 
 \RequirePackage{appendix}
 \newcommand{\addappendix}{
+  \clearpage
   \phantomsection
-  \newpage
   \appendix
   \section*{\appendixname}
   \addcontentsline{toc}{section}{\appendixname}
@@ -94,15 +112,15 @@
 \RequirePackage{afterpage}
 \newcommand{\blankinfo}{This page was intentionally left blank}
 \newcommand{\blankpage}{
+  \clearpage
   \phantomsection
-  \newpage
   \hbox{}
   \vfill
   {\centering \MakeUppercase{\blankinfo}\par}
   \vfill
   \thispagestyle{empty}
   \addtocounter{page}{-1}
-  \newpage
+  \clearpage
 }
 
 \RequirePackage[
@@ -201,10 +219,16 @@
 \DeclareMathOperator{\polylog}{\mathsf{polylog}}
 
 \newcommand{\compl}{{}^\mathsf{c}\!}
-\newcommand{\goesto}{\rightarrow}
 \newcommand{\inv}{^{-1}}
 \newcommand{\transpose}{^{\mathsf{T}}}
 \newcommand{\sigmasq}{\sigma^2}
+
+\newcommand{\band}{\mathbin{\&}}
+\newcommand{\bor}{\mid}
+\newcommand{\sgg}{\overset{s}{\gg}} % Or just \gg
+\newcommand{\ugg}{\overset{u}{\gg}} % Or \ggg
+\newcommand{\sll}{\overset{s}{\ll}} % Or just \ll
+\newcommand{\ull}{\overset{u}{\ll}} % Or \lll
 
 \newcommand{\dell}[1]{\!\del{#1}}
 \newcommand{\dellr}[1]{\dell{#1}\!}
@@ -221,7 +245,6 @@
 \newcommand{\laplace}[1]{\mathscr{L}\dell{#1}}
 \newcommand{\laplaceinv}[1]{\mathscr{L}\inv\dell{#1}}
 \newcommand{\littleomega}[1]{\omega\dell{#1}}
-\newcommand{\percent}[1]{#1\%}
 
 % If you find a replacement, let me know
 \newcommand{\getsr}{
@@ -260,6 +283,12 @@
 \newcommand{\nsubsetneq}{\centernot\subsetneq}
 \newcommand{\nsupset}{\centernot\supset}
 \newcommand{\nsupsetneq}{\centernot\supsetneq}
+
+% Free to choose yourself:
+% \renewcommand{\ge}{\geqslant}
+% \renewcommand{\geq}{\geqslant}
+% \renewcommand{\le}{\leqslant}
+% \renewcommand{\leq}{\leqslant}
 
 \RequirePackage{newunicodechar}
 \newunicodechar{≈}{\approx}
@@ -344,6 +373,10 @@
   \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}
 }
 
+\makeatletter
+\def\input@path{{Sections/}}
+\makeatother
+
 \graphicspath{{Images/}}
 \newcommand{\mitlogo}{MIT_logo.png}
 \newcommand{\ntnulogo}{NTNU_logo_EN.png}
@@ -397,7 +430,6 @@
 % Alternatively, check out clrscode4e: https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/11599/clrscode4e.pdf
 \RequirePackage{algorithm}
 \RequirePackage{algpseudocode}
-\RequirePackage{morewrites}
 
 \RequirePackage{newfloat}
 \newfloat{procedure}{tbp}{lop}
@@ -570,6 +602,8 @@
 \setlength{\glspagelistwidth}{0.14\linewidth}
 
 \renewcommand{\printglossaries}{
+  \clearpage
+  \phantomsection
   \iflanguage{norsk}{
     \renewcommand{\abbreviationsname}{Forkortelser}
     \renewcommand{\acronymname}{Akronymer}
@@ -592,7 +626,11 @@
   shortcuts,
   wordspacearound,
 ]{extdash}
-\RequirePackage[per-mode=symbol]{siunitx}
+
+\RequirePackage[
+  exponent-product=\cdot,
+  per-mode=symbol,
+]{siunitx}
 \DeclareSIUnit{\nothing}{\relax}
 
 \newcommand{\datestring}{Date}

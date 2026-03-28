@@ -7,8 +7,8 @@
     \frontmatter
     \input{Sections/01_Frontmatter}
 
+    \clearpage
     \phantomsection
-    \newpage
     \tableofcontents
     \listoffigures
     \listoftables
@@ -18,20 +18,17 @@
     \listoftheorems
 
     \mainmatter
-    \input{Sections/1_Introduction}
-    \input{Sections/2_Math-Examples}
-    \input{Sections/3_Figures-and-Tables}
-    \input{Sections/4_Code-Examples}
-    \input{Sections/5_Algorithm-Example}
-    \input{Sections/6_Language}
+    \input{1_Introduction}
+    \input{2_Math-Examples}
+    \input{3_Figures-and-Tables}
+    \input{4_Code-Examples}
+    \input{5_Algorithm-Example}
+    \input{6_Language}
 
     \addappendix
-    \input{Sections/99_Appendix}
+    \input{99_Appendix}
 
-    \phantomsection
-    \newpage
     \printglossaries
-
-    \newpage
+    \clearpage
     \printbibliography[heading=bibintoc]
 \end{document}
