@@ -79,7 +79,6 @@
 \RequirePackage{silence}
 \WarningFilter{latex}{Command \showhyphens has changed.}
 \WarningFilter{latex}{Command `\theH}
-\WarningFilter{tablefootnote}{LuaTeX and hyperref}
 
 % ------- Document structure --------
 \RequirePackage{etoolbox}
@@ -218,8 +217,8 @@
 \DeclareMathOperator{\polylog}{\mathsf{polylog}}
 
 \newcommand{\compl}{{}^\mathsf{c}\!}
-\newcommand{\inv}{^{-1}}
-\newcommand{\transpose}{^{\mathsf{T}}}
+\newcommand{\inv}{{}^{-1}}
+\newcommand{\transpose}{{}^{\mathsf{T}}}
 \newcommand{\sigmasq}{\sigma^2}
 
 \newcommand{\band}{\mathbin{\&}}
@@ -329,9 +328,7 @@
 \RequirePackage{pgfplots}
 \pgfplotsset{compat=1.18}
 
-\RequirePackage{tablefootnote}
 \newcommand{\footnotenonumber}[1]{{\def\thempfn{}\footnotetext{#1}}}
-\newcommand{\footnotetight}[1]{\footnote{\renewcommand\baselinestretch{1}\footnotesize #1}}
 
 \RequirePackage{floatrow}
 \floatsetup[figure]{capposition=bottom}
@@ -504,16 +501,10 @@
 \makeatletter
 \cref@addlanguagedefs{american}{
   \if@cref@capitalise
-    \crefname{ineq}{Inequality}{Inequalities}
-    \crefname{subsection}{Subsection}{Subsections}
-    \crefname{subsubsection}{Subsubsection}{Subsubsections}
     \crefformat{procedure}{Procedure~#2#1#3}
     \crefrangeformat{procedure}{Procedures~#3#1#4 to~#5#2#6}
     \crefmultiformat{procedure}{Procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
   \else
-    \crefname{ineq}{inequality}{inequalities}
-    \crefname{subsection}{subsection}{subsections}
-    \crefname{subsubsection}{subsubsection}{subsubsections}
     \crefformat{procedure}{procedure~#2#1#3}
     \crefrangeformat{procedure}{procedures~#3#1#4 to~#5#2#6}
     \crefmultiformat{procedure}{procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
@@ -521,16 +512,10 @@
 }
 \cref@addlanguagedefs{british}{
   \if@cref@capitalise
-    \crefname{ineq}{Inequality}{Inequalities}
-    \crefname{subsection}{Subsection}{Subsections}
-    \crefname{subsubsection}{Subsubsection}{Subsubsections}
     \crefformat{procedure}{Procedure~#2#1#3}
     \crefrangeformat{procedure}{Procedures~#3#1#4 to~#5#2#6}
     \crefmultiformat{procedure}{Procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
   \else
-    \crefname{ineq}{inequality}{inequalities}
-    \crefname{subsection}{subsection}{subsections}
-    \crefname{subsubsection}{subsubsection}{subsubsections}
     \crefformat{procedure}{procedure~#2#1#3}
     \crefrangeformat{procedure}{procedures~#3#1#4 to~#5#2#6}
     \crefmultiformat{procedure}{procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
@@ -538,16 +523,10 @@
 }
 \cref@addlanguagedefs{norsk}{
   \if@cref@capitalise
-    \crefname{ineq}{Ulikhet}{Ulikheter}
-    \crefname{subsection}{Underseksjon}{Underseksjoner}
-    \crefname{subsubsection}{Underunderseksjon}{Underunderseksjoner}
     \crefformat{procedure}{Prosedyre~#2#1#3}
     \crefrangeformat{procedure}{Prosedyrer~#3#1#4 til~#5#2#6}
     \crefmultiformat{procedure}{Prosedyrer~#2#1#3}{ og~#2#1#3}{, #2#1#3}{, og~#2#1#3}
   \else
-    \crefname{ineq}{ulikhet}{ulikheter}
-    \crefname{subsection}{underseksjon}{underseksjoner}
-    \crefname{subsubsection}{underunderseksjon}{underunderseksjoner}
     \crefformat{procedure}{prosedyre~#2#1#3}
     \crefrangeformat{procedure}{prosedyrer~#3#1#4 til~#5#2#6}
     \crefmultiformat{procedure}{prosedyrer~#2#1#3}{ og~#2#1#3}{, #2#1#3}{ og~#2#1#3}
@@ -642,13 +621,12 @@
 \RequirePackage{comment}
 \RequirePackage{csquotes} % Must load after minted
 \RequirePackage{lipsum}
-\RequirePackage{paralist}
 \RequirePackage{pdfpages}
 
 \RequirePackage{booktabs}
 \UseTblrLibrary{booktabs}
 
-\RequirePackage{enumitem}
+\RequirePackage[inline]{enumitem}
 \setlistdepth{5}
 \setlist[enumerate,1]{label=(\arabic*)}
 \setlist[enumerate,2]{label=(\alph*)}
@@ -678,6 +656,7 @@
 \ifnum\c@secnumdepth > 0
   \numberwithin{equation}{section}
   \numberwithin{figure}{section}
+  \numberwithin{ineq}{section}
   \numberwithin{table}{section}
   \numberwithin{algorithm}{section}
   \numberwithin{listing}{section}
@@ -692,6 +671,10 @@
   \renewcommand{\abbreviationsname}{Abbreviations}
   \renewcommand{\creflastconjunction}{, and~}
   \renewcommand{\creflastgroupconjunction}{, and~}
+  % Change with capitalise
+  \crefname{ineq}{Inequality}{Inequalities}
+  \crefname{subsection}{Subsection}{Subsections}
+  \crefname{subsubsection}{Subsubsection}{Subsubsections}
 }
 \addto{\captionsbritish}{
   \floatname{procedure}{Procedure}
@@ -699,6 +682,10 @@
   \renewcommand{\abbreviationsname}{Abbreviations}
   \renewcommand{\creflastconjunction}{, and~}
   \renewcommand{\creflastgroupconjunction}{, and~}
+  % Change with capitalise
+  \crefname{ineq}{Inequality}{Inequalities}
+  \crefname{subsection}{Subsection}{Subsections}
+  \crefname{subsubsection}{Subsubsection}{Subsubsections}
 }
 \addto{\captionsnorsk}{
   \floatname{procedure}{Prosedyre}
@@ -733,6 +720,10 @@
   \renewenvironment{step}{\begin{trinn}}{\end{trinn}}
   \renewcommand{\ntnulogo}{NTNU_logo_NB.png}
   \setlength{\parindent}{0em}
+  % Change with capitalise
+  \crefname{ineq}{Ulikhet}{Ulikheter}
+  \crefname{subsection}{Underseksjon}{Underseksjoner}
+  \crefname{subsubsection}{Underseksjon}{Underseksjoner}
 }
 
 \ifthenelse{\equal{\languagename}{norsk}}{

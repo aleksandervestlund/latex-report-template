@@ -1,5 +1,4 @@
 \section{Math Examples}
-
 This section demonstrates various mathematical features supported by the template. Every package listed under the \enquote{Mathematics} category in \texttt{packages.sty} is represented here with a usage example. Some of these examples are purely illustrative and are not necessarily mathematically meaningful.
 
 The \gls{gcd} and \gls{lcm} are fundamental concepts in number theory. The \gls{lcm} of two numbers is the smallest number that is a multiple of both.
@@ -12,23 +11,21 @@ The \gls{gcd} and \gls{lcm} are fundamental concepts in number theory. The \gls{
 
 We begin with examples of custom\-/defined relation symbols:
 \begin{equation*}
-    x \defeq y + z
-\end{equation*}
-\begin{equation*}
-    a \whateq b
-\end{equation*}
-\begin{equation*}
-    p \hateq q
-\end{equation*}
-\begin{equation*}
-    f \coloneqq g
-\end{equation*}
-\begin{equation*}
-    M \meq N
-\end{equation*}
-\begin{equation*}
+    x \defeq y + z, \quad
+    a \whateq b, \quad
+    p \hateq q, \quad
+    f \coloneqq g, \quad
+    M \meq N, \quad
     U \qmeq V\transpose
 \end{equation*}
+
+Superscript shorthands for inverse and transpose:
+\begin{equation*}
+    A\inv, \quad A\transpose, \quad A\inv\transpose
+\end{equation*}
+
+The \texttt{defn} command is used to introduce a \defn{defined term} in bold italic.
+The \texttt{amortized} command denotes amortized cost: $\amortized{T}\dell{n}$.
 
 The number of permutations of $r$ items from a set of $n$ elements is given by:
 \begin{equation*}
@@ -42,63 +39,262 @@ The number of combinations (binomial coefficient) is:
 
 We can also use floor and ceiling functions:
 \begin{equation*}
-    \ceil*{1.2} = 2 \qquad \floor*{2.2} = 2
+    \ceil*{1.2} = 2, \qquad \floor*{2.2} = 2
 \end{equation*}
 
-Expected value notation:
+The \texttt{dell}, \texttt{dellr}, and \texttt{delr} commands add tight spacing around \texttt{del} delimiters:
+\begin{equation*}
+    f\dell{x}, \quad f\dellr{x}, \quad f\delr{x}
+\end{equation*}
+
+The \texttt{narrowarray} and \texttt{normalarray} commands adjust column spacing in arrays:
+\begin{equation*}
+    \narrowarray{0.5}
+    \begin{pmatrix} a & b \\ c & d \end{pmatrix}
+    \normalarray
+    \quad \text{vs} \quad
+    \begin{pmatrix} a & b \\ c & d \end{pmatrix}
+\end{equation*}
+
+\subsection{Operators}
+
+Declared math operators:
+\begin{equation*}
+    \Adj\dellr{A},
+    \quad \logtwo\dellr{n},
+    \quad \logten\dellr{n},
+    \quad \sinc\dellr{\omega},
+    \quad \polylog\dellr{\secpar}
+\end{equation*}
+
+Statistical operators:
+\begin{equation*}
+    \Cov\dell{X, Y} = \expect{XY} - \expect{X}\expect{Y}
+\end{equation*}
+
+The \texttt{getsr} command renders a random-sampling arrow from \texttt{cryptocode}:
+\begin{equation*}
+    k \getsr \bin^\secpar
+\end{equation*}
+
+\subsection{Expected Value and Variance}
+
+Expected value and variance:
 \begin{equation*}
     \expect{X} = \sum_{x \in \mathcal{X}} x \cdot \prob{X = x}
 \end{equation*}
-
-Variance:
 \begin{equation*}
-    \Var\dellr{X} = \sigmasq\dellr{X} = \expect{\dell{X - \expect{X}}^2} = \sum_{x \in \mathcal{X}} \dell{x - \expect{X}}^2 \cdot \prob{X = x}
+    \Var\dellr{X} = \sigmasq\dellr{X} = \expect{\dell{X - \expect{X}}^2} = \expectsq{X} - \expect{X}^2
 \end{equation*}
 
-Some commonly used mathematical sets and transforms:
+\subsection{Sets, Transforms, and Notation}
+
+Commonly used mathematical sets and transforms:
 \begin{equation*}
-    \NN \subset \ZZ \subset \QQ \subset \RR \subset \CC, \quad \laplaceinv{\laplace{x}} = x, \quad \fourierinv{\fourier{x}} = x, \quad \compl A
+    \NN \subset \ZZ \subset \QQ \subset \RR \subset \CC,
+    \quad \laplaceinv{\laplace{x}} = x,
+    \quad \fourierinv{\fourier{x}} = x,
+    \quad \compl A
 \end{equation*}
 
-Equations, partially to demonstrate \texttt{glossaries\-/extra}:
+Script and calligraphic fonts from \texttt{mathrsfs}:
+\begin{equation*}
+    \mathscr{F},
+    \quad \mathscr{L},
+    \quad \mathscr{H},
+    \quad \mathscr{A}
+\end{equation*}
+
+\subsection{Calculus and Differentials}
+
+Ordinary and partial derivatives using \texttt{diffcoeff}:
+\begin{equation*}
+    \dl f,
+    \quad \diff{f}{x},
+    \quad \diff[2]{f}{x},
+    \quad \diffp{f}{x},
+    \quad \diffp{f}{{x}{y}}
+\end{equation*}
+
+Absolute value and norm from \texttt{commath}:
+\begin{equation*}
+    \abs{x},
+    \quad \norm{x},
+    \quad \abs*{\frac{a}{b}},
+    \quad \norm*{\frac{a}{b}}
+\end{equation*}
+
+\subsection{Equations}
+\label{subsec:equations}
+
+An equation with a label and number, demonstrating \texttt{amsmath}: \cref{subsec:equations}
+\begin{equation}\label{eq:euler}
+    e^{i\pi} + 1 = 0
+\end{equation}
+
+The custom \texttt{inequality} environment assigns a label like an equation:
+\begin{inequality}\label{ineq:example}
+    n^2 \geq n \quad \text{for all } n \geq 1
+\end{inequality}
+
+\cref{eq:euler,ineq:example}. Equations, partially to demonstrate \texttt{glossaries\-/extra}:
 \begin{equation*}
     E = m\gls{c}^2
 \end{equation*}
 
-A piecewise\-/defined function can be written as:
+A piecewise\-/defined function using \texttt{cif} and \texttt{cotherwise}:
 \begin{equation*}
-    f\dellr{x} = \begin{cases}
+    f\dell{x} = \begin{cases}
         x^2 & \cif{x \geq 0} \\
         -x  & \cotherwise
     \end{cases}
 \end{equation*}
 
-We can use symbols such as $\forall$, $\exists$, $\Rightarrow$, $\nexists$, and $\neg$ for logic notation.
-
-We also use \texttt{mathclap} to fix spacing issues:
+We also use \texttt{mathclap} to fix spacing in subscripts:
 \begin{equation*}
     \sum_{1 \leq i < j \leq n} a_{ij}
-\end{equation*}
-\begin{equation*}
+    \qquad \text{vs} \qquad
     \sum_{\mathclap{1 \leq i < j \leq n}} a_{ij}
 \end{equation*}
 
-\begin{theorem}[Intervals]
-    Let $f$ be a continuous function in a closed interval $[a,b]$. Then $f$ is bounded and attains its bounds on $[a,b]$.
-\end{theorem}
+Quotient group notation using \texttt{faktor}:
+\begin{equation*}
+    \faktor{G}{N}, \quad \faktor{\ZZ}{n\ZZ}
+\end{equation*}
 
-\begin{proof}
-    By the Extreme Value Theorem, a continuous function on a closed interval attains its maximum and minimum.
-\end{proof}
+\subsection{Logic and Negations}
+
+Logical symbols: $\forall$, $\exists$, $\nexists$, $\Rightarrow$, $\neg$, $\land$, $\lor$.
+
+Negated relations from \texttt{centernot}:
+\begin{equation*}
+    \napprox, \quad \nequiv, \quad \nperp, \quad \npropto, \quad
+    \nsubset, \quad \nsupset, \quad \nsubsetneq, \quad \nsupsetneq, \quad
+    \nmodels, \quad \ndashv
+\end{equation*}
+
+\subsection{Bitwise and Shift Operators}
+
+Bitwise and shift operators for use in algorithms or hardware descriptions:
+\begin{equation*}
+    a \band b, \quad a \bor b, \quad a \sll b, \quad a \sgg b, \quad a \ull b, \quad a \ugg b
+\end{equation*}
+
+\subsection{Unicode Shortcuts}
+
+The \texttt{newunicodechar} package allows direct use of Unicode symbols in math mode:
+\begin{equation*}
+    ≈,\ ∆,\ ≥,\ ∞,\ ∫,\ ≤,\ ≠,\ Ω,\ ∂,\ π,\ ∏,\ ∑,\ ∨,\ ∧
+\end{equation*}
+
+In addition, if you prefer
+\begin{equation*}
+    \leqslant \quad \geqslant
+\end{equation*}
+
+instead of
+\begin{equation*}
+    ≤ \quad ≥
+\end{equation*}
+
+you can uncomment those corresponding lines in the \mintinline{latex}{packages.sty}.
+
+\subsection{Miscellaneous}
 
 Bold vector notation using \texttt{bm}:
 \begin{equation*}
     \bm{F} = m \bm{a}
 \end{equation*}
 
-We can cancel out terms to simplify expressions:
+Cancellation of terms using \texttt{cancel}:
 \begin{equation*}
     \frac{\cancel{a} \cdot b}{\cancel{a}} = b
 \end{equation*}
 
-The \texttt{nicefrac} package provides better inline fractions to write text: $\nicefrac{a}{b}$ is cleaner than $\frac{a}{b}$ or $a/b$.
+The \texttt{nicefrac} package provides better inline fractions: $\nicefrac{a}{b}$ is cleaner than $\frac{a}{b}$ or $a/b$.
+
+\subsection{Probability Distributions}
+
+Common probability distributions in aligned notation:
+\begin{align*}
+    X &\sim \gaussian{\mu}{\sigmasq} \\
+    X &\sim \binomial{n}{p} \\
+    X &\sim \poisson{\lambda} \\
+    X &\sim \exponential{\lambda} \\
+    X &\sim \uniform{a}{b} \\
+    X &\sim \geometric{p} \\
+    X &\sim \negativebinomial{k}{p} \\
+    X &\sim \hypergeometric{N}{k}{n} \\
+    X &\sim \gammadist{\alpha}{\beta} \\
+    X &\sim \chisq{\nu} \\
+    X &\sim \studentt{\nu}
+\end{align*}
+
+\subsection{Theorem Environments}
+
+The template declares a wide range of theorem-like environments using \texttt{thmtools} and \texttt{amsthm}. All \--- except remarks (arbitrarily) \--- are numbered within sections.
+
+\begin{theorem}[Extreme Value Theorem]
+    Let $f$ be a continuous function on a closed interval $[a,b]$. Then $f$ attains both its maximum and minimum on $[a,b]$.
+\end{theorem}
+\begin{proof}
+    By the Extreme Value Theorem, a continuous function on a compact set attains its bounds.
+\end{proof}
+\begin{proofidea}
+    Compactness of $[a,b]$ under continuity forces boundedness and attainment.
+\end{proofidea}
+\begin{proofsketch}
+    Cover $[a,b]$ by open sets, extract a finite subcover, and simply apply continuity.
+\end{proofsketch}
+
+\begin{lemma}
+    For all $n \in \NN$, we have $n^2 \geq n$.
+\end{lemma}
+\begin{corollary}
+    In particular, $n^2 - n \geq 0$ for all $n \in \NN$.
+\end{corollary}
+\begin{proposition}
+    Every prime greater than $2$ is odd.
+\end{proposition}
+\begin{claim}
+    The sum of two even integers is even.
+\end{claim}
+\begin{definition}
+    A \defn{prime number} is a natural number greater than $1$ with no positive divisors other than $1$ and itself.
+\end{definition}
+\begin{example}
+    The numbers $2, 3, 5, 7, 11$ are all prime.
+\end{example}
+\begin{remark}
+    Note that $1$ is not considered a prime number by convention.
+\end{remark}
+\begin{assumption}
+    We assume throughout that all graphs are simple and undirected.
+\end{assumption}
+\begin{observation}
+    The degree sequence of a tree on $n$ vertices sums to $2\dell{n - 1}$.
+\end{observation}
+\begin{fact}
+    Every finite group of prime order is cyclic.
+\end{fact}
+\begin{case}
+    Suppose $x > 0$. Then $f\dell{x} = x^2$.
+\end{case}
+\begin{exercise}
+    Prove that $\sqrt{2}$ is irrational.
+\end{exercise}
+\begin{problem}
+    Find all $x \in \RR$ such that $x^2 = -1$.
+\end{problem}
+\begin{invariant}
+    The quantity $E = \frac{1}{2}mv^2 + mgh$ is conserved throughout the motion.
+\end{invariant}
+\begin{property}
+    The identity element of a group is unique.
+\end{property}
+\begin{principle}
+    By the pigeonhole principle, if $n+1$ items are placed in $n$ containers, at least one container holds more than one item.
+\end{principle}
+\begin{step}
+    Reduce the problem to a simpler subproblem by induction.
+\end{step}

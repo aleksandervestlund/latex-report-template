@@ -1,6 +1,6 @@
 \section{Figures and Tables}
 
-In this section, we demonstrate how to include and format both figures and tables using \LaTeX. Note that by convention, table captions are placed above the table, while figure captions are placed below the image. This reflects common typesetting standards to help readers interpret the content before or after viewing it. Examples are shown in \cref{fig:theway,fig:subfigures,tab:standard,tab:budget}.
+In this section, we demonstrate how to include and format both figures and tables using \LaTeX. Note that by convention, table captions are placed above the table, while figure captions are placed below the image. This reflects common typesetting standards to help readers interpret the content before or after viewing it. Examples are shown in \cref{fig:theway,fig:subfigures,fig:sidebyside,fig:pgfplot,fig:pulses,tab:standard,tab:siunitx,tab:budget}.
 
 \begin{figure}
     \centering
@@ -38,6 +38,122 @@ In this section, we demonstrate how to include and format both figures and table
     \end{subfigure}
 \end{figure}
 
+The \texttt{floatrow} package allows placing two floats side by side with independent captions:
+
+\begin{figure}
+    \caption{Left image using \texttt{floatrow}.}
+    \label{fig:sidebyside}
+    \begin{floatrow}
+        \ffigbox[\FBwidth]{%
+            \caption{Left subfloat.}%
+        }{%
+            \includegraphics[width=0.45\textwidth]{the_way.jpg}%
+        }
+        \ffigbox[\FBwidth]{%
+            \caption{Right subfloat.}%
+        }{%
+            \includegraphics[width=0.45\textwidth]{the_way.jpg}%
+        }
+    \end{floatrow}
+\end{figure}
+
+The \texttt{adjustbox} package allows constraining image dimensions:
+\begin{figure}
+    \centering
+    \includegraphics[max width=0.5\textwidth, max height=4cm]{the_way.jpg}
+    \caption{Image constrained with \texttt{adjustbox} \texttt{max width} and \texttt{max height}.}
+\end{figure}
+
+A simple plot using \texttt{pgfplots} and drawing manually using \mintinline{latex}{tikzpicture}:
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            height=6.5cm,
+            width=\linewidth,
+            hide obscured x ticks=false,
+            xlabel={$r$},
+            xlabel style={at={(axis description cs)}},
+            xmin=-4,
+            xmax=4,
+            domain=-4:4,
+            xtick={-2, 0, 2},
+            xticklabels={$-\sqrt{E}$, $0$, $\sqrt{E}$},
+            ymax=0.8,
+            ytick={0.5},
+            yticklabels={$\nicefrac{1}{2}$},
+            samples=500,
+            axis lines=center,
+        ]
+            \addplot[blue,thick] {0.5 * exp(-abs(x + 2))};
+            \addlegendentry{$f_{r|s}\dell{r|s_0} = \frac{1}{2} e^{-\abs{r + \sqrt{E}}}$}
+             
+            \addplot[red,thick] {0.5 * exp(-abs(x - 2))};
+            \addlegendentry{$f_{r|s}\dell{r|s_1} = \frac{1}{2} e^{-\abs{r - \sqrt{E}}}$}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{$f_{r|s}(r|s_i)$.}
+    \label{fig:pgfplot}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.325\textwidth}
+        \begin{tikzpicture}
+            \draw[->] (0,0) -- (3.4,0) node[right] {$t$};
+            \draw[->] (0,-2) -- (0,2) node[above] {$s_1(t)$};
+
+            \node[left] at (0,1.5) {$\nicefrac{A}{2}$};
+            \node[left] at (0,-1.5) {$\nicefrac{-A}{2}$};
+            \node[below] at (1.5,0) {$\nicefrac{T}{2}$};
+            \node[below] at (3,0) {$T$};
+
+            \draw[thick] (0,1.5) -- (1.5,1.5) -- (1.5,-1.5) -- (3,-1.5);
+            \draw[dashed] (0,-1.5) -- (1.5,-1.5);
+            \draw[dashed] (3,-1.5) -- (3,0);
+        \end{tikzpicture}
+        \caption{$s_1(t)$.}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.325\textwidth}
+        \begin{tikzpicture}
+            \draw[->] (0,0) -- (3.4,0) node[right] {$t$};
+            \draw[->] (0,-2) -- (0,2) node[above] {$s_1(T - t)$};
+
+            \node[left] at (0,1.5) {$\nicefrac{A}{2}$};
+            \node[left] at (0,-1.5) {$\nicefrac{-A}{2}$};
+            \node[below] at (1.5,0) {$\nicefrac{T}{2}$};
+            \node[below] at (3,0) {$T$};
+
+            \draw[thick] (0,-1.5) -- (1.5,-1.5) -- (1.5,1.5) -- (3,1.5);
+            \draw[dashed] (0,1.5) -- (1.5,1.5);
+            \draw[dashed] (3,1.5) -- (3,0);
+        \end{tikzpicture}
+        \caption{$s_1(T - t)$.}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.325\textwidth}
+        \begin{tikzpicture}
+            \draw[->] (0,0) -- (3.4,0) node[right] {$t$};
+            \draw[->] (0,-2) -- (0,2) node[above] {$s_2(t)$};
+    
+            \node[left] at (0,1.5) {$\nicefrac{A}{2}$};
+            \node[left] at (0,-1.5) {$\nicefrac{-A}{2}$};
+            \node[below] at (0.75,0) {$\nicefrac{T}{4}$};
+            \node[below] at (2.25,0) {$\nicefrac{3T}{4}$};
+            \node[below] at (3,0) {$T$};
+    
+            \draw[thick] (0,-1.5) -- (0.75,-1.5) -- (0.75,1.5) -- (2.25,1.5) -- (2.25,-1.5) -- (3,-1.5);
+            \draw[dashed] (0,1.5) -- (0.75,1.5);
+            \draw[dashed] (3,-1.5) -- (3,0);
+        \end{tikzpicture}
+        \caption{$s_2(t) = s_2(T - t)$.}
+    \end{subfigure}
+    \caption{Pulses and their matched filters.}
+    \label{fig:pulses}
+\end{figure}
+
 \begin{table}
     \centering
     \begin{tblr}{colspec={lcr}}
@@ -49,8 +165,43 @@ In this section, we demonstrate how to include and format both figures and table
         Oranges & 2 kg & 3.20 \\
         \bottomrule
     \end{tblr}
-    \caption{Example of a standard table.}
+    \caption{Example of a standard table using \texttt{tabularray} and \texttt{booktabs}.}
     \label{tab:standard}
+\end{table}
+
+The \texttt{siunitx} package provides consistent number and unit formatting. The \texttt{S} column type aligns numbers on the decimal point:
+
+\begin{table}
+    \centering
+    \begin{tblr}{colspec={lcc}}
+        \toprule
+        \thead{Component} & \thead{Value} & \thead{Unit} \\
+        \midrule
+        Resistance        & \num{4.70}    & \unit{\kilo\ohm} \\
+        Capacitance       & \num{100.00}  & \unit{\micro\farad} \\
+        Voltage           & \num{3.30}    & \unit{\volt} \\
+        Frequency         & \num{2400.00} & \unit{\mega\hertz} \\
+        Mass              & \num{0.25}    & \unit{\kilo\gram} \\
+        \bottomrule
+    \end{tblr}
+    \caption{Table with \texttt{siunitx} unit and number formatting.}
+    \label{tab:siunitx}
+\end{table}
+
+\texttt{\textbackslash footnotenonumber}\footnote{Numbered.} adds an unnumbered footnote\footnotenonumber{Unnumbered.}. The \texttt{multirow} and \texttt{multicol} packages allow spanning rows and columns:
+
+\begin{table}
+    \centering
+    \begin{tblr}{colspec={lccc}}
+        \toprule
+        \thead{Group} & \thead{A} & \thead{B} & \thead{C} \\
+        \midrule
+        \SetCell[r=2]{l} Shared & 1 & 2 & 3 \\
+                                & 4 & 5 & 6 \\
+        Other & 7 & 8 & 9 \\
+        \bottomrule
+    \end{tblr}
+    \caption{Row spanning using \texttt{tabularray}'s \texttt{\textbackslash SetCell}.}
 \end{table}
 
 \begin{landscape}
