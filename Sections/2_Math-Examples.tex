@@ -1,5 +1,5 @@
 \section{Math Examples}
-This section demonstrates various mathematical features supported by the template. Every package listed under the \enquote{Mathematics} category in \texttt{packages.sty} is represented here with a usage example. Some of these examples are purely illustrative and are not necessarily mathematically meaningful.
+This section demonstrates various mathematical features supported by the template. Every package listed under the \enquote{Mathematics} category in \mintinline{latex}{packages.sty} is represented here with a usage example. Some of these examples are purely illustrative and are not necessarily mathematically meaningful.
 
 The \gls{gcd} and \gls{lcm} are fundamental concepts in number theory. The \gls{lcm} of two numbers is the smallest number that is a multiple of both.
 \begin{equation*}
@@ -11,21 +11,23 @@ The \gls{gcd} and \gls{lcm} are fundamental concepts in number theory. The \gls{
 
 We begin with examples of custom\-/defined relation symbols:
 \begin{equation*}
-    x \defeq y + z, \quad
-    a \whateq b, \quad
-    p \hateq q, \quad
-    f \coloneqq g, \quad
-    M \meq N, \quad
-    U \qmeq V\transpose
+    x \defeq y + z,
+    \quad a \whateq b,
+    \quad p \hateq q,
+    \quad f \coloneqq g,
+    \quad M \meq N,
+    \quad U \qmeq V
 \end{equation*}
 
 Superscript shorthands for inverse and transpose:
 \begin{equation*}
-    A\inv, \quad A\transpose, \quad A\inv\transpose
+    A\inv,
+    \quad A\transpose,
+    \quad A\inv\transpose
 \end{equation*}
 
-The \texttt{defn} command is used to introduce a \defn{defined term} in bold italic.
-The \texttt{amortized} command denotes amortized cost: $\amortized{T}\dell{n}$.
+The \mintinline{latex}{defn} command is used to introduce a \defn{defined term} in bold italic.
+The \mintinline{latex}{amortized} command denotes amortized cost: $\amortized{T}\dell{n}$.
 
 The number of permutations of $r$ items from a set of $n$ elements is given by:
 \begin{equation*}
@@ -42,12 +44,14 @@ We can also use floor and ceiling functions:
     \ceil*{1.2} = 2, \qquad \floor*{2.2} = 2
 \end{equation*}
 
-The \texttt{dell}, \texttt{dellr}, and \texttt{delr} commands add tight spacing around \texttt{del} delimiters:
+The \mintinline{latex}{dell}, \mintinline{latex}{dellr}, and \mintinline{latex}{delr} commands add tight spacing around \mintinline{latex}{del} delimiters:
 \begin{equation*}
-    f\dell{x}, \quad f\dellr{x}, \quad f\delr{x}
+    f\dell{x},
+    \quad f\dellr{x},
+    \quad f\delr{x}
 \end{equation*}
 
-The \texttt{narrowarray} and \texttt{normalarray} commands adjust column spacing in arrays:
+The \mintinline{latex}{narrowarray} and \mintinline{latex}{normalarray} commands adjust column spacing in arrays:
 \begin{equation*}
     \narrowarray{0.5}
     \begin{pmatrix} a & b \\ c & d \end{pmatrix}
@@ -72,9 +76,9 @@ Statistical operators:
     \Cov\dell{X, Y} = \expect{XY} - \expect{X}\expect{Y}
 \end{equation*}
 
-The \texttt{getsr} command renders a random-sampling arrow from \texttt{cryptocode}:
+The \mintinline{latex}{getsr} command renders a random\-/sampling arrow (if you find a way to create it without using \mintinline{latex}{tikz}, let me know):
 \begin{equation*}
-    k \getsr \bin^\secpar
+    k \getsr \bin^\secpar = k \sample \bin^\secpar
 \end{equation*}
 
 \subsection{Expected Value and Variance}
@@ -97,7 +101,7 @@ Commonly used mathematical sets and transforms:
     \quad \compl A
 \end{equation*}
 
-Script and calligraphic fonts from \texttt{mathrsfs}:
+Script and calligraphic fonts from \mintinline{latex}{mathrsfs}:
 \begin{equation*}
     \mathscr{F},
     \quad \mathscr{L},
@@ -107,16 +111,17 @@ Script and calligraphic fonts from \texttt{mathrsfs}:
 
 \subsection{Calculus and Differentials}
 
-Ordinary and partial derivatives using \texttt{diffcoeff}:
+Ordinary and partial derivatives using \mintinline{latex}{diffcoeff}:
 \begin{equation*}
     \dl f,
+    \quad \dif f,
     \quad \diff{f}{x},
     \quad \diff[2]{f}{x},
     \quad \diffp{f}{x},
     \quad \diffp{f}{{x}{y}}
 \end{equation*}
 
-Absolute value and norm from \texttt{commath}:
+Absolute value and norm from \mintinline{latex}{commath}:
 \begin{equation*}
     \abs{x},
     \quad \norm{x},
@@ -127,22 +132,22 @@ Absolute value and norm from \texttt{commath}:
 \subsection{Equations}
 \label{subsec:equations}
 
-An equation with a label and number, demonstrating \texttt{amsmath}: \cref{subsec:equations}
+An equation with a label and number, demonstrating \mintinline{latex}{amsmath}: \cref{subsec:equations}
 \begin{equation}\label{eq:euler}
     e^{i\pi} + 1 = 0
 \end{equation}
 
-The custom \texttt{inequality} environment assigns a label like an equation:
+The custom \mintinline{latex}{inequality} environment assigns a label like an equation:
 \begin{inequality}\label{ineq:example}
     n^2 \geq n \quad \text{for all } n \geq 1
 \end{inequality}
 
-\cref{eq:euler,ineq:example}. Equations, partially to demonstrate \texttt{glossaries\-/extra}:
+\cref{eq:euler,ineq:example}. Equations, partially to demonstrate \mintinline{latex}{glossaries-extra}:
 \begin{equation*}
     E = m\gls{c}^2
 \end{equation*}
 
-A piecewise\-/defined function using \texttt{cif} and \texttt{cotherwise}:
+A piecewise\-/defined function using \mintinline{latex}{cif} and \mintinline{latex}{cotherwise}:
 \begin{equation*}
     f\dell{x} = \begin{cases}
         x^2 & \cif{x \geq 0} \\
@@ -150,14 +155,14 @@ A piecewise\-/defined function using \texttt{cif} and \texttt{cotherwise}:
     \end{cases}
 \end{equation*}
 
-We also use \texttt{mathclap} to fix spacing in subscripts:
+We also use \mintinline{latex}{mathclap} to fix spacing in subscripts:
 \begin{equation*}
     \sum_{1 \leq i < j \leq n} a_{ij}
     \qquad \text{vs} \qquad
     \sum_{\mathclap{1 \leq i < j \leq n}} a_{ij}
 \end{equation*}
 
-Quotient group notation using \texttt{faktor}:
+Quotient group notation using \mintinline{latex}{faktor}:
 \begin{equation*}
     \faktor{G}{N}, \quad \faktor{\ZZ}{n\ZZ}
 \end{equation*}
@@ -166,23 +171,37 @@ Quotient group notation using \texttt{faktor}:
 
 Logical symbols: $\forall$, $\exists$, $\nexists$, $\Rightarrow$, $\neg$, $\land$, $\lor$.
 
-Negated relations from \texttt{centernot}:
+Negated relations from \mintinline{latex}{centernot}:
 \begin{equation*}
-    \napprox, \quad \nequiv, \quad \nperp, \quad \npropto, \quad
-    \nsubset, \quad \nsupset, \quad \nsubsetneq, \quad \nsupsetneq, \quad
-    \nmodels, \quad \ndashv
+    \napprox,
+    \quad \nequiv,
+    \quad \nperp,
+    \quad \npropto,
+    \quad \nsubset,
+    \quad \nsupset,
+    \quad \nsubsetneq,
+    \quad \nsupsetneq,
+    \quad \nmodels,
+    \quad \ndashv
 \end{equation*}
 
 \subsection{Bitwise and Shift Operators}
 
 Bitwise and shift operators for use in algorithms or hardware descriptions:
 \begin{equation*}
-    a \band b, \quad a \bor b, \quad a \sll b, \quad a \sgg b, \quad a \ull b, \quad a \ugg b
+    a \band b,
+    \quad a \bor b,
+\end{equation*}
+\begin{equation*}
+    a \sll b = a \ll b,
+    \quad a \sgg b = a \gg b,
+    \quad a \ull b = a \lll b,
+    \quad a \ugg b = a \ggg b
 \end{equation*}
 
 \subsection{Unicode Shortcuts}
 
-The \texttt{newunicodechar} package allows direct use of Unicode symbols in math mode:
+The \mintinline{latex}{newunicodechar} package allows direct use of Unicode symbols in math mode:
 \begin{equation*}
     ≈,\ ∆,\ ≥,\ ∞,\ ∫,\ ≤,\ ≠,\ Ω,\ ∂,\ π,\ ∏,\ ∑,\ ∨,\ ∧
 \end{equation*}
@@ -197,21 +216,21 @@ instead of
     ≤ \quad ≥
 \end{equation*}
 
-you can uncomment those corresponding lines in the \mintinline{latex}{packages.sty}.
+you can uncomment the corresponding lines in the \mintinline{latex}{packages.sty}.
 
 \subsection{Miscellaneous}
 
-Bold vector notation using \texttt{bm}:
+Bold vector notation using \mintinline{latex}{bm}:
 \begin{equation*}
     \bm{F} = m \bm{a}
 \end{equation*}
 
-Cancellation of terms using \texttt{cancel}:
+Cancellation of terms using \mintinline{latex}{cancel}:
 \begin{equation*}
     \frac{\cancel{a} \cdot b}{\cancel{a}} = b
 \end{equation*}
 
-The \texttt{nicefrac} package provides better inline fractions: $\nicefrac{a}{b}$ is cleaner than $\frac{a}{b}$ or $a/b$.
+The \mintinline{latex}{nicefrac} package provides better inline fractions: $\nicefrac{a}{b}$ is cleaner than $\frac{a}{b}$ or $a/b$.
 
 \subsection{Probability Distributions}
 
@@ -232,7 +251,7 @@ Common probability distributions in aligned notation:
 
 \subsection{Theorem Environments}
 
-The template declares a wide range of theorem-like environments using \texttt{thmtools} and \texttt{amsthm}. All \--- except remarks (arbitrarily) \--- are numbered within sections.
+The template declares a wide range of theorem-like environments using \mintinline{latex}{thmtools} and \mintinline{latex}{amsthm}. All \--- except remarks (arbitrarily) \--- are numbered within sections.
 
 \begin{theorem}[Extreme Value Theorem]
     Let $f$ be a continuous function on a closed interval $[a,b]$. Then $f$ attains both its maximum and minimum on $[a,b]$.

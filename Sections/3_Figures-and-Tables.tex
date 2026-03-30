@@ -1,17 +1,17 @@
 \section{Figures and Tables}
 
-In this section, we demonstrate how to include and format both figures and tables using \LaTeX. Note that by convention, table captions are placed above the table, while figure captions are placed below the image. This reflects common typesetting standards to help readers interpret the content before or after viewing it. Examples are shown in \cref{fig:theway,fig:subfigures,fig:sidebyside,fig:pgfplot,fig:pulses,tab:standard,tab:siunitx,tab:budget}.
+In this section, we demonstrate how to include and format both figures and tables using \LaTeX. Note that by convention, table captions are placed above the table, while figure captions are placed below the image. This reflects common typesetting standards to help readers interpret the content before or after viewing it. Examples are shown in \cref{fig:theway,fig:subfigures,fig:sidebyside,fig:pgfplot,fig:pulses,tab:standard,tab:budget}.
 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{the_way.jpg}
-    \caption{A single image example using \texttt{graphicx}.}
+    \caption{A single image example using \mintinline{latex}{graphicx}.}
     \label{fig:theway}
 \end{figure}
 
 \begin{figure}
     \centering
-    \caption{A 2x2 grid of subfigures using the \texttt{subcaption} package.}
+    \caption{A 2x2 grid of subfigures using the \mintinline{latex}{subcaption} package.}
     \label{fig:subfigures}
     \begin{subfigure}{0.45\textwidth}
         \centering
@@ -38,41 +38,28 @@ In this section, we demonstrate how to include and format both figures and table
     \end{subfigure}
 \end{figure}
 
-The \texttt{floatrow} package allows placing two floats side by side with independent captions:
+The \mintinline{latex}{floatrow} package allows placing two floats side by side with independent captions:
 
 \begin{figure}
-    \caption{Left image using \texttt{floatrow}.}
+    \caption{Left image using \mintinline{latex}{floatrow}.}
     \label{fig:sidebyside}
     \begin{floatrow}
-        \ffigbox[\FBwidth]{%
-            \caption{Left subfloat.}%
-        }{%
-            \includegraphics[width=0.45\textwidth]{the_way.jpg}%
+        \ffigbox[\FBwidth]{\caption{Left subfloat.}}{
+            \includegraphics[width=0.45\textwidth]{the_way.jpg}
         }
-        \ffigbox[\FBwidth]{%
-            \caption{Right subfloat.}%
-        }{%
-            \includegraphics[width=0.45\textwidth]{the_way.jpg}%
+        \ffigbox[\FBwidth]{\caption{Right subfloat.}}{
+            \includegraphics[width=0.45\textwidth]{the_way.jpg}
         }
     \end{floatrow}
 \end{figure}
 
-The \texttt{adjustbox} package allows constraining image dimensions:
-\begin{figure}
-    \centering
-    \includegraphics[max width=0.5\textwidth, max height=4cm]{the_way.jpg}
-    \caption{Image constrained with \texttt{adjustbox} \texttt{max width} and \texttt{max height}.}
-\end{figure}
-
-A simple plot using \texttt{pgfplots} and drawing manually using \mintinline{latex}{tikzpicture}:
+A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \mintinline{latex}{tikzpicture}:
 
 \begin{figure}
     \centering
     \begin{tikzpicture}
         \begin{axis}[
             height=6.5cm,
-            width=\linewidth,
-            hide obscured x ticks=false,
             xlabel={$r$},
             xlabel style={at={(axis description cs)}},
             xmin=-4,
@@ -83,13 +70,12 @@ A simple plot using \texttt{pgfplots} and drawing manually using \mintinline{lat
             ymax=0.8,
             ytick={0.5},
             yticklabels={$\nicefrac{1}{2}$},
-            samples=500,
-            axis lines=center,
+            axis lines=middle,
         ]
-            \addplot[blue,thick] {0.5 * exp(-abs(x + 2))};
+            \addplot+{0.5 * exp(-abs(x + 2))};
             \addlegendentry{$f_{r|s}\dell{r|s_0} = \frac{1}{2} e^{-\abs{r + \sqrt{E}}}$}
              
-            \addplot[red,thick] {0.5 * exp(-abs(x - 2))};
+            \addplot+{0.5 * exp(-abs(x - 2))};
             \addlegendentry{$f_{r|s}\dell{r|s_1} = \frac{1}{2} e^{-\abs{r - \sqrt{E}}}$}
         \end{axis}
     \end{tikzpicture}
@@ -165,30 +151,13 @@ A simple plot using \texttt{pgfplots} and drawing manually using \mintinline{lat
         Oranges & 2 kg & 3.20 \\
         \bottomrule
     \end{tblr}
-    \caption{Example of a standard table using \texttt{tabularray} and \texttt{booktabs}.}
+    \caption{Example of a standard table using \mintinline{latex}{tabularray} and \mintinline{latex}{booktabs}.}
     \label{tab:standard}
 \end{table}
 
-The \texttt{siunitx} package provides consistent number and unit formatting. The \texttt{S} column type aligns numbers on the decimal point:
+The \mintinline{latex}{siunitx} package provides consistent number and unit formatting.
 
-\begin{table}
-    \centering
-    \begin{tblr}{colspec={lcc}}
-        \toprule
-        \thead{Component} & \thead{Value} & \thead{Unit} \\
-        \midrule
-        Resistance        & \num{4.70}    & \unit{\kilo\ohm} \\
-        Capacitance       & \num{100.00}  & \unit{\micro\farad} \\
-        Voltage           & \num{3.30}    & \unit{\volt} \\
-        Frequency         & \num{2400.00} & \unit{\mega\hertz} \\
-        Mass              & \num{0.25}    & \unit{\kilo\gram} \\
-        \bottomrule
-    \end{tblr}
-    \caption{Table with \texttt{siunitx} unit and number formatting.}
-    \label{tab:siunitx}
-\end{table}
-
-\texttt{\textbackslash footnotenonumber}\footnote{Numbered.} adds an unnumbered footnote\footnotenonumber{Unnumbered.}. The \texttt{multirow} and \texttt{multicol} packages allow spanning rows and columns:
+\mintinline{latex}{\footnotenonumber}\footnote{Numbered.} adds an unnumbered footnote\footnotenonumber{Unnumbered.}. The \mintinline{latex}{multirow} and \mintinline{latex}{multicol} packages allow spanning rows and columns:
 
 \begin{table}
     \centering
@@ -201,7 +170,7 @@ The \texttt{siunitx} package provides consistent number and unit formatting. The
         Other & 7 & 8 & 9 \\
         \bottomrule
     \end{tblr}
-    \caption{Row spanning using \texttt{tabularray}'s \texttt{\textbackslash SetCell}.}
+    \caption{Row spanning using \mintinline{latex}{tabularray}'s \mintinline{latex}{\SetCell}.}
 \end{table}
 
 \begin{landscape}
@@ -209,7 +178,7 @@ The \texttt{siunitx} package provides consistent number and unit formatting. The
     \renewcommand{\arraystretch}{1.19}
     \scriptsize
     \begin{longtable}{ | l *{13}{| r} | }
-        \caption{Budget \texttt{longtable} example.} \label{tab:budget} \\
+        \caption{Budget \mintinline{latex}{longtable} example.} \label{tab:budget} \\
         \hline
         & \multicolumn{4}{c|}{\textbf{YEAR 1}} & \multicolumn{4}{c|}{\textbf{YEAR 2}} & \multicolumn{4}{c|}{\textbf{YEAR 3}} & \\
         \hline

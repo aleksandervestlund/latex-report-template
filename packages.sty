@@ -326,7 +326,21 @@
 \RequirePackage[nottoc]{tocbibind}
 
 \RequirePackage{pgfplots}
-\pgfplotsset{compat=1.18}
+\pgfplotsset{
+  compat=newest,
+  cycle list name=color list,
+  every axis plot/.append style={
+    axis lines=middle,
+    black,
+    line join=round,
+    thick,
+  },
+  hide obscured x ticks=false,
+  major tick length=5pt,
+  width=\linewidth,
+  samples=101,
+  scale=1.0,
+}
 
 \newcommand{\footnotenonumber}[1]{{\def\thempfn{}\footnotetext{#1}}}
 
