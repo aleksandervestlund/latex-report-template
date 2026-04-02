@@ -3,10 +3,10 @@ This section demonstrates various mathematical features supported by the templat
 
 The \gls{gcd} and \gls{lcm} are fundamental concepts in number theory. The \gls{lcm} of two numbers is the smallest number that is a multiple of both.
 \begin{equation*}
-    \gcd\p*{a, b} = \mathit{\glsxtrshort{gcd}}\p*{a, b}
+    \gcd\del{a, b} = \mathit{\glsxtrshort{gcd}}\del{a, b}
 \end{equation*}
 \begin{equation*}
-    \lcm\p*{a, b} = \mathit{\glsxtrshort{lcm}}\p*{a, b}
+    \lcm\del{a, b} = \mathit{\glsxtrshort{lcm}}\del{a, b}
 \end{equation*}
 
 We begin with examples of custom\-/defined relation symbols:
@@ -23,20 +23,20 @@ Superscript shorthands for inverse and transpose:
 \begin{equation*}
     A\inv,
     \quad A\transpose,
-    \quad A\inv\transpose
+    \quad {A\inv}\transpose
 \end{equation*}
 
 The \mintinline{latex}{defn} command is used to introduce a \defn{defined term} in bold italic.
-The \mintinline{latex}{amortized} command denotes amortized cost: $\amortized{T}\p*{n}$.
+The \mintinline{latex}{amortized} command denotes amortized cost: $\amortized{T}\del{n}$.
 
 The number of permutations of $r$ items from a set of $n$ elements is given by:
 \begin{equation*}
-    \perm{n}{r} = \frac{n!}{\p*{n - r}!}
+    \perm{n}{r} = \frac{n!}{\del{n - r}!}
 \end{equation*}
 
 The number of combinations (binomial coefficient) is:
 \begin{equation*}
-    \choose{n}{r} = \comb{n}{r} = \frac{n!}{r!\p*{n - r}!}
+    \choose{n}{r} = \comb{n}{r} = \frac{n!}{r!\del{n - r}!}
 \end{equation*}
 
 We can also use floor and ceiling functions:
@@ -46,9 +46,9 @@ We can also use floor and ceiling functions:
 
 The \mintinline{latex}{dell}, \mintinline{latex}{dellr}, and \mintinline{latex}{delr} commands add tight spacing around \mintinline{latex}{del} delimiters:
 \begin{equation*}
-    f\p*{x},
-    \quad f\p*{x},
-    \quad f\p*{x}
+    f\del{x},
+    \quad f\del{x},
+    \quad f\del{x}
 \end{equation*}
 
 The \mintinline{latex}{narrowarray} and \mintinline{latex}{normalarray} commands adjust column spacing in arrays:
@@ -64,16 +64,16 @@ The \mintinline{latex}{narrowarray} and \mintinline{latex}{normalarray} commands
 
 Declared math operators:
 \begin{equation*}
-    \Adj\p*{A},
-    \quad \logtwo\p*{n},
-    \quad \logten\p*{n},
-    \quad \sinc\p*{\omega},
+    \Adj\del{A},
+    \quad \logtwo\del{n},
+    \quad \logten\del{n},
+    \quad \sinc\del{\omega},
     \quad \polylog
 \end{equation*}
 
 Statistical operators:
 \begin{equation*}
-    \Cov\p*{X, Y} = \expect{XY} - \expect{X}\expect{Y}
+    \Cov\del{X, Y} = \expect{XY} - \expect{X}\expect{Y}
 \end{equation*}
 
 The \mintinline{latex}{getsr} command renders a random\-/sampling arrow (if you find a way to create it without using \mintinline{latex}{tikz}, let me know):
@@ -88,7 +88,7 @@ Expected value and variance:
     \expect{X} = \sum_{x \in \mathcal{X}} x \cdot \prob{X = x}
 \end{equation*}
 \begin{equation*}
-    \Var\p*{X} = \sigmasq\p*{X} = \expect{\p*{X - \expect{X}}^2} = \expectsq{X} - \expect{X}^2
+    \Var\del{X} = \sigmasq\del{X} = \expect{\dell{X - \expect{X}}^2} = \expectsq{X} - \expect{X}^2
 \end{equation*}
 
 \subsection{Sets, Transforms, and Notation}
@@ -149,7 +149,7 @@ The custom \mintinline{latex}{inequality} environment assigns a label like an eq
 
 A piecewise\-/defined function using \mintinline{latex}{cif} and \mintinline{latex}{cotherwise}:
 \begin{equation*}
-    f\p*{x} = \begin{cases}
+    f\del{x} = \begin{cases}
         x^2 & \cif{x \geq 0} \\
         -x  & \cotherwise
     \end{cases}
@@ -286,13 +286,13 @@ The template declares a wide range of theorem-like environments using \mintinlin
     We assume throughout that all graphs are simple and undirected.
 \end{assumption}
 \begin{observation}
-    The degree sequence of a tree on $n$ vertices sums to $2\p*{n - 1}$.
+    The degree sequence of a tree on $n$ vertices sums to $2\del{n - 1}$.
 \end{observation}
 \begin{fact}
     Every finite group of prime order is cyclic.
 \end{fact}
 \begin{case}
-    Suppose $x > 0$. Then $f\p*{x} = x^2$.
+    Suppose $x > 0$. Then $f\del{x} = x^2$.
 \end{case}
 \begin{exercise}
     Prove that $\sqrt{2}$ is irrational.

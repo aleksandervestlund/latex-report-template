@@ -190,6 +190,7 @@
 \setlength{\savearraycolsep}{\arraycolsep}
 \newcommand{\narrowarray}[1]{\setlength{\arraycolsep}{#1\arraycolsep}}
 \newcommand{\normalarray}{\setlength{\arraycolsep}{\savearraycolsep}}
+% \narrowarray{0.5}
 
 \newcommand{\defeq}{\overset{\mathrm{def}}{=}}
 \newcommand{\meq}{\overset{\mathrm{m}}{=}}
@@ -197,12 +198,17 @@
 \newcommand{\hateq}{\mathrel{\hat{=}}}
 \newcommand{\whateq}{\mathrel{\widehat{=}}}
 
-\let\c\relax
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
-\DeclarePairedDelimiter{\p}{(}{)}
-\DeclarePairedDelimiter{\s}{[}{]}
-\DeclarePairedDelimiter{\c}{\{}{\}}
+\DeclarePairedDelimiter{\parenthesis}{(}{)}
+\DeclarePairedDelimiter{\squarebracket}{[}{]}
+\DeclarePairedDelimiter{\curlybracket}{\{}{\}}
+\renewcommand{\del}[1]{\parenthesis*{#1}}
+\newcommand{\dell}[1]{\!\del{#1}}
+\newcommand{\dellr}[1]{\dell{#1}\!}
+\newcommand{\delr}[1]{\del{#1}\!}
+\renewcommand{\sbr}[1]{\squarebracket*{#1}}
+\renewcommand{\cbr}[1]{\curlybracket*{#1}}
 
 \DeclareMathOperator{\Adj}{Adj}
 \DeclareMathOperator{\Cov}{Cov}
@@ -213,8 +219,8 @@
 \DeclareMathOperator{\Var}{Var}
 
 \newcommand{\compl}{{}^\mathsf{c}\!}
-\newcommand{\inv}{{}^{-1}}
-\newcommand{\transpose}{{}^{\mathsf{T}}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\transpose}{^\top}
 \newcommand{\sigmasq}{\sigma^2}
 
 \newcommand{\band}{\mathbin{\&}}
@@ -229,11 +235,11 @@
 \newcommand{\comb}[2]{{}^{#1}C_{#2}}
 \renewcommand{\choose}[2]{\dbinom{#1}{#2}}
 \newcommand{\defn}[1]{\textit{\textbf{\boldmath #1}}}
-\newcommand{\expectsq}[1]{\mathbb{E}^2\p*{#1}}
-\newcommand{\fourier}[1]{\mathcal{F}\p*{#1}}
-\newcommand{\fourierinv}[1]{\mathcal{F}\inv\p*{#1}}
-\newcommand{\laplace}[1]{\mathscr{L}\p*{#1}}
-\newcommand{\laplaceinv}[1]{\mathscr{L}\inv\p*{#1}}
+\newcommand{\expectsq}[1]{\mathbb{E}^2\del{#1}}
+\newcommand{\fourier}[1]{\mathcal{F}\del{#1}}
+\newcommand{\fourierinv}[1]{\mathcal{F}\inv\del{#1}}
+\newcommand{\laplace}[1]{\mathscr{L}\del{#1}}
+\newcommand{\laplaceinv}[1]{\mathscr{L}\inv\del{#1}}
 
 % If you find a replacement, let me know
 \newcommand{\getsr}{
@@ -249,17 +255,19 @@
   }
 }
 
-\newcommand{\binomial}[2]{\mathrm{Bin}\p*{#1, #2}} % n, p
+\newcommand{\binomial}[2]{\mathrm{Bin}\del{#1, #2}} % n, p
 \newcommand{\chisq}[1]{\chi^2_{#1}} % nu
-\newcommand{\exponential}[1]{\mathrm{Exp}\p*{#1}} % lambda
-\newcommand{\hypergeometric}[3]{\mathrm{h}\p*{#1, #2, #3}} % N, k, n
-\newcommand{\gammadist}[2]{\mathrm{Ga}\p*{#1, #2}} % alpha, beta
-\newcommand{\gaussian}[2]{\mathcal{N}\p*{#1, #2}} % mu, sigma^2
-\newcommand{\geometric}[1]{\mathrm{Geom}\p*{#1}} % p
-\newcommand{\negativebinomial}[2]{\mathrm{NegBin}\p*{#1, #2}} % k, p
-\newcommand{\poisson}[1]{\mathrm{Pois}\p*{#1}} % mu=lambda*t
+\newcommand{\exponential}[1]{\mathrm{Exp}\del{#1}} % lambda
+\newcommand{\hypergeometric}[3]{\mathrm{h}\del{#1, #2, #3}} % N, k, n
+\newcommand{\gammadist}[2]{\mathrm{Ga}\del{#1, #2}} % alpha, beta
+\newcommand{\gaussian}[2]{\mathcal{N}\del{#1, #2}} % mu, sigma^2
+\newcommand{\geometric}[1]{\mathrm{Geom}\del{#1}} % p
+\newcommand{\negativebinomial}[2]{\mathrm{NegBin}\del{#1, #2}} % k, p
+\newcommand{\poisson}[1]{\mathrm{Pois}\del{#1}} % mu=lambda*t
 \newcommand{\studentt}[1]{t_{#1}} % nu
-\newcommand{\uniform}[2]{\mathrm{Unif}\p*{#1, #2}} % a, b
+\newcommand{\uniform}[2]{\mathrm{Unif}\del{#1, #2}} % a, b
+
+\allowdisplaybreaks
 
 \usepackage{centernot}
 \newcommand{\napprox}{\centernot\approx}
@@ -408,11 +416,11 @@
 \RequirePackage{minted}
 \setminted{
   autogobble=true,
+  baselinestretch=1,
   breaklines=true,
   mathescape,
   style=default,
 }
-\fvset{baselinestretch=1}
 
 \RequirePackage[most]{tcolorbox}
 \tcbset{
@@ -496,17 +504,24 @@
   sets,
 ]{cryptocode} % Must load after hyperref and before cleveref
 \let\AC\relax % Conflicts with glossaries-extra
-\renewcommand{\prob}[1]{\operatorname{\probname}\p*{#1}}
-\renewcommand{\expect}[1]{\operatorname{\expectationname}\p*{#1}}
+\renewcommand{\prob}[1]{\operatorname{\probname}\del{#1}}
+\renewcommand{\expect}[1]{\operatorname{\expectationname}\del{#1}}
 
-\newcommand*{\polylog}[1][\secpar]{\pcpolynomialstyle{polylog}\ifthenelse{\equal{#1}{}}{}{\p*{#1}}}
+\newcommand*{\polylog}[1][\secpar]{\pcpolynomialstyle{polylog}\ifthenelse{\equal{#1}{}}{}{\del{#1}}}
 
 \newcommand{\com}{\pcalgostyle{Com}}
 \newcommand{\extend}{\pcalgostyle{Extend}}
 \newcommand{\gen}{\pcalgostyle{Gen}}
 \newcommand{\keygen}{\pcalgostyle{KeyGen}}
+\newcommand{\len}{\pcalgostyle{len}}
 \newcommand{\seal}{\pcalgostyle{Seal}}
 \newcommand{\unseal}{\pcalgostyle{Unseal}}
+\newcommand{\ver}{\pcalgostyle{Ver}}
+
+\newcommand{\checksum}{\key[checksum]}
+\newcommand{\Bottom}{\key[Bottom]}
+\newcommand{\Stretch}{\key[Stretch]}
+\newcommand{\Top}{\key[Top]}
 
 % TODO: Switch to zref-clever when it supports Norwegian
 \RequirePackage[
@@ -683,6 +698,36 @@
   \numberwithin{procedure}{section}
 \fi
 \makeatother
+
+\RequirePackage{titlesec}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
+
+\titleformat{\paragraph}
+  {\normalfont\normalsize\bfseries}
+  {\theparagraph}
+  {1em}
+  {}
+\titleformat{\subparagraph}
+  {\normalfont\normalsize\bfseries}
+  {\thesubparagraph}
+  {1em}
+  {}
+\titlespacing*{\paragraph}
+  {0pt}
+  {3.25ex plus 1ex minus .2ex}
+  {1.5ex plus .2ex}
+\titlespacing*{\subparagraph}
+  {0pt}
+  {3.25ex plus 1ex minus .2ex}
+  {1.5ex plus .2ex}
+
+\let\oldparagraph\paragraph
+\let\oldsubparagraph\subparagraph
+\newcommand{\subsubsubsection}{\oldparagraph}
+\newcommand{\subsubsubsubsection}{\oldsubparagraph}
+\renewcommand{\paragraph}{\oldparagraph*}
+\renewcommand{\subparagraph}{\oldsubparagraph*}
 
 % ------------ Language -------------
 \addto{\captionsamerican}{
