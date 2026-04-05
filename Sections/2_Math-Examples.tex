@@ -54,10 +54,16 @@ The \mintinline{latex}{dell}, \mintinline{latex}{dellr}, and \mintinline{latex}{
 The \mintinline{latex}{narrowarray} and \mintinline{latex}{normalarray} commands adjust column spacing in arrays:
 \begin{equation*}
     \narrowarray{0.5}
-    \begin{pmatrix} a & b \\ c & d \end{pmatrix}
+    \begin{pmatrix}
+        a & b \\
+        c & d
+    \end{pmatrix}
     \normalarray
     \quad \text{vs} \quad
-    \begin{pmatrix} a & b \\ c & d \end{pmatrix}
+    \begin{pmatrix}
+        a & b \\
+        c & d
+    \end{pmatrix}
 \end{equation*}
 
 \subsection{Operators}
@@ -76,9 +82,9 @@ Statistical operators:
     \Cov\del{X, Y} = \expect{XY} - \expect{X}\expect{Y}
 \end{equation*}
 
-The \mintinline{latex}{getsr} command renders a random\-/sampling arrow (if you find a way to create it without using \mintinline{latex}{tikz}, let me know):
+The \mintinline{latex}{rgets} command renders a random\-/sampling arrow (if you find a way to create it without using \mintinline{latex}{tikz}, let me know):
 \begin{equation*}
-    k \getsr \bin^\secpar = k \sample \bin^\secpar
+    k \rgets \bin^\secpar = k \sample \bin^\secpar
 \end{equation*}
 
 \subsection{Expected Value and Variance}

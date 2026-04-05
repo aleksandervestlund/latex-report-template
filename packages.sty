@@ -23,6 +23,8 @@
   l2tabu,
   orthodox,
 ]{nag}
+\newcommand\hmmax{0}
+\newcommand\bmmax{0}
 \RequirePackage[main=]{babel}
 \RequirePackage[
   babel,
@@ -32,7 +34,6 @@
   stretch=10,
   tracking=true,
 ]{microtype}
-\RequirePackage{lmodern}
 \RequirePackage[
   a4paper,
   left=30mm,
@@ -44,26 +45,52 @@
   marginparwidth=20mm,
 ]{geometry}
 \RequirePackage[onehalfspacing]{setspace}
+\RequirePackage[
+  dvipsnames,
+  table,
+  xcdraw,
+]{xcolor}
+
+\newif\ifusenewpx
+\newif\ifusenewtx
+\newif\ifusepxortx
+
+% Enable newpx or newtx font:
+% \usenewpxtrue
+% \usenewtxtrue
+
+\ifusenewpx\usepxortxtrue\fi
+\ifusenewtx\usepxortxtrue\fi
+\ifusenewpx\ifusenewtx
+  \PackageError{packages}{Cannot enable both usenewpx and usenewtx}{}
+\fi\fi
 
 \RequirePackage{iftex}
-\ifPDFTeX % pdfLaTeX
+\ifPDFTeX
   \RequirePackage[utf8]{inputenc}
   \RequirePackage[T1]{fontenc}
   \RequirePackage{morewrites}
+  \ifusenewpx
+    \RequirePackage{newpxtext}
+  \else\ifusenewtx
+    \RequirePackage{newtxtext}
+  \else
+    \RequirePackage{lmodern}
+  \fi\fi
   \pdfgentounicode=1
   \microtypesetup{
     expansion=true,
     kerning=true,
     protrusion=true,
   }
-\else\ifLuaTeX % LuaLaTeX
+\else\ifLuaTeX
   \RequirePackage{fontspec}
   \microtypesetup{
     expansion=true,
     kerning=false,
     protrusion=false,
   }
-\else\ifXeTeX % XeLaTeX
+\else\ifXeTeX
   \RequirePackage{fontspec}
   \RequirePackage{morewrites}
   \microtypesetup{
@@ -121,11 +148,6 @@
   \clearpage
 }
 
-\RequirePackage[
-  dvipsnames,
-  table,
-  xcdraw,
-]{xcolor}
 \RequirePackage[obeyFinal]{todonotes}
 \pretocmd{\todo}{\PackageWarningNoLine{todonotes}{TODO (page \thepage)}}{}{}
 
@@ -149,6 +171,19 @@
 \RequirePackage{mathtools}
 \RequirePackage{nicefrac}
 \RequirePackage{thmtools}
+
+\ifusepxortx
+  \let\mathscr\relax
+  \ifusenewpx
+    \RequirePackage{newpxmath}
+  \else
+    \RequirePackage{newtxmath}
+  \fi
+  \let\laplace\relax
+  \WarningFilter{latexfont}{Size substitutions with differences}
+  \WarningFilter{latexfont}{Font shape `U/lasy}
+  \WarningFilter{latexfont}{Font shape `U/rsfs}
+\fi
 
 % Both English and Norwegian versions
 \declaretheorem[numberwithin=section]{
@@ -186,6 +221,7 @@
 \newcommand{\cif}[1]{\text{if $#1$}}
 \newcommand{\cotherwise}{\text{otherwise}}
 
+\allowdisplaybreaks
 \newlength{\savearraycolsep}
 \setlength{\savearraycolsep}{\arraycolsep}
 \newcommand{\narrowarray}[1]{\setlength{\arraycolsep}{#1\arraycolsep}}
@@ -200,28 +236,30 @@
 
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
-\DeclarePairedDelimiter{\parenthesis}{(}{)}
-\DeclarePairedDelimiter{\squarebracket}{[}{]}
-\DeclarePairedDelimiter{\curlybracket}{\{}{\}}
-\renewcommand{\del}[1]{\parenthesis*{#1}}
+\DeclarePairedDelimiter{\paren}{(}{)}
+\DeclarePairedDelimiter{\bracket}{[}{]}
+\DeclarePairedDelimiter{\curly}{\{}{\}}
+\renewcommand{\del}[1]{\paren*{#1}}
 \newcommand{\dell}[1]{\!\del{#1}}
 \newcommand{\dellr}[1]{\dell{#1}\!}
 \newcommand{\delr}[1]{\del{#1}\!}
-\renewcommand{\sbr}[1]{\squarebracket*{#1}}
-\renewcommand{\cbr}[1]{\curlybracket*{#1}}
+\renewcommand{\sbr}[1]{\bracket*{#1}}
+\renewcommand{\cbr}[1]{\curly*{#1}}
 
 \DeclareMathOperator{\Adj}{Adj}
 \DeclareMathOperator{\Cov}{Cov}
 \DeclareMathOperator{\lcm}{lcm}
 \DeclareMathOperator{\logtwo}{log_2}
 \DeclareMathOperator{\logten}{log_{10}}
+\DeclareMathOperator{\ord}{ord}
 \DeclareMathOperator{\sinc}{sinc}
 \DeclareMathOperator{\Var}{Var}
 
 \newcommand{\compl}{{}^\mathsf{c}\!}
+\newcommand{\sq}{^2}
 \newcommand{\inv}{^{-1}}
 \newcommand{\transpose}{^\top}
-\newcommand{\sigmasq}{\sigma^2}
+\newcommand{\sigmasq}{\sigma\sq}
 
 \newcommand{\band}{\mathbin{\&}}
 \newcommand{\bor}{\mid}
@@ -230,19 +268,23 @@
 \newcommand{\sll}{\overset{s}{\ll}} % Or just \ll
 \newcommand{\ull}{\overset{u}{\ll}} % Or \lll
 
-\newcommand{\amortized}[1]{\widehat{#1}}
+\newcommand{\func}[3]{#1 \colon #2 \to #3}
+
 \newcommand{\perm}[2]{{}^{#1}P_{#2}}
 \newcommand{\comb}[2]{{}^{#1}C_{#2}}
 \renewcommand{\choose}[2]{\dbinom{#1}{#2}}
+
+\newcommand{\amortized}[1]{\widehat{#1}}
 \newcommand{\defn}[1]{\textit{\textbf{\boldmath #1}}}
-\newcommand{\expectsq}[1]{\mathbb{E}^2\del{#1}}
+\newcommand{\expectsq}[1]{\mathbb{E}\sq\del{#1}}
 \newcommand{\fourier}[1]{\mathcal{F}\del{#1}}
 \newcommand{\fourierinv}[1]{\mathcal{F}\inv\del{#1}}
+\newcommand{\indicator}[1]{\mathbb{I}\del{#1}}
 \newcommand{\laplace}[1]{\mathscr{L}\del{#1}}
 \newcommand{\laplaceinv}[1]{\mathscr{L}\inv\del{#1}}
 
 % If you find a replacement, let me know
-\newcommand{\getsr}{
+\newcommand{\rgets}{
   \mathrel{
     \tikz[
       baseline=-0.45ex,
@@ -250,13 +292,14 @@
       outer sep=0pt,
     ]{
       \node at (0, 0) {$\leftarrow$};
-      \node at (0.05, 0.15) {$\scriptscriptstyle R$};
+      \node at (0.05, 0.15) {\tiny R};
     }
   }
 }
 
+\newcommand{\bernoulli}[1]{\mathrm{Bernoulli}\del{#1}} % p
 \newcommand{\binomial}[2]{\mathrm{Bin}\del{#1, #2}} % n, p
-\newcommand{\chisq}[1]{\chi^2_{#1}} % nu
+\newcommand{\chisq}[1]{\chi\sq_{#1}} % nu
 \newcommand{\exponential}[1]{\mathrm{Exp}\del{#1}} % lambda
 \newcommand{\hypergeometric}[3]{\mathrm{h}\del{#1, #2, #3}} % N, k, n
 \newcommand{\gammadist}[2]{\mathrm{Ga}\del{#1, #2}} % alpha, beta
@@ -267,25 +310,28 @@
 \newcommand{\studentt}[1]{t_{#1}} % nu
 \newcommand{\uniform}[2]{\mathrm{Unif}\del{#1, #2}} % a, b
 
-\allowdisplaybreaks
-
 \usepackage{centernot}
-\newcommand{\napprox}{\centernot\approx}
 \newcommand{\ndashv}{\centernot\dashv}
-\newcommand{\nequiv}{\centernot\equiv}
 \newcommand{\nmodels}{\centernot\models}
 \newcommand{\nperp}{\centernot\perp}
 \newcommand{\npropto}{\centernot\propto}
-\newcommand{\nsubset}{\centernot\subset}
 \newcommand{\nsubsetneq}{\centernot\subsetneq}
-\newcommand{\nsupset}{\centernot\supset}
 \newcommand{\nsupsetneq}{\centernot\supsetneq}
+
+\ifusepxortx\else % From unicode-math
+  \newcommand{\napprox}{\centernot\approx}
+  \newcommand{\nequiv}{\centernot\equiv}
+  \newcommand{\nsubset}{\centernot\subset}
+  \newcommand{\nsupset}{\centernot\supset}
+\fi
 
 % Free to choose yourself:
 \renewcommand{\ge}{\geqslant}
 \renewcommand{\geq}{\geqslant}
 \renewcommand{\le}{\leqslant}
 \renewcommand{\leq}{\leqslant}
+% \renewcommand{\leqslant}{\leq}
+% \renewcommand{\geqslant}{\geq}
 
 \RequirePackage{newunicodechar}
 \newunicodechar{≈}{\approx}
@@ -378,7 +424,7 @@
 \renewcommand{\theadfont}{\bfseries}
 
 \RequirePackage{multicol}
-\setlength\multicolsep{0pt}
+\setlength{\multicolsep}{0pt}
 
 \newcommand{\HRule}{
   \rule{\linewidth}{0.5mm}
@@ -509,19 +555,29 @@
 
 \newcommand*{\polylog}[1][\secpar]{\pcpolynomialstyle{polylog}\ifthenelse{\equal{#1}{}}{}{\del{#1}}}
 
-\newcommand{\com}{\pcalgostyle{Com}}
+\newcommand{\commit}{\pcalgostyle{Com}}
+\newcommand{\cpa}{\pcalgostyle{CPA}}
 \newcommand{\extend}{\pcalgostyle{Extend}}
-\newcommand{\gen}{\pcalgostyle{Gen}}
-\newcommand{\keygen}{\pcalgostyle{KeyGen}}
+\newcommand{\funs}{\pcalgostyle{Funs}}
 \newcommand{\len}{\pcalgostyle{len}}
+\newcommand{\lwe}{\pcalgostyle{LWE}}
 \newcommand{\seal}{\pcalgostyle{Seal}}
 \newcommand{\unseal}{\pcalgostyle{Unseal}}
-\newcommand{\ver}{\pcalgostyle{Ver}}
+\renewcommand{\verify}{\pcalgostyle{Ver}}
+
+\newcommand{\gen}{\pcalgostyle{Gen}}
+\newcommand{\keygen}{\pcalgostyle{Key}\gen}
+
+\newcommand{\cpaadv}[2]{\cpa\pcadvantagename\sbr{#1, #2}} % adv, func
+\newcommand{\prfadv}[2]{\prf\pcadvantagename\sbr{#1, #2}} % adv, func
+\newcommand{\prpadv}[2]{\prp\pcadvantagename\sbr{#1, #2}} % adv, func
+
+\newcommand{\gf}[1]{\pcalgostyle{GF}\sbr{#1}}
 
 \newcommand{\checksum}{\key[checksum]}
-\newcommand{\Bottom}{\key[Bottom]}
-\newcommand{\Stretch}{\key[Stretch]}
-\newcommand{\Top}{\key[Top]}
+\newcommand{\com}{\key[com]}
+\newcommand{\ct}{\key[ct]}
+\newcommand{\pt}{\key[pt]}
 
 % TODO: Switch to zref-clever when it supports Norwegian
 \RequirePackage[
@@ -706,12 +762,12 @@
 \titleformat{\paragraph}
   {\normalfont\normalsize\bfseries}
   {\theparagraph}
-  {1em}
+  {\parskip}
   {}
 \titleformat{\subparagraph}
   {\normalfont\normalsize\bfseries}
   {\thesubparagraph}
-  {1em}
+  {\parskip}
   {}
 \titlespacing*{\paragraph}
   {0pt}
