@@ -82,9 +82,9 @@ Statistical operators:
     \Cov\del{X, Y} = \expect{XY} - \expect{X}\expect{Y}
 \end{equation*}
 
-The \mintinline{latex}{rgets} command renders a random\-/sampling arrow (if you find a way to create it without using \mintinline{latex}{tikz}, let me know):
+The \mintinline{latex}{rgets}/\mintinline{latex}{sgets} commands render a random\-/sampling arrow (if you find a way to create it without using \mintinline{latex}{tikz}, let me know):
 \begin{equation*}
-    k \rgets \bin^\secpar = k \sample \bin^\secpar
+    k \rgets \bin^\secpar = k \xleftarrow{R} \bin^\secpar = k \sgets \bin^\secpar = k \sample \bin^\secpar
 \end{equation*}
 
 \subsection{Expected Value and Variance}
@@ -148,7 +148,12 @@ The custom \mintinline{latex}{inequality} environment assigns a label like an eq
     n^2 \geq n \quad \text{for all } n \geq 1
 \end{inequality}
 
-\cref{eq:euler,ineq:example}. Equations, partially to demonstrate the package \mintinline{latex}{glossaries-extra}:
+The custom \mintinline{latex}{invariant} environment also assigns a label like an equation:
+\begin{invariant}\label{inv:example}
+    n^2 \geq n \quad \text{for all } n \geq 1
+\end{invariant}
+
+\cref{eq:euler,ineq:example,inv:example}. Equations, partially to demonstrate the package \mintinline{latex}{glossaries-extra}:
 \begin{equation*}
     E = m\gls{c}^2
 \end{equation*}
@@ -252,7 +257,7 @@ Common probability distributions in aligned notation:
 
 \subsection{Theorem Environments}
 
-The template declares a wide range of theorem-like environments using \mintinline{latex}{thmtools} and \mintinline{latex}{amsthm}. All \--- except remarks (arbitrarily) \--- are numbered within sections.
+The template declares a wide range of theorem-like environments using \mintinline{latex}{thmtools} and \mintinline{latex}{amsthm}.
 
 \begin{theorem}[Extreme Value Theorem]
     Let $f$ be a continuous function on a closed interval $[a,b]$. Then $f$ attains both its maximum and minimum on $[a,b]$.
@@ -282,12 +287,6 @@ The template declares a wide range of theorem-like environments using \mintinlin
 \begin{definition}
     A \defn{prime number} is a natural number greater than $1$ with no positive divisors other than $1$ and itself.
 \end{definition}
-\begin{example}
-    The numbers $2, 3, 5, 7, 11$ are all prime.
-\end{example}
-\begin{remark}
-    Note that $1$ is not considered a prime number by convention.
-\end{remark}
 \begin{assumption}
     We assume throughout that all graphs are simple and undirected.
 \end{assumption}
@@ -297,24 +296,21 @@ The template declares a wide range of theorem-like environments using \mintinlin
 \begin{fact}
     Every finite group of prime order is cyclic.
 \end{fact}
-\begin{case}
-    Suppose $x > 0$. Then $f\del{x} = x^2$.
-\end{case}
-\begin{exercise}
-    Prove that $\sqrt{2}$ is irrational.
-\end{exercise}
-\begin{problem}
-    Find all $x \in \RR$ such that $x^2 = -1$.
-\end{problem}
-\begin{invariant}
-    The quantity $E = \frac{1}{2}mv^2 + mgh$ is conserved throughout the motion.
-\end{invariant}
 \begin{property}
     The identity element of a group is unique.
 \end{property}
 \begin{principle}
     By the pigeonhole principle, if $n+1$ items are placed in $n$ containers, at least one container holds more than one item.
 \end{principle}
-\begin{step}
-    Reduce the problem to a simpler subproblem by induction.
-\end{step}
+\begin{example}
+    The numbers $2, 3, 5, 7, 11$ are all prime.
+\end{example}
+\begin{exercise}
+    Prove that $\sqrt{2}$ is irrational.
+\end{exercise}
+\begin{problem}
+    Find all $x \in \RR$ such that $x^2 = -1$.
+\end{problem}
+\begin{remark}
+    Note that $1$ is not considered a prime number by convention.
+\end{remark}

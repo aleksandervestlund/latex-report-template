@@ -103,6 +103,7 @@
   }
 \fi\fi\fi
 
+\RequirePackage{anyfontsize}
 \setlength{\parskip}{0.8em}
 \sloppy
 
@@ -182,32 +183,29 @@
   \else
     \RequirePackage{newtxmath}
   \fi
-  \WarningFilter{latexfont}{Font shape `U/lasy}
-  \WarningFilter{latexfont}{Font shape `U/rsfs}
-  \WarningFilter{latexfont}{Size substitutions with differences}
 \fi
 
 % Both English and Norwegian versions
-\declaretheorem[numberwithin=section]{
+\declaretheorem[numberwithin=section]{theorem}
+\declaretheorem[sibling=theorem]{
   assumption,antagelse,
-  case,tilfelle,
   claim,påstand,
   corollary,korollar,
   definition,definisjon,
-  example,eksempel,
-  exercise,oppgave,
   fact,faktum,
-  invariant,
   lemma,
   observation,observasjon,
   principle,prinsipp,
   property,egenskap,
   proposition,forslag,
-  problem,
-  step,trinn,
-  theorem,teorem % Cannot have trailing comma
+  teorem % Cannot have trailing comma
 }
-\declaretheorem[style=remark]{
+\declaretheorem[numberwithin=section]{
+  example,eksempel,
+  exercise,oppgave,
+  problem
+}
+\declaretheorem[style=remark,sibling=theorem]{
   remark,merk
 }
 
@@ -236,8 +234,6 @@
 \newcommand*{\hateq}{\mathrel{\hat{=}}}
 \newcommand*{\whateq}{\mathrel{\widehat{=}}}
 
-\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
-\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 \DeclarePairedDelimiter{\paren}{(}{)}
 \DeclarePairedDelimiter{\bracket}{[}{]}
 \DeclarePairedDelimiter{\curly}{\{}{\}}
@@ -255,6 +251,7 @@
 \DeclareMathOperator{\logten}{log_{10}}
 \DeclareMathOperator{\ord}{ord}
 \DeclareMathOperator{\sinc}{sinc}
+\DeclareMathOperator{\supp}{supp}
 \DeclareMathOperator{\Var}{Var}
 
 \newcommand*{\compl}{{}^\mathsf{c}\!}
@@ -285,19 +282,21 @@
 \newcommand*{\laplacet}[1]{\mathscr{L}\del{#1}}
 \newcommand*{\laplaceinvt}[1]{\mathscr{L}\inv\del{#1}}
 
-% If you find a replacement, let me know
-\newcommand*{\rgets}{
+\newcommand*{\xgets}[2][]{
   \mathrel{
     \tikz[
-      baseline=-0.45ex,
+      baseline=-0.426ex,
       inner sep=0pt,
       outer sep=0pt,
     ]{
-      \node at (0, 0) {$\leftarrow$};
-      \node at (0.05, 0.15) {\tiny R};
+      \ifthenelse{\equal{#1}{}}{}{\node at (0.05, -0.1) {\tiny #1};}
+      \node at (0, 0) {$\gets$};
+      \ifthenelse{\equal{#2}{}}{}{\node at (0.05, 0.15) {\tiny #2};}
     }
   }
 }
+\newcommand*{\rgets}{\xgets{R}}
+\newcommand*{\sgets}{\xgets{\$}}
 
 \newcommand*{\bernoulli}[1]{\mathrm{Bernoulli}\del{#1}} % p
 \newcommand*{\binomial}[2]{\mathrm{Bin}\del{#1, #2}} % n, p
@@ -312,7 +311,7 @@
 \newcommand*{\studentt}[1]{t_{#1}} % nu
 \newcommand*{\uniform}[2]{\mathrm{Unif}\del{#1, #2}} % a, b
 
-\usepackage{centernot}
+\RequirePackage{centernot}
 \newcommand*{\ndashv}{\centernot\dashv}
 \newcommand*{\nmodels}{\centernot\models}
 \newcommand*{\nperp}{\centernot\perp}
@@ -320,14 +319,13 @@
 \newcommand*{\nsubsetneq}{\centernot\subsetneq}
 \newcommand*{\nsupsetneq}{\centernot\supsetneq}
 
-\ifusepxortx\else % From unicode-math
-  \newcommand*{\napprox}{\centernot\approx}
-  \newcommand*{\nequiv}{\centernot\equiv}
-  \newcommand*{\nsubset}{\centernot\subset}
-  \newcommand*{\nsupset}{\centernot\supset}
-\fi
+% From unicode-math when using newpx or newtx
+\providecommand*{\napprox}{\centernot\approx}
+\providecommand*{\nequiv}{\centernot\equiv}
+\providecommand*{\nsubset}{\centernot\subset}
+\providecommand*{\nsupset}{\centernot\supset}
 
-% Free to choose yourself:
+% Free to choose yourself (should not mix):
 \renewcommand*{\ge}{\geqslant}
 \renewcommand*{\geq}{\geqslant}
 \renewcommand*{\le}{\leqslant}
@@ -335,29 +333,38 @@
 % \renewcommand*{\leqslant}{\leq}
 % \renewcommand*{\geqslant}{\geq}
 
+\RequirePackage{fontawesome5}
 \RequirePackage{newunicodechar}
 \newunicodechar{≈}{\approx}
 \newunicodechar{∆}{\Delta}
+\newunicodechar{}{\faApple}
 \newunicodechar{≥}{\geq}
 \newunicodechar{∞}{\infty}
 \newunicodechar{∫}{\int}
+\newunicodechar{∧}{\land}
 \newunicodechar{≤}{\leq}
+\newunicodechar{∨}{\lor}
+\newunicodechar{◊}{\lozenge}
 \newunicodechar{≠}{\neq}
 \newunicodechar{Ω}{\Omega}
 \newunicodechar{∂}{\partial}
 \newunicodechar{π}{\pi}
 \newunicodechar{∏}{\Pi}
 \newunicodechar{∑}{\Sigma}
-\newunicodechar{∨}{\lor}
-\newunicodechar{∧}{\land}
+\newunicodechar{√}{\surd}
+\newunicodechar{˚}{\textdegree}
 
 \RequirePackage{aliascnt}
 \newaliascnt{ineq}{equation}
+\newaliascnt{inv}{equation}
 \aliascntresetthe{ineq}
+\aliascntresetthe{inv}
 
 \makeatletter
-\def\inequality{$$\refstepcounter{ineq}}
+\newcommand*{\inequality}{$$\refstepcounter{ineq}}
+\newcommand*{\invariant}{$$\refstepcounter{inv}}
 \def\endinequality{\eqno\hbox{\@eqnnum}$$\@ignoretrue}
+\def\endinvariant{\eqno\hbox{\@eqnnum}$$\@ignoretrue}
 \makeatother
 
 % ------- Figures and tables --------
@@ -436,7 +443,7 @@
 }
 
 \makeatletter
-\def\input@path{{Sections/}}
+\newcommand*{\input@path}{{Sections/}}
 \makeatother
 
 \graphicspath{{Images/}}
@@ -477,7 +484,6 @@
   oversize,
 }
 
-% Ignore warnings
 \BeforeBeginEnvironment{minted}{\begin{tcolorbox}}
 \AfterEndEnvironment{minted}{\end{tcolorbox}}
 
@@ -552,37 +558,55 @@
   sets,
 ]{cryptocode} % Must load after hyperref and before cleveref
 \let\AC\relax % Conflicts with glossaries-extra
-\renewcommand*{\prob}[1]{\operatorname{\probname}\del{#1}}
-\renewcommand*{\expect}[1]{\operatorname{\expectationname}\del{#1}}
-
-\newcommand*{\polylog}[1][\secpar]{\pcpolynomialstyle{polylog}\ifthenelse{\equal{#1}{}}{}{\del{#1}}}
-\newcommand*{\gf}[1]{\pcalgostyle{GF}\sbr{#1}}
 
 \newcommand*{\answer}{\pcalgostyle{Answer}}
 \newcommand*{\commit}{\pcalgostyle{Com}}
 \newcommand*{\extend}{\pcalgostyle{Extend}}
 \newcommand*{\gen}{\pcalgostyle{Gen}}
-\newcommand*{\keygen}{\pcalgostyle{Key}\gen}
+\newcommand*{\ideal}{\pcalgostyle{Ideal}}
 \newcommand*{\len}{\pcalgostyle{len}}
 \newcommand*{\query}{\pcalgostyle{Query}}
+\newcommand*{\real}{\pcalgostyle{Real}}
 \newcommand*{\reconstruct}{\pcalgostyle{Reconstruct}}
 \newcommand*{\seal}{\pcalgostyle{Seal}}
+\newcommand*{\share}{\pcalgostyle{Share}}
 \newcommand*{\unseal}{\pcalgostyle{Unseal}}
-\renewcommand*{\verify}{\pcalgostyle{Ver}}
+\newcommand*{\view}{\pcalgostyle{View}}
 
-\newcommand*{\cpa}{\pcalgostyle{CPA}}
-\newcommand*{\lwe}{\pcalgostyle{LWE}}
-\newcommand*{\pir}{\pcalgostyle{PIR}}
+\renewcommand*{\prob}[1]{\operatorname{\probname}\del{#1}}
+\renewcommand*{\expect}[1]{\operatorname{\expectationname}\del{#1}}
+\renewcommand*{\kgen}{\pcalgostyle{Key}\gen}
+\renewcommand*{\verify}{\pcalgostyle{Ver}}
 
 \newcommand*{\funs}[2]{\pcalgostyle{Funs}\sbr{#1, #2}} % func1, func2
 \newcommand*{\cpaadv}[2]{\cpa\pcadvantagename\sbr{#1, #2}} % adv, func
 \newcommand*{\prfadv}[2]{\prf\pcadvantagename\sbr{#1, #2}} % adv, func
 \newcommand*{\prpadv}[2]{\prp\pcadvantagename\sbr{#1, #2}} % adv, func
 
+\newcommand*{\polylog}[1][\secpar]{\pcpolynomialstyle{polylog}\ifthenelse{\equal{#1}{}}{}{\del{#1}}}
+\newcommand*{\gf}[1]{\pcalgostyle{GF}\sbr{#1}}
+
+\newcommand*{\circuit}{\mathcal{C}}
+\newcommand*{\proveralgo}{\mathcal{P}}
+\newcommand*{\verifieralgo}{\mathcal{V}}
+
+\newcommand*{\cpa}{\pcalgostyle{CPA}}
+\newcommand*{\lwe}{\pcalgostyle{LWE}}
+\newcommand*{\mpc}{\pcalgostyle{MPC}}
+\newcommand*{\pir}{\pcalgostyle{PIR}}
+
+\newcommand*{\ipol}{\pccomplexitystyle{PI}}
+\newcommand*{\pspace}{\pccomplexitystyle{PSPACE}}
+
 \newcommand*{\ans}{\key[ans]}
 \newcommand*{\checksum}{\key[checksum]}
 \newcommand*{\com}{\key[com]}
 \newcommand*{\ct}{\key[ct]}
+\newcommand*{\cteval}{\key[\tilde{ct}]}
+\newcommand*{\ek}{\key[ek]}
+\newcommand*{\nonce}{\key[r]}
+\newcommand*{\m}{\key[m]}
+\newcommand*{\ppar}{\key[pp]}
 \newcommand*{\pt}{\key[pt]}
 \newcommand*{\qu}{\key[qu]}
 
@@ -593,7 +617,7 @@
   noabbrev,
 ]{cleveref} % Must load after amsmath, babel and hyperref
 \creflabelformat{ineq}{#2\textup{(#1)}#3}
-
+\creflabelformat{inv}{#2\textup{(#1)}#3}
 \newcommand*{\creflastconjunction}{, and~}
 \newcommand*{\creflastgroupconjunction}{, and~}
 
@@ -675,7 +699,7 @@
 % \GlsXtrEnableEntryCounting{\acronymtype,abbreviation}{2}
 
 % Minmax these
-\setlength{\glsdescwidth}{0.58\linewidth}
+\setlength{\glsdescwidth}{0.57\linewidth}
 \setlength{\glspagelistwidth}{0.14\linewidth}
 
 \renewcommand*{\printglossaries}{
@@ -755,6 +779,7 @@
   \numberwithin{equation}{section}
   \numberwithin{figure}{section}
   \numberwithin{ineq}{section}
+  \numberwithin{inv}{section}
   \numberwithin{table}{section}
   \numberwithin{algorithm}{section}
   \numberwithin{listing}{section}
@@ -799,6 +824,7 @@
   \renewcommand*{\abbreviationsname}{Abbreviations}
   % Change with capitalise
   \crefname{ineq}{Inequality}{Inequalities}
+  \crefname{inv}{Invariant}{Invariants}
   \crefname{subsection}{Subsection}{Subsections}
   \crefname{subsubsection}{Subsubsection}{Subsubsections}
 }
@@ -808,6 +834,7 @@
   \renewcommand*{\abbreviationsname}{Abbreviations}
   % Change with capitalise
   \crefname{ineq}{Inequality}{Inequalities}
+  \crefname{inv}{Invariant}{Invariants}
   \crefname{subsection}{Subsection}{Subsections}
   \crefname{subsubsection}{Subsubsection}{Subsubsections}
 }
@@ -831,25 +858,24 @@
   \renewcommand*{\listtheoremname}{Teorem}
   \renewcommand*{\proofideatext}{Bevisidé}
   \renewcommand*{\proofsketchtext}{Bevisutkast}
-  \renewenvironment{assumption}{\begin{antagelse}}{\end{antagelse}}
-  \renewenvironment{case}{\begin{tilfelle}}{\end{tilfelle}}
-  \renewenvironment{claim}{\begin{påstand}}{\end{påstand}}
-  \renewenvironment{corollary}{\begin{korollar}}{\end{korollar}}
-  \renewenvironment{definition}{\begin{definisjon}}{\end{definisjon}}
-  \renewenvironment{example}{\begin{eksempel}}{\end{eksempel}}
-  \renewenvironment{exercise}{\begin{oppgave}}{\end{oppgave}}
-  \renewenvironment{fact}{\begin{faktum}}{\end{faktum}}
-  \renewenvironment{observation}{\begin{observasjon}}{\end{observasjon}}
-  \renewenvironment{principle}{\begin{prinsipp}}{\end{prinsipp}}
-  \renewenvironment{property}{\begin{egenskap}}{\end{egenskap}}
-  \renewenvironment{proposition}{\begin{forslag}}{\end{forslag}}
-  \renewenvironment{remark}{\begin{merk}}{\end{merk}}
-  \renewenvironment{theorem}{\begin{teorem}}{\end{teorem}}
-  \renewenvironment{step}{\begin{trinn}}{\end{trinn}}
+  \renewenvironment*{assumption}{\begin{antagelse}}{\end{antagelse}}
+  \renewenvironment*{claim}{\begin{påstand}}{\end{påstand}}
+  \renewenvironment*{corollary}{\begin{korollar}}{\end{korollar}}
+  \renewenvironment*{definition}{\begin{definisjon}}{\end{definisjon}}
+  \renewenvironment*{example}{\begin{eksempel}}{\end{eksempel}}
+  \renewenvironment*{exercise}{\begin{oppgave}}{\end{oppgave}}
+  \renewenvironment*{fact}{\begin{faktum}}{\end{faktum}}
+  \renewenvironment*{observation}{\begin{observasjon}}{\end{observasjon}}
+  \renewenvironment*{principle}{\begin{prinsipp}}{\end{prinsipp}}
+  \renewenvironment*{property}{\begin{egenskap}}{\end{egenskap}}
+  \renewenvironment*{proposition}{\begin{forslag}}{\end{forslag}}
+  \renewenvironment*{remark}{\begin{merk}}{\end{merk}}
+  \renewenvironment*{theorem}{\begin{teorem}}{\end{teorem}}
   \renewcommand*{\ntnulogo}{NTNU_logo_NB.png}
   \setlength{\parindent}{0em}
   % Change with capitalise
   \crefname{ineq}{Ulikhet}{Ulikheter}
+  \crefname{inv}{Invariant}{Invarianter}
   \crefname{subsection}{Underseksjon}{Underseksjoner}
   \crefname{subsubsection}{Underseksjon}{Underseksjoner}
 }
