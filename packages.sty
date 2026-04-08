@@ -61,7 +61,7 @@
 
 \ifusenewpx
   \ifusenewtx
-    \PackageError{packages}{Cannot enable both usenewpx and usenewtx}{}
+    \PackageError{packages}{Cannot enable both newpx and newtx fonts}{}
   \fi
   \usepxortxtrue
 \else\ifusenewtx
@@ -183,10 +183,16 @@
   \else
     \RequirePackage{newtxmath}
   \fi
+  \RequirePackage[cal=cm]{mathalpha}
 \fi
 
-% Both English and Norwegian versions
-\declaretheorem[numberwithin=section]{theorem}
+% Both English and Norwegian versions:
+\declaretheorem[numberwithin=section]{
+  example,eksempel,
+  exercise,oppgave,
+  problem,
+  theorem % Cannot have trailing comma
+}
 \declaretheorem[sibling=theorem]{
   assumption,antagelse,
   claim,påstand,
@@ -198,14 +204,9 @@
   principle,prinsipp,
   property,egenskap,
   proposition,forslag,
-  teorem % Cannot have trailing comma
+  teorem
 }
-\declaretheorem[numberwithin=section]{
-  example,eksempel,
-  exercise,oppgave,
-  problem
-}
-\declaretheorem[style=remark,sibling=theorem]{
+\declaretheorem[style=remark,numbered=no]{
   remark,merk
 }
 
@@ -224,9 +225,8 @@
 \allowdisplaybreaks
 \newlength{\savearraycolsep}
 \setlength{\savearraycolsep}{\arraycolsep}
-\newcommand*{\narrowarray}[1]{\setlength{\arraycolsep}{#1\arraycolsep}}
-\newcommand*{\normalarray}{\setlength{\arraycolsep}{\savearraycolsep}}
-% \narrowarray{0.5}
+\newcommand*{\narrowarray}[1]{\setlength{\arraycolsep}{#1\savearraycolsep}}
+\newcommand*{\normalarray}{\narrowarray{1}}
 
 \newcommand*{\defeq}{\overset{\mathrm{def}}{=}}
 \newcommand*{\meq}{\overset{\mathrm{m}}{=}}
@@ -243,6 +243,8 @@
 \newcommand*{\delr}[1]{\del{#1}\!}
 \renewcommand*{\sbr}[1]{\bracket*{#1}}
 \renewcommand*{\cbr}[1]{\curly*{#1}}
+\renewcommand*{\intoo}[1]{\del{#1}}
+\renewcommand*{\intcc}[1]{\sbr{#1}}
 
 \DeclareMathOperator{\Adj}{Adj}
 \DeclareMathOperator{\Cov}{Cov}
@@ -253,6 +255,9 @@
 \DeclareMathOperator{\sinc}{sinc}
 \DeclareMathOperator{\supp}{supp}
 \DeclareMathOperator{\Var}{Var}
+
+\DeclareMathSymbol{\mlq}{\mathord}{operators}{'134}
+\DeclareMathSymbol{\mrq}{\mathord}{operators}{'42}
 
 \newcommand*{\compl}{{}^\mathsf{c}\!}
 \newcommand*{\sq}{^2}
@@ -267,7 +272,7 @@
 \newcommand*{\sll}{\overset{s}{\ll}} % Or just \ll
 \newcommand*{\ull}{\overset{u}{\ll}} % Or \lll
 
-\newcommand*{\func}[3]{#1 \colon #2 \to #3}
+\newcommand*{\func}[3]{#1\colon #2 \to #3}
 
 \newcommand*{\perm}[2]{{}^{#1}P_{#2}}
 \newcommand*{\comb}[2]{{}^{#1}C_{#2}}
@@ -289,9 +294,9 @@
       inner sep=0pt,
       outer sep=0pt,
     ]{
-      \ifthenelse{\equal{#1}{}}{}{\node at (0.05, -0.1) {\tiny #1};}
-      \node at (0, 0) {$\gets$};
       \ifthenelse{\equal{#2}{}}{}{\node at (0.05, 0.15) {\tiny #2};}
+      \node at (0, 0) {$\gets$};
+      \ifthenelse{\equal{#1}{}}{}{\node at (0.05, -0.1) {\tiny #1};}
     }
   }
 }
@@ -319,7 +324,7 @@
 \newcommand*{\nsubsetneq}{\centernot\subsetneq}
 \newcommand*{\nsupsetneq}{\centernot\supsetneq}
 
-% From unicode-math when using newpx or newtx
+% From unicode-math when using newpx or newtx:
 \providecommand*{\napprox}{\centernot\approx}
 \providecommand*{\nequiv}{\centernot\equiv}
 \providecommand*{\nsubset}{\centernot\subset}
@@ -538,6 +543,7 @@
 \RequirePackage{bookmark}
 \RequirePackage[norefs]{refcheck} % Remove "norefs" for debugging
 
+\let\eval\relax
 \RequirePackage[
   advantage,
   adversary,
@@ -573,19 +579,6 @@
 \newcommand*{\unseal}{\pcalgostyle{Unseal}}
 \newcommand*{\view}{\pcalgostyle{View}}
 
-\renewcommand*{\prob}[1]{\operatorname{\probname}\del{#1}}
-\renewcommand*{\expect}[1]{\operatorname{\expectationname}\del{#1}}
-\renewcommand*{\kgen}{\pcalgostyle{Key}\gen}
-\renewcommand*{\verify}{\pcalgostyle{Ver}}
-
-\newcommand*{\funs}[2]{\pcalgostyle{Funs}\sbr{#1, #2}} % func1, func2
-\newcommand*{\cpaadv}[2]{\cpa\pcadvantagename\sbr{#1, #2}} % adv, func
-\newcommand*{\prfadv}[2]{\prf\pcadvantagename\sbr{#1, #2}} % adv, func
-\newcommand*{\prpadv}[2]{\prp\pcadvantagename\sbr{#1, #2}} % adv, func
-
-\newcommand*{\polylog}[1][\secpar]{\pcpolynomialstyle{polylog}\ifthenelse{\equal{#1}{}}{}{\del{#1}}}
-\newcommand*{\gf}[1]{\pcalgostyle{GF}\sbr{#1}}
-
 \newcommand*{\circuit}{\mathcal{C}}
 \newcommand*{\proveralgo}{\mathcal{P}}
 \newcommand*{\verifieralgo}{\mathcal{V}}
@@ -595,20 +588,34 @@
 \newcommand*{\mpc}{\pcalgostyle{MPC}}
 \newcommand*{\pir}{\pcalgostyle{PIR}}
 
-\newcommand*{\ipol}{\pccomplexitystyle{PI}}
+\newcommand*{\dtime}{\pccomplexitystyle{DTIME}}
+\newcommand*{\ipol}{\pccomplexitystyle{IP}}
 \newcommand*{\pspace}{\pccomplexitystyle{PSPACE}}
 
 \newcommand*{\ans}{\key[ans]}
-\newcommand*{\checksum}{\key[checksum]}
 \newcommand*{\com}{\key[com]}
 \newcommand*{\ct}{\key[ct]}
-\newcommand*{\cteval}{\key[\tilde{ct}]}
+\newcommand*{\cteval}{\tilde{\key[ct]}}
 \newcommand*{\ek}{\key[ek]}
-\newcommand*{\nonce}{\key[r]}
-\newcommand*{\m}{\key[m]}
 \newcommand*{\ppar}{\key[pp]}
 \newcommand*{\pt}{\key[pt]}
 \newcommand*{\qu}{\key[qu]}
+
+\renewcommand*{\prob}[1]{\operatorname{\probname}\del{#1}}
+\renewcommand*{\expect}[1]{\operatorname{\expectationname}\del{#1}}
+
+\renewcommand*{\kgen}{\pcalgostyle{Key}\gen}
+\renewcommand*{\verify}{\pcalgostyle{Ver}}
+
+\newcommand*{\funs}[2]{\pcalgostyle{Funs}\sbr{#1, #2}} % func1, func2
+\newcommand*{\perms}[1]{\pcalgostyle{Perms}\sbr{#1}} % func
+
+\newcommand*{\cpaadv}[2]{\cpa\pcadvantagename\sbr{#1, #2}} % adv, func
+\newcommand*{\prfadv}[2]{\prf\pcadvantagename\sbr{#1, #2}} % adv, func
+\newcommand*{\prpadv}[2]{\prp\pcadvantagename\sbr{#1, #2}} % adv, func
+
+\newcommand*{\polylog}[1][\secpar]{\pcpolynomialstyle{polylog}\ifthenelse{\equal{#1}{}}{}{\del{#1}}}
+\newcommand*{\gf}[1]{\pcalgostyle{GF}\sbr{#1}}
 
 % TODO: Switch to zref-clever when it supports Norwegian
 \RequirePackage[
@@ -698,9 +705,9 @@
 \loadglsentries{glossary} % Loading "glossary.tex"
 % \GlsXtrEnableEntryCounting{\acronymtype,abbreviation}{2}
 
-% Minmax these
-\setlength{\glsdescwidth}{0.57\linewidth}
-\setlength{\glspagelistwidth}{0.14\linewidth}
+% Minmax these:
+\setlength{\glsdescwidth}{0.54\linewidth}
+\setlength{\glspagelistwidth}{0.18\linewidth}
 
 \renewcommand*{\printglossaries}{
   \clearpage
@@ -720,6 +727,13 @@
   }
   \clearpage
 }
+
+\newcommand*{\cGlsshort}[1]{\texorpdfstring{\Glsxtrshort*{#1}}{\glsentryshort{#1}}}
+\newcommand*{\cglsshort}[1]{\texorpdfstring{\glsxtrshort*{#1}}{\glsentryshort{#1}}}
+\newcommand*{\cGlslong}[1]{\texorpdfstring{\Glsxtrlong*{#1}}{\glsentryshort{#1}}}
+\newcommand*{\cglslong}[1]{\texorpdfstring{\glsxtrlong*{#1}}{\glsentryshort{#1}}}
+\newcommand*{\cGlsfull}[1]{\texorpdfstring{\Glsxtrfull*{#1}}{\glsentryshort{#1}}}
+\newcommand*{\cglsfull}[1]{\texorpdfstring{\glsxtrfull*{#1}}{\glsentryshort{#1}}}
 
 % ------------- General -------------
 \RequirePackage[
@@ -816,6 +830,14 @@
 \newcommand*{\subsubsubsubsection}{\oldsubparagraph}
 \renewcommand*{\paragraph}{\oldparagraph*}
 \renewcommand*{\subparagraph}{\oldsubparagraph*}
+
+% These are the default values. Configure if double-digit numbers:
+\makeatletter
+\renewcommand*\l@subsection{\@dottedtocline{2}{1.5em}{2.3em}}
+\renewcommand*\l@subsubsection{\@dottedtocline{3}{3.8em}{3.2em}}
+\renewcommand*\l@paragraph{\@dottedtocline{4}{7.0em}{4.1em}}
+\renewcommand*\l@subparagraph{\@dottedtocline{5}{10em}{5em}}
+\makeatother
 
 % ------------ Language -------------
 \addto{\captionsamerican}{
