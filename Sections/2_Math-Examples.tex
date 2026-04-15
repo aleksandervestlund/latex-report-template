@@ -41,7 +41,7 @@ The number of combinations (binomial coefficient) is:
 
 We can also use floor and ceiling functions:
 \begin{equation*}
-    \ceil*{1.2} = 2, \qquad \floor*{2.2} = 2
+    \ceil{1.2} = 2, \qquad \floor{2.2} = 2
 \end{equation*}
 
 The \mintinline{latex}{dell}, \mintinline{latex}{dellr}, and \mintinline{latex}{delr} commands add tight spacing around \mintinline{latex}{del} delimiters:
@@ -91,9 +91,6 @@ The \mintinline{latex}{rgets}/\mintinline{latex}{sgets} commands render a random
 
 Expected value and variance:
 \begin{equation*}
-    \tr
-\end{equation*}
-\begin{equation*}
     \expect{X} = \sum_{x \in \mathcal{X}} x \cdot \prob{X = x}
 \end{equation*}
 \begin{equation*}
@@ -108,14 +105,6 @@ Commonly used mathematical sets and transforms:
     \quad \laplaceinvt{\laplacet{x}} = x,
     \quad \fourierinvt{\fouriert{x}} = x,
     \quad \compl A
-\end{equation*}
-
-Script and calligraphic fonts from \mintinline{latex}{mathrsfs}:
-\begin{equation*}
-    \mathscr{F},
-    \quad \mathscr{L},
-    \quad \mathscr{H},
-    \quad \mathscr{A}
 \end{equation*}
 
 \subsection{Calculus and Differentials}
@@ -232,6 +221,11 @@ you can delete the corresponding lines in the \mintinline{latex}{packages.sty}.
 Bold vector notation using \mintinline{latex}{bm}:
 \begin{equation*}
     \bm{F} = m \bm{a}
+\end{equation*}
+
+For matrices and vectors, use the respective commands \mintinline{latex}{\mat} and \mintinline{latex}{\vect} for ease of switching notation, which depends on the setting. Here, \mintinline{latex}{\mat} produces \mintinline{latex}{\mathbf}, while \mintinline{latex}{\vect} produces \mintinline{latex}{\bm}:
+\begin{equation*}
+    \mat{C}\vect{u} = \lambda \vect{u}
 \end{equation*}
 
 Cancellation of terms using \mintinline{latex}{cancel}:

@@ -387,15 +387,15 @@
 
 \RequirePackage{aliascnt}
 \newaliascnt{ineq}{equation}
-\newaliascnt{inv}{equation}
+\newaliascnt{inva}{equation}
 \aliascntresetthe{ineq}
-\aliascntresetthe{inv}
+\aliascntresetthe{inva}
 
 \makeatletter
 \newcommand*{\inequality}{$$\refstepcounter{ineq}}
-\newcommand*{\invariant}{$$\refstepcounter{inv}}
+\newcommand*{\invariant} {$$\refstepcounter{inva}}
 \def\endinequality{\eqno\hbox{\@eqnnum}$$\@ignoretrue}
-\def\endinvariant{\eqno\hbox{\@eqnnum}$$\@ignoretrue}
+\def\endinvariant {\eqno\hbox{\@eqnnum}$$\@ignoretrue}
 \makeatother
 
 % ------- Figures and tables --------
@@ -678,7 +678,7 @@
   noabbrev,
 ]{cleveref} % Must load after amsmath, babel and hyperref
 \creflabelformat{ineq}{#2\textup{(#1)}#3}
-\creflabelformat{inv} {#2\textup{(#1)}#3}
+\creflabelformat{inva}{#2\textup{(#1)}#3}
 
 \newcommand*{\creflastconjunction}     {, and~}
 \newcommand*{\creflastgroupconjunction}{, and~}
@@ -849,7 +849,7 @@
   \numberwithin{equation} {section}
   \numberwithin{figure}   {section}
   \numberwithin{ineq}     {section}
-  \numberwithin{inv}      {section}
+  \numberwithin{inva}     {section}
   \numberwithin{table}    {section}
   \numberwithin{algorithm}{section}
   \numberwithin{listing}  {section}
@@ -882,10 +882,10 @@
 
 \let\oldparagraph\paragraph
 \let\oldsubparagraph\subparagraph
-\newcommand*{\subsubsubsection}{\oldparagraph}
+\newcommand*{\subsubsubsection}   {\oldparagraph}
 \newcommand*{\subsubsubsubsection}{\oldsubparagraph}
-\renewcommand*{\paragraph}{\oldparagraph*}
-\renewcommand*{\subparagraph}{\oldsubparagraph*}
+\renewcommand*{\paragraph}        {\oldparagraph*}
+\renewcommand*{\subparagraph}     {\oldsubparagraph*}
 
 % These are the default values. Configure if double-digit numbers:
 \makeatletter
@@ -898,12 +898,12 @@
 % ------------ Language -------------
 \addto{\captionsamerican}{
   \floatname{procedure}{Procedure}
-  \renewcommand*{\contentsname}{Table of Contents}
+  \renewcommand*{\contentsname}     {Table of Contents}
   \renewcommand*{\abbreviationsname}{Abbreviations}
   % Change with capitalise
-  \crefname{ineq}{Inequality}{Inequalities}
-  \crefname{inv}{Invariant}{Invariants}
-  \crefname{subsection}{Subsection}{Subsections}
+  \crefname{ineq}{Inequality}            {Inequalities}
+  \crefname{inva}{Invariant}             {Invariants}
+  \crefname{subsection}{Subsection}      {Subsections}
   \crefname{subsubsection}{Subsubsection}{Subsubsections}
 }
 \addto{\captionsbritish}{
@@ -912,7 +912,7 @@
   \renewcommand*{\abbreviationsname}{Abbreviations}
   % Change with capitalise
   \crefname{ineq}         {Inequality}   {Inequalities}
-  \crefname{inv}          {Invariant}    {Invariants}
+  \crefname{inva}         {Invariant}    {Invariants}
   \crefname{subsection}   {Subsection}   {Subsections}
   \crefname{subsubsection}{Subsubsection}{Subsubsections}
 }
@@ -954,7 +954,7 @@
   \setlength{\parindent}{0em}
   % Change with capitalise
   \crefname{ineq}         {Ulikhet}     {Ulikheter}
-  \crefname{inv}          {Invariant}   {Invarianter}
+  \crefname{inva}         {Invariant}   {Invarianter}
   \crefname{subsection}   {Underseksjon}{Underseksjoner}
   \crefname{subsubsection}{Underseksjon}{Underseksjoner}
 }
