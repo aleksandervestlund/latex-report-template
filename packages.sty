@@ -119,7 +119,7 @@
 \patchcmd{\abstract}{\small}{}{}{}
 
 \newcommand*{\keywordsname}{Keywords}
-\newcommand*{\keywords}[1]{
+\newcommand*{\keywords} [1]{
   \textbf{\emph{\keywordsname}} \--- #1%
 }
 
@@ -214,37 +214,34 @@
   remark,merk
 }
 
-\newcommand*{\proofideatext}{Proof Idea}
+\newcommand*{\proofideatext}  {Proof Idea}
 \newcommand*{\proofsketchtext}{Proof Sketch}
-\newenvironment*{proofidea}
-  {\begin{proof}[\proofideatext]\pushQED{}}
-  {\end{proof}}
-\newenvironment*{proofsketch}
-  {\begin{proof}[\proofsketchtext]}
-  {\end{proof}}
+\newenvironment*{proofidea}  {\begin{proof}[\proofideatext]\pushQED{}}{\end{proof}}
+\newenvironment*{proofsketch}{\begin{proof}[\proofsketchtext]}        {\end{proof}}
 
 \allowdisplaybreaks
 
 \newlength{\savearraycolsep}
 \setlength{\savearraycolsep}{\arraycolsep}
+
 \newcommand*{\narrowarray}[1]{\setlength{\arraycolsep}{#1\savearraycolsep}}
-\newcommand*{\normalarray}{\narrowarray{1}}
+\newcommand*{\normalarray}   {\narrowarray{1}}
 % \narrowarray{0.5}
 
-\DeclarePairedDelimiter{\pdelim}{(}{)}
-\DeclarePairedDelimiter{\bdelim}{[}{]}
-\DeclarePairedDelimiter{\cdelim}{\{}{\}}
+\DeclarePairedDelimiter{\pdelim}{(}      {)}
+\DeclarePairedDelimiter{\bdelim}{[}      {]}
+\DeclarePairedDelimiter{\cdelim}{\{}     {\}}
 \DeclarePairedDelimiter{\rdelim}{\lfloor}{\rceil}
 
-\renewcommand*{\del}[1]{\pdelim*{#1}}
-\renewcommand*{\sbr}[1]{\bdelim*{#1}}
-\renewcommand*{\cbr}[1]{\cdelim*{#1}}
+\renewcommand*{\del}  [1]{\pdelim*{#1}}
+\renewcommand*{\sbr}  [1]{\bdelim*{#1}}
+\renewcommand*{\cbr}  [1]{\cdelim*{#1}}
 \renewcommand*{\intoo}[1]{\del{#1}}
 \renewcommand*{\intcc}[1]{\sbr{#1}}
-\newcommand*{\round}[1]{\rdelim*{#1}}
-\newcommand*{\dell}[1]{\!\del{#1}}
-\newcommand*{\dellr}[1]{\dell{#1}\!}
-\newcommand*{\delr}[1]{\del{#1}\!}
+\newcommand*{\round}  [1]{\rdelim*{#1}}
+\newcommand*{\dell}   [1]{\!\del{#1}}
+\newcommand*{\dellr}  [1]{\dell{#1}\!}
+\newcommand*{\delr}   [1]{\del{#1}\!}
 
 % TODO (WIP) (should have paren as innermost instead of outermost):
 % \newcount\autodelimdepth
@@ -259,62 +256,75 @@
 %   \global\advance\autodelimdepth by -1
 % }
 
-\newcommand*{\defeq}{\overset{\mathrm{def}}{=}}
-\newcommand*{\meq}{\overset{\mathrm{m}}{=}}
-\newcommand*{\qmeq}{\overset{?}{=}}
-\newcommand*{\hateq}{\mathrel{\hat{=}}}
+\newcommand*{\defeq} {\overset{\mathrm{def}}{=}}
+\newcommand*{\meq}   {\overset{\mathrm{m}}{=}}
+\newcommand*{\qmeq}  {\overset{?}{=}}
+\newcommand*{\hateq} {\mathrel{\hat{=}}}
 \newcommand*{\whateq}{\mathrel{\widehat{=}}}
 
-\DeclareMathOperator{\Adj}{Adj}
-\DeclareMathOperator{\Cov}{Cov}
-\DeclareMathOperator{\law}{Law}
-\DeclareMathOperator{\lcm}{lcm}
-\DeclareMathOperator{\logtwo}{log_2}
-\DeclareMathOperator{\logten}{log_{10}}
-\DeclareMathOperator{\ord}{ord}
-\DeclareMathOperator{\sinc}{sinc}
-\DeclareMathOperator{\supp}{supp}
-\DeclareMathOperator{\tr}{tr}
-\DeclareMathOperator{\Var}{Var}
-
+\DeclareMathOperator {\Adj}   {Adj}
+\DeclareMathOperator {\Cov}   {Cov}
+\DeclareMathOperator {\law}   {Law}
+\DeclareMathOperator {\lcm}   {lcm}
+\DeclareMathOperator {\logtwo}{log_2}
+\DeclareMathOperator {\logten}{log_{10}}
+\DeclareMathOperator {\ord}   {ord}
+\DeclareMathOperator {\sinc}  {sinc}
+\DeclareMathOperator {\supp}  {supp}
+\DeclareMathOperator {\tr}    {tr}
+\DeclareMathOperator {\Var}   {Var}
 \DeclareMathOperator*{\softmax}{softmax}
-\newcommand*{\data}{\mathcal{D}}
-\newcommand*{\loss}{\mathcal{L}}
+
+\newcommand*{\data}      {\mathcal{D}}
+\newcommand*{\loss}      {\mathcal{L}}
 \newcommand*{\hypothesis}{\mathcal{H}}
 
-\newcommand*{\compl}{{}^\mathsf{c}\!}
-\newcommand*{\sq}{^2}
-\newcommand*{\inv}{^{-1}}
+\newcommand*{\compl}    {{}^\mathsf{c}\!}
+\newcommand*{\sq}       {^2}
+\newcommand*{\inv}      {^{-1}}
 \newcommand*{\transpose}{^\top}
-\newcommand*{\sigmasq}{\sigma\sq}
+\newcommand*{\sigmasq}  {\sigma\sq}
 
 \newcommand*{\band}{\mathbin{\&}}
-\newcommand*{\bor}{\mid}
-\newcommand*{\sgg}{\overset{s}{\gg}} % Or just \gg
-\newcommand*{\ugg}{\overset{u}{\gg}} % Or \ggg
-\newcommand*{\sll}{\overset{s}{\ll}} % Or just \ll
-\newcommand*{\ull}{\overset{u}{\ll}} % Or \lll
+\newcommand*{\bor} {\mid}
+\newcommand*{\sgg} {\overset{s}{\gg}} % Or just \gg
+\newcommand*{\ugg} {\overset{u}{\gg}} % Or \ggg
+\newcommand*{\sll} {\overset{s}{\ll}} % Or just \ll
+\newcommand*{\ull} {\overset{u}{\ll}} % Or \lll
 
 \newcommand*{\func}[3]{#1\colon #2 \to #3}
 
-\newcommand*{\perm}[2]{{}^{#1}P_{#2}}
-\newcommand*{\comb}[2]{{}^{#1}C_{#2}}
+\newcommand*{\perm}    [2]{{}^{#1}P_{#2}}
+\newcommand*{\comb}    [2]{{}^{#1}C_{#2}}
 \renewcommand*{\choose}[2]{\dbinom{#1}{#2}}
 
-\newcommand*{\amortized}[1]{\widehat{#1}}
-\newcommand*{\defn}[1]{\textbf{\textit{#1}}}
-\newcommand*{\expectsq}[1]{\mathbb{E}\sq\del{#1}}
-\newcommand*{\fouriert}[1]{\mathcal{F}\del{#1}}
+\newcommand*{\amortized}  [1]{\widehat{#1}}
+\newcommand*{\defn}       [1]{\textbf{\textit{#1}}}
+\newcommand*{\expectsq}   [1]{\mathbb{E}\sq\del{#1}}
+\newcommand*{\fouriert}   [1]{\mathcal{F}\del{#1}}
 \newcommand*{\fourierinvt}[1]{\mathcal{F}\inv\del{#1}}
-\newcommand*{\indicator}[1]{\mathbb{I}\del{#1}}
-\newcommand*{\laplacet}[1]{\mathscr{L}\del{#1}}
+\newcommand*{\indicator}  [1]{\mathbb{I}\del{#1}}
+\newcommand*{\laplacet}   [1]{\mathscr{L}\del{#1}}
 \newcommand*{\laplaceinvt}[1]{\mathscr{L}\inv\del{#1}}
 
-\newcommand*{\mat}[1]{\mathbf{#1}}
+\newcommand*{\mat} [1]{\mathbf{#1}}
 \newcommand*{\vect}[1]{\bm{#1}}
 
-\newcommand*{\cif}[1]{\text{if $#1$}}
+\newcommand*{\cif}    [1]{\text{if $#1$}}
 \newcommand*{\cotherwise}{\text{otherwise}}
+
+\newcommand*{\bernoulli}       [1]{\mathrm{Bernoulli}\del{#1}} % p
+\newcommand*{\binomial}        [2]{\mathrm{Bin}\del{#1, #2}} % n, p
+\newcommand*{\chisq}           [1]{\chi\sq_{#1}} % nu
+\newcommand*{\exponential}     [1]{\mathrm{Exp}\del{#1}} % lambda
+\newcommand*{\hypergeometric}  [3]{\mathrm{h}\del{#1, #2, #3}} % N, k, n
+\newcommand*{\gammadist}       [2]{\mathrm{Ga}\del{#1, #2}} % alpha, beta
+\newcommand*{\gaussian}        [2]{\mathcal{N}\del{#1, #2}} % mu, sigma^2
+\newcommand*{\geometric}       [1]{\mathrm{Geom}\del{#1}} % p
+\newcommand*{\negativebinomial}[2]{\mathrm{NegBin}\del{#1, #2}} % k, p
+\newcommand*{\poisson}         [1]{\mathrm{Pois}\del{#1}} % mu=lambda*t
+\newcommand*{\studentt}        [1]{t_{#1}} % nu
+\newcommand*{\uniform}         [2]{\mathrm{Unif}\del{#1, #2}} % a, b
 
 \newcommand*{\xgets}[2][]{
   \mathrel{
@@ -332,37 +342,24 @@
 \newcommand*{\rgets}{\xgets{R}}
 \newcommand*{\sgets}{\xgets{\$}}
 
-\newcommand*{\bernoulli}[1]{\mathrm{Bernoulli}\del{#1}} % p
-\newcommand*{\binomial}[2]{\mathrm{Bin}\del{#1, #2}} % n, p
-\newcommand*{\chisq}[1]{\chi\sq_{#1}} % nu
-\newcommand*{\exponential}[1]{\mathrm{Exp}\del{#1}} % lambda
-\newcommand*{\hypergeometric}[3]{\mathrm{h}\del{#1, #2, #3}} % N, k, n
-\newcommand*{\gammadist}[2]{\mathrm{Ga}\del{#1, #2}} % alpha, beta
-\newcommand*{\gaussian}[2]{\mathcal{N}\del{#1, #2}} % mu, sigma^2
-\newcommand*{\geometric}[1]{\mathrm{Geom}\del{#1}} % p
-\newcommand*{\negativebinomial}[2]{\mathrm{NegBin}\del{#1, #2}} % k, p
-\newcommand*{\poisson}[1]{\mathrm{Pois}\del{#1}} % mu=lambda*t
-\newcommand*{\studentt}[1]{t_{#1}} % nu
-\newcommand*{\uniform}[2]{\mathrm{Unif}\del{#1, #2}} % a, b
-
 \RequirePackage{centernot}
-\newcommand*{\ndashv}{\centernot\dashv}
-\newcommand*{\nmodels}{\centernot\models}
-\newcommand*{\nperp}{\centernot\perp}
-\newcommand*{\npropto}{\centernot\propto}
+\newcommand*{\ndashv}    {\centernot\dashv}
+\newcommand*{\nmodels}   {\centernot\models}
+\newcommand*{\nperp}     {\centernot\perp}
+\newcommand*{\npropto}   {\centernot\propto}
 \newcommand*{\nsubsetneq}{\centernot\subsetneq}
 \newcommand*{\nsupsetneq}{\centernot\supsetneq}
 
 % From unicode-math when using newpx or newtx:
 \providecommand*{\napprox}{\centernot\approx}
-\providecommand*{\nequiv}{\centernot\equiv}
+\providecommand*{\nequiv} {\centernot\equiv}
 \providecommand*{\nsubset}{\centernot\subset}
 \providecommand*{\nsupset}{\centernot\supset}
 
 % Free to choose yourself (should not mix):
-\renewcommand*{\ge}{\geqslant}
+\renewcommand*{\ge} {\geqslant}
 \renewcommand*{\geq}{\geqslant}
-\renewcommand*{\le}{\leqslant}
+\renewcommand*{\le} {\leqslant}
 \renewcommand*{\leq}{\leqslant}
 % \renewcommand*{\leqslant}{\leq}
 % \renewcommand*{\geqslant}{\geq}
@@ -436,24 +433,24 @@
 \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
 
 \RequirePackage{floatrow}
-\floatsetup[figure]{capposition=bottom}
+\floatsetup[figure]   {capposition=bottom}
 \floatsetup[subfigure]{capposition=bottom}
-\floatsetup[table]{capposition=top}
+\floatsetup[table]    {capposition=top}
 
-\setcounter{topnumber}{3}
+\setcounter{topnumber}   {3}
 \setcounter{bottomnumber}{1}
-\setcounter{totalnumber}{5}
+\setcounter{totalnumber} {5}
 \setcounter{dbltopnumber}{2}
 
-\renewcommand*{\topfraction}{0.7}
-\renewcommand*{\bottomfraction}{0.3}
-\renewcommand*{\textfraction}{0.1}
-\renewcommand*{\floatpagefraction}{0.7}
-\renewcommand*{\dbltopfraction}{0.7}
+\renewcommand*{\topfraction}         {0.7}
+\renewcommand*{\bottomfraction}      {0.3}
+\renewcommand*{\textfraction}        {0.1}
+\renewcommand*{\floatpagefraction}   {0.7}
+\renewcommand*{\dbltopfraction}      {0.7}
 \renewcommand*{\dblfloatpagefraction}{0.7}
 
+\setlength{\intextsep}   {10pt plus 2pt minus 2pt}
 \setlength{\textfloatsep}{12pt plus 2pt minus 2pt}
-\setlength{\intextsep}{10pt plus 2pt minus 2pt}
 
 \RequirePackage{xspace}
 \RequirePackage[export]{adjustbox}
@@ -481,9 +478,9 @@
 \makeatother
 
 \graphicspath{{Images/}}
-\newcommand*{\mitlogo}{MIT_logo.png}
+\newcommand*{\mitlogo} {MIT_logo.png}
 \newcommand*{\ntnulogo}{NTNU_logo_EN.png}
-\newcommand*{\snulogo}{SNU_logo.png}
+\newcommand*{\snulogo} {SNU_logo.png}
 
 \makeatletter
 \renewcommand*{\listof}[2]{
@@ -536,7 +533,7 @@
 }
 
 \BeforeBeginEnvironment{minted}{\begin{tcolorbox}}
-\AfterEndEnvironment{minted}{\end{tcolorbox}}
+\AfterEndEnvironment   {minted}{\end{tcolorbox}}
 
 \let\oldinputminted\inputminted
 \RenewDocumentCommand{\inputminted}{O{} m m}{
@@ -553,7 +550,7 @@
 \RequirePackage{newfloat}
 \newfloat{procedure}{tbp}{lop}
 \newcommand*{\listprocedurename}{List of Procedures}
-\newcommand*{\listofprocedures}{\listof{procedure}{\listprocedurename}}
+\newcommand*{\listofprocedures} {\listof{procedure}{\listprocedurename}}
 
 % ---------- Bibliography -----------
 \RequirePackage[
@@ -573,7 +570,8 @@
 \addbibresource{references.bib} % Comment out this line if not using references
 \DeclareNameAlias{sortname}{family-given}
 \DeclareDelimFormat{nameyeardelim}{\addcomma\space}
-\DeclareOuterCiteDelims{cite}{\bibopenbracket}{\bibclosebracket}
+
+\DeclareOuterCiteDelims{cite}    {\bibopenbracket}{\bibclosebracket}
 \DeclareInnerCiteDelims{textcite}{\bibopenbracket}{\bibclosebracket}
 
 % ----------- Referencing -----------
@@ -611,53 +609,53 @@
 ]{cryptocode} % Must load after hyperref and before cleveref
 \let\AC\relax % Conflicts with glossaries-extra
 
-\newcommand*{\answer}{\pcalgostyle{Answer}}
-\newcommand*{\commit}{\pcalgostyle{Com}}
-\newcommand*{\detect}{\pcalgostyle{Detect}}
-\newcommand*{\extend}{\pcalgostyle{Extend}}
-\newcommand*{\gen}{\pcalgostyle{Gen}}
-\newcommand*{\ideal}{\pcalgostyle{Ideal}}
-\newcommand*{\len}{\pcalgostyle{len}}
-\newcommand*{\Mark}{\pcalgostyle{Mark}}
-\newcommand*{\query}{\pcalgostyle{Query}}
-\newcommand*{\real}{\pcalgostyle{Real}}
+\newcommand*{\answer}     {\pcalgostyle{Answer}}
+\newcommand*{\commit}     {\pcalgostyle{Com}}
+\newcommand*{\detect}     {\pcalgostyle{Detect}}
+\newcommand*{\extend}     {\pcalgostyle{Extend}}
+\newcommand*{\gen}        {\pcalgostyle{Gen}}
+\newcommand*{\ideal}      {\pcalgostyle{Ideal}}
+\newcommand*{\len}        {\pcalgostyle{len}}
+\newcommand*{\Mark}       {\pcalgostyle{Mark}}
+\newcommand*{\query}      {\pcalgostyle{Query}}
+\newcommand*{\real}       {\pcalgostyle{Real}}
 \newcommand*{\reconstruct}{\pcalgostyle{Reconstruct}}
-\newcommand*{\seal}{\pcalgostyle{Seal}}
-\newcommand*{\share}{\pcalgostyle{Share}}
-\newcommand*{\unseal}{\pcalgostyle{Unseal}}
-\newcommand*{\view}{\pcalgostyle{View}}
+\newcommand*{\seal}       {\pcalgostyle{Seal}}
+\newcommand*{\share}      {\pcalgostyle{Share}}
+\newcommand*{\unseal}     {\pcalgostyle{Unseal}}
+\newcommand*{\view}       {\pcalgostyle{View}}
 
-\newcommand*{\circuit}{\mathcal{C}}
-\newcommand*{\proveralgo}{\mathcal{P}}
+\newcommand*{\circuit}     {\mathcal{C}}
+\newcommand*{\proveralgo}  {\mathcal{P}}
 \newcommand*{\verifieralgo}{\mathcal{V}}
 
-\newcommand*{\cpa}{\pcalgostyle{CPA}}
+\newcommand*{\cpa} {\pcalgostyle{CPA}}
 \newcommand*{\dlog}{\pcalgostyle{DLOG}}
-\newcommand*{\lwe}{\pcalgostyle{LWE}}
-\newcommand*{\mpc}{\pcalgostyle{MPC}}
-\newcommand*{\pir}{\pcalgostyle{PIR}}
+\newcommand*{\lwe} {\pcalgostyle{LWE}}
+\newcommand*{\mpc} {\pcalgostyle{MPC}}
+\newcommand*{\pir} {\pcalgostyle{PIR}}
 
-\newcommand*{\dtime}{\pccomplexitystyle{DTIME}}
-\newcommand*{\ip}{\pccomplexitystyle{IP}}
+\newcommand*{\dtime} {\pccomplexitystyle{DTIME}}
+\newcommand*{\ip}    {\pccomplexitystyle{IP}}
 \newcommand*{\pspace}{\pccomplexitystyle{PSPACE}}
 
-\newcommand*{\ans}{\key[ans]}
-\newcommand*{\com}{\key[com]}
-\newcommand*{\ct}{\key[ct]}
+\newcommand*{\ans}   {\key[ans]}
+\newcommand*{\com}   {\key[com]}
+\newcommand*{\ct}    {\key[ct]}
 \newcommand*{\cteval}{\tilde{\ct}}
-\newcommand*{\ek}{\key[ek]}
-\newcommand*{\ppar}{\key[pp]}
-\newcommand*{\pt}{\key[pt]}
-\newcommand*{\qu}{\key[qu]}
+\newcommand*{\ek}    {\key[ek]}
+\newcommand*{\ppar}  {\key[pp]}
+\newcommand*{\pt}    {\key[pt]}
+\newcommand*{\qu}    {\key[qu]}
 
 \renewcommand*{\expect}[1]{\operatorname{\expectationname}\del{#1}}
-\renewcommand*{\prob}[1]{\operatorname{\probname}\del{#1}}
+\renewcommand*{\prob}  [1]{\operatorname{\probname}\del{#1}}
 \renewcommand*{\smallO}[1]{o\del{#1}}
 
-\renewcommand*{\kgen}{\pcalgostyle{Key}\gen}
+\renewcommand*{\kgen}  {\pcalgostyle{Key}\gen}
 \renewcommand*{\verify}{\pcalgostyle{Ver}}
 
-\newcommand*{\funs}[2]{\pcalgostyle{Funs}\sbr{#1, #2}} % func1, func2
+\newcommand*{\funs} [2]{\pcalgostyle{Funs}\sbr{#1, #2}} % func1, func2
 \newcommand*{\perms}[1]{\pcalgostyle{Perms}\sbr{#1}} % func
 
 \newcommand*{\cpaadv}[2]{\cpa\pcadvantagename\del{#1, #2}} % adv, func
@@ -665,13 +663,13 @@
 \newcommand*{\prpadv}[2]{\prp\pcadvantagename\del{#1, #2}} % adv, func
 
 \newcommand*{\polylog}[1][\secpar]{\pcpolynomialstyle{polylog}\ifthenelse{\equal{#1}{}}{}{\del{#1}}}
-\newcommand*{\gf}[1]{\pcalgostyle{GF}\sbr{#1}}
+\newcommand*{\gf}     [1]{\pcalgostyle{GF}\sbr{#1}}
 
 \newcommand*{\smallOmegatilde}[1]{\tilde{\omega}\del{#1}}
-\newcommand*{\bigOmegatilde}[1]{\widetilde{\Omega}\del{#1}}
-\newcommand*{\bigThetatilde}[1]{\widetilde{\Theta}\del{#1}}
-\newcommand*{\bigOtilde}[1]{\widetilde{\mathcal{O}}\del{#1}}
-\newcommand*{\smallOtilde}[1]{\tilde{o}\del{#1}}
+\newcommand*{\bigOmegatilde}  [1]{\widetilde{\Omega}\del{#1}}
+\newcommand*{\bigThetatilde}  [1]{\widetilde{\Theta}\del{#1}}
+\newcommand*{\bigOtilde}      [1]{\widetilde{\mathcal{O}}\del{#1}}
+\newcommand*{\smallOtilde}    [1]{\tilde{o}\del{#1}}
 
 % TODO: Switch to zref-clever when it supports Norwegian
 \RequirePackage[
@@ -680,8 +678,9 @@
   noabbrev,
 ]{cleveref} % Must load after amsmath, babel and hyperref
 \creflabelformat{ineq}{#2\textup{(#1)}#3}
-\creflabelformat{inv}{#2\textup{(#1)}#3}
-\newcommand*{\creflastconjunction}{, and~}
+\creflabelformat{inv} {#2\textup{(#1)}#3}
+
+\newcommand*{\creflastconjunction}     {, and~}
 \newcommand*{\creflastgroupconjunction}{, and~}
 
 \makeatletter
@@ -747,22 +746,23 @@
   translate=babel,
 ]{glossaries-extra} % Must load after hyperref
 
-\newcommand*{\symboltype}{symbols}
+\newcommand*{\symboltype}    {symbols}
 \newcommand*{\initialismtype}{initialism}
 \newcommand*{\initialismname}{Initialisms}
+
 \newglossary*{\initialismtype}{\initialismname}
 \NewDocumentCommand{\newinitialism}{O{} m m m}{
   \newabbreviation[type=\initialismtype,#1]{#2}{#3}{#4}
 }
 
-\setabbreviationstyle{long-short}
+\setabbreviationstyle              {long-short}
 \setabbreviationstyle[\acronymtype]{long-short}
 
 \loadglsentries{glossary} % Loading "glossary.tex"
 % \GlsXtrEnableEntryCounting{\acronymtype,abbreviation}{2}
 
 % Minmax these:
-\setlength{\glsdescwidth}{0.54\linewidth}
+\setlength{\glsdescwidth}    {0.54\linewidth}
 \setlength{\glspagelistwidth}{0.18\linewidth}
 
 \renewcommand*{\printglossaries}{
@@ -786,10 +786,10 @@
 
 \newcommand*{\cGlsshort}[1]{\texorpdfstring{\Glsxtrshort*{#1}}{\glsentryshort{#1}}}
 \newcommand*{\cglsshort}[1]{\texorpdfstring{\glsxtrshort*{#1}}{\glsentryshort{#1}}}
-\newcommand*{\cGlslong}[1]{\texorpdfstring{\Glsxtrlong*{#1}}{\glsentryshort{#1}}}
-\newcommand*{\cglslong}[1]{\texorpdfstring{\glsxtrlong*{#1}}{\glsentryshort{#1}}}
-\newcommand*{\cGlsfull}[1]{\texorpdfstring{\Glsxtrfull*{#1}}{\glsentryshort{#1}}}
-\newcommand*{\cglsfull}[1]{\texorpdfstring{\glsxtrfull*{#1}}{\glsentryshort{#1}}}
+\newcommand*{\cGlslong} [1]{\texorpdfstring{\Glsxtrlong*{#1}} {\glsentryshort{#1}}}
+\newcommand*{\cglslong} [1]{\texorpdfstring{\glsxtrlong*{#1}} {\glsentryshort{#1}}}
+\newcommand*{\cGlsfull} [1]{\texorpdfstring{\Glsxtrfull*{#1}} {\glsentryshort{#1}}}
+\newcommand*{\cglsfull} [1]{\texorpdfstring{\glsxtrfull*{#1}} {\glsentryshort{#1}}}
 
 % ------------- General -------------
 \RequirePackage[
@@ -846,20 +846,20 @@
 % \setcounter{secnumdepth}{0}
 \makeatletter
 \ifnum\c@secnumdepth > 0
-  \numberwithin{equation}{section}
-  \numberwithin{figure}{section}
-  \numberwithin{ineq}{section}
-  \numberwithin{inv}{section}
-  \numberwithin{table}{section}
+  \numberwithin{equation} {section}
+  \numberwithin{figure}   {section}
+  \numberwithin{ineq}     {section}
+  \numberwithin{inv}      {section}
+  \numberwithin{table}    {section}
   \numberwithin{algorithm}{section}
-  \numberwithin{listing}{section}
+  \numberwithin{listing}  {section}
   \numberwithin{procedure}{section}
 \fi
 \makeatother
 
 \RequirePackage{titlesec}
 \setcounter{secnumdepth}{5}
-\setcounter{tocdepth}{5}
+\setcounter{tocdepth}   {5}
 
 \titleformat{\paragraph}
   {\normalfont\normalsize\bfseries}
@@ -889,10 +889,10 @@
 
 % These are the default values. Configure if double-digit numbers:
 \makeatletter
-\renewcommand*\l@subsection{\@dottedtocline{2}{1.5em}{2.3em}}
+\renewcommand*\l@subsection   {\@dottedtocline{2}{1.5em}{2.3em}}
 \renewcommand*\l@subsubsection{\@dottedtocline{3}{3.8em}{3.2em}}
-\renewcommand*\l@paragraph{\@dottedtocline{4}{7.0em}{4.1em}}
-\renewcommand*\l@subparagraph{\@dottedtocline{5}{10em}{5em}}
+\renewcommand*\l@paragraph    {\@dottedtocline{4}{7.0em}{4.1em}}
+\renewcommand*\l@subparagraph {\@dottedtocline{5}{10em} {5em}}
 \makeatother
 
 % ------------ Language -------------
@@ -908,54 +908,54 @@
 }
 \addto{\captionsbritish}{
   \floatname{procedure}{Procedure}
-  \renewcommand*{\contentsname}{Table of Contents}
+  \renewcommand*{\contentsname}     {Table of Contents}
   \renewcommand*{\abbreviationsname}{Abbreviations}
   % Change with capitalise
-  \crefname{ineq}{Inequality}{Inequalities}
-  \crefname{inv}{Invariant}{Invariants}
-  \crefname{subsection}{Subsection}{Subsections}
+  \crefname{ineq}         {Inequality}   {Inequalities}
+  \crefname{inv}          {Invariant}    {Invariants}
+  \crefname{subsection}   {Subsection}   {Subsections}
   \crefname{subsubsection}{Subsubsection}{Subsubsections}
 }
 \addto{\captionsnorsk}{
   \floatname{procedure}{Prosedyre}
-  \renewcommand*{\abbreviationsname}{Forkortelser}
-  \renewcommand*{\acronymname}{Akronym}
-  \renewcommand*{\algorithmname}{Algoritme}
-  \renewcommand*{\appendixname}{Vedlegg}
-  \renewcommand*{\blankinfo}{Denne siden er med hensikt blank}
-  \renewcommand*{\contentsname}{Innholdsfortegnelse}
-  \renewcommand*{\creflastconjunction}{ og~}
+  \renewcommand*{\abbreviationsname}       {Forkortelser}
+  \renewcommand*{\acronymname}             {Akronym}
+  \renewcommand*{\algorithmname}           {Algoritme}
+  \renewcommand*{\appendixname}            {Vedlegg}
+  \renewcommand*{\blankinfo}               {Denne siden er med hensikt blank}
+  \renewcommand*{\contentsname}            {Innholdsfortegnelse}
+  \renewcommand*{\creflastconjunction}     { og~}
   \renewcommand*{\creflastgroupconjunction}{ og~}
-  \renewcommand*{\datestring}{Dato}
-  \renewcommand*{\initialismname}{Forbokstavord}
-  \renewcommand*{\keywordsname}{Nøkkelord}
-  \renewcommand*{\listalgorithmname}{Algoritmer}
-  \renewcommand*{\listingscaption}{Opplisting}
-  \renewcommand*{\listoflistingscaption}{Opplistinger}
-  \renewcommand*{\listprocedurename}{Prosedyrer}
-  \renewcommand*{\listtheoremname}{Teorem}
-  \renewcommand*{\proofideatext}{Bevisidé}
-  \renewcommand*{\proofsketchtext}{Bevisutkast}
-  \renewenvironment*{aside}{\begin{avsporing}}{\end{avsporing}}
-  \renewenvironment*{assumption}{\begin{antagelse}}{\end{antagelse}}
-  \renewenvironment*{claim}{\begin{påstand}}{\end{påstand}}
-  \renewenvironment*{corollary}{\begin{korollar}}{\end{korollar}}
-  \renewenvironment*{definition}{\begin{definisjon}}{\end{definisjon}}
-  \renewenvironment*{example}{\begin{eksempel}}{\end{eksempel}}
-  \renewenvironment*{exercise}{\begin{oppgave}}{\end{oppgave}}
-  \renewenvironment*{fact}{\begin{faktum}}{\end{faktum}}
+  \renewcommand*{\datestring}              {Dato}
+  \renewcommand*{\initialismname}          {Forbokstavord}
+  \renewcommand*{\keywordsname}            {Nøkkelord}
+  \renewcommand*{\listalgorithmname}       {Algoritmer}
+  \renewcommand*{\listingscaption}         {Opplisting}
+  \renewcommand*{\listoflistingscaption}   {Opplistinger}
+  \renewcommand*{\listprocedurename}       {Prosedyrer}
+  \renewcommand*{\listtheoremname}         {Teorem}
+  \renewcommand*{\proofideatext}           {Bevisidé}
+  \renewcommand*{\proofsketchtext}         {Bevisutkast}
+  \renewenvironment*{aside}      {\begin{avsporing}}  {\end{avsporing}}
+  \renewenvironment*{assumption} {\begin{antagelse}}  {\end{antagelse}}
+  \renewenvironment*{claim}      {\begin{påstand}}    {\end{påstand}}
+  \renewenvironment*{corollary}  {\begin{korollar}}   {\end{korollar}}
+  \renewenvironment*{definition} {\begin{definisjon}} {\end{definisjon}}
+  \renewenvironment*{example}    {\begin{eksempel}}   {\end{eksempel}}
+  \renewenvironment*{exercise}   {\begin{oppgave}}    {\end{oppgave}}
+  \renewenvironment*{fact}       {\begin{faktum}}     {\end{faktum}}
   \renewenvironment*{observation}{\begin{observasjon}}{\end{observasjon}}
-  \renewenvironment*{principle}{\begin{prinsipp}}{\end{prinsipp}}
-  \renewenvironment*{property}{\begin{egenskap}}{\end{egenskap}}
-  \renewenvironment*{proposition}{\begin{forslag}}{\end{forslag}}
-  \renewenvironment*{remark}{\begin{merk}}{\end{merk}}
-  \renewenvironment*{theorem}{\begin{teorem}}{\end{teorem}}
+  \renewenvironment*{principle}  {\begin{prinsipp}}   {\end{prinsipp}}
+  \renewenvironment*{property}   {\begin{egenskap}}   {\end{egenskap}}
+  \renewenvironment*{proposition}{\begin{forslag}}    {\end{forslag}}
+  \renewenvironment*{remark}     {\begin{merk}}       {\end{merk}}
+  \renewenvironment*{theorem}    {\begin{teorem}}     {\end{teorem}}
   \renewcommand*{\ntnulogo}{NTNU_logo_NB.png}
   \setlength{\parindent}{0em}
   % Change with capitalise
-  \crefname{ineq}{Ulikhet}{Ulikheter}
-  \crefname{inv}{Invariant}{Invarianter}
-  \crefname{subsection}{Underseksjon}{Underseksjoner}
+  \crefname{ineq}         {Ulikhet}     {Ulikheter}
+  \crefname{inv}          {Invariant}   {Invarianter}
+  \crefname{subsection}   {Underseksjon}{Underseksjoner}
   \crefname{subsubsection}{Underseksjon}{Underseksjoner}
 }
 
