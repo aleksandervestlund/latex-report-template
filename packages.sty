@@ -36,11 +36,13 @@
 ]{microtype}
 \RequirePackage[
   a4paper,
+  letterpaper,
   left=30mm,
   right=30mm,
   top=26mm,
   bottom=26mm,
   footskip=14mm,
+  mag=1000,
   marginparsep=0mm,
   marginparwidth=20mm,
 ]{geometry}
@@ -50,6 +52,8 @@
   table,
   xcdraw,
 ]{xcolor}
+\RequirePackage{anyfontsize}
+% TODO: Consider adding libertine support
 
 \newif\ifusenewpx
 \newif\ifusenewtx
@@ -103,7 +107,6 @@
   }
 \fi\fi\fi
 
-\RequirePackage{anyfontsize}
 \setlength{\parskip}{0.8em}
 \sloppy
 
@@ -207,26 +210,54 @@
   teorem
 }
 \declaretheorem[style=remark,numbered=no]{
+  aside,avsporing,
   remark,merk
 }
 
 \newcommand*{\proofideatext}{Proof Idea}
 \newcommand*{\proofsketchtext}{Proof Sketch}
 \newenvironment*{proofidea}
-  {\renewcommand*{\qedsymbol}{}\begin{proof}[\proofideatext]}
+  {\begin{proof}[\proofideatext]\pushQED{}}
   {\end{proof}}
 \newenvironment*{proofsketch}
   {\begin{proof}[\proofsketchtext]}
   {\end{proof}}
 
-\newcommand*{\cif}[1]{\text{if $#1$}}
-\newcommand*{\cotherwise}{\text{otherwise}}
-
 \allowdisplaybreaks
+
 \newlength{\savearraycolsep}
 \setlength{\savearraycolsep}{\arraycolsep}
 \newcommand*{\narrowarray}[1]{\setlength{\arraycolsep}{#1\savearraycolsep}}
 \newcommand*{\normalarray}{\narrowarray{1}}
+% \narrowarray{0.5}
+
+\DeclarePairedDelimiter{\pdelim}{(}{)}
+\DeclarePairedDelimiter{\bdelim}{[}{]}
+\DeclarePairedDelimiter{\cdelim}{\{}{\}}
+\DeclarePairedDelimiter{\rdelim}{\lfloor}{\rceil}
+
+\renewcommand*{\del}[1]{\pdelim*{#1}}
+\renewcommand*{\sbr}[1]{\bdelim*{#1}}
+\renewcommand*{\cbr}[1]{\cdelim*{#1}}
+\renewcommand*{\intoo}[1]{\del{#1}}
+\renewcommand*{\intcc}[1]{\sbr{#1}}
+\newcommand*{\round}[1]{\rdelim*{#1}}
+\newcommand*{\dell}[1]{\!\del{#1}}
+\newcommand*{\dellr}[1]{\dell{#1}\!}
+\newcommand*{\delr}[1]{\del{#1}\!}
+
+% TODO (WIP) (should have paren as innermost instead of outermost):
+% \newcount\autodelimdepth
+% \newcount\autodelimtype
+% \newcommand{\autodelim}[1]{
+%   \global\autodelimtype=\autodelimdepth
+%   \global\divide\autodelimtype by 3
+%   \global\multiply\autodelimtype by 3
+%   \global\autodelimtype=\numexpr\autodelimdepth - \autodelimtype\relax
+%   \global\advance\autodelimdepth by 1
+%   \ifcase\autodelimtype\del{#1}\or\sbr{#1}\or\cbr{#1}\fi
+%   \global\advance\autodelimdepth by -1
+% }
 
 \newcommand*{\defeq}{\overset{\mathrm{def}}{=}}
 \newcommand*{\meq}{\overset{\mathrm{m}}{=}}
@@ -234,30 +265,22 @@
 \newcommand*{\hateq}{\mathrel{\hat{=}}}
 \newcommand*{\whateq}{\mathrel{\widehat{=}}}
 
-\DeclarePairedDelimiter{\paren}{(}{)}
-\DeclarePairedDelimiter{\bracket}{[}{]}
-\DeclarePairedDelimiter{\curly}{\{}{\}}
-\renewcommand*{\del}[1]{\paren*{#1}}
-\newcommand*{\dell}[1]{\!\del{#1}}
-\newcommand*{\dellr}[1]{\dell{#1}\!}
-\newcommand*{\delr}[1]{\del{#1}\!}
-\renewcommand*{\sbr}[1]{\bracket*{#1}}
-\renewcommand*{\cbr}[1]{\curly*{#1}}
-\renewcommand*{\intoo}[1]{\del{#1}}
-\renewcommand*{\intcc}[1]{\sbr{#1}}
-
 \DeclareMathOperator{\Adj}{Adj}
 \DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\law}{Law}
 \DeclareMathOperator{\lcm}{lcm}
 \DeclareMathOperator{\logtwo}{log_2}
 \DeclareMathOperator{\logten}{log_{10}}
 \DeclareMathOperator{\ord}{ord}
 \DeclareMathOperator{\sinc}{sinc}
 \DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\Var}{Var}
 
-\DeclareMathSymbol{\mlq}{\mathord}{operators}{'134}
-\DeclareMathSymbol{\mrq}{\mathord}{operators}{'42}
+\DeclareMathOperator*{\softmax}{softmax}
+\newcommand*{\data}{\mathcal{D}}
+\newcommand*{\loss}{\mathcal{L}}
+\newcommand*{\hypothesis}{\mathcal{H}}
 
 \newcommand*{\compl}{{}^\mathsf{c}\!}
 \newcommand*{\sq}{^2}
@@ -279,13 +302,19 @@
 \renewcommand*{\choose}[2]{\dbinom{#1}{#2}}
 
 \newcommand*{\amortized}[1]{\widehat{#1}}
-\newcommand*{\defn}[1]{\textit{\textbf{\boldmath #1}}}
+\newcommand*{\defn}[1]{\textbf{\textit{#1}}}
 \newcommand*{\expectsq}[1]{\mathbb{E}\sq\del{#1}}
 \newcommand*{\fouriert}[1]{\mathcal{F}\del{#1}}
 \newcommand*{\fourierinvt}[1]{\mathcal{F}\inv\del{#1}}
 \newcommand*{\indicator}[1]{\mathbb{I}\del{#1}}
 \newcommand*{\laplacet}[1]{\mathscr{L}\del{#1}}
 \newcommand*{\laplaceinvt}[1]{\mathscr{L}\inv\del{#1}}
+
+\newcommand*{\mat}[1]{\mathbf{#1}}
+\newcommand*{\vect}[1]{\bm{#1}}
+
+\newcommand*{\cif}[1]{\text{if $#1$}}
+\newcommand*{\cotherwise}{\text{otherwise}}
 
 \newcommand*{\xgets}[2][]{
   \mathrel{
@@ -489,6 +518,23 @@
   oversize,
 }
 
+\newtcolorbox{resultbox}[1][]{
+  boxrule=0.8pt,
+  colback=blue!5,
+  colframe=blue!40!black,
+  fonttitle=\bfseries,
+  sharp corners,
+  title={#1},
+}
+\newtcolorbox{remarkbox}[1][Remark]{
+  boxrule=0.6pt,
+  colback=orange!5,
+  colframe=orange!60!black,
+  fonttitle=\bfseries\itshape,
+  sharp corners,
+  title={#1},
+}
+
 \BeforeBeginEnvironment{minted}{\begin{tcolorbox}}
 \AfterEndEnvironment{minted}{\end{tcolorbox}}
 
@@ -567,10 +613,12 @@
 
 \newcommand*{\answer}{\pcalgostyle{Answer}}
 \newcommand*{\commit}{\pcalgostyle{Com}}
+\newcommand*{\detect}{\pcalgostyle{Detect}}
 \newcommand*{\extend}{\pcalgostyle{Extend}}
 \newcommand*{\gen}{\pcalgostyle{Gen}}
 \newcommand*{\ideal}{\pcalgostyle{Ideal}}
 \newcommand*{\len}{\pcalgostyle{len}}
+\newcommand*{\Mark}{\pcalgostyle{Mark}}
 \newcommand*{\query}{\pcalgostyle{Query}}
 \newcommand*{\real}{\pcalgostyle{Real}}
 \newcommand*{\reconstruct}{\pcalgostyle{Reconstruct}}
@@ -584,12 +632,13 @@
 \newcommand*{\verifieralgo}{\mathcal{V}}
 
 \newcommand*{\cpa}{\pcalgostyle{CPA}}
+\newcommand*{\dlog}{\pcalgostyle{DLOG}}
 \newcommand*{\lwe}{\pcalgostyle{LWE}}
 \newcommand*{\mpc}{\pcalgostyle{MPC}}
 \newcommand*{\pir}{\pcalgostyle{PIR}}
 
 \newcommand*{\dtime}{\pccomplexitystyle{DTIME}}
-\newcommand*{\ipol}{\pccomplexitystyle{IP}}
+\newcommand*{\ip}{\pccomplexitystyle{IP}}
 \newcommand*{\pspace}{\pccomplexitystyle{PSPACE}}
 
 \newcommand*{\ans}{\key[ans]}
@@ -601,8 +650,9 @@
 \newcommand*{\pt}{\key[pt]}
 \newcommand*{\qu}{\key[qu]}
 
-\renewcommand*{\prob}[1]{\operatorname{\probname}\del{#1}}
 \renewcommand*{\expect}[1]{\operatorname{\expectationname}\del{#1}}
+\renewcommand*{\prob}[1]{\operatorname{\probname}\del{#1}}
+\renewcommand*{\smallO}[1]{o\del{#1}}
 
 \renewcommand*{\kgen}{\pcalgostyle{Key}\gen}
 \renewcommand*{\verify}{\pcalgostyle{Ver}}
@@ -610,12 +660,18 @@
 \newcommand*{\funs}[2]{\pcalgostyle{Funs}\sbr{#1, #2}} % func1, func2
 \newcommand*{\perms}[1]{\pcalgostyle{Perms}\sbr{#1}} % func
 
-\newcommand*{\cpaadv}[2]{\cpa\pcadvantagename\sbr{#1, #2}} % adv, func
-\newcommand*{\prfadv}[2]{\prf\pcadvantagename\sbr{#1, #2}} % adv, func
-\newcommand*{\prpadv}[2]{\prp\pcadvantagename\sbr{#1, #2}} % adv, func
+\newcommand*{\cpaadv}[2]{\cpa\pcadvantagename\del{#1, #2}} % adv, func
+\newcommand*{\prfadv}[2]{\prf\pcadvantagename\del{#1, #2}} % adv, func
+\newcommand*{\prpadv}[2]{\prp\pcadvantagename\del{#1, #2}} % adv, func
 
 \newcommand*{\polylog}[1][\secpar]{\pcpolynomialstyle{polylog}\ifthenelse{\equal{#1}{}}{}{\del{#1}}}
 \newcommand*{\gf}[1]{\pcalgostyle{GF}\sbr{#1}}
+
+\newcommand*{\smallOmegatilde}[1]{\tilde{\omega}\del{#1}}
+\newcommand*{\bigOmegatilde}[1]{\widetilde{\Omega}\del{#1}}
+\newcommand*{\bigThetatilde}[1]{\widetilde{\Theta}\del{#1}}
+\newcommand*{\bigOtilde}[1]{\widetilde{\mathcal{O}}\del{#1}}
+\newcommand*{\smallOtilde}[1]{\tilde{o}\del{#1}}
 
 % TODO: Switch to zref-clever when it supports Norwegian
 \RequirePackage[
@@ -880,6 +936,7 @@
   \renewcommand*{\listtheoremname}{Teorem}
   \renewcommand*{\proofideatext}{Bevisidé}
   \renewcommand*{\proofsketchtext}{Bevisutkast}
+  \renewenvironment*{aside}{\begin{avsporing}}{\end{avsporing}}
   \renewenvironment*{assumption}{\begin{antagelse}}{\end{antagelse}}
   \renewenvironment*{claim}{\begin{påstand}}{\end{påstand}}
   \renewenvironment*{corollary}{\begin{korollar}}{\end{korollar}}
@@ -902,6 +959,17 @@
   \crefname{subsubsection}{Underseksjon}{Underseksjoner}
 }
 
+\DeclareSymbolFont{operatorsT1}{T1}{cmr}{m}{n} % Slots: https://en.wikipedia.org/wiki/Cork_encoding
 \ifthenelse{\equal{\languagename}{norsk}}{
   \RequirePackage{icomma}
-}{}
+  \DeclareMathSymbol{\mlq}{\mathord}{operatorsT1}{19}
+  \DeclareMathSymbol{\mrq}{\mathord}{operatorsT1}{20}
+}{\ifthenelse{\equal{\languagename}{american}}{
+  \DeclareMathSymbol{\mlq}{\mathord}{operatorsT1}{16}
+  \DeclareMathSymbol{\mrq}{\mathord}{operatorsT1}{17}
+}{\ifthenelse{\equal{\languagename}{british}}{
+  \DeclareMathSymbol{\mlq}{\mathord}{operatorsT1}{96}
+  \DeclareMathSymbol{\mrq}{\mathord}{operatorsT1}{39}
+}{\PackageError{latex}{Unsupported language}{}}}}
+
+\endinput

@@ -142,7 +142,7 @@ A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \min
 
 The \mintinline{latex}{siunitx} package provides consistent number and unit formatting.
 
-\mintinline{latex}{\footnotenonumber}\footnote{Numbered.} adds an unnumbered footnote\footnotenonumber{Unnumbered.}. The \mintinline{latex}{multirow} and \mintinline{latex}{multicol} packages allow spanning rows and columns:
+\mintinline{latex}{\footnotenonumber}\footnote{Numbered.} adds an unnumbered footnote\footnotenonumber{Unnumbered.}. The\footnote{Numbered again.} \mintinline{latex}{multirow} and \mintinline{latex}{multicol} packages allow spanning rows and columns:
 
 \begin{table}
     \centering
@@ -159,8 +159,8 @@ The \mintinline{latex}{siunitx} package provides consistent number and unit form
 \end{table}
 
 \begin{landscape}
-    \setlength{\tabcolsep}{1.6pt}
-    \renewcommand{\arraystretch}{1.18}
+    \setlength{\tabcolsep}{-0.18pt}
+    \renewcommand{\arraystretch}{1.23}
     \scriptsize
     \begin{longtable}{ | l *{13}{| r} | }
         \caption{Budget \mintinline{latex}{longtable} example.} \label{tab:budget} \\
