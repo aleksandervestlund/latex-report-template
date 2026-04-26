@@ -119,14 +119,10 @@
 \patchcmd{\abstract}{\small}{}{}{}
 
 \newcommand*{\keywordsname}{Keywords}
-\newcommand*{\keywords} [1]{
-  \textbf{\emph{\keywordsname}} \--- #1%
-}
+\newcommand*{\keywords} [1]{\textbf{\emph{\keywordsname}} \--- #1}
 
-\newcommand*{\frontmatter}{
-  \pagenumbering{roman}
-}
-\newcommand*{\mainmatter}{
+\newcommand*{\frontmatter}{\pagenumbering{roman}}
+\newcommand*{\mainmatter} {
   \clearpage
   \pagenumbering{arabic}
 }
@@ -262,17 +258,17 @@
 \newcommand*{\hateq} {\mathrel{\hat{=}}}
 \newcommand*{\whateq}{\mathrel{\widehat{=}}}
 
-\DeclareMathOperator {\Adj}   {Adj}
-\DeclareMathOperator {\Cov}   {Cov}
-\DeclareMathOperator {\law}   {Law}
-\DeclareMathOperator {\lcm}   {lcm}
-\DeclareMathOperator {\logtwo}{log_2}
-\DeclareMathOperator {\logten}{log_{10}}
-\DeclareMathOperator {\ord}   {ord}
-\DeclareMathOperator {\sinc}  {sinc}
-\DeclareMathOperator {\supp}  {supp}
-\DeclareMathOperator {\tr}    {tr}
-\DeclareMathOperator {\Var}   {Var}
+\DeclareMathOperator {\Adj}    {Adj}
+\DeclareMathOperator {\Cov}    {Cov}
+\DeclareMathOperator {\law}    {Law}
+\DeclareMathOperator {\lcm}    {lcm}
+\DeclareMathOperator {\logtwo} {log_2}
+\DeclareMathOperator {\logten} {log_{10}}
+\DeclareMathOperator {\ord}    {ord}
+\DeclareMathOperator {\sinc}   {sinc}
+\DeclareMathOperator {\supp}   {supp}
+\DeclareMathOperator {\tr}     {tr}
+\DeclareMathOperator {\Var}    {Var}
 \DeclareMathOperator*{\softmax}{softmax}
 
 \newcommand*{\data}      {\mathcal{D}}
@@ -300,7 +296,6 @@
 
 \newcommand*{\amortized}  [1]{\widehat{#1}}
 \newcommand*{\defn}       [1]{\textbf{\textit{#1}}}
-\newcommand*{\expectsq}   [1]{\mathbb{E}\sq\del{#1}}
 \newcommand*{\fouriert}   [1]{\mathcal{F}\del{#1}}
 \newcommand*{\fourierinvt}[1]{\mathcal{F}\inv\del{#1}}
 \newcommand*{\indicator}  [1]{\mathbb{I}\del{#1}}
@@ -313,18 +308,20 @@
 \newcommand*{\cif}    [1]{\text{if $#1$}}
 \newcommand*{\cotherwise}{\text{otherwise}}
 
-\newcommand*{\bernoulli}       [1]{\mathrm{Bernoulli}\del{#1}} % p
-\newcommand*{\binomial}        [2]{\mathrm{Bin}\del{#1, #2}} % n, p
-\newcommand*{\chisq}           [1]{\chi\sq_{#1}} % nu
-\newcommand*{\exponential}     [1]{\mathrm{Exp}\del{#1}} % lambda
-\newcommand*{\hypergeometric}  [3]{\mathrm{h}\del{#1, #2, #3}} % N, k, n
-\newcommand*{\gammadist}       [2]{\mathrm{Ga}\del{#1, #2}} % alpha, beta
-\newcommand*{\gaussian}        [2]{\mathcal{N}\del{#1, #2}} % mu, sigma^2
-\newcommand*{\geometric}       [1]{\mathrm{Geom}\del{#1}} % p
+\newcommand*{\bernoulli}       [1]{\mathrm{Bernoulli}\del{#1}}  % p
+\newcommand*{\binomial}        [2]{\mathrm{Bin}\del{#1, #2}}    % n, p
+\newcommand*{\chisq}           [1]{\chi\sq_{#1}}                % nu
+\newcommand*{\exponential}     [1]{\mathrm{Exp}\del{#1}}        % lambda
+\newcommand*{\hypergeometric}  [3]{\mathrm{h}\del{#1, #2, #3}}  % N, k, n
+\newcommand*{\gammadist}       [2]{\mathrm{Ga}\del{#1, #2}}     % alpha, beta
+\newcommand*{\gaussian}        [2]{\mathcal{N}\del{#1, #2}}     % mu, sigma^2
+\newcommand*{\geometric}       [1]{\mathrm{Geom}\del{#1}}       % p
 \newcommand*{\negativebinomial}[2]{\mathrm{NegBin}\del{#1, #2}} % k, p
-\newcommand*{\poisson}         [1]{\mathrm{Pois}\del{#1}} % mu=lambda*t
-\newcommand*{\studentt}        [1]{t_{#1}} % nu
-\newcommand*{\uniform}         [2]{\mathrm{Unif}\del{#1, #2}} % a, b
+\newcommand*{\poisson}         [1]{\mathrm{Pois}\del{#1}}       % mu = lambda*t
+\newcommand*{\studentt}        [1]{t_{#1}}                      % nu
+\newcommand*{\uniform}         [2]{\mathrm{Unif}\del{#1, #2}}   % a, b
+
+\NewDocumentCommand{\kendall}{O{M} O{M} O{1} O{\infty} O{FIFO}}{\mathit{#1}/\mathit{#2}/#3/#4/\mathit{#5}}
 
 \newcommand*{\xgets}[2][]{
   \mathrel{
@@ -430,7 +427,11 @@
 }
 
 \newcommand*{\footnotenonumber}[1]{{\renewcommand*{\thempfn}{}\footnotetext{#1}}}
-\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\setkeys{Gin}{
+  keepaspectratio,
+  totalheight=\textheight,
+  width=\linewidth,
+}
 
 \RequirePackage{floatrow}
 \floatsetup[figure]   {capposition=bottom}
@@ -466,12 +467,8 @@
 \RequirePackage{multicol}
 \setlength{\multicolsep}{0pt}
 
-\newcommand*{\HRule}{
-  \rule{\linewidth}{0.5mm}
-}
-\newcommand*{\specialcell}[2][c]{%
-  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}
-}
+\newcommand*{\HRule}            {\rule{\linewidth}{0.5mm}}
+\newcommand*{\specialcell}[2][c]{\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
 
 \makeatletter
 \newcommand*{\input@path}{{Sections/}}
@@ -640,6 +637,7 @@
 \newcommand*{\pspace}{\pccomplexitystyle{PSPACE}}
 
 \newcommand*{\ans}   {\key[ans]}
+\newcommand*{\cert}  {\key[cert]}
 \newcommand*{\com}   {\key[com]}
 \newcommand*{\ct}    {\key[ct]}
 \newcommand*{\cteval}{\tilde{\ct}}
@@ -652,18 +650,20 @@
 \renewcommand*{\prob}  [1]{\operatorname{\probname}\del{#1}}
 \renewcommand*{\smallO}[1]{o\del{#1}}
 
-\renewcommand*{\kgen}  {\pcalgostyle{Key}\gen}
-\renewcommand*{\verify}{\pcalgostyle{Ver}}
+\renewcommand*{\kgen}    {\pcalgostyle{Key}\gen}
+\renewcommand*{\probname}{\mathbb{P}}
+\renewcommand*{\verify}  {\pcalgostyle{Ver}}
 
-\newcommand*{\funs} [2]{\pcalgostyle{Funs}\sbr{#1, #2}} % func1, func2
-\newcommand*{\perms}[1]{\pcalgostyle{Perms}\sbr{#1}} % func
+\newcommand*{\funs} [2]{\pcalgostyle{Funs}\del{#1, #2}} % func1, func2
+\newcommand*{\perms}[1]{\pcalgostyle{Perms}\del{#1}}    % func
 
 \newcommand*{\cpaadv}[2]{\cpa\pcadvantagename\del{#1, #2}} % adv, func
 \newcommand*{\prfadv}[2]{\prf\pcadvantagename\del{#1, #2}} % adv, func
 \newcommand*{\prpadv}[2]{\prp\pcadvantagename\del{#1, #2}} % adv, func
 
-\newcommand*{\polylog}[1][\secpar]{\pcpolynomialstyle{polylog}\ifthenelse{\equal{#1}{}}{}{\del{#1}}}
-\newcommand*{\gf}     [1]{\pcalgostyle{GF}\sbr{#1}}
+\newcommand*{\expectsq}[1]         {\operatorname{\expectationname}\sq\del{#1}}
+\newcommand*{\gf}      [1]         {\pcalgostyle{GF}\sbr{#1}}
+\newcommand*{\polylog} [1][\secpar]{\pcpolynomialstyle{polylog}\ifthenelse{\equal{#1}{}}{}{\del{#1}}}
 
 \newcommand*{\smallOmegatilde}[1]{\tilde{\omega}\del{#1}}
 \newcommand*{\bigOmegatilde}  [1]{\widetilde{\Omega}\del{#1}}
@@ -686,33 +686,33 @@
 \makeatletter
 \cref@addlanguagedefs{american}{
   \if@cref@capitalise
-    \crefformat{procedure}{Procedure~#2#1#3}
+    \crefformat{procedure}     {Procedure~#2#1#3}
     \crefrangeformat{procedure}{Procedures~#3#1#4 to~#5#2#6}
     \crefmultiformat{procedure}{Procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
   \else
-    \crefformat{procedure}{procedure~#2#1#3}
+    \crefformat{procedure}     {procedure~#2#1#3}
     \crefrangeformat{procedure}{procedures~#3#1#4 to~#5#2#6}
     \crefmultiformat{procedure}{procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
   \fi
 }
 \cref@addlanguagedefs{british}{
   \if@cref@capitalise
-    \crefformat{procedure}{Procedure~#2#1#3}
+    \crefformat{procedure}     {Procedure~#2#1#3}
     \crefrangeformat{procedure}{Procedures~#3#1#4 to~#5#2#6}
     \crefmultiformat{procedure}{Procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
   \else
-    \crefformat{procedure}{procedure~#2#1#3}
+    \crefformat{procedure}     {procedure~#2#1#3}
     \crefrangeformat{procedure}{procedures~#3#1#4 to~#5#2#6}
     \crefmultiformat{procedure}{procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
   \fi
 }
 \cref@addlanguagedefs{norsk}{
   \if@cref@capitalise
-    \crefformat{procedure}{Prosedyre~#2#1#3}
+    \crefformat{procedure}     {Prosedyre~#2#1#3}
     \crefrangeformat{procedure}{Prosedyrer~#3#1#4 til~#5#2#6}
     \crefmultiformat{procedure}{Prosedyrer~#2#1#3}{ og~#2#1#3}{, #2#1#3}{, og~#2#1#3}
   \else
-    \crefformat{procedure}{prosedyre~#2#1#3}
+    \crefformat{procedure}     {prosedyre~#2#1#3}
     \crefrangeformat{procedure}{prosedyrer~#3#1#4 til~#5#2#6}
     \crefmultiformat{procedure}{prosedyrer~#2#1#3}{ og~#2#1#3}{, #2#1#3}{ og~#2#1#3}
   \fi
@@ -739,6 +739,7 @@
 \RequirePackage[
   abbreviations, % Comment out this line if not using abbreviations (can still use initialisms)
   acronyms,
+  automake,
   % nomain, % Decomment this line if not using standard glossary
   shortcuts,
   style=altlong4col,
@@ -784,12 +785,18 @@
   \clearpage
 }
 
-\newcommand*{\cGlsshort}[1]{\texorpdfstring{\Glsxtrshort*{#1}}{\glsentryshort{#1}}}
-\newcommand*{\cglsshort}[1]{\texorpdfstring{\glsxtrshort*{#1}}{\glsentryshort{#1}}}
-\newcommand*{\cGlslong} [1]{\texorpdfstring{\Glsxtrlong*{#1}} {\glsentryshort{#1}}}
-\newcommand*{\cglslong} [1]{\texorpdfstring{\glsxtrlong*{#1}} {\glsentryshort{#1}}}
-\newcommand*{\cGlsfull} [1]{\texorpdfstring{\Glsxtrfull*{#1}} {\glsentryshort{#1}}}
-\newcommand*{\cglsfull} [1]{\texorpdfstring{\glsxtrfull*{#1}} {\glsentryshort{#1}}}
+\newcommand*{\cGlsshort}  [1]{\texorpdfstring{\Glsxtrshort*{#1}}  {\glsentryshort{#1}}}
+\newcommand*{\cglsshort}  [1]{\texorpdfstring{\glsxtrshort*{#1}}  {\glsentryshort{#1}}}
+\newcommand*{\cGlsshortpl}[1]{\texorpdfstring{\Glsxtrshortpl*{#1}}{\glsentryshort{#1}}}
+\newcommand*{\cglsshortpl}[1]{\texorpdfstring{\glsxtrshortpl*{#1}}{\glsentryshort{#1}}}
+\newcommand*{\cGlslong}   [1]{\texorpdfstring{\Glsxtrlong*{#1}}   {\glsentryshort{#1}}}
+\newcommand*{\cglslong}   [1]{\texorpdfstring{\glsxtrlong*{#1}}   {\glsentryshort{#1}}}
+\newcommand*{\cGlslongpl} [1]{\texorpdfstring{\Glsxtrlongpl*{#1}} {\glsentryshort{#1}}}
+\newcommand*{\cglslongpl} [1]{\texorpdfstring{\glsxtrlongpl*{#1}} {\glsentryshort{#1}}}
+\newcommand*{\cGlsfull}   [1]{\texorpdfstring{\Glsxtrfull*{#1}}   {\glsentryshort{#1}}}
+\newcommand*{\cglsfull}   [1]{\texorpdfstring{\glsxtrfull*{#1}}   {\glsentryshort{#1}}}
+\newcommand*{\cGlsfullpl} [1]{\texorpdfstring{\Glsxtrfullpl*{#1}} {\glsentryshort{#1}}}
+\newcommand*{\cglsfullpl} [1]{\texorpdfstring{\glsxtrfullpl*{#1}} {\glsentryshort{#1}}}
 
 % ------------- General -------------
 \RequirePackage[
@@ -802,6 +809,10 @@
   per-mode=symbol,
 ]{siunitx}
 \DeclareSIUnit{\nothing}{\relax}
+\DeclareSIUnit{\bit}    {b}
+\DeclareSIUnit{\packet} {packet}
+\DeclareSIUnit{\packets}{packets}
+\DeclareSIUnit{\symbol} {sym}
 
 \newcommand*{\datestring}{Date}
 \RequirePackage[
@@ -838,9 +849,7 @@
 \renewcommand*{\footrulewidth}{0.1ex}
 \fancyfoot[C]{\thepage}
 
-\newcommand*{\Romannumeral}[1]{%
-  \MakeUppercase{\romannumeral #1}%
-}
+\newcommand*{\Romannumeral}[1]{\MakeUppercase{\romannumeral #1}}
 
 % ---- Numbering within sections ----
 % \setcounter{secnumdepth}{0}
@@ -857,42 +866,28 @@
 \fi
 \makeatother
 
-\RequirePackage{titlesec}
-\setcounter{secnumdepth}{5}
-\setcounter{tocdepth}   {5}
+% \RequirePackage{titlesec}
+% \setcounter{secnumdepth}{5}
+% \setcounter{tocdepth}   {5}
 
-\titleformat{\paragraph}
-  {\normalfont\normalsize\bfseries}
-  {\theparagraph}
-  {\parskip}
-  {}
-\titleformat{\subparagraph}
-  {\normalfont\normalsize\bfseries}
-  {\thesubparagraph}
-  {\parskip}
-  {}
-\titlespacing*{\paragraph}
-  {0pt}
-  {3.25ex plus 1ex minus .2ex}
-  {1.5ex plus .2ex}
-\titlespacing*{\subparagraph}
-  {0pt}
-  {3.25ex plus 1ex minus .2ex}
-  {1.5ex plus .2ex}
+% \titleformat{\paragraph}   {\normalfont\normalsize\bfseries}{\theparagraph}   {\parskip}{}
+% \titleformat{\subparagraph}{\normalfont\normalsize\bfseries}{\thesubparagraph}{\parskip}{}
+% \titlespacing*{\paragraph}   {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+% \titlespacing*{\subparagraph}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 
-\let\oldparagraph\paragraph
-\let\oldsubparagraph\subparagraph
-\newcommand*{\subsubsubsection}   {\oldparagraph}
-\newcommand*{\subsubsubsubsection}{\oldsubparagraph}
-\renewcommand*{\paragraph}        {\oldparagraph*}
-\renewcommand*{\subparagraph}     {\oldsubparagraph*}
+% \let\oldparagraph\paragraph
+% \let\oldsubparagraph\subparagraph
+% \newcommand*{\subsubsubsection}   {\oldparagraph}
+% \newcommand*{\subsubsubsubsection}{\oldsubparagraph}
+% \renewcommand*{\paragraph}        {\oldparagraph*}
+% \renewcommand*{\subparagraph}     {\oldsubparagraph*}
 
-% These are the default values. Configure if double-digit numbers:
+% These are the default values for (ext)article. Configure if double-digit numbers:
 \makeatletter
-\renewcommand*\l@subsection   {\@dottedtocline{2}{1.5em}{2.3em}}
-\renewcommand*\l@subsubsection{\@dottedtocline{3}{3.8em}{3.2em}}
-\renewcommand*\l@paragraph    {\@dottedtocline{4}{7.0em}{4.1em}}
-\renewcommand*\l@subparagraph {\@dottedtocline{5}{10em} {5em}}
+\renewcommand*{\l@subsection}   {\@dottedtocline{2}{1.5em}{2.3em}}
+\renewcommand*{\l@subsubsection}{\@dottedtocline{3}{3.8em}{3.2em}}
+\renewcommand*{\l@paragraph}    {\@dottedtocline{4}{7.0em}{4.1em}}
+\renewcommand*{\l@subparagraph} {\@dottedtocline{5}{10em} {5em}}
 \makeatother
 
 % ------------ Language -------------
@@ -936,6 +931,7 @@
   \renewcommand*{\listtheoremname}         {Teorem}
   \renewcommand*{\proofideatext}           {Bevisidé}
   \renewcommand*{\proofsketchtext}         {Bevisutkast}
+  \renewcommand*{\ntnulogo}                {NTNU_logo_NB.png}
   \renewenvironment*{aside}      {\begin{avsporing}}  {\end{avsporing}}
   \renewenvironment*{assumption} {\begin{antagelse}}  {\end{antagelse}}
   \renewenvironment*{claim}      {\begin{påstand}}    {\end{påstand}}
@@ -950,7 +946,6 @@
   \renewenvironment*{proposition}{\begin{forslag}}    {\end{forslag}}
   \renewenvironment*{remark}     {\begin{merk}}       {\end{merk}}
   \renewenvironment*{theorem}    {\begin{teorem}}     {\end{teorem}}
-  \renewcommand*{\ntnulogo}{NTNU_logo_NB.png}
   \setlength{\parindent}{0em}
   % Change with capitalise
   \crefname{ineq}         {Ulikhet}     {Ulikheter}
