@@ -151,6 +151,8 @@
   \clearpage
 }
 
+\newcommand*{\footnotenonumber}[1]{{\renewcommand*{\thempfn}{}\footnotetext{#1}}}
+
 \RequirePackage[obeyFinal]{todonotes}
 \pretocmd{\todo}{\PackageWarningNoLine{todonotes}{TODO (page \thepage)}}{}{}
 
@@ -426,7 +428,6 @@
   scale=1.0,
 }
 
-\newcommand*{\footnotenonumber}[1]{{\renewcommand*{\thempfn}{}\footnotetext{#1}}}
 \setkeys{Gin}{
   keepaspectratio,
   totalheight=\textheight,
@@ -685,37 +686,19 @@
 
 \makeatletter
 \cref@addlanguagedefs{american}{
-  \if@cref@capitalise
-    \crefformat{procedure}     {Procedure~#2#1#3}
-    \crefrangeformat{procedure}{Procedures~#3#1#4 to~#5#2#6}
-    \crefmultiformat{procedure}{Procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
-  \else
-    \crefformat{procedure}     {procedure~#2#1#3}
-    \crefrangeformat{procedure}{procedures~#3#1#4 to~#5#2#6}
-    \crefmultiformat{procedure}{procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
-  \fi
+  \crefformat{procedure}     {Procedure~#2#1#3}
+  \crefrangeformat{procedure}{Procedures~#3#1#4 to~#5#2#6}
+  \crefmultiformat{procedure}{Procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
 }
 \cref@addlanguagedefs{british}{
-  \if@cref@capitalise
-    \crefformat{procedure}     {Procedure~#2#1#3}
-    \crefrangeformat{procedure}{Procedures~#3#1#4 to~#5#2#6}
-    \crefmultiformat{procedure}{Procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
-  \else
-    \crefformat{procedure}     {procedure~#2#1#3}
-    \crefrangeformat{procedure}{procedures~#3#1#4 to~#5#2#6}
-    \crefmultiformat{procedure}{procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
-  \fi
+  \crefformat{procedure}     {Procedure~#2#1#3}
+  \crefrangeformat{procedure}{Procedures~#3#1#4 to~#5#2#6}
+  \crefmultiformat{procedure}{Procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
 }
 \cref@addlanguagedefs{norsk}{
-  \if@cref@capitalise
-    \crefformat{procedure}     {Prosedyre~#2#1#3}
-    \crefrangeformat{procedure}{Prosedyrer~#3#1#4 til~#5#2#6}
-    \crefmultiformat{procedure}{Prosedyrer~#2#1#3}{ og~#2#1#3}{, #2#1#3}{, og~#2#1#3}
-  \else
-    \crefformat{procedure}     {prosedyre~#2#1#3}
-    \crefrangeformat{procedure}{prosedyrer~#3#1#4 til~#5#2#6}
-    \crefmultiformat{procedure}{prosedyrer~#2#1#3}{ og~#2#1#3}{, #2#1#3}{ og~#2#1#3}
-  \fi
+  \crefformat{procedure}     {Prosedyre~#2#1#3}
+  \crefrangeformat{procedure}{Prosedyrer~#3#1#4 til~#5#2#6}
+  \crefmultiformat{procedure}{Prosedyrer~#2#1#3}{ og~#2#1#3}{, #2#1#3}{, og~#2#1#3}
 }
 
 \newcommand*{\refcheckize}[1]{%
@@ -895,7 +878,6 @@
   \floatname{procedure}{Procedure}
   \renewcommand*{\contentsname}     {Table of Contents}
   \renewcommand*{\abbreviationsname}{Abbreviations}
-  % Change with capitalise
   \crefname{ineq}{Inequality}            {Inequalities}
   \crefname{inva}{Invariant}             {Invariants}
   \crefname{subsection}{Subsection}      {Subsections}
@@ -905,7 +887,6 @@
   \floatname{procedure}{Procedure}
   \renewcommand*{\contentsname}     {Table of Contents}
   \renewcommand*{\abbreviationsname}{Abbreviations}
-  % Change with capitalise
   \crefname{ineq}         {Inequality}   {Inequalities}
   \crefname{inva}         {Invariant}    {Invariants}
   \crefname{subsection}   {Subsection}   {Subsections}
@@ -947,7 +928,6 @@
   \renewenvironment*{remark}     {\begin{merk}}       {\end{merk}}
   \renewenvironment*{theorem}    {\begin{teorem}}     {\end{teorem}}
   \setlength{\parindent}{0em}
-  % Change with capitalise
   \crefname{ineq}         {Ulikhet}     {Ulikheter}
   \crefname{inva}         {Invariant}   {Invarianter}
   \crefname{subsection}   {Underseksjon}{Underseksjoner}
