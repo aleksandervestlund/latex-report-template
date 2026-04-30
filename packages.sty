@@ -108,15 +108,65 @@
 \fi\fi\fi
 
 \setlength{\parskip}{0.8em}
+
+\clubpenalty=10000
+\widowpenalty=10000
+\flushbottom
 \sloppy
 
-\RequirePackage{silence}
-\WarningFilter{latex}{Command \showhyphens has changed.}
-\WarningFilter{latex}{Command `\theH} % https://github.com/arnomi/cryptocode/issues/28
+\newcommand*{\authorstring}{Author}
+\newcommand*{\authorsstring}{Authors}
+\RequirePackage{authblk}
+\RequirePackage{xpatch}
+\renewcommand*{\Affilfont}{\small}
+\renewcommand*{\Authsep}{\\}
+\renewcommand*{\Authand}{\\}
+\renewcommand*{\Authands}{\\}
+\setcounter{Maxaffil}{0}
+
+\makeatletter
+\newcommand{\printauthorstring}{%
+  \ifnum\value{authors}=1
+    \authorstring
+  \else
+    \authorsstring
+  \fi
+}
+\makeatother
+
+\makeatletter
+\newcommand*{\AB@fnsymbols}[1]{%
+  \def\AB@sep{}%
+  \@for\AB@tmp:=#1\do{%
+    \AB@sep\@fnsymbol{\AB@tmp}%
+    \def\AB@sep{,}%
+  }%
+}
+\renewcommand*{\AB@authnote}[1]{}
+\xpatchcmd{\affil} {\AB@note{#1}}{\AB@note{\@fnsymbol{#1}}}           {}{}
+\xpatchcmd{\author}{\AB@note{#1}}{\AB@note{\protect\AB@fnsymbols{#1}}}{}{}
+\makeatother
+
+\makeatletter
+\newcommand*{\department}[1]{\gdef\@department{#1}}
+\newcommand*{\logo}[1]{\gdef\@logo{#1}}
+\newcommand{\course}[2]{%
+  \gdef\@coursecode{#1}%
+  \gdef\@coursename{#2}%
+}
+\newcommand*{\@department}{}
+\newcommand*{\@coursecode}{}
+\newcommand*{\@coursename}{}
+\makeatletter
 
 % ------- Document structure --------
+\RequirePackage{silence} % Must load after authblk
+\WarningFilter{latex}{Command \showhyphens has changed}
+\WarningFilter{latex}{Command `\theH} % https://github.com/arnomi/cryptocode/issues/28
+
 \RequirePackage{etoolbox}
 \patchcmd{\abstract}{\small}{}{}{}
+\AtEndEnvironment{abstract}{\glsresetall}
 
 \newcommand*{\keywordsname}{Keywords}
 \newcommand*{\keywords} [1]{\textbf{\emph{\keywordsname}} \--- #1}
@@ -153,7 +203,10 @@
 
 \newcommand*{\footnotenonumber}[1]{{\renewcommand*{\thempfn}{}\footnotetext{#1}}}
 
-\RequirePackage[obeyFinal]{todonotes}
+\RequirePackage[
+  obeyFinal,
+  textsize=tiny,
+]{todonotes}
 \pretocmd{\todo}{\PackageWarningNoLine{todonotes}{TODO (page \thepage)}}{}{}
 
 % ----------- Mathematics -----------
@@ -187,6 +240,9 @@
   \RequirePackage[cal=cm]{mathalpha}
 \fi
 
+\interdisplaylinepenalty=2500
+\allowdisplaybreaks
+
 % Both English and Norwegian versions:
 \declaretheorem[numberwithin=section]{
   example,eksempel,
@@ -197,6 +253,7 @@
 \declaretheorem[sibling=theorem]{
   assumption,antagelse,
   claim,påstand,
+  conjecture,konjektur,
   corollary,korollar,
   definition,definisjon,
   fact,faktum,
@@ -216,8 +273,6 @@
 \newcommand*{\proofsketchtext}{Proof Sketch}
 \newenvironment*{proofidea}  {\begin{proof}[\proofideatext]\pushQED{}}{\end{proof}}
 \newenvironment*{proofsketch}{\begin{proof}[\proofsketchtext]}        {\end{proof}}
-
-\allowdisplaybreaks
 
 \newlength{\savearraycolsep}
 \setlength{\savearraycolsep}{\arraycolsep}
@@ -325,6 +380,7 @@
 
 \NewDocumentCommand{\kendall}{O{M} O{M} O{1} O{\infty} O{FIFO}}{\mathit{#1}/\mathit{#2}/#3/#4/\mathit{#5}}
 
+\RequirePackage{ifthen}
 \newcommand*{\xgets}[2][]{
   \mathrel{
     \tikz[
@@ -399,7 +455,6 @@
 
 % ------- Figures and tables --------
 \RequirePackage{graphicx}
-\RequirePackage{tabularray}
 \RequirePackage[
   figureposition=bottom,
   font=onehalfspacing,
@@ -407,7 +462,11 @@
   tableposition=top,
 ]{caption}
 \RequirePackage[list=true]{subcaption}
+\RequirePackage{tabularray}
 \RequirePackage[nottoc]{tocbibind}
+
+\RequirePackage{stfloats}
+\fnbelowfloat
 
 \RequirePackage{tikz}
 \usetikzlibrary{calc}
@@ -445,7 +504,7 @@
 \setcounter{dbltopnumber}{2}
 
 \renewcommand*{\topfraction}         {0.7}
-\renewcommand*{\bottomfraction}      {0.3}
+\renewcommand*{\bottomfraction}      {0.4}
 \renewcommand*{\textfraction}        {0.1}
 \renewcommand*{\floatpagefraction}   {0.7}
 \renewcommand*{\dbltopfraction}      {0.7}
@@ -476,9 +535,13 @@
 \makeatother
 
 \graphicspath{{Images/}}
-\newcommand*{\mitlogo} {MIT_logo.png}
-\newcommand*{\ntnulogo}{NTNU_logo_EN.png}
-\newcommand*{\snulogo} {SNU_logo.png}
+\newcommand*{\mitlogo} {MIT_logo}
+\newcommand*{\ntnulogo}{NTNU_logo_EN}
+\newcommand*{\snulogo} {SNU_logo}
+
+\makeatletter
+\newcommand*{\@logo}{\ntnulogo}
+\makeatother
 
 \makeatletter
 \renewcommand*{\listof}[2]{
@@ -878,9 +941,9 @@
   \floatname{procedure}{Procedure}
   \renewcommand*{\contentsname}     {Table of Contents}
   \renewcommand*{\abbreviationsname}{Abbreviations}
-  \crefname{ineq}{Inequality}            {Inequalities}
-  \crefname{inva}{Invariant}             {Invariants}
-  \crefname{subsection}{Subsection}      {Subsections}
+  \crefname{ineq}         {Inequality}   {Inequalities}
+  \crefname{inva}         {Invariant}    {Invariants}
+  \crefname{subsection}   {Subsection}   {Subsections}
   \crefname{subsubsection}{Subsubsection}{Subsubsections}
 }
 \addto{\captionsbritish}{
@@ -898,6 +961,8 @@
   \renewcommand*{\acronymname}             {Akronym}
   \renewcommand*{\algorithmname}           {Algoritme}
   \renewcommand*{\appendixname}            {Vedlegg}
+  \renewcommand*{\authorstring}            {Forfatter}
+  \renewcommand*{\authorsstring}            {Forfattere}
   \renewcommand*{\blankinfo}               {Denne siden er med hensikt blank}
   \renewcommand*{\contentsname}            {Innholdsfortegnelse}
   \renewcommand*{\creflastconjunction}     { og~}
@@ -912,10 +977,11 @@
   \renewcommand*{\listtheoremname}         {Teorem}
   \renewcommand*{\proofideatext}           {Bevisidé}
   \renewcommand*{\proofsketchtext}         {Bevisutkast}
-  \renewcommand*{\ntnulogo}                {NTNU_logo_NB.png}
+  \renewcommand*{\ntnulogo}                {NTNU_logo_NB}
   \renewenvironment*{aside}      {\begin{avsporing}}  {\end{avsporing}}
   \renewenvironment*{assumption} {\begin{antagelse}}  {\end{antagelse}}
   \renewenvironment*{claim}      {\begin{påstand}}    {\end{påstand}}
+  \renewenvironment*{conjecture} {\begin{konjektur}}  {\end{konjektur}}
   \renewenvironment*{corollary}  {\begin{korollar}}   {\end{korollar}}
   \renewenvironment*{definition} {\begin{definisjon}} {\end{definisjon}}
   \renewenvironment*{example}    {\begin{eksempel}}   {\end{eksempel}}

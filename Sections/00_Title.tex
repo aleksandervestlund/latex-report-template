@@ -1,25 +1,24 @@
+\makeatletter
 \begin{titlepage}
     \vbox{}
     \vbox{}
 
     \begin{center}
         \begin{figure}[H]
-            \includegraphics[width=0.4\textwidth]{\mitlogo} % Change to "\ntnulogo"
+            \includegraphics[width=0.4\textwidth]{\@logo} % Change to "\ntnulogo"
         \end{figure}
-        \textsc{
-            \LARGE Department of Electrical Engineering and Computer Science
-        } \\
+        \textsc{\LARGE \@department} \\
         \vspace{1cm}
-        \textsc{\Large{6.xxx \--- xxx}} \\
+        \textsc{\Large{\@coursecode \--- \@coursename}} \\
         \vspace{1cm}
         \HRule % If title goes over more than one line, change to: "\HRule \\"
 
-        {\LARGE{\bfseries{Title}}}
+        {\LARGE{\textbf{\@title}}}
         \HRule
 
         \large{
-            \emph{Author:} \\
-            Aleksander Thornes Vestlund \\
+            \emph{\printauthorstring:} \\
+            \AB@authlist \\
 
             \vspace{0.5cm}
 
@@ -33,3 +32,4 @@
         }
     \end{center}
 \end{titlepage}
+\makeatother
