@@ -114,26 +114,25 @@
 \flushbottom
 \sloppy
 
-\newcommand*{\authorstring}{Author}
-\newcommand*{\authorsstring}{Authors}
+
 \RequirePackage{authblk}
-\RequirePackage{xpatch}
 \renewcommand*{\Affilfont}{\small}
 \renewcommand*{\Authsep}{\\}
 \renewcommand*{\Authand}{\\}
 \renewcommand*{\Authands}{\\}
 \setcounter{Maxaffil}{0}
 
-\makeatletter
-\newcommand{\printauthorstring}{%
-  \ifnum\value{authors}=1
+\newcommand*{\authorstring}{Author}
+\newcommand*{\authorsstring}{Authors}
+\newcommand*{\printauthorstring}{%
+  \ifnum\value{authors} = 1
     \authorstring
   \else
     \authorsstring
   \fi
 }
-\makeatother
 
+\RequirePackage{xpatch}
 \makeatletter
 \newcommand*{\AB@fnsymbols}[1]{%
   \def\AB@sep{}%
@@ -149,8 +148,8 @@
 
 \makeatletter
 \newcommand*{\department}[1]{\gdef\@department{#1}}
-\newcommand*{\logo}[1]{\gdef\@logo{#1}}
-\newcommand{\course}[2]{%
+\newcommand*{\logo}      [1]{\gdef\@logo{#1}}
+\newcommand*{\course}    [2]{%
   \gdef\@coursecode{#1}%
   \gdef\@coursename{#2}%
 }
@@ -309,6 +308,22 @@
 %   \global\advance\autodelimdepth by -1
 % }
 
+\makeatletter
+\newif\if@firstcol
+\def\env@vectorlogic{%
+  \setlength{\arraycolsep}{0pt}
+  \setlength{\extrarowheight}{-1.5pt}
+  \global\@firstcoltrue
+  \let\org@arraycr\@arraycr
+  \def\@arraycr{\global\@firstcoltrue\org@arraycr}%
+  \array{*{20}{>{\if@firstcol\global\@firstcolfalse\else,\,\fi}c}}%
+}
+\newenvironment{comma@array}{\env@vectorlogic}{\endmatrix}
+\makeatother
+
+\RequirePackage{environ}
+\NewEnviron{pvector}{\del{\begin{comma@array}\BODY\end{comma@array}}}
+
 \newcommand*{\defeq} {\overset{\mathrm{def}}{=}}
 \newcommand*{\meq}   {\overset{\mathrm{m}}{=}}
 \newcommand*{\qmeq}  {\overset{?}{=}}
@@ -378,7 +393,9 @@
 \newcommand*{\studentt}        [1]{t_{#1}}                      % nu
 \newcommand*{\uniform}         [2]{\mathrm{Unif}\del{#1, #2}}   % a, b
 
-\NewDocumentCommand{\kendall}{O{M} O{M} O{1} O{\infty} O{FIFO}}{\mathit{#1}/\mathit{#2}/#3/#4/\mathit{#5}}
+\NewDocumentCommand{\kendall}{O{M} O{M} O{1} O{\infty} O{FIFO}}{%
+  \mathit{#1/#2/#3/#4/#5}%
+}
 
 \RequirePackage{ifthen}
 \newcommand*{\xgets}[2][]{
@@ -635,6 +652,10 @@
 \DeclareOuterCiteDelims{cite}    {\bibopenbracket}{\bibclosebracket}
 \DeclareInnerCiteDelims{textcite}{\bibopenbracket}{\bibclosebracket}
 
+\NewDocumentCommand{\textscite}{O{} m}{%
+  \citeauthor{#2}'s [\citeyear[#1]{#2}]%
+}
+
 % ----------- Referencing -----------
 \RequirePackage[
   unicode,
@@ -779,6 +800,7 @@
 
 \refcheckize{\cref}
 \refcheckize{\Cref}
+\refcheckize{\nameref}
 
 \PassOptionsToPackage{lang-warn=false}{datatool-base}
 % More styles: https://www.dickimaw-books.com/gallery/glossaries-styles/
@@ -900,7 +922,7 @@
 % ---- Numbering within sections ----
 % \setcounter{secnumdepth}{0}
 \makeatletter
-\ifnum\c@secnumdepth > 0
+\ifnum\value{secnumdepth} > 0
   \numberwithin{equation} {section}
   \numberwithin{figure}   {section}
   \numberwithin{ineq}     {section}
@@ -962,7 +984,7 @@
   \renewcommand*{\algorithmname}           {Algoritme}
   \renewcommand*{\appendixname}            {Vedlegg}
   \renewcommand*{\authorstring}            {Forfatter}
-  \renewcommand*{\authorsstring}            {Forfattere}
+  \renewcommand*{\authorsstring}           {Forfattere}
   \renewcommand*{\blankinfo}               {Denne siden er med hensikt blank}
   \renewcommand*{\contentsname}            {Innholdsfortegnelse}
   \renewcommand*{\creflastconjunction}     { og~}
