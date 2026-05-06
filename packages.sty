@@ -430,20 +430,24 @@
 \providecommand*{\nsubset}{\centernot\subset}
 \providecommand*{\nsupset}{\centernot\supset}
 
-% Free to choose yourself (should not mix):
+% Some alternatives for ≤ and ≥ (should not mix). 1:
 \renewcommand*{\ge} {\geqslant}
 \renewcommand*{\geq}{\geqslant}
 \renewcommand*{\le} {\leqslant}
 \renewcommand*{\leq}{\leqslant}
+% 2:
 % \renewcommand*{\leqslant}{\leq}
 % \renewcommand*{\geqslant}{\geq}
 
-% Some alts. 1:
+% Some alternatives for empty sets (should not mix). 1:
 \renewcommand*{\emptyset}{\varnothing}
 % 2:
 % \renewcommand*{\varnothing}{\emptyset}
 % 3:
-% \renewcommand*{\emptyset}{\set{}}
+% \renewcommand*{\emptyset}  {\text{Ø}}
+% \renewcommand*{\varnothing}{\text{Ø}}
+% 4:
+% \renewcommand*{\emptyset}  {\set{}}
 % \renewcommand*{\varnothing}{\set{}}
 
 \RequirePackage{fontawesome5} % This is somewhat unnecessary
@@ -857,7 +861,6 @@
 
 \renewcommand*{\printglossaries}{
   \clearpage
-  \FloatBarrier
   \iflanguage{norsk}{
     \printglossary
     \printglossary[type=\acronymtype]
