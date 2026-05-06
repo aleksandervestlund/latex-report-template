@@ -42,7 +42,7 @@
   a4paper,
   letterpaper,
   footskip=14mm,
-  headheight=14.5pt,
+  headheight=5.1mm,
   mag=1000,
   marginparsep=0mm,
   marginparwidth=20mm,
@@ -277,10 +277,8 @@
 
 \newlength{\savearraycolsep}
 \setlength{\savearraycolsep}{\arraycolsep}
-
 \newcommand*{\narrowarray}[1]{\setlength{\arraycolsep}{#1\savearraycolsep}}
 \newcommand*{\normalarray}   {\narrowarray{1}}
-% \narrowarray{0.5}
 
 \DeclarePairedDelimiter{\pdelim}{(}      {)}
 \DeclarePairedDelimiter{\bdelim}{[}      {]}
@@ -313,8 +311,8 @@
 \makeatletter
 \newif\if@firstcol
 \def\env@vectorlogic{%
-  \setlength{\arraycolsep}{0pt}
-  \setlength{\extrarowheight}{-1.5pt}
+  \setlength{\arraycolsep}{0em}
+  \setlength{\extrarowheight}{-0.2em}
   \global\@firstcoltrue
   \let\org@arraycr\@arraycr
   \def\@arraycr{\global\@firstcoltrue\org@arraycr}%
@@ -403,9 +401,9 @@
 \newcommand*{\xgets}[2][]{
   \mathrel{
     \tikz[
-      baseline=-0.426ex,
-      inner sep=0pt,
-      outer sep=0pt,
+      baseline=-0.1873em,
+      inner sep=0em,
+      outer sep=0em,
     ]{
       \ifthenelse{\equal{#2}{}}{}{\node at (0.05,0.15) {\tiny #2};}
       \node at (0, 0) {$\gets$};
@@ -522,7 +520,7 @@
     thick,
   },
   hide obscured x ticks=false,
-  major tick length=5pt,
+  major tick length=0.5em,
   width=\linewidth,
   samples=101,
   scale=1.0,
@@ -551,8 +549,8 @@
 \renewcommand*{\dbltopfraction}      {0.7}
 \renewcommand*{\dblfloatpagefraction}{0.7}
 
-\setlength{\intextsep}   {10pt plus 2pt minus 2pt}
-\setlength{\textfloatsep}{12pt plus 2pt minus 2pt}
+\setlength{\intextsep}   {0.8em plus 0.2em minus 0.2em}
+\setlength{\textfloatsep}{1.0em plus 0.2em minus 0.2em}
 
 \RequirePackage{xspace}
 \RequirePackage[export]{adjustbox}
@@ -566,7 +564,7 @@
 \renewcommand*{\theadfont}{\bfseries}
 
 \RequirePackage{multicol}
-\setlength{\multicolsep}{0pt}
+\setlength{\multicolsep}{0em}
 
 \newcommand*{\HRule}            {\rule{\linewidth}{0.5mm}}
 \newcommand*{\specialcell}[2][c]{\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
@@ -618,7 +616,7 @@
 }
 
 \newtcolorbox{resultbox}[1][]{
-  boxrule=0.8pt,
+  boxrule=0.1em,
   colback=blue!5,
   colframe=blue!40!black,
   fonttitle=\bfseries,
@@ -626,7 +624,7 @@
   title={#1},
 }
 \newtcolorbox{remarkbox}[1][Remark]{
-  boxrule=0.6pt,
+  boxrule=0.05em,
   colback=orange!5,
   colframe=orange!60!black,
   fonttitle=\bfseries\itshape,
@@ -938,8 +936,8 @@
 \RequirePackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\renewcommand*{\headrulewidth}{0.1ex}
-\renewcommand*{\footrulewidth}{0.1ex}
+\renewcommand*{\headrulewidth}{0.05em}
+\renewcommand*{\footrulewidth}{0.05em}
 \fancyfoot[C]{\thepage}
 
 \RequirePackage{nth}
@@ -964,8 +962,8 @@
 
 % \titleformat{\paragraph}   {\normalfont\normalsize\bfseries}{\theparagraph}   {\parskip}{}
 % \titleformat{\subparagraph}{\normalfont\normalsize\bfseries}{\thesubparagraph}{\parskip}{}
-% \titlespacing*{\paragraph}   {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
-% \titlespacing*{\subparagraph}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+% \titlespacing*{\paragraph}   {0em}{1.625em plus 0.5em minus 0.1em}{0.75em plus 0.1em}
+% \titlespacing*{\subparagraph}{0em}{1.625em plus 0.5em minus 0.1em}{0.75em plus 0.1em}
 
 % \let\oldparagraph\paragraph
 % \let\oldsubparagraph\subparagraph
@@ -976,10 +974,10 @@
 
 % These are the default values for (ext)article. Configure if double-digit numbers:
 \makeatletter
-\renewcommand*{\l@subsection}   {\@dottedtocline{2}{1.5em}{2.3em}}
-\renewcommand*{\l@subsubsection}{\@dottedtocline{3}{3.8em}{3.2em}}
-\renewcommand*{\l@paragraph}    {\@dottedtocline{4}{7.0em}{4.1em}}
-\renewcommand*{\l@subparagraph} {\@dottedtocline{5}{10em} {5em}}
+\renewcommand*{\l@subsection}   {\@dottedtocline{2}{1.5em} {2.3em}}
+\renewcommand*{\l@subsubsection}{\@dottedtocline{3}{3.8em} {3.2em}}
+\renewcommand*{\l@paragraph}    {\@dottedtocline{4}{7.0em} {4.1em}}
+\renewcommand*{\l@subparagraph} {\@dottedtocline{5}{10.0em}{5.0em}}
 \makeatother
 
 % ------------ Language -------------
