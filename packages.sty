@@ -35,13 +35,14 @@
   tracking=true,
 ]{microtype}
 \RequirePackage[
-  a4paper,
-  letterpaper,
   left=30mm,
   right=30mm,
-  top=26mm,
   bottom=26mm,
+  top=26mm,
+  a4paper,
+  letterpaper,
   footskip=14mm,
+  headheight=14.5pt,
   mag=1000,
   marginparsep=0mm,
   marginparwidth=20mm,
@@ -114,7 +115,6 @@
 \flushbottom
 \sloppy
 
-
 \RequirePackage{authblk}
 \renewcommand*{\Affilfont}{\small}
 \renewcommand*{\Authsep}{\\}
@@ -179,9 +179,9 @@
 \RequirePackage{appendix}
 \newcommand*{\addappendix}{
   \clearpage
-  \phantomsection
   \appendix
-  \section*{\appendixname}
+  \phantomsection
+  \section*{\appendixname\markboth{\appendixname}{\appendixname}}
   \addcontentsline{toc}{section}{\appendixname}
   \renewcommand*{\thesubsection}{\Alph{subsection}}
 }
@@ -190,7 +190,6 @@
 \newcommand*{\blankinfo}{This page was intentionally left blank}
 \newcommand*{\blankpage}{
   \clearpage
-  \phantomsection
   \hbox{}
   \vfill
   {\centering \MakeUppercase{\blankinfo}\par}
@@ -263,7 +262,10 @@
   proposition,forslag,
   teorem
 }
-\declaretheorem[style=remark,numbered=no]{
+\declaretheorem[
+  numbered=no,
+  style=remark,
+]{
   aside,avsporing,
   remark,merk
 }
@@ -405,9 +407,9 @@
       inner sep=0pt,
       outer sep=0pt,
     ]{
-      \ifthenelse{\equal{#2}{}}{}{\node at (0.05, 0.15) {\tiny #2};}
+      \ifthenelse{\equal{#2}{}}{}{\node at (0.05,0.15) {\tiny #2};}
       \node at (0, 0) {$\gets$};
-      \ifthenelse{\equal{#1}{}}{}{\node at (0.05, -0.1) {\tiny #1};}
+      \ifthenelse{\equal{#1}{}}{}{\node at (0.05,-0.1) {\tiny #1};}
     }
   }
 }
@@ -435,6 +437,14 @@
 \renewcommand*{\leq}{\leqslant}
 % \renewcommand*{\leqslant}{\leq}
 % \renewcommand*{\geqslant}{\geq}
+
+% Some alts. 1:
+\renewcommand*{\emptyset}{\varnothing}
+% 2:
+% \renewcommand*{\varnothing}{\emptyset}
+% 3:
+% \renewcommand*{\emptyset}{\set{}}
+% \renewcommand*{\varnothing}{\set{}}
 
 \RequirePackage{fontawesome5} % This is somewhat unnecessary
 \RequirePackage{newunicodechar}
@@ -472,21 +482,31 @@
 
 % ------- Figures and tables --------
 \RequirePackage{graphicx}
+\RequirePackage[list=true]{subcaption}
+\RequirePackage{tabularray}
+\RequirePackage[nottoc]{tocbibind}
+
 \RequirePackage[
   figureposition=bottom,
   font=onehalfspacing,
   labelfont=bf,
   tableposition=top,
 ]{caption}
-\RequirePackage[list=true]{subcaption}
-\RequirePackage{tabularray}
-\RequirePackage[nottoc]{tocbibind}
+\renewcommand*{\theContinuedFloat}{\alph{ContinuedFloat}}
 
 \RequirePackage{stfloats}
 \fnbelowfloat
 
 \RequirePackage{tikz}
-\usetikzlibrary{calc}
+\usetikzlibrary{
+  arrows.meta,
+  calc,
+  decorations.markings,
+  fit,
+  overlay-beamer-styles,
+}
+
+\RequirePackage[edges]{forest}
 
 \RequirePackage{pgfplots}
 \pgfplotsset{
@@ -652,8 +672,9 @@
 \DeclareOuterCiteDelims{cite}    {\bibopenbracket}{\bibclosebracket}
 \DeclareInnerCiteDelims{textcite}{\bibopenbracket}{\bibclosebracket}
 
+\newcommand*{\possessivestring}{'s}
 \NewDocumentCommand{\textscite}{O{} m}{%
-  \citeauthor{#2}'s [\citeyear[#1]{#2}]%
+  \citeauthor{#2}\possessivestring{} [\citeyear[#1]{#2}]%
 }
 
 % ----------- Referencing -----------
@@ -836,7 +857,7 @@
 
 \renewcommand*{\printglossaries}{
   \clearpage
-  \phantomsection
+  \FloatBarrier
   \iflanguage{norsk}{
     \printglossary
     \printglossary[type=\acronymtype]
@@ -878,6 +899,7 @@
 ]{siunitx}
 \DeclareSIUnit{\nothing}{\relax}
 \DeclareSIUnit{\bit}    {b}
+\DeclareSIUnit{\mile}   {mile}
 \DeclareSIUnit{\packet} {packet}
 \DeclareSIUnit{\packets}{packets}
 \DeclareSIUnit{\symbol} {sym}
@@ -917,11 +939,11 @@
 \renewcommand*{\footrulewidth}{0.1ex}
 \fancyfoot[C]{\thepage}
 
+\RequirePackage{nth}
 \newcommand*{\Romannumeral}[1]{\MakeUppercase{\romannumeral #1}}
 
 % ---- Numbering within sections ----
 % \setcounter{secnumdepth}{0}
-\makeatletter
 \ifnum\value{secnumdepth} > 0
   \numberwithin{equation} {section}
   \numberwithin{figure}   {section}
@@ -932,7 +954,6 @@
   \numberwithin{listing}  {section}
   \numberwithin{procedure}{section}
 \fi
-\makeatother
 
 % \RequirePackage{titlesec}
 % \setcounter{secnumdepth}{5}
@@ -997,6 +1018,7 @@
   \renewcommand*{\listoflistingscaption}   {Opplistinger}
   \renewcommand*{\listprocedurename}       {Prosedyrer}
   \renewcommand*{\listtheoremname}         {Teorem}
+  \renewcommand*{\possessivestring}        {s}
   \renewcommand*{\proofideatext}           {Bevisidé}
   \renewcommand*{\proofsketchtext}         {Bevisutkast}
   \renewcommand*{\ntnulogo}                {NTNU_logo_NB}
