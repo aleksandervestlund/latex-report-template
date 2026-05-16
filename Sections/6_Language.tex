@@ -40,7 +40,7 @@ Symbol entries defined with the \mintinline{latex}{symbols} glossary type are li
 
 \subsection{Lists}
 
-The \mintinline{latex}{enumitem} package provides flexible list customisation. The template configures five levels of nested enumeration:
+The \mintinline{latex}{enumitem} package provides flexible list customization. The template configures five levels of nested enumeration:
 
 \begin{enumerate}
     \item First level (arabic)
@@ -57,6 +57,21 @@ The \mintinline{latex}{enumitem} package provides flexible list customisation. T
         \end{enumerate}
     \end{enumerate}
 \end{enumerate}
+
+For now, only four levels of \mintinline{latex}{itemize} are defined:
+
+\begin{itemize}
+    \item First level.
+    \begin{itemize}
+        \item Second level.
+        \begin{itemize}
+            \item Third level.
+            \begin{itemize}
+                \item Fourth level.
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
 
 Inline lists are sometimes useful: \begin{enumerate*}
     \item Something
