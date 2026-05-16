@@ -3,10 +3,10 @@ This section demonstrates various mathematical features supported by the templat
 
 The \gls{gcd} and \gls{lcm} are fundamental concepts in number theory. The \gls{lcm} of two numbers is the smallest number that is a multiple of both.
 \begin{equation*}
-    \gcd\del{a, b} = \mathit{\glsxtrshort{gcd}}\del{a, b}
+    \gcd\abr{a, b} = \mathit{\glsxtrshort{gcd}}\abr{a, b}
 \end{equation*}
 \begin{equation*}
-    \lcm\del{a, b} = \mathit{\glsxtrshort{lcm}}\del{a, b}
+    \lcm\abr{a, b} = \mathit{\glsxtrshort{lcm}}\abr{a, b}
 \end{equation*}
 
 We begin with examples of custom\-/defined relation symbols:
@@ -27,28 +27,22 @@ Superscript shorthands for inverse and transpose:
 \end{equation*}
 
 The \mintinline{latex}{defn} command is used to introduce a \defn{defined term} in bold italic.
-The \mintinline{latex}{amortized} command denotes amortized cost: $\amortized{T}\del{n}$.
+
+The \mintinline{latex}{amortized} command denotes amortized cost: $\amortized{T}\abr{n}$.
 
 The number of permutations of $r$ items from a set of $n$ elements is given by:
 \begin{equation*}
-    \perm{n}{r} = \frac{n!}{\del{n - r}!}
+    \perm{n}{r} = \frac{n!}{\abr{n - r}!}
 \end{equation*}
 
 The number of combinations (binomial coefficient) is:
 \begin{equation*}
-    \choose{n}{r} = \comb{n}{r} = \frac{n!}{r!\del{n - r}!}
+    \choose{n}{r} = \comb{n}{r} = \frac{n!}{r!\abr{n - r}!}
 \end{equation*}
 
 We can also use floor and ceiling functions:
 \begin{equation*}
     \ceil{1.2} = 2, \qquad \floor{2.2} = 2
-\end{equation*}
-
-The \mintinline{latex}{dell}, \mintinline{latex}{dellr}, and \mintinline{latex}{delr} commands add tight spacing around \mintinline{latex}{del} delimiters:
-\begin{equation*}
-    f\del{x},
-    \quad f\del{x},
-    \quad f\del{x}
 \end{equation*}
 
 The \mintinline{latex}{narrowarray} and \mintinline{latex}{normalarray} commands adjust column spacing in arrays:
@@ -82,16 +76,16 @@ And auto delimiters:
 
 Declared math operators:
 \begin{equation*}
-    \Adj\del{A},
-    \quad \logtwo\del{n},
-    \quad \logten\del{n},
-    \quad \sinc\del{\omega},
+    \Adj\abr{A},
+    \quad \logtwo\abr{n},
+    \quad \logten\abr{n},
+    \quad \sinc\abr{\omega},
     \quad \polylog
 \end{equation*}
 
 Statistical operators:
 \begin{equation*}
-    \Cov\del{X, Y} = \expect{XY} - \expect{X}\expect{Y}
+    \Cov\abr{X, Y} = \expect{XY} - \expect{X}\expect{Y}
 \end{equation*}
 
 The \mintinline{latex}{rgets}/\mintinline{latex}{sgets} commands render a random\-/sampling arrow (if you find a way to create them without using \mintinline{latex}{tikz}, let me know):
@@ -106,7 +100,7 @@ Expected value and variance:
     \expect{X} = \sum_{x \in \mathcal{X}} x \cdot \prob{X = x}
 \end{equation*}
 \begin{equation*}
-    \Var\del{X} = \sigmasq\del{X} = \expect{\dell{X - \expect{X}}^2} = \expectsq{X} - \expect{X}^2
+    \Var\abr{X} = \sigmasq\abr{X} = \expect{\abrl{X - \expect{X}}^2} = \expectsq{X} - \expect{X}^2
 \end{equation*}
 
 \subsection{Sets, Transforms, and Notation}
@@ -162,7 +156,7 @@ The custom \mintinline{latex}{invariant} environment also assigns a label like a
 
 A piecewise\-/defined function using \mintinline{latex}{cif} and \mintinline{latex}{cotherwise}:
 \begin{equation*}
-    f\del{x} = \begin{cases}
+    f\abr{x} = \begin{cases}
         x^2 & \cif{x \geq 0} \\
         -x  & \cotherwise
     \end{cases}
@@ -299,7 +293,7 @@ The template declares a wide range of theorem-like environments using \mintinlin
     We assume throughout that all graphs are simple and undirected.
 \end{assumption}
 \begin{observation}
-    The degree sequence of a tree on $n$ vertices sums to $2\del{n - 1}$.
+    The degree sequence of a tree on $n$ vertices sums to $2\abr{n - 1}$.
 \end{observation}
 \begin{fact}
     Every finite group of prime order is cyclic.

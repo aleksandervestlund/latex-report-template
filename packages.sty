@@ -290,9 +290,6 @@
 \renewcommand*{\intoo}[1]{\del{#1}}
 \renewcommand*{\intcc}[1]{\sbr{#1}}
 \newcommand*{\round}  [1]{\rdelim*{#1}}
-\newcommand*{\dell}   [1]{\!\del{#1}}
-\newcommand*{\dellr}  [1]{\dell{#1}\!}
-\newcommand*{\delr}   [1]{\del{#1}\!}
 
 \makeatletter
 \newcount\ad@currentdepth
@@ -326,6 +323,9 @@
   \expandafter\endgroup\ad@next
 }
 \makeatother
+\newcommand*{\abrl} [1]{\!\abr{#1}}
+\newcommand*{\abrlr}[1]{\abrl{#1}\!}
+\newcommand*{\abrr} [1]{\abr{#1}\!}
 
 \makeatletter
 \newif\if@firstcol
@@ -390,11 +390,11 @@
 
 \newcommand*{\amortized}  [1]{\widehat{#1}}
 \newcommand*{\defn}       [1]{\textbf{\textit{#1}}}
-\newcommand*{\fouriert}   [1]{\mathcal{F}\del{#1}}
-\newcommand*{\fourierinvt}[1]{\mathcal{F}\inv\del{#1}}
-\newcommand*{\indicator}  [1]{\mathbb{I}\del{#1}}
-\newcommand*{\laplacet}   [1]{\mathscr{L}\del{#1}}
-\newcommand*{\laplaceinvt}[1]{\mathscr{L}\inv\del{#1}}
+\newcommand*{\fouriert}   [1]{\mathcal{F}\abr{#1}}
+\newcommand*{\fourierinvt}[1]{\mathcal{F}\inv\abr{#1}}
+\newcommand*{\indicator}  [1]{\mathbb{I}\abr{#1}}
+\newcommand*{\laplacet}   [1]{\mathscr{L}\abr{#1}}
+\newcommand*{\laplaceinvt}[1]{\mathscr{L}\inv\abr{#1}}
 
 \newcommand*{\mat} [1]{\mathbf{#1}}
 \newcommand*{\vect}[1]{\bm{#1}}
@@ -402,18 +402,18 @@
 \newcommand*{\cif}    [1]{\text{if $#1$}}
 \newcommand*{\cotherwise}{\text{otherwise}}
 
-\newcommand*{\bernoulli}       [1]{\mathrm{Bernoulli}\del{#1}}  % p
-\newcommand*{\binomial}        [2]{\mathrm{Bin}\del{#1, #2}}    % n, p
+\newcommand*{\bernoulli}       [1]{\mathrm{Bernoulli}\abr{#1}}  % p
+\newcommand*{\binomial}        [2]{\mathrm{Bin}\abr{#1, #2}}    % n, p
 \newcommand*{\chisq}           [1]{\chi\sq_{#1}}                % nu
-\newcommand*{\exponential}     [1]{\mathrm{Exp}\del{#1}}        % lambda
-\newcommand*{\hypergeometric}  [3]{\mathrm{h}\del{#1, #2, #3}}  % N, k, n
-\newcommand*{\gammadist}       [2]{\mathrm{Ga}\del{#1, #2}}     % alpha, beta
-\newcommand*{\gaussian}        [2]{\mathcal{N}\del{#1, #2}}     % mu, sigma^2
-\newcommand*{\geometric}       [1]{\mathrm{Geom}\del{#1}}       % p
-\newcommand*{\negativebinomial}[2]{\mathrm{NegBin}\del{#1, #2}} % k, p
-\newcommand*{\poisson}         [1]{\mathrm{Pois}\del{#1}}       % mu = lambda*t
+\newcommand*{\exponential}     [1]{\mathrm{Exp}\abr{#1}}        % lambda
+\newcommand*{\hypergeometric}  [3]{\mathrm{h}\abr{#1, #2, #3}}  % N, k, n
+\newcommand*{\gammadist}       [2]{\mathrm{Ga}\abr{#1, #2}}     % alpha, beta
+\newcommand*{\gaussian}        [2]{\mathcal{N}\abr{#1, #2}}     % mu, sigma^2
+\newcommand*{\geometric}       [1]{\mathrm{Geom}\abr{#1}}       % p
+\newcommand*{\negativebinomial}[2]{\mathrm{NegBin}\abr{#1, #2}} % k, p
+\newcommand*{\poisson}         [1]{\mathrm{Pois}\abr{#1}}       % mu = lambda*t
 \newcommand*{\studentt}        [1]{t_{#1}}                      % nu
-\newcommand*{\uniform}         [2]{\mathrm{Unif}\del{#1, #2}}   % a, b
+\newcommand*{\uniform}         [2]{\mathrm{Unif}\abr{#1, #2}}   % a, b
 
 \NewDocumentCommand{\kendall}{O{M} O{M} O{1} O{\infty} O{FIFO}}{%
   \mathit{#1/#2/#3/#4/#5}%
@@ -809,30 +809,30 @@
 \newcommand*{\rchk}  {\key[rchk]}
 \newcommand*{\rchpk} {\key[rchpk]}
 
-\renewcommand*{\expect}[1]{\operatorname{\expectationname}\del{#1}}
-\renewcommand*{\prob}  [1]{\operatorname{\probname}\del{#1}}
-\renewcommand*{\smallO}[1]{o\del{#1}}
+\renewcommand*{\expect}[1]{\operatorname{\expectationname}\abr{#1}}
+\renewcommand*{\prob}  [1]{\operatorname{\probname}\abr{#1}}
+\renewcommand*{\smallO}[1]{\ensuremath{o}\del{#1}}
 
 \renewcommand*{\kgen}    {\pcalgostyle{Key}\gen}
 \renewcommand*{\probname}{\mathbb{P}}
 \renewcommand*{\verify}  {\pcalgostyle{Ver}}
 
-\newcommand*{\funs} [2]{\pcalgostyle{Funs}\del{#1, #2}} % func1, func2
-\newcommand*{\perms}[1]{\pcalgostyle{Perms}\del{#1}}    % func
+\newcommand*{\funs} [2]{\pcalgostyle{Funs}\abr{#1, #2}} % func1, func2
+\newcommand*{\perms}[1]{\pcalgostyle{Perms}\abr{#1}}    % func
 
-\newcommand*{\cpaadv}[2]{\cpa\pcadvantagename\del{#1, #2}} % adv, func
-\newcommand*{\prfadv}[2]{\prf\pcadvantagename\del{#1, #2}} % adv, func
-\newcommand*{\prpadv}[2]{\prp\pcadvantagename\del{#1, #2}} % adv, func
+\newcommand*{\cpaadv}[2]{\cpa\pcadvantagename\abr{#1, #2}} % adv, func
+\newcommand*{\prfadv}[2]{\prf\pcadvantagename\abr{#1, #2}} % adv, func
+\newcommand*{\prpadv}[2]{\prp\pcadvantagename\abr{#1, #2}} % adv, func
 
 \newcommand*{\expectsq}[1]         {\operatorname{\expectationname}\sq\del{#1}}
-\newcommand*{\gf}      [1]         {\pcalgostyle{GF}\sbr{#1}}
+\newcommand*{\gf}      [1]         {\pcalgostyle{GF}\abr{#1}}
 \newcommand*{\polylog} [1][\secpar]{\pcpolynomialstyle{polylog}\ifthenelse{\equal{#1}{}}{}{\del{#1}}}
 
 \newcommand*{\smallOmegatilde}[1]{\tilde{\omega}\del{#1}}
 \newcommand*{\bigOmegatilde}  [1]{\widetilde{\Omega}\del{#1}}
 \newcommand*{\bigThetatilde}  [1]{\widetilde{\Theta}\del{#1}}
 \newcommand*{\bigOtilde}      [1]{\widetilde{\mathcal{O}}\del{#1}}
-\newcommand*{\smallOtilde}    [1]{\tilde{o}\del{#1}}
+\newcommand*{\smallOtilde}    [1]{\tilde{\ensuremath{o}}\del{#1}}
 
 % TODO: Switch to zref-clever when it supports Norwegian
 \RequirePackage[
