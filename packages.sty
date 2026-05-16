@@ -295,7 +295,7 @@
 \newcount\ad@currentdepth
 \newcount\ad@maxdepth
 \newcount\ad@type
-\newcommand*{\abr}[1]{%
+\DeclareRobustCommand*{\abr}[1]{%
   \begingroup
   \def\abr##1{%
     \global\advance\ad@currentdepth by 1\relax
