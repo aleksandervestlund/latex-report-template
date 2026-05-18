@@ -19,13 +19,9 @@
 % +---------------------------------+
 
 % ----------- Page setup ------------
-\RequirePackage[
-  l2tabu,
-  orthodox,
-]{nag}
 \newcommand*{\hmmax}{0}
 \newcommand*{\bmmax}{0}
-\RequirePackage[main=]{babel}
+\RequirePackage{babel}
 \RequirePackage[
   babel,
   factor=1100,
@@ -40,7 +36,6 @@
   bottom=26mm,
   top=26mm,
   a4paper,
-  letterpaper,
   footskip=14mm,
   headheight=5.1mm,
   mag=1000,
@@ -75,7 +70,7 @@
 \fi\fi
 
 \RequirePackage{iftex}
-\ifPDFTeX
+\ifpdftex
   \RequirePackage[utf8]{inputenc}
   \RequirePackage[T1]{fontenc}
   \RequirePackage{morewrites}
@@ -92,14 +87,14 @@
     kerning=true,
     protrusion=true,
   }
-\else\ifLuaTeX
+\else\ifluatex
   \RequirePackage{fontspec}
   \microtypesetup{
     expansion=true,
     kerning=false,
     protrusion=false,
   }
-\else\ifXeTeX
+\else\ifxetex
   \RequirePackage{fontspec}
   \RequirePackage{morewrites}
   \microtypesetup{
@@ -114,7 +109,6 @@
 \clubpenalty=10000
 \widowpenalty=10000
 \flushbottom
-\sloppy
 
 \RequirePackage[blocks]{authblk}
 \renewcommand*{\Affilfont}{\small}
@@ -156,7 +150,7 @@
 \newcommand*{\@department}{}
 \newcommand*{\@coursecode}{}
 \newcommand*{\@coursename}{}
-\makeatletter
+\makeatother
 
 % ------- Document structure --------
 \RequirePackage{silence} % Must load after authblk
@@ -207,15 +201,12 @@
 \pretocmd{\todo}{\PackageWarningNoLine{todonotes}{TODO (page \thepage)}}{}{}
 
 % ----------- Mathematics -----------
-\RequirePackage{latexsym}
-\RequirePackage{amsfonts}
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{amsthm}
 \RequirePackage{bm}
 \RequirePackage{calc}
 \RequirePackage[makeroom]{cancel}
-\RequirePackage{commath}
 \RequirePackage[
   ISO,
   mleftright,
@@ -224,8 +215,8 @@
 \RequirePackage{faktor}
 \RequirePackage{mathrsfs}
 \RequirePackage{mathtools}
-\RequirePackage{nicefrac}
 \RequirePackage{thmtools}
+\RequirePackage{xfrac}
 
 \ifusepxortx
   \let\mathscr\relax
@@ -279,17 +270,22 @@
 \newcommand*{\narrowarray}[1]{\setlength{\arraycolsep}{#1\savearraycolsep}}
 \newcommand*{\normalarray}   {\narrowarray{1}}
 
-\DeclarePairedDelimiter{\pdelim}{(}      {)}
-\DeclarePairedDelimiter{\bdelim}{[}      {]}
-\DeclarePairedDelimiter{\cdelim}{\{}     {\}}
-\DeclarePairedDelimiter{\rdelim}{\lfloor}{\rceil}
+\DeclarePairedDelimiter{\pdelim} {(}      {)}
+\DeclarePairedDelimiter{\bdelim} {[}      {]}
+\DeclarePairedDelimiter{\cdelim} {\{}     {\}}
+\DeclarePairedDelimiter{\pbdelim}{(}      {]}
+\DeclarePairedDelimiter{\bpdelim}{[}      {)}
+\DeclarePairedDelimiter{\rdelim} {\lfloor}{\rceil}
 
-\renewcommand*{\del}  [1]{\pdelim*{#1}}
-\renewcommand*{\sbr}  [1]{\bdelim*{#1}}
-\renewcommand*{\cbr}  [1]{\cdelim*{#1}}
-\renewcommand*{\intoo}[1]{\del{#1}}
-\renewcommand*{\intcc}[1]{\sbr{#1}}
-\newcommand*{\round}  [1]{\rdelim*{#1}}
+\newcommand*{\del}  [1]{\pdelim*{#1}}
+\newcommand*{\sbr}  [1]{\bdelim*{#1}}
+\newcommand*{\cbr}  [1]{\cdelim*{#1}}
+\newcommand*{\set}  [1]{\cdelim*{#1}}
+\newcommand*{\round}[1]{\rdelim*{#1}}
+\newcommand*{\intoo}[1]{\del{#1}}
+\newcommand*{\intcc}[1]{\sbr{#1}}
+\newcommand*{\intoc}[1]{\pbdelim*{#1}}
+\newcommand*{\intco}[1]{\bpdelim*{#1}}
 
 \makeatletter
 \newcount\ad@currentdepth
@@ -323,25 +319,21 @@
   \expandafter\endgroup\ad@next
 }
 \makeatother
-\newcommand*{\abrr} [1]{\abr{#1}\!}
-\newcommand*{\abrlr}[1]{\!\abrr{#1}}
-\newcommand*{\abrl} [1]{\!\abr{#1}}
 
 \makeatletter
 \newif\if@firstcol
 \def\env@vectorlogic{%
   \setlength{\arraycolsep}{0em}
-  \setlength{\extrarowheight}{-0.2em}
+  \setlength{\extrarowheight}{-0.25em}
   \global\@firstcoltrue
   \let\org@arraycr\@arraycr
   \def\@arraycr{\global\@firstcoltrue\org@arraycr}%
   \array{*{20}{>{\if@firstcol\global\@firstcolfalse\else,\,\fi}c}}%
 }
-\newenvironment{comma@array}{\env@vectorlogic}{\endmatrix}
+\newenvironment{comma@array}{\env@vectorlogic}{\endarray}
 \makeatother
 
-\RequirePackage{environ}
-\NewEnviron{pvector}{\del{\begin{comma@array}\BODY\end{comma@array}}}
+\NewDocumentEnvironment{pvector}{+b}{\del{\begin{comma@array}#1\end{comma@array}}}{}
 
 \newcommand*{\defeq} {\overset{\mathrm{def}}{=}}
 \newcommand*{\meq}   {\overset{\mathrm{m}}{=}}
@@ -356,14 +348,14 @@
 \DeclareMathOperator {\Cov}    {Cov}
 \DeclareMathOperator {\law}    {Law}
 \DeclareMathOperator {\lcm}    {lcm}
-\DeclareMathOperator {\logtwo} {log_2}    % Works badly when raising to a power (\logtwo^3)
-\DeclareMathOperator {\logten} {log_{10}} % Works badly when raising to a power
 \DeclareMathOperator {\ord}    {ord}
 \DeclareMathOperator {\sinc}   {sinc}
 \DeclareMathOperator {\supp}   {supp}
 \DeclareMathOperator {\tr}     {tr}
 \DeclareMathOperator {\Var}    {Var}
 \DeclareMathOperator*{\softmax}{softmax}
+\newcommand*{\logtwo}{\log_2}
+\newcommand*{\logten}{\log_{10}}
 
 \newcommand*{\data}      {\mathcal{D}}
 \newcommand*{\loss}      {\mathcal{L}}
@@ -419,7 +411,6 @@
   \mathit{#1/#2/#3/#4/#5}%
 }
 
-\RequirePackage{ifthen}
 \newcommand*{\xgets}[2][]{
   \mathrel{
     \tikz[
@@ -427,9 +418,9 @@
       inner sep=0em,
       outer sep=0em,
     ]{
-      \ifthenelse{\equal{#2}{}}{}{\node at (0.05,0.15) {\tiny #2};}
+      \ifblank{#2}{}{\node at (0.05,0.15) {\tiny #2};}
       \node at (0,0) {$\gets$};
-      \ifthenelse{\equal{#1}{}}{}{\node at (0.05,-0.1) {\tiny #1};}
+      \ifblank{#2}{}{\node at (0.05,-0.1) {\tiny #1};}
     }
   }
 }
@@ -533,7 +524,7 @@
   calc,
   decorations.markings,
   fit,
-  overlay-beamer-styles,
+  % overlay-beamer-styles,
 }
 
 \RequirePackage[edges]{forest}
@@ -549,15 +540,15 @@
   },
   hide obscured x ticks=false,
   major tick length=0.5em,
-  width=\linewidth,
+  width=0.95\linewidth,
   samples=101,
   scale=1.0,
 }
 
 \setkeys{Gin}{
   keepaspectratio,
-  totalheight=\textheight,
-  width=\linewidth,
+  totalheight=0.95\textheight,
+  width=0.95\linewidth,
 }
 
 \RequirePackage{floatrow}
@@ -585,11 +576,8 @@
 \RequirePackage{float} % Must load after floatrow
 \RequirePackage{longtable}
 \RequirePackage{lscape}
-\RequirePackage{multirow}
 \RequirePackage{flafter}
 \RequirePackage[section]{placeins}
-\RequirePackage{makecell}
-\renewcommand*{\theadfont}{\bfseries}
 
 \RequirePackage{multicol}
 \setlength{\multicolsep}{0em}
@@ -698,7 +686,6 @@
   uniquename=init,
   urldate=long,
 ]{biblatex}
-\addbibresource{references.bib} % Comment out this line if not using references
 \DeclareNameAlias{sortname}{family-given}
 \DeclareDelimFormat{nameyeardelim}{\addcomma\space}
 
@@ -714,11 +701,7 @@
 \RequirePackage[
   unicode,
   breaklinks=true,
-  colorlinks,
-  citecolor=black,
-  filecolor=black,
-  linkcolor=black,
-  urlcolor=black,
+  hidelinks,
 ]{hyperref}
 \RequirePackage{bookmark}
 \RequirePackage[norefs]{refcheck} % Remove "norefs" for debugging
@@ -736,6 +719,7 @@
   landau,
   logic,
   mm,
+  % n, % Conflicts with lambda
   notions,
   operators,
   oracles,
@@ -826,7 +810,7 @@
 
 \newcommand*{\expectsq}[1]         {\operatorname{\expectationname}\sq\del{#1}}
 \newcommand*{\gf}      [1]         {\pcalgostyle{GF}\abr{#1}}
-\newcommand*{\polylog} [1][\secpar]{\pcpolynomialstyle{polylog}\ifthenelse{\equal{#1}{}}{}{\del{#1}}}
+\newcommand*{\polylog} [1][\secpar]{\pcpolynomialstyle{polylog}\ifblank{#1}{}{\del{#1}}}
 
 \newcommand*{\smallOmegatilde}[1]{\tilde{\omega}\del{#1}}
 \newcommand*{\bigOmegatilde}  [1]{\widetilde{\Omega}\del{#1}}
@@ -904,13 +888,11 @@
 
 \setabbreviationstyle              {long-short}
 \setabbreviationstyle[\acronymtype]{long-short}
-
-\loadglsentries{glossary} % Loading "glossary.tex"
 % \GlsXtrEnableEntryCounting{\acronymtype,abbreviation}{2}
 
 % Minmax these:
 \setlength{\glsdescwidth}    {0.54\linewidth}
-\setlength{\glspagelistwidth}{0.18\linewidth}
+\setlength{\glspagelistwidth}{0.17\linewidth}
 
 \renewcommand*{\printglossaries}{
   \clearpage
@@ -943,10 +925,13 @@
 \newcommand*{\cglsfullpl} [1]{\texorpdfstring{\glsxtrfullpl*{#1}} {\glsentryshort{#1}}}
 
 % ------------- General -------------
+\RequirePackage{comment}
 \RequirePackage[
   shortcuts,
   wordspacearound,
 ]{extdash}
+\RequirePackage{lipsum}
+\RequirePackage{pdfpages}
 
 \RequirePackage[
   exponent-product=\cdot,
@@ -965,11 +950,8 @@
   nodayofweek,
 ]{datetime}
 
-\RequirePackage{array}
-\RequirePackage{comment}
-\RequirePackage{csquotes} % Must load after minted
-\RequirePackage{lipsum}
-\RequirePackage{pdfpages}
+\RequirePackage[autopunct=true]{csquotes} % Must load after minted
+\MakeOuterQuote{"}
 
 \RequirePackage{booktabs}
 \UseTblrLibrary{booktabs}
@@ -1083,6 +1065,7 @@
   \crefname{subsubsection}{Underseksjon}{Underseksjoner}
 }
 
+\RequirePackage{ifthen}
 \DeclareSymbolFont{operatorsT1}{T1}{cmr}{m}{n} % Slots: https://en.wikipedia.org/wiki/Cork_encoding
 \ifthenelse{\equal{\languagename}{norsk}}{
   \RequirePackage{icomma}

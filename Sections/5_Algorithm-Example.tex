@@ -1,6 +1,6 @@
 \section{Algorithm Examples}
 
-This section demonstrates how to typeset algorithms and procedures using the \mintinline{latex}{algorithm} and \mintinline{latex}{algorithmicx} packages. These environments help describe step\=/by\=/step logic in a readable and consistent format. We show both a procedure and an algorithm with complexity analysis. Procedures are useful for defining reusable logic or utility operations, while algorithms describe complete workflows. The pseudocode supports conditional logic, loops, return values, and comments. \Cref{pro:mult} performs a single multiplication and therefore runs in constant time, $\bigO{1}$.
+This section demonstrates how to typeset algorithms and procedures using the \mintinline{latex}{algorithm} and \mintinline{latex}{algorithmicx} packages. These environments help describe step\-/by\-/step logic in a readable and consistent format. We show both a procedure and an algorithm with complexity analysis. Procedures are useful for defining reusable logic or utility operations, while algorithms describe complete workflows. The pseudocode supports conditional logic, loops, return values, and comments. \Cref{pro:mult} performs a single multiplication and therefore runs in constant time, $\bigO{1}$.
 
 \begin{procedure}[H]
     \caption{Multiply two integers.}
@@ -28,7 +28,7 @@ This section demonstrates how to typeset algorithms and procedures using the \mi
             \While{$N \neq 0$}
                 \If{$N$ is even}
                     \State $X \gets X \cdot X$
-                    \State $N \gets \nicefrac{N}{2}$ \Comment{Divide exponent by 2}
+                    \State $N \gets \sfrac{N}{2}$ \Comment{Divide exponent by 2}
                 \Else
                     \State $y \gets y \cdot X$
                     \State $N \gets N - 1$

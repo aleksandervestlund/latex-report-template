@@ -100,7 +100,7 @@ Expected value and variance:
     \expect{X} = \sum_{x \in \mathcal{X}} x \cdot \prob{X = x}
 \end{equation*}
 \begin{equation*}
-    \Var\del{X} = \sigmasq\del{X} = \expect{\abrl{X - \expect{X}}^2} = \expectsq{X} - \expect{X}^2
+    \Var\del{X} = \sigmasq\del{X} = \expect{\abr{X - \expect{X}}\sq} = \expectsq{X} - \expect{X}^2
 \end{equation*}
 
 \subsection{Sets, Transforms, and Notation}
@@ -118,17 +118,10 @@ Commonly used mathematical sets and transforms:
 Ordinary and partial derivatives using \mintinline{latex}{diffcoeff}:
 \begin{equation*}
     \dl f,
-    \quad \dif f,
     \quad \diff{f}{x},
     \quad \diff[2]{f}{x},
     \quad \diffp{f}{x},
     \quad \diffp{f}{{x}{y}}
-\end{equation*}
-
-Absolute value and norm from \mintinline{latex}{commath}:
-\begin{equation*}
-    \abs{\frac{a}{b}},
-    \quad \norm{\frac{a}{b}}
 \end{equation*}
 
 \subsection{Equations}
@@ -237,7 +230,7 @@ Cancellation of terms using \mintinline{latex}{cancel}:
     \frac{\cancel{a} \cdot b}{\cancel{a}} = b
 \end{equation*}
 
-The \mintinline{latex}{nicefrac} package provides better inline fractions: $\nicefrac{a}{b}$ is cleaner than $\frac{a}{b}$ or $a/b$.
+The \mintinline{latex}{xfrac} package provides better inline fractions: $\sfrac{a}{b}$ is cleaner than $\frac{a}{b}$ or $a/b$.
 
 \subsection{Probability Distributions}
 

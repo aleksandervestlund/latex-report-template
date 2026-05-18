@@ -54,7 +54,7 @@ A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \min
             xticklabels={$-\sqrt{E}$, $0$, $\sqrt{E}$},
             ymax=0.8,
             ytick={0.5},
-            yticklabels={$\nicefrac{1}{2}$},
+            yticklabels={$\sfrac{1}{2}$},
             axis lines=middle,
         ]
             \addplot+{0.5 * exp(-abs(x + 2))};
@@ -72,12 +72,12 @@ A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \min
     \centering
     \begin{subfigure}{0.325\textwidth}
         \begin{tikzpicture}
-            \draw[->] (0,0) -- (3.4,0) node[right] {$t$};
+            \draw[->] (0,0) -- (3.25,0) node[right] {$t$};
             \draw[->] (0,-2) -- (0,2) node[above] {$s_1\del{t}$};
 
-            \node[left] at (0,1.5) {$\nicefrac{A}{2}$};
-            \node[left] at (0,-1.5) {$\nicefrac{-A}{2}$};
-            \node[below] at (1.5,0) {$\nicefrac{T}{2}$};
+            \node[left] at (0,1.5) {$\sfrac{A}{2}$};
+            \node[left] at (0,-1.5) {$\sfrac{-A}{2}$};
+            \node[below] at (1.5,0) {$\sfrac{T}{2}$};
             \node[below] at (3,0) {$T$};
 
             \draw[thick] (0,1.5) -- (1.5,1.5) -- (1.5,-1.5) -- (3,-1.5);
@@ -89,12 +89,12 @@ A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \min
     \hfill
     \begin{subfigure}{0.325\textwidth}
         \begin{tikzpicture}
-            \draw[->] (0,0) -- (3.4,0) node[right] {$t$};
+            \draw[->] (0,0) -- (3.25,0) node[right] {$t$};
             \draw[->] (0,-2) -- (0,2) node[above] {$s_1\del{T - t}$};
 
-            \node[left] at (0,1.5) {$\nicefrac{A}{2}$};
-            \node[left] at (0,-1.5) {$\nicefrac{-A}{2}$};
-            \node[below] at (1.5,0) {$\nicefrac{T}{2}$};
+            \node[left] at (0,1.5) {$\sfrac{A}{2}$};
+            \node[left] at (0,-1.5) {$\sfrac{-A}{2}$};
+            \node[below] at (1.5,0) {$\sfrac{T}{2}$};
             \node[below] at (3,0) {$T$};
 
             \draw[thick] (0,-1.5) -- (1.5,-1.5) -- (1.5,1.5) -- (3,1.5);
@@ -106,13 +106,13 @@ A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \min
     \hfill
     \begin{subfigure}{0.325\textwidth}
         \begin{tikzpicture}
-            \draw[->] (0,0) -- (3.4,0) node[right] {$t$};
+            \draw[->] (0,0) -- (3.25,0) node[right] {$t$};
             \draw[->] (0,-2) -- (0,2) node[above] {$s_2\del{t}$};
     
-            \node[left] at (0,1.5) {$\nicefrac{A}{2}$};
-            \node[left] at (0,-1.5) {$\nicefrac{-A}{2}$};
-            \node[below] at (0.75,0) {$\nicefrac{T}{4}$};
-            \node[below] at (2.25,0) {$\nicefrac{3T}{4}$};
+            \node[left] at (0,1.5) {$\sfrac{A}{2}$};
+            \node[left] at (0,-1.5) {$\sfrac{-A}{2}$};
+            \node[below] at (0.75,0) {$\sfrac{T}{4}$};
+            \node[below] at (2.25,0) {$\sfrac{3T}{4}$};
             \node[below] at (3,0) {$T$};
     
             \draw[thick] (0,-1.5) -- (0.75,-1.5) -- (0.75,1.5) -- (2.25,1.5) -- (2.25,-1.5) -- (3,-1.5);
@@ -129,7 +129,7 @@ A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \min
     \centering
     \begin{tblr}{colspec={lcr}}
         \toprule
-        \thead{Item} & \thead{Quantity} & \thead{Price (€)} \\
+        \textbf{Item} & \textbf{Quantity} & \textbf{Price (€)} \\
         \midrule
         Apples  & $\qty{3}{\kilo\gram}$   & $4.50$ \\
         Bananas & $\qty{1.5}{\kilo\gram}$ & $2.10$ \\
@@ -148,7 +148,7 @@ The \mintinline{latex}{siunitx} package provides consistent number and unit form
     \centering
     \begin{tblr}{colspec={lccc}}
         \toprule
-        \thead{Group} & \thead{A} & \thead{B} & \thead{C} \\
+        \textbf{Group} & \textbf{A} & \textbf{B} & \textbf{C} \\
         \midrule
         \SetCell[r=2]{l} Shared & 1 & 2 & 3 \\
                                 & 4 & 5 & 6 \\
@@ -160,7 +160,7 @@ The \mintinline{latex}{siunitx} package provides consistent number and unit form
 
 \begin{landscape}
     \setlength{\tabcolsep}{-0.18pt}
-    \renewcommand{\arraystretch}{1.23}
+    \renewcommand{\arraystretch}{1.18}
     \scriptsize
     \begin{longtable}{ | l *{13}{| r} | }
         \caption{Budget \mintinline{latex}{longtable} example.} \label{tab:budget} \\
