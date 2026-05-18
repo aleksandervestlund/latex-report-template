@@ -104,11 +104,8 @@
   }
 \fi\fi\fi
 
-\setlength{\parskip}{0.8em}
-
-\clubpenalty=10000
-\widowpenalty=10000
-\flushbottom
+\RequirePackage[all]{nowidow}
+\raggedbottom
 
 \RequirePackage[blocks]{authblk}
 \renewcommand*{\Affilfont}{\small}
@@ -940,15 +937,13 @@
 \DeclareSIUnit{\nothing}{\relax}
 \DeclareSIUnit{\bit}    {b}
 \DeclareSIUnit{\mile}   {mile}
+\DeclareSIUnit{\miles}  {miles}
 \DeclareSIUnit{\packet} {packet}
 \DeclareSIUnit{\packets}{packets}
 \DeclareSIUnit{\symbol} {sym}
 
 \newcommand*{\datestring}{Date}
-\RequirePackage[
-  level,
-  nodayofweek,
-]{datetime}
+\RequirePackage[useregional]{datetime2}
 
 \RequirePackage[autopunct=true]{csquotes} % Must load after minted
 \MakeOuterQuote{"}
@@ -1058,7 +1053,6 @@
   \renewenvironment*{proposition}{\begin{forslag}}    {\end{forslag}}
   \renewenvironment*{remark}     {\begin{merk}}       {\end{merk}}
   \renewenvironment*{theorem}    {\begin{teorem}}     {\end{teorem}}
-  \setlength{\parindent}{0em}
   \crefname{ineq}         {Ulikhet}     {Ulikheter}
   \crefname{inva}         {Invariant}   {Invarianter}
   \crefname{subsection}   {Underseksjon}{Underseksjoner}
@@ -1069,14 +1063,21 @@
 \DeclareSymbolFont{operatorsT1}{T1}{cmr}{m}{n} % Slots: https://en.wikipedia.org/wiki/Cork_encoding
 \ifthenelse{\equal{\languagename}{norsk}}{
   \RequirePackage{icomma}
+  \RequirePackage[tocskip]{parskip}
   \DeclareMathSymbol{\mlq}{\mathord}{operatorsT1}{19}
   \DeclareMathSymbol{\mrq}{\mathord}{operatorsT1}{20}
-}{\ifthenelse{\equal{\languagename}{american}}{
-  \DeclareMathSymbol{\mlq}{\mathord}{operatorsT1}{16}
-  \DeclareMathSymbol{\mrq}{\mathord}{operatorsT1}{17}
-}{\ifthenelse{\equal{\languagename}{british}}{
-  \DeclareMathSymbol{\mlq}{\mathord}{operatorsT1}{96}
-  \DeclareMathSymbol{\mrq}{\mathord}{operatorsT1}{39}
-}{\PackageError{latex}{Unsupported language}{}}}}
+}{%
+  \RequirePackage[
+    indent,
+    tocskip,
+  ]{parskip}
+  \ifthenelse{\equal{\languagename}{american}}{
+    \DeclareMathSymbol{\mlq}{\mathord}{operatorsT1}{16}
+    \DeclareMathSymbol{\mrq}{\mathord}{operatorsT1}{17}
+  }{\ifthenelse{\equal{\languagename}{british}}{
+    \DeclareMathSymbol{\mlq}{\mathord}{operatorsT1}{96}
+    \DeclareMathSymbol{\mrq}{\mathord}{operatorsT1}{39}
+  }{\PackageError{latex}{Unsupported language}{}}}
+}
 
 \endinput
