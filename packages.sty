@@ -167,15 +167,6 @@
   \pagenumbering{arabic}
 }
 
-\RequirePackage{appendix}
-\newcommand*{\addappendix}{
-  \clearpage
-  \appendix
-  \phantomsection
-  \section*{\appendixname\markboth{\appendixname}{\appendixname}}
-  \addcontentsline{toc}{section}{\appendixname}
-}
-
 \RequirePackage{afterpage}
 \newcommand*{\blankinfo}{This page was intentionally left blank}
 \newcommand*{\blankpage}{
@@ -187,6 +178,18 @@
   \thispagestyle{empty}
   \addtocounter{page}{-1}
   \clearpage
+}
+
+\RequirePackage[
+  page,
+  % title,
+  toc,
+]{appendix}
+\BeforeBeginEnvironment{appendices}{
+  \clearpage
+  \crefalias{section}      {appendix}
+  \crefalias{subsection}   {appendix}
+  \crefalias{subsubsection}{appendix}
 }
 
 \newcommand*{\footnotenonumber}[1]{{\renewcommand*{\thempfn}{}\footnotetext{#1}}}
