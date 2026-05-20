@@ -50,37 +50,50 @@
   xcdraw,
 ]{xcolor}
 \RequirePackage{anyfontsize}
-% TODO: Consider adding libertine support
-
-\newif\ifusenewpx
-\newif\ifusenewtx
-\newif\ifusepxortx
-
-% Enable newpx or newtx font:
-% \usenewpxtrue
-% \usenewtxtrue
-
-\ifusenewpx
-  \ifusenewtx
-    \PackageError{packages}{Cannot enable both newpx and newtx fonts}{}
-  \fi
-  \usepxortxtrue
-\else\ifusenewtx
-  \usepxortxtrue
-\fi\fi
 
 \RequirePackage{iftex}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=packages,
+  prefix=packages@
+}
+
+% TODO: Consider adding libertine font support
+\DeclareStringOption[lmodern]   {font}
+\DeclareStringOption[varnothing]{setnotation}
+\DeclareBoolOption{slant}
+\ProcessKeyvalOptions*
+
+\newif\ifusepxortx
+\makeatletter
+\ifdefstring{\packages@font}{newpx}{
+  \usepxortxtrue
+}{
+  \ifdefstring{\packages@font}{newtx}{
+    \usepxortxtrue
+  }{}
+}
+\makeatother
+
 \ifpdftex
   \RequirePackage[utf8]{inputenc}
   \RequirePackage[T1]{fontenc}
   \RequirePackage{morewrites}
-  \ifusenewpx
-    \RequirePackage{newpxtext}
-  \else\ifusenewtx
-    \RequirePackage{newtxtext}
-  \else
+  \makeatletter
+  \ifdefstring{\packages@font}{lmodern}{
     \RequirePackage{lmodern}
-  \fi\fi
+  }{
+    \ifdefstring{\packages@font}{newtx}{
+      \RequirePackage{newtxtext}
+    }{
+      \ifdefstring{\packages@font}{newpx}{
+        \RequirePackage{newpxtext}
+      }{
+        \PackageError{packages}{Undefined font}{}
+      }
+    }
+  }
+  \makeatother
   \pdfgentounicode=1
   \microtypesetup{
     expansion=true,
@@ -154,6 +167,12 @@
 \WarningFilter{latex}{Command \showhyphens has changed}
 \WarningFilter{latex}{Command `\theH} % https://github.com/arnomi/cryptocode/issues/28
 
+\newcommand*{\frontmatter}{\pagenumbering{roman}}
+\newcommand*{\mainmatter} {
+  \clearpage
+  \pagenumbering{arabic}
+}
+
 \RequirePackage{etoolbox}
 \patchcmd{\abstract}{\small}{}{}{}
 \AtEndEnvironment{abstract}{\glsresetall}
@@ -161,10 +180,16 @@
 \newcommand*{\keywordsname}{Keywords}
 \newcommand*{\keywords} [1]{\textbf{\emph{\keywordsname}} \--- #1}
 
-\newcommand*{\frontmatter}{\pagenumbering{roman}}
-\newcommand*{\mainmatter} {
+\RequirePackage[
+  page,
+  % title, % Optional
+  toc,
+]{appendix}
+\BeforeBeginEnvironment{appendices}{
   \clearpage
-  \pagenumbering{arabic}
+  \crefalias{section}      {appendix}
+  \crefalias{subsection}   {appendix}
+  \crefalias{subsubsection}{appendix}
 }
 
 \RequirePackage{afterpage}
@@ -178,18 +203,6 @@
   \thispagestyle{empty}
   \addtocounter{page}{-1}
   \clearpage
-}
-
-\RequirePackage[
-  page,
-  % title,
-  toc,
-]{appendix}
-\BeforeBeginEnvironment{appendices}{
-  \clearpage
-  \crefalias{section}      {appendix}
-  \crefalias{subsection}   {appendix}
-  \crefalias{subsubsection}{appendix}
 }
 
 \newcommand*{\footnotenonumber}[1]{{\renewcommand*{\thempfn}{}\footnotetext{#1}}}
@@ -220,11 +233,11 @@
 
 \ifusepxortx
   \let\mathscr\relax
-  \ifusenewpx
+  \ifdefstring{\packages@font}{newpx}{
     \RequirePackage{newpxmath}
-  \else
+  }{
     \RequirePackage{newtxmath}
-  \fi
+  }
   \RequirePackage[cal=cm]{mathalpha}
 \fi
 
@@ -354,6 +367,7 @@
 \DeclareMathOperator {\tr}     {tr}
 \DeclareMathOperator {\Var}    {Var}
 \DeclareMathOperator*{\softmax}{softmax}
+
 \newcommand*{\logtwo}{\log_2}
 \newcommand*{\logten}{\log_{10}}
 
@@ -441,25 +455,39 @@
 \providecommand*{\nsubset}{\centernot\subset}
 \providecommand*{\nsupset}{\centernot\supset}
 
-% Some alternatives for ≤ and ≥ (should not mix). 1:
-\renewcommand*{\ge} {\geqslant}
-\renewcommand*{\geq}{\geqslant}
-\renewcommand*{\le} {\leqslant}
-\renewcommand*{\leq}{\leqslant}
-% 2:
-% \renewcommand*{\leqslant}{\leq}
-% \renewcommand*{\geqslant}{\geq}
+\makeatletter
+\ifbool{packages@slant}{
+  \renewcommand*{\ge} {\geqslant}
+  \renewcommand*{\geq}{\geqslant}
+  \renewcommand*{\le} {\leqslant}
+  \renewcommand*{\leq}{\leqslant}
+}{
+  \renewcommand*{\leqslant}{\leq}
+  \renewcommand*{\geqslant}{\geq}
+}
+\makeatother
 
-% Some alternatives for empty sets (should not mix). 1:
-\renewcommand*{\emptyset}{\varnothing}
-% 2:
-% \renewcommand*{\varnothing}{\emptyset}
-% 3:
-% \renewcommand*{\emptyset}  {\text{Ø}}
-% \renewcommand*{\varnothing}{\text{Ø}}
-% 4:
-% \renewcommand*{\emptyset}  {\set{}}
-% \renewcommand*{\varnothing}{\set{}}
+\makeatletter
+\ifdefstring{\packages@setnotation}{varnothing}{
+  \renewcommand*{\emptyset}{\varnothing}
+}{
+  \ifdefstring{\packages@setnotation}{emptyset}{
+    \renewcommand*{\varnothing}{\emptyset}
+  }{
+    \ifdefstring{\packages@setnotation}{oe}{
+      \renewcommand*{\emptyset}  {\text{Ø}}
+      \renewcommand*{\varnothing}{\text{Ø}}
+    }{
+      \ifdefstring{\packages@setnotation}{braces}{
+        \renewcommand*{\emptyset}  {\set{}}
+        \renewcommand*{\varnothing}{\set{}}
+      }{
+        \PackageError{packages}{Undefined set notation}{}
+      }
+    }
+  }
+}
+\makeatother
 
 \RequirePackage{fontawesome5} % This is somewhat unnecessary
 \RequirePackage{newunicodechar}

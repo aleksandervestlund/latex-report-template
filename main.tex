@@ -1,6 +1,10 @@
 \RequirePackage[l2tabu,orthodox]{nag}
 \documentclass[12pt,american]{extarticle} % Change to "american", "british" or "norsk"
-\usepackage{packages}                     % Loading "packages.sty"
+\usepackage[
+  font=lmodern, % lmodern, newpx, newtx
+  slant=true,
+  setnotation=varnothing, % varnothing, emptyset, oe, braces
+]{packages}                               % Loading "packages.sty"
 \addbibresource{references.bib}           % Loading "references.bib"
 \loadglsentries{glossary}                 % Loading "glossary.tex"
 
@@ -36,6 +40,5 @@
     \clearpage
     \printbibliography[heading=bibintoc] % Comment out this line if not using references
     \printglossaries % Comment out this line if not using glossaries
-
     \input{99_Appendix}
 \end{document}
