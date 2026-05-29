@@ -61,6 +61,7 @@
 % TODO: Consider adding libertine font support
 \DeclareStringOption[lmodern]   {font}
 \DeclareStringOption[varnothing]{setnotation}
+\DeclareBoolOption{glscount}
 \DeclareBoolOption{slant}
 \ProcessKeyvalOptions*
 
@@ -181,9 +182,9 @@
 \newcommand*{\keywords} [1]{\textbf{\emph{\keywordsname}} \--- #1}
 
 \RequirePackage[
-  page,
+  page,    % Optional
   % title, % Optional
-  toc,
+  toc,     % Optional
 ]{appendix}
 \BeforeBeginEnvironment{appendices}{
   \clearpage
@@ -233,11 +234,13 @@
 
 \ifusepxortx
   \let\mathscr\relax
+  \makeatletter
   \ifdefstring{\packages@font}{newpx}{
     \RequirePackage{newpxmath}
   }{
     \RequirePackage{newtxmath}
   }
+  \makeatother
   \RequirePackage[cal=cm]{mathalpha}
 \fi
 
@@ -359,7 +362,7 @@
 
 \DeclareMathOperator {\Adj}    {Adj}
 \DeclareMathOperator {\Cov}    {Cov}
-\DeclareMathOperator {\law}    {Law}
+\DeclareMathOperator {\Law}    {Law}
 \DeclareMathOperator {\lcm}    {lcm}
 \DeclareMathOperator {\ord}    {ord}
 \DeclareMathOperator {\sinc}   {sinc}
@@ -465,9 +468,7 @@
   \renewcommand*{\leqslant}{\leq}
   \renewcommand*{\geqslant}{\geq}
 }
-\makeatother
 
-\makeatletter
 \ifdefstring{\packages@setnotation}{varnothing}{
   \renewcommand*{\emptyset}{\varnothing}
 }{
@@ -791,14 +792,14 @@
 \newcommand*{\ip}    {\pccomplexitystyle{IP}}
 \newcommand*{\pspace}{\pccomplexitystyle{PSPACE}}
 
-\newcommand*{\groth}    {\pcalgostyle{Groth16}}
-\newcommand*{\mimc}     {\pcalgostyle{MiMC}}
-\newcommand*{\pinocchio}{\pcalgostyle{Pinocchio}}
-\newcommand*{\poseidon} {\pcalgostyle{Poseidon}}
-\newcommand*{\plonk}    {\mathcal{P}\mathfrak{lon}\mathcal{K}}
-\newcommand*{\rescue}   {\pcalgostyle{Rescue}}
-\newcommand*{\sha}      {\pcalgostyle{\glsxtrshort{sha}\pcmathhyphen{}256}}
-\newcommand*{\vision}   {\pcalgostyle{Vision}}
+\newcommand*{\groth}         {\pcalgostyle{Groth16}}
+\newcommand*{\mimc}          {\pcalgostyle{MiMC}}
+\newcommand*{\pinocchio}     {\pcalgostyle{Pinocchio}}
+\newcommand*{\poseidon}      {\pcalgostyle{Poseidon}}
+\newcommand*{\plonk}         {\mathcal{P}\mathfrak{lon}\mathcal{K}}
+\newcommand*{\rescue}        {\pcalgostyle{Rescue}}
+\newcommand*{\shatwofiftysix}{\pcalgostyle{SHA\pcmathhyphen{}256}}
+\newcommand*{\vision}        {\pcalgostyle{Vision}}
 
 \newcommand*{\ans}   {\key[ans]}
 \newcommand*{\cert}  {\key[cert]}
@@ -916,7 +917,12 @@
 
 \setabbreviationstyle              {long-short}
 \setabbreviationstyle[\acronymtype]{long-short}
-% \GlsXtrEnableEntryCounting{\acronymtype,abbreviation}{2}
+
+\makeatletter
+\ifbool{packages@glscount}{
+  \GlsXtrEnableEntryCounting{\acronymtype,abbreviation}{2}
+}{}
+\makeatother
 
 % Minmax these:
 \setlength{\glsdescwidth}    {0.54\linewidth}
@@ -1090,7 +1096,6 @@
   \crefname{subsubsection}{Underseksjon}{Underseksjoner}
 }
 
-\RequirePackage{ifthen}
 \DeclareSymbolFont{operatorsT1}{T1}{cmr}{m}{n} % Slots: https://en.wikipedia.org/wiki/Cork_encoding
 \ifthenelse{\equal{\languagename}{norsk}}{
   \RequirePackage{icomma}
