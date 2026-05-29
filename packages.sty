@@ -182,9 +182,9 @@
 \newcommand*{\keywords} [1]{\textbf{\emph{\keywordsname}} \--- #1}
 
 \RequirePackage[
-  page,    % Optional
+  page,  % Optional
   % title, % Optional
-  toc,     % Optional
+  toc,   % Optional
 ]{appendix}
 \BeforeBeginEnvironment{appendices}{
   \clearpage
@@ -293,12 +293,12 @@
 \DeclarePairedDelimiter{\bpdelim}{[}      {)}
 \DeclarePairedDelimiter{\rdelim} {\lfloor}{\rceil}
 
-\newcommand*{\del}  [1]{\pdelim*{#1}}
+\newcommand*{\pbr}  [1]{\pdelim*{#1}}
 \newcommand*{\sbr}  [1]{\bdelim*{#1}}
 \newcommand*{\cbr}  [1]{\cdelim*{#1}}
 \newcommand*{\set}  [1]{\cdelim*{#1}}
 \newcommand*{\round}[1]{\rdelim*{#1}}
-\newcommand*{\intoo}[1]{\del{#1}}
+\newcommand*{\intoo}[1]{\pbr{#1}}
 \newcommand*{\intcc}[1]{\sbr{#1}}
 \newcommand*{\intoc}[1]{\pbdelim*{#1}}
 \newcommand*{\intco}[1]{\bpdelim*{#1}}
@@ -326,7 +326,7 @@
   \multiply\@tempcnta by 3\relax
   \advance\ad@type by -\@tempcnta\relax
   \ifcase\ad@type
-    \def\ad@next{\del{#1}}%
+    \def\ad@next{\pbr{#1}}%
   \or
     \def\ad@next{\sbr{#1}}%
   \or
@@ -349,7 +349,7 @@
 \newenvironment{comma@array}{\env@vectorlogic}{\endarray}
 \makeatother
 
-\NewDocumentEnvironment{pvector}{+b}{\del{\begin{comma@array}#1\end{comma@array}}}{}
+\NewDocumentEnvironment{pvector}{+b}{\pbr{\begin{comma@array}#1\end{comma@array}}}{}
 
 \newcommand*{\defeq} {\overset{\mathrm{def}}{=}}
 \newcommand*{\meq}   {\overset{\mathrm{m}}{=}}
@@ -490,6 +490,18 @@
 }
 \makeatother
 
+\RequirePackage[
+  exponent-product=\cdot,
+  per-mode=symbol,
+]{siunitx}
+\DeclareSIUnit{\nothing}{\relax}
+\DeclareSIUnit{\bit}    {b}
+\DeclareSIUnit{\mile}   {mile}
+\DeclareSIUnit{\miles}  {miles}
+\DeclareSIUnit{\packet} {packet}
+\DeclareSIUnit{\packets}{packets}
+\DeclareSIUnit{\symbol} {sym}
+
 \RequirePackage{fontawesome5} % This is somewhat unnecessary
 \RequirePackage{newunicodechar}
 \makeatletter
@@ -514,7 +526,7 @@
 \newunicodechar{∏}{\Pi}
 \newunicodechar{∑}{\Sigma}
 \newunicodechar{√}{\surd}
-\newunicodechar{˚}{\textdegree}
+\renewunicodechar{º}{\unit{\degree}}
 \renewunicodechar{±}{\pm}
 
 \RequirePackage{aliascnt}
@@ -824,7 +836,7 @@
 
 \renewcommand*{\expect}[1]{\operatorname{\expectationname}\abr{#1}}
 \renewcommand*{\prob}  [1]{\operatorname{\probname}\abr{#1}}
-\renewcommand*{\smallO}[1]{\ensuremath{o}\del{#1}}
+\renewcommand*{\smallO}[1]{\ensuremath{o}\pbr{#1}}
 
 \renewcommand*{\kgen}    {\pcalgostyle{Key}\gen}
 \renewcommand*{\probname}{\mathbb{P}}
@@ -837,15 +849,15 @@
 \newcommand*{\prfadv}[2]{\prf\pcadvantagename\abr{#1, #2}} % adv, func
 \newcommand*{\prpadv}[2]{\prp\pcadvantagename\abr{#1, #2}} % adv, func
 
-\newcommand*{\expectsq}[1]         {\operatorname{\expectationname}\sq\del{#1}}
+\newcommand*{\expectsq}[1]         {\operatorname{\expectationname}\sq\pbr{#1}}
 \newcommand*{\gf}      [1]         {\pcalgostyle{GF}\abr{#1}}
-\newcommand*{\polylog} [1][\secpar]{\pcpolynomialstyle{polylog}\ifblank{#1}{}{\del{#1}}}
+\newcommand*{\polylog} [1][\secpar]{\pcpolynomialstyle{polylog}\ifblank{#1}{}{\pbr{#1}}}
 
-\newcommand*{\smallOmegatilde}[1]{\tilde{\omega}\del{#1}}
-\newcommand*{\bigOmegatilde}  [1]{\widetilde{\Omega}\del{#1}}
-\newcommand*{\bigThetatilde}  [1]{\widetilde{\Theta}\del{#1}}
-\newcommand*{\bigOtilde}      [1]{\widetilde{\mathcal{O}}\del{#1}}
-\newcommand*{\smallOtilde}    [1]{\tilde{\ensuremath{o}}\del{#1}}
+\newcommand*{\smallOmegatilde}[1]{\tilde{\omega}\pbr{#1}}
+\newcommand*{\bigOmegatilde}  [1]{\widetilde{\Omega}\pbr{#1}}
+\newcommand*{\bigThetatilde}  [1]{\widetilde{\Theta}\pbr{#1}}
+\newcommand*{\bigOtilde}      [1]{\widetilde{\mathcal{O}}\pbr{#1}}
+\newcommand*{\smallOtilde}    [1]{\tilde{\ensuremath{o}}\pbr{#1}}
 
 % TODO: Switch to zref-clever when it supports Norwegian
 \RequirePackage[
@@ -966,18 +978,6 @@
 ]{extdash}
 \RequirePackage{lipsum}
 \RequirePackage{pdfpages}
-
-\RequirePackage[
-  exponent-product=\cdot,
-  per-mode=symbol,
-]{siunitx}
-\DeclareSIUnit{\nothing}{\relax}
-\DeclareSIUnit{\bit}    {b}
-\DeclareSIUnit{\mile}   {mile}
-\DeclareSIUnit{\miles}  {miles}
-\DeclareSIUnit{\packet} {packet}
-\DeclareSIUnit{\packets}{packets}
-\DeclareSIUnit{\symbol} {sym}
 
 \newcommand*{\datestring}{Date}
 \RequirePackage[useregional]{datetime2}

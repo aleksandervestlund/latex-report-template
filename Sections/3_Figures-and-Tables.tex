@@ -58,13 +58,13 @@ A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \min
             axis lines=middle,
         ]
             \addplot+{0.5 * exp(-abs(x + 2))};
-            \addlegendentry{$f_{r | s}\del{r | s_0} = \frac{1}{2} e^{-\abs{r + \sqrt{E}}}$}
+            \addlegendentry{$f_{r | s}\pbr{r | s_0} = \frac{1}{2} e^{-\abs{r + \sqrt{E}}}$}
 
             \addplot+{0.5 * exp(-abs(x - 2))};
-            \addlegendentry{$f_{r | s}\del{r | s_1} = \frac{1}{2} e^{-\abs{r - \sqrt{E}}}$}
+            \addlegendentry{$f_{r | s}\pbr{r | s_1} = \frac{1}{2} e^{-\abs{r - \sqrt{E}}}$}
         \end{axis}
     \end{tikzpicture}
-    \caption{$f_{r | s}\del{r | s_i}$.}
+    \caption{$f_{r | s}\pbr{r | s_i}$.}
     \label{fig:pgfplot}
 \end{figure}
 
@@ -73,7 +73,7 @@ A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \min
     \begin{subfigure}{0.325\textwidth}
         \begin{tikzpicture}
             \draw[->] (0,0) -- (3.25,0) node[right] {$t$};
-            \draw[->] (0,-2) -- (0,2) node[above] {$s_1\del{t}$};
+            \draw[->] (0,-2) -- (0,2) node[above] {$s_1\pbr{t}$};
 
             \node[left] at (0,1.5) {$\sfrac{A}{2}$};
             \node[left] at (0,-1.5) {$\sfrac{-A}{2}$};
@@ -84,13 +84,13 @@ A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \min
             \draw[dashed] (0,-1.5) -- (1.5,-1.5);
             \draw[dashed] (3,-1.5) -- (3,0);
         \end{tikzpicture}
-        \caption{$s_1\del{t}$.}
+        \caption{$s_1\pbr{t}$.}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.325\textwidth}
         \begin{tikzpicture}
             \draw[->] (0,0) -- (3.25,0) node[right] {$t$};
-            \draw[->] (0,-2) -- (0,2) node[above] {$s_1\del{T - t}$};
+            \draw[->] (0,-2) -- (0,2) node[above] {$s_1\pbr{T - t}$};
 
             \node[left] at (0,1.5) {$\sfrac{A}{2}$};
             \node[left] at (0,-1.5) {$\sfrac{-A}{2}$};
@@ -101,13 +101,13 @@ A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \min
             \draw[dashed] (0,1.5) -- (1.5,1.5);
             \draw[dashed] (3,1.5) -- (3,0);
         \end{tikzpicture}
-        \caption{$s_1\del{T - t}$.}
+        \caption{$s_1\pbr{T - t}$.}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.325\textwidth}
         \begin{tikzpicture}
             \draw[->] (0,0) -- (3.25,0) node[right] {$t$};
-            \draw[->] (0,-2) -- (0,2) node[above] {$s_2\del{t}$};
+            \draw[->] (0,-2) -- (0,2) node[above] {$s_2\pbr{t}$};
     
             \node[left] at (0,1.5) {$\sfrac{A}{2}$};
             \node[left] at (0,-1.5) {$\sfrac{-A}{2}$};
@@ -119,7 +119,7 @@ A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \min
             \draw[dashed] (0,1.5) -- (0.75,1.5);
             \draw[dashed] (3,-1.5) -- (3,0);
         \end{tikzpicture}
-        \caption{$s_2\del{t} = s_2\del{T - t}$.}
+        \caption{$s_2\pbr{t} = s_2\pbr{T - t}$.}
     \end{subfigure}
     \caption{Pulses and their matched filters.}
     \label{fig:pulses}
@@ -127,7 +127,7 @@ A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \min
 
 \begin{table}
     \centering
-    \begin{tblr}{colspec={lcr}}
+    \begin{tblr}{colspec={lrr}}
         \toprule
         \textbf{Item} & \textbf{Quantity} & \textbf{Price (€)} \\
         \midrule

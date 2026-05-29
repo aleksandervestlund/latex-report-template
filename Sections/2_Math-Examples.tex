@@ -3,10 +3,10 @@ This section demonstrates various mathematical features supported by the templat
 
 The \gls{gcd} and \gls{lcm} are fundamental concepts in number theory. The \gls{lcm} of two numbers is the smallest number that is a multiple of both.
 \begin{equation*}
-    \gcd\del{a, b} = \mathit{\glsxtrshort{gcd}}\del{a, b}
+    \gcd\pbr{a, b} = \mathit{\glsxtrshort{gcd}}\pbr{a, b}
 \end{equation*}
 \begin{equation*}
-    \lcm\del{a, b} = \mathit{\glsxtrshort{lcm}}\del{a, b}
+    \lcm\pbr{a, b} = \mathit{\glsxtrshort{lcm}}\pbr{a, b}
 \end{equation*}
 
 We begin with examples of custom\-/defined relation symbols:
@@ -28,16 +28,16 @@ Superscript shorthands for inverse and transpose:
 
 The \mintinline{latex}{defn} command is used to introduce a \defn{defined term} in bold italic.
 
-The \mintinline{latex}{amortized} command denotes amortized cost: $\amortized{T}\del{n}$.
+The \mintinline{latex}{amortized} command denotes amortized cost: $\amortized{T}\pbr{n}$.
 
 The number of permutations of $r$ items from a set of $n$ elements is given by:
 \begin{equation*}
-    \perm{n}{r} = \frac{n!}{\del{n - r}!}
+    \perm{n}{r} = \frac{n!}{\pbr{n - r}!}
 \end{equation*}
 
 The number of combinations (binomial coefficient) is:
 \begin{equation*}
-    \choose{n}{r} = \comb{n}{r} = \frac{n!}{r!\del{n - r}!}
+    \choose{n}{r} = \comb{n}{r} = \frac{n!}{r!\pbr{n - r}!}
 \end{equation*}
 
 We can also use floor and ceiling functions:
@@ -76,16 +76,16 @@ And auto delimiters:
 
 Declared math operators:
 \begin{equation*}
-    \Adj\del{A},
-    \quad \logtwo\del{n},
-    \quad \logten\del{n},
-    \quad \sinc\del{\omega},
+    \Adj\pbr{A},
+    \quad \logtwo\pbr{n},
+    \quad \logten\pbr{n},
+    \quad \sinc\pbr{\omega},
     \quad \polylog
 \end{equation*}
 
 Statistical operators:
 \begin{equation*}
-    \Cov\del{X, Y} = \expect{XY} - \expect{X}\expect{Y}
+    \Cov\pbr{X, Y} = \expect{XY} - \expect{X}\expect{Y}
 \end{equation*}
 
 The \mintinline{latex}{rgets}/\mintinline{latex}{sgets} commands render a random\-/sampling arrow (if you find a way to create them without using \mintinline{latex}{tikz}, let me know):
@@ -100,7 +100,7 @@ Expected value and variance:
     \expect{X} = \sum_{x \in \mathcal{X}} x \cdot \prob{X = x}
 \end{equation*}
 \begin{equation*}
-    \Var\del{X} = \sigmasq\del{X} = \expect{\abr{X - \expect{X}}\sq} = \expectsq{X} - \expect{X}^2
+    \Var\pbr{X} = \sigmasq\pbr{X} = \expect{\abr{X - \expect{X}}\sq} = \expectsq{X} - \expect{X}^2
 \end{equation*}
 
 \subsection{Sets, Transforms, and Notation}
@@ -125,9 +125,8 @@ Ordinary and partial derivatives using \mintinline{latex}{diffcoeff}:
 \end{equation*}
 
 \subsection{Equations}
-\label{subsec:equations}
 
-An equation with a label and number, demonstrating \mintinline{latex}{amsmath}: \cref{subsec:equations}
+An equation with a label and number, demonstrating \mintinline{latex}{amsmath}:
 \begin{equation}\label{eq:euler}
     e^{i\pi} + 1 = 0
 \end{equation}
@@ -149,7 +148,7 @@ The custom \mintinline{latex}{invariant} environment also assigns a label like a
 
 A piecewise\-/defined function using \mintinline{latex}{cif} and \mintinline{latex}{cotherwise}:
 \begin{equation*}
-    f\del{x} = \begin{cases}
+    f\pbr{x} = \begin{cases}
         x^2 & \cif{x \geq 0} \\
         -x  & \cotherwise
     \end{cases}
@@ -203,15 +202,8 @@ Bitwise and shift operators for use in algorithms or hardware descriptions:
 
 The \mintinline{latex}{newunicodechar} package allows direct use of Unicode symbols in math mode:
 \begin{equation*}
-    ≈,\ ∆,\ ≥,\ ∞,\ ∫,\ ≤,\ ≠,\ Ω,\ ∂,\ π,\ ∏,\ ∑,\ ∨,\ ∧
+    ≈,\ ∆,\ ≥,\ ∞,\ ∫,\ ∧,\ ≤,\ ∨,\ ◊,\ ≠,\ Ω,\ ∂,\ π,\ ∏,\ ∑,\ √,\ º,\ ±
 \end{equation*}
-
-If you do not like the slant on
-\begin{equation*}
-    ≤ \quad ≥
-\end{equation*}
-
-you can delete the corresponding lines in the \mintinline{latex}{packages.sty}.
 
 \subsection{Miscellaneous}
 
@@ -236,17 +228,17 @@ The \mintinline{latex}{xfrac} package provides better inline fractions: $\sfrac{
 
 Common probability distributions in aligned notation:
 \begin{align*}
-    X &\sim \gaussian{\mu}{\sigmasq} \\
-    X &\sim \bernoulli{p} \\
-    X &\sim \binomial{n}{p} \\
-    X &\sim \poisson{\lambda} \\
-    X &\sim \exponential{\lambda} \\
-    X &\sim \uniform{a}{b} \\
-    X &\sim \geometric{p} \\
-    X &\sim \negativebinomial{k}{p} \\
-    X &\sim \hypergeometric{N}{k}{n} \\
+    X &\sim \gaussian{\mu}{\sigmasq}  \\
+    X &\sim \bernoulli{p}             \\
+    X &\sim \binomial{n}{p}           \\
+    X &\sim \poisson{\lambda}         \\
+    X &\sim \exponential{\lambda}     \\
+    X &\sim \uniform{a}{b}            \\
+    X &\sim \geometric{p}             \\
+    X &\sim \negativebinomial{k}{p}   \\
+    X &\sim \hypergeometric{N}{k}{n}  \\
     X &\sim \gammadist{\alpha}{\beta} \\
-    X &\sim \chisq{\nu} \\
+    X &\sim \chisq{\nu}               \\
     X &\sim \studentt{\nu}
 \end{align*}
 
@@ -286,7 +278,7 @@ The template declares a wide range of theorem-like environments using \mintinlin
     We assume throughout that all graphs are simple and undirected.
 \end{assumption}
 \begin{observation}
-    The degree sequence of a tree on $n$ vertices sums to $2\del{n - 1}$.
+    The degree sequence of a tree on $n$ vertices sums to $2\pbr{n - 1}$.
 \end{observation}
 \begin{fact}
     Every finite group of prime order is cyclic.
