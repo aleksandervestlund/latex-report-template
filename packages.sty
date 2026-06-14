@@ -21,7 +21,7 @@
 % ----------- Page setup ------------
 \newcommand*{\hmmax}{0}
 \newcommand*{\bmmax}{0}
-\RequirePackage{babel}
+\RequirePackage[main=]{babel}
 \RequirePackage[
   babel,
   factor=1100,
@@ -393,21 +393,22 @@
 \newcommand*{\iu}{\mathrm{i}}
 \newcommand*{\ju}{\mathrm{j}}
 
-\newcommand*{\airy}           [1]{\operatorname{Ai}_{#1}}
-\newcommand*{\biry}           [1]{\operatorname{Bi}_{#1}}
+\newcommand*{\airy}              {\operatorname{Ai}}
+\newcommand*{\biry}              {\operatorname{Bi}}
 \newcommand*{\bernoullinumber}[1]{\mathrm{B}_{#1}}
-\newcommand*{\besselj}        [1]{\mathrm{J}_{#1}}
-\newcommand*{\besseljs}       [1]{\mathrm{j}_{#1}}
 \newcommand*{\besseli}        [1]{\mathrm{I}_{#1}}
 \newcommand*{\besselis}       [1]{\mathrm{i}_{#1}}
+\newcommand*{\besselj}        [1]{\mathrm{J}_{#1}}
+\newcommand*{\besseljs}       [1]{\mathrm{j}_{#1}}
 \newcommand*{\besselk}        [1]{\mathrm{K}_{#1}}
 \newcommand*{\besselks}       [1]{\mathrm{k}_{#1}}
 \newcommand*{\chebyshevfirst} [1]{\mathrm{T}_{#1}}
 \newcommand*{\chebyshevsecond}[1]{\mathrm{U}_{#1}}
-\newcommand*{\hankelfirst}    [1]{\mathrm{H}_{#1}^{\del{1}}}
-\newcommand*{\hankelfirsts}   [1]{\mathrm{h}_{#1}^{\del{1}}}
-\newcommand*{\hankelsecond}   [1]{\mathrm{H}_{#1}^{\del{2}}}
-\newcommand*{\hankelseconds}  [1]{\mathrm{h}_{#1}^{\del{2}}}
+\newcommand*{\hankelfirst}    [1]{\mathrm{H}_{#1}^{\pbr{1}}}
+\newcommand*{\hankelfirsts}   [1]{\mathrm{h}_{#1}^{\pbr{1}}}
+\newcommand*{\hankelsecond}   [1]{\mathrm{H}_{#1}^{\pbr{2}}}
+\newcommand*{\hankelseconds}  [1]{\mathrm{h}_{#1}^{\pbr{2}}}
+\newcommand*{\harmonics}      [2]{\mathrm{Y}_{#1}^{#2}}
 \newcommand*{\hermite}        [1]{\mathrm{H}_{#1}}
 \newcommand*{\neumann}        [1]{\mathrm{N}_{#1}}
 \newcommand*{\neumanns}       [1]{\mathrm{n}_{#1}}
@@ -457,18 +458,18 @@
 \newcommand*{\cif}    [1]{\text{if $#1$}}
 \newcommand*{\cotherwise}{\text{otherwise}}
 
-\newcommand*{\bernoulli}       [1]{\mathrm{Bernoulli}\abr{#1}}  % p
-\newcommand*{\binomial}        [2]{\mathrm{Bin}\abr{#1, #2}}    % n, p
-\newcommand*{\chisq}           [1]{\chi\sq_{#1}}                % nu
-\newcommand*{\exponential}     [1]{\mathrm{Exp}\abr{#1}}        % lambda
-\newcommand*{\hypergeometric}  [3]{\mathrm{h}\abr{#1, #2, #3}}  % N, k, n
-\newcommand*{\gammadist}       [2]{\mathrm{Ga}\abr{#1, #2}}     % alpha, beta
-\newcommand*{\gaussian}        [2]{\mathcal{N}\abr{#1, #2}}     % mu, sigma^2
-\newcommand*{\geometric}       [1]{\mathrm{Geom}\abr{#1}}       % p
-\newcommand*{\negativebinomial}[2]{\mathrm{NegBin}\abr{#1, #2}} % k, p
-\newcommand*{\poisson}         [1]{\mathrm{Pois}\abr{#1}}       % mu = lambda*t
-\newcommand*{\studentt}        [1]{t_{#1}}                      % nu
-\newcommand*{\uniform}         [2]{\mathrm{Unif}\abr{#1, #2}}   % a, b
+\newcommand*{\bernoulli}       [1]{\operatorname{Bernoulli}\abr{#1}}  % p
+\newcommand*{\binomial}        [2]{\operatorname{Bin}\abr{#1, #2}}    % n, p
+\newcommand*{\chisq}           [1]{\chi\sq_{#1}}                      % nu
+\newcommand*{\exponential}     [1]{\operatorname{Exp}\abr{#1}}        % lambda
+\newcommand*{\hypergeometric}  [3]{\mathrm{h}\abr{#1, #2, #3}}        % N, k, n
+\newcommand*{\gammadist}       [2]{\operatorname{Ga}\abr{#1, #2}}     % alpha, beta
+\newcommand*{\gaussian}        [2]{\mathcal{N}\abr{#1, #2}}           % mu, sigma^2
+\newcommand*{\geometric}       [1]{\operatorname{Geom}\abr{#1}}       % p
+\newcommand*{\negativebinomial}[2]{\operatorname{NegBin}\abr{#1, #2}} % k, p
+\newcommand*{\poisson}         [1]{\operatorname{Pois}\abr{#1}}       % mu = lambda*t
+\newcommand*{\studentt}        [1]{t_{#1}}                            % nu
+\newcommand*{\uniform}         [2]{\operatorname{Unif}\abr{#1, #2}}   % a, b
 
 \NewDocumentCommand{\kendall}{O{M} O{M} O{1} O{\infty} O{FIFO}}{%
   \mathit{#1/#2/#3/#4/#5}%
@@ -1028,7 +1029,10 @@
 \newcommand*{\datestring}{Date}
 \RequirePackage[useregional]{datetime2}
 
-\RequirePackage[autopunct=true]{csquotes} % Must load after minted
+\RequirePackage[
+  autopunct=true,
+  strict=true,
+]{csquotes} % Must load after minted
 \MakeOuterQuote{"}
 
 \RequirePackage{booktabs}

@@ -59,10 +59,10 @@ A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \min
             axis lines=middle,
         ]
             \addplot+{0.5 * exp(-abs(x + 2))};
-            \addlegendentry{$f_{r | s}\pbr{r | s_0} = \frac{1}{2} e^{-\abs{r + \sqrt{E}}}$}
+            \addlegendentry{$f_{r | s}\pbr{r | s_0} = \frac{1}{2} \eu^{-\abs{r + \sqrt{E}}}$}
 
             \addplot+{0.5 * exp(-abs(x - 2))};
-            \addlegendentry{$f_{r | s}\pbr{r | s_1} = \frac{1}{2} e^{-\abs{r - \sqrt{E}}}$}
+            \addlegendentry{$f_{r | s}\pbr{r | s_1} = \frac{1}{2} \eu^{-\abs{r - \sqrt{E}}}$}
         \end{axis}
     \end{tikzpicture}
     \caption{$f_{r | s}\pbr{r | s_i}$.}
