@@ -233,7 +233,7 @@
 \RequirePackage{xfrac}
 
 \ifusepxortx
-  \let\mathscr\relax
+  \let\mathscr\undefined
   \makeatletter
   \ifdefstring{\packages@font}{newpx}{
     \RequirePackage{newpxmath}
@@ -296,12 +296,13 @@
 \newcommand*{\pbr}  [1]{\pdelim*{#1}}
 \newcommand*{\sbr}  [1]{\bdelim*{#1}}
 \newcommand*{\cbr}  [1]{\cdelim*{#1}}
-\newcommand*{\set}  [1]{\cdelim*{#1}}
+\newcommand*{\set}  [1]{\cbr{#1}}
 \newcommand*{\round}[1]{\rdelim*{#1}}
-\newcommand*{\intoo}[1]{\pbr{#1}}
-\newcommand*{\intcc}[1]{\sbr{#1}}
-\newcommand*{\intoc}[1]{\pbdelim*{#1}}
-\newcommand*{\intco}[1]{\bpdelim*{#1}}
+
+\newcommand*{\intoo}[2]{\pbr{#1, #2}}
+\newcommand*{\intcc}[2]{\sbr{#1, #2}}
+\newcommand*{\intoc}[2]{\pbdelim*{#1, #2}}
+\newcommand*{\intco}[2]{\bpdelim*{#1, #2}}
 
 \makeatletter
 \newcount\ad@currentdepth
@@ -360,19 +361,63 @@
 \newcommand*{\mineq} {\mathrel{-}=}
 \newcommand*{\pluseq}{\mathrel{+}=}
 
-\DeclareMathOperator {\Adj}    {Adj}
-\DeclareMathOperator {\Cov}    {Cov}
-\DeclareMathOperator {\Law}    {Law}
-\DeclareMathOperator {\lcm}    {lcm}
-\DeclareMathOperator {\ord}    {ord}
-\DeclareMathOperator {\sinc}   {sinc}
-\DeclareMathOperator {\supp}   {supp}
-\DeclareMathOperator {\tr}     {tr}
-\DeclareMathOperator {\Var}    {Var}
-\DeclareMathOperator*{\softmax}{softmax}
+\let\Re\undefined
+\let\Im\undefined
+\DeclareMathOperator {\Adj}       {Adj}           % adjugate
+\DeclareMathOperator {\Cov}       {Cov}           % covariance
+\DeclareMathOperator {\divergence}{div}           % divergence
+\DeclareMathOperator {\fraction}  {frac}          % fractional part
+\DeclareMathOperator {\grad}      {\mathbf{grad}} % gradient
+\DeclareMathOperator {\id}        {id}            % identity relation
+\DeclareMathOperator {\Im}        {Im}            % imaginary
+\DeclareMathOperator {\integer}   {int}           % integer part
+\DeclareMathOperator {\Law}       {Law}           % law
+\DeclareMathOperator {\lb}        {lb}            % log2
+\DeclareMathOperator {\lcm}       {lcm}           % least common multiple
+\DeclareMathOperator {\ord}       {ord}           % order
+\DeclareMathOperator {\rank}      {rank}          % rank
+\DeclareMathOperator {\Re}        {Re}            % real
+\DeclareMathOperator {\rot}       {\mathbf{rot}}  % rotation
+\DeclareMathOperator {\sinc}      {sinc}          % sine cardinal
+\DeclareMathOperator {\sgn}       {sgn}           % signum
+\DeclareMathOperator {\supp}      {supp}          % support
+\DeclareMathOperator {\tr}        {tr}            % trace
+\DeclareMathOperator {\Var}       {Var}           % variance
+\DeclareMathOperator*{\softmax}   {softmax}       % softmax
 
 \newcommand*{\logtwo}{\log_2}
 \newcommand*{\logten}{\log_{10}}
+
+% Upright "e", "i", and "j", per ISO 80000:
+\newcommand*{\eu}{\mathrm{e}}
+\newcommand*{\iu}{\mathrm{i}}
+\newcommand*{\ju}{\mathrm{j}}
+
+\newcommand*{\airy}           [1]{\operatorname{Ai}_{#1}}
+\newcommand*{\biry}           [1]{\operatorname{Bi}_{#1}}
+\newcommand*{\bernoullinumber}[1]{\mathrm{B}_{#1}}
+\newcommand*{\besselj}        [1]{\mathrm{J}_{#1}}
+\newcommand*{\besseljs}       [1]{\mathrm{j}_{#1}}
+\newcommand*{\besseli}        [1]{\mathrm{I}_{#1}}
+\newcommand*{\besselis}       [1]{\mathrm{i}_{#1}}
+\newcommand*{\besselk}        [1]{\mathrm{K}_{#1}}
+\newcommand*{\besselks}       [1]{\mathrm{k}_{#1}}
+\newcommand*{\chebyshevfirst} [1]{\mathrm{T}_{#1}}
+\newcommand*{\chebyshevsecond}[1]{\mathrm{U}_{#1}}
+\newcommand*{\hankelfirst}    [1]{\mathrm{H}_{#1}^{\del{1}}}
+\newcommand*{\hankelfirsts}   [1]{\mathrm{h}_{#1}^{\del{1}}}
+\newcommand*{\hankelsecond}   [1]{\mathrm{H}_{#1}^{\del{2}}}
+\newcommand*{\hankelseconds}  [1]{\mathrm{h}_{#1}^{\del{2}}}
+\newcommand*{\hermite}        [1]{\mathrm{H}_{#1}}
+\newcommand*{\neumann}        [1]{\mathrm{N}_{#1}}
+\newcommand*{\neumanns}       [1]{\mathrm{n}_{#1}}
+
+\NewDocumentCommand{\laguerre}{m o}{%
+  \mathrm{L}_{#1}\IfValueTF{#2}{^{#2}}{}%
+}
+\NewDocumentCommand{\legendre}{m o}{%
+  \mathrm{P}_{#1}\IfValueTF{#2}{^{#2}}{}%
+}
 
 \newcommand*{\data}      {\mathcal{D}}
 \newcommand*{\loss}      {\mathcal{L}}
@@ -393,8 +438,9 @@
 
 \newcommand*{\func}[3]{#1 : #2 \to #3}
 
-\newcommand*{\perm}    [2]{{}^{#1}P_{#2}}
-\newcommand*{\comb}    [2]{{}^{#1}C_{#2}}
+\newcommand*{\decisionrule}[2]{\underset{#2}{\overset{#1}{\gtrless}}}
+\newcommand*{\perm}        [2]{{}^{#1}P_{#2}}
+\newcommand*{\comb}        [2]{{}^{#1}C_{#2}}
 \renewcommand*{\choose}[2]{\dbinom{#1}{#2}}
 
 \newcommand*{\amortized}  [1]{\widehat{#1}}
@@ -502,7 +548,7 @@
 \DeclareSIUnit{\packets}{packets}
 \DeclareSIUnit{\symbol} {sym}
 
-\RequirePackage{fontawesome5} % This is somewhat unnecessary
+\RequirePackage{fontawesome5} % This is somewhat unnecessary. Used for faApple
 \RequirePackage{newunicodechar}
 \makeatletter
 \NewCommandCopy{\renewunicodechar}{\newunicodechar}
@@ -526,7 +572,7 @@
 \newunicodechar{∏}{\Pi}
 \newunicodechar{∑}{\Sigma}
 \newunicodechar{√}{\surd}
-\renewunicodechar{º}{\unit{\degree}}
+\renewunicodechar{°}{\unit{\degree}}
 \renewunicodechar{±}{\pm}
 
 \RequirePackage{aliascnt}
@@ -661,7 +707,7 @@
   % autogobble=true,
   baselinestretch=1,
   breaklines=true,
-  fontsize=\small, % Optional
+  % fontsize=\small, % Optional
   mathescape,
   style=default,
 }
@@ -747,7 +793,7 @@
 \RequirePackage{bookmark}
 \RequirePackage[norefs]{refcheck} % Remove "norefs" for debugging
 
-\let\eval\relax
+\let\eval\undefined
 \RequirePackage[
   advantage,
   adversary,
@@ -768,7 +814,7 @@
   probability,
   sets,
 ]{cryptocode} % Must load after hyperref and before cleveref
-\let\AC\relax % Conflicts with glossaries-extra
+\let\AC\undefined % Conflicts with glossaries-extra
 
 \createprocedureblock {expproc}{center,boxed}{}{$\mathrm{Experiment}$}{}
 \createprocedureblock {procb}  {center,boxed}{}{}                     {}

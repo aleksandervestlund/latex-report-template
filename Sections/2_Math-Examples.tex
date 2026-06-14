@@ -77,7 +77,7 @@ And auto delimiters:
 Declared math operators:
 \begin{equation*}
     \Adj\pbr{A},
-    \quad \logtwo\pbr{n},
+    \quad \logtwo\sq\pbr{n},
     \quad \logten\pbr{n},
     \quad \sinc\pbr{\omega},
     \quad \polylog
@@ -100,7 +100,7 @@ Expected value and variance:
     \expect{X} = \sum_{x \in \mathcal{X}} x \cdot \prob{X = x}
 \end{equation*}
 \begin{equation*}
-    \Var\pbr{X} = \sigmasq\pbr{X} = \expect{\abr{X - \expect{X}}\sq} = \expectsq{X} - \expect{X}^2
+    \Var\pbr{X} = \sigmasq\pbr{X} = \expect{\abr{X - \expect{X}}\sq} = \expectsq{X} - \expect{X}\sq
 \end{equation*}
 
 \subsection{Sets, Transforms, and Notation}
@@ -133,24 +133,24 @@ An equation with a label and number, demonstrating \mintinline{latex}{amsmath}:
 
 The custom \mintinline{latex}{inequality} environment assigns a label like an equation:
 \begin{inequality}\label{ineq:example}
-    n^2 \geq n \quad \text{for all } n \geq 1
+    n\sq \geq n \quad \text{for all } n \geq 1
 \end{inequality}
 
 The custom \mintinline{latex}{invariant} environment also assigns a label like an equation:
 \begin{invariant}\label{inv:example}
-    n^2 \geq n \quad \text{for all } n \geq 1
+    n\sq \geq n \quad \text{for all } n \geq 1
 \end{invariant}
 
 \cref{eq:euler,ineq:example,inv:example}. Equations, partially to demonstrate the package \mintinline{latex}{glossaries-extra}:
 \begin{equation*}
-    E = m\gls{c}^2
+    E = m\gls{c}\sq
 \end{equation*}
 
 A piecewise\-/defined function using \mintinline{latex}{cif} and \mintinline{latex}{cotherwise}:
 \begin{equation*}
     f\pbr{x} = \begin{cases}
-        x^2 & \cif{x \geq 0} \\
-        -x  & \cotherwise
+        x\sq & \cif{x \geq 0} \\
+        -x   & \cotherwise
     \end{cases}
 \end{equation*}
 
@@ -168,7 +168,7 @@ Quotient group notation using \mintinline{latex}{faktor}:
 
 \subsection{Logic and Negations}
 
-Logical symbols: $\forall$, $\exists$, $\nexists$, $\Rightarrow$, $\neg$, $\land$, $\lor$.
+Logical symbols: $\forall$, $\exists$, $\nexists$, $\implies$, $\iff$, $\neg/\lnot$, $\land$, $\lor$, and $\top$.
 
 Negated relations from \mintinline{latex}{centernot}:
 \begin{equation*}
@@ -202,7 +202,7 @@ Bitwise and shift operators for use in algorithms or hardware descriptions:
 
 The \mintinline{latex}{newunicodechar} package allows direct use of Unicode symbols in math mode:
 \begin{equation*}
-    ≈,\ ∆,\ ≥,\ ∞,\ ∫,\ ∧,\ ≤,\ ∨,\ ◊,\ ≠,\ Ω,\ ∂,\ π,\ ∏,\ ∑,\ √,\ º,\ ±
+    ≈,\ ∆,\ ≥,\ ∞,\ ∫,\ ∧,\ ≤,\ ∨,\ ◊,\ ≠,\ Ω,\ ∂,\ π,\ ∏,\ ∑,\ √,\ °,\ ±
 \end{equation*}
 
 \subsection{Miscellaneous}
@@ -247,23 +247,23 @@ Common probability distributions in aligned notation:
 The template declares a wide range of theorem-like environments using \mintinline{latex}{thmtools} and \mintinline{latex}{amsthm}.
 
 \begin{theorem}[Extreme Value Theorem]
-    Let $f$ be a continuous function on a closed interval $[a,b]$. Then $f$ attains both its maximum and minimum on $[a,b]$.
+    Let $f$ be a continuous function on a closed interval $\intcc{a}{b}$. Then $f$ attains both its maximum and minimum on $\intcc{a}{b}$.
 \end{theorem}
 \begin{proof}
     By the Extreme Value Theorem, a continuous function on a compact set attains its bounds.
 \end{proof}
 \begin{proofidea}
-    Compactness of $[a,b]$ under continuity forces boundedness and attainment.
+    Compactness of $\intcc{a}{b}$ under continuity forces boundedness and attainment.
 \end{proofidea}
 \begin{proofsketch}
-    Cover $[a,b]$ by open sets, extract a finite subcover, and simply apply continuity.
+    Cover $\intcc{a}{b}$ by open sets, extract a finite subcover, and simply apply continuity.
 \end{proofsketch}
 
 \begin{lemma}
-    For all $n \in \NN$, we have $n^2 \geq n$.
+    For all $n \in \NN$, we have $n\sq \geq n$.
 \end{lemma}
 \begin{corollary}
-    In particular, $n^2 - n \geq 0$ for all $n \in \NN$.
+    In particular, $n\sq - n \geq 0$ for all $n \in \NN$.
 \end{corollary}
 \begin{proposition}
     Every prime greater than $2$ is odd.
@@ -290,13 +290,13 @@ The template declares a wide range of theorem-like environments using \mintinlin
     By the pigeonhole principle, if $n+1$ items are placed in $n$ containers, at least one container holds more than one item.
 \end{principle}
 \begin{example}
-    The numbers $2, 3, 5, 7, 11$ are all prime.
+    The numbers $2, 3, 5, 7$, and $11$ are all prime.
 \end{example}
 \begin{exercise}
     Prove that $\sqrt{2}$ is irrational.
 \end{exercise}
 \begin{problem}
-    Find all $x \in \RR$ such that $x^2 = -1$.
+    Find all $x \in \RR$ such that $x\sq = -1$.
 \end{problem}
 \begin{aside}
     Peter er gei.
