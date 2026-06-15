@@ -230,7 +230,13 @@
 \RequirePackage{mathrsfs}
 \RequirePackage{mathtools}
 \RequirePackage{thmtools}
+
 \RequirePackage{xfrac}
+% Dirty fix:
+\let\oldsfrac\sfrac
+\renewcommand*{\sfrac}[3][\relax]{%
+  \ifx\relax#1\oldsfrac{{#2}}{#3}\else\oldsfrac[#1]{{#2}}{#3}\fi%
+}
 
 \ifusepxortx
   \let\mathscr\undefined
@@ -455,8 +461,8 @@
 \newcommand*{\mat} [1]{\mathbf{#1}}
 \newcommand*{\vect}[1]{\bm{#1}}
 
-\newcommand*{\cif}    [1]{\text{if $#1$}}
-\newcommand*{\cotherwise}{\text{otherwise}}
+\newcommand*{\cif}[1]{\text{if $#1$}}
+\newcommand*{\cow}   {\text{otherwise}}
 
 \newcommand*{\bernoulli}       [1]{\operatorname{Bernoulli}\abr{#1}}  % p
 \newcommand*{\binomial}        [2]{\operatorname{Bin}\abr{#1, #2}}    % n, p
