@@ -123,12 +123,12 @@
 
 \RequirePackage[blocks]{authblk}
 \renewcommand*{\Affilfont}{\small}
-\renewcommand*{\Authsep}{\\}
-\renewcommand*{\Authand}{\\}
-\renewcommand*{\Authands}{\\}
+\renewcommand*{\Authsep}  {\\}
+\renewcommand*{\Authand}  {\\}
+\renewcommand*{\Authands} {\\}
 
-\newcommand*{\authorstring}{Author}
-\newcommand*{\authorsstring}{Authors}
+\newcommand*{\authorstring}     {Author}
+\newcommand*{\authorsstring}    {Authors}
 \newcommand*{\printauthorstring}{%
   \ifnum\value{authors} = 1
     \authorstring
@@ -199,7 +199,9 @@
   \clearpage
   \hbox{}
   \vfill
-  {\centering \MakeUppercase{\blankinfo}\par}
+  \begingroup
+    \centering \MakeUppercase{\blankinfo}\par
+  \endgroup
   \vfill
   \thispagestyle{empty}
   \addtocounter{page}{-1}
@@ -319,30 +321,32 @@
 \newcount\ad@type
 \DeclareRobustCommand*{\abr}[1]{%
   \begingroup
-  \def\abr##1{%
-    \global\advance\ad@currentdepth by 1\relax
-    \ifnum\ad@currentdepth>\ad@maxdepth
-      \global\ad@maxdepth=\ad@currentdepth
+    \def\abr##1{%
+      \global\advance\ad@currentdepth by 1\relax
+      \ifnum\ad@currentdepth>\ad@maxdepth
+        \global\ad@maxdepth=\ad@currentdepth
+      \fi
+      ##1%
+      \global\advance\ad@currentdepth by -1\relax
+    }%
+    \global\ad@maxdepth=0\relax
+    \global\ad@currentdepth=0\relax
+    \setbox\z@=\hbox{$#1$}%
+    \ad@type=\ad@maxdepth\relax
+    \@tempcnta=\ad@type
+    \divide\@tempcnta by 3\relax
+    \multiply\@tempcnta by 3\relax
+    \advance\ad@type by -\@tempcnta\relax
+    \ifcase\ad@type
+      \def\ad@next{\pbr{#1}}%
+    \or
+      \def\ad@next{\sbr{#1}}%
+    \or
+      \def\ad@next{\cbr{#1}}%
     \fi
-    ##1%
-    \global\advance\ad@currentdepth by -1\relax
-  }%
-  \global\ad@maxdepth=0\relax
-  \global\ad@currentdepth=0\relax
-  \setbox\z@=\hbox{$#1$}%
-  \ad@type=\ad@maxdepth\relax
-  \@tempcnta=\ad@type
-  \divide\@tempcnta by 3\relax
-  \multiply\@tempcnta by 3\relax
-  \advance\ad@type by -\@tempcnta\relax
-  \ifcase\ad@type
-    \def\ad@next{\pbr{#1}}%
-  \or
-    \def\ad@next{\sbr{#1}}%
-  \or
-    \def\ad@next{\cbr{#1}}%
-  \fi
-  \expandafter\endgroup\ad@next
+    \expandafter
+  \endgroup
+  \ad@next
 }
 \makeatother
 
@@ -535,7 +539,7 @@
       \renewcommand*{\emptyset}  {\text{Ø}}
       \renewcommand*{\varnothing}{\text{Ø}}
     }{
-      \ifdefstring{\packages@setnotation}{braces}{
+      \ifdefstring{\packages@setnotation}{brackets}{
         \renewcommand*{\emptyset}  {\set{}}
         \renewcommand*{\varnothing}{\set{}}
       }{
@@ -698,7 +702,7 @@
 \makeatletter
 \renewcommand*{\listof}[2]{
   \@ifundefined{ext@#1}{\float@error{#1}}{
-    \expandafter\let\csname l@#1\endcsname \l@figure
+    \expandafter\let\csname l@#1\endcsname\l@figure
     \float@listhead{#2}
     \addcontentsline{toc}{section}{#2}
     \begingroup
@@ -728,7 +732,6 @@
   hyphenationfix,
   oversize,
 }
-
 \newtcolorbox{resultbox}[1][]{
   boxrule=0.1em,
   colback=blue!5,
@@ -812,11 +815,10 @@
   events,
   ff,
   keys,
-  lambda,
+  lambda, % Or "n"
   landau,
   logic,
   mm,
-  % n, % Conflicts with lambda
   notions,
   operators,
   oracles,
