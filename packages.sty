@@ -232,10 +232,17 @@
 \RequirePackage{thmtools}
 
 \RequirePackage{xfrac}
-% Dirty fix:
-\let\oldsfrac\sfrac
-\renewcommand*{\sfrac}[3][\relax]{%
-  \ifx\relax#1\oldsfrac{{#2}}{#3}\else\oldsfrac[#1]{{#2}}{#3}\fi%
+\NewCommandCopy{\oldsfrac}{\sfrac}
+\RenewDocumentCommand{\sfrac}{o m o m}{%
+  \IfValueTF{#1}{%
+    \IfValueTF{#3}
+      {\oldsfrac[#1]{{#2}}[#3]{{#4}}}
+      {\oldsfrac[#1]{{#2}}{{#4}}}
+  }{%
+    \IfValueTF{#3}
+      {\oldsfrac{{#2}}[#3]{{#4}}}
+      {\oldsfrac{{#2}}{{#4}}}
+  }%
 }
 
 \ifusepxortx
@@ -746,7 +753,7 @@
 \BeforeBeginEnvironment{minted}{\begin{tcolorbox}}
 \AfterEndEnvironment   {minted}{\end{tcolorbox}}
 
-\let\oldinputminted\inputminted
+\NewCommandCopy{\oldinputminted}{\inputminted}
 \RenewDocumentCommand{\inputminted}{O{} m m}{
   \begin{tcolorbox}
     \oldinputminted[#1]{#2}{#3}
