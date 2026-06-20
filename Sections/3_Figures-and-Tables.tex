@@ -41,7 +41,7 @@ In this section, we demonstrate how to include and format both figures and table
 \FloatBarrier
 A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \mintinline{latex}{tikzpicture}:
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \begin{tikzpicture}
         \begin{axis}[
@@ -69,7 +69,7 @@ A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \min
     \label{fig:pgfplot}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \begin{subfigure}{0.325\textwidth}
         \begin{tikzpicture}
@@ -126,7 +126,7 @@ A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \min
     \label{fig:pulses}
 \end{figure}
 
-\begin{table}
+\begin{table}[H]
     \centering
     \begin{tblr}{colspec={lrr}}
         \toprule

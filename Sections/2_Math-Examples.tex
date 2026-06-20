@@ -77,15 +77,32 @@ And auto delimiters:
 Declared math operators:
 \begin{equation*}
     \Adj\pbr{A},
+    \quad \Cov\pbr{n},
+    \quad \divergence\pbr{n},
+    \quad \fraction\pbr{n},
+    \quad \grad\pbr{n},
+    \quad \id\pbr{n},
+    \quad \Im\pbr{n},
+    \quad \integer\pbr{n}
+\end{equation*}
+\begin{equation*}
+    \Law\pbr{n},
+    \quad \lb\pbr{n},
+    \quad \lcm\pbr{n},
+    \quad \ord\pbr{n},
+    \quad \rank\pbr{n},
+    \quad \Re\pbr{n},
+    \quad \rot\pbr{n},
+    \quad \sinc\pbr{\omega}
+\end{equation*}
+\begin{equation*}
+    \sgn\pbr{n},
+    \quad \supp\pbr{n},
+    \quad \tr\pbr{n},
+    \quad \softmax\pbr{n},
     \quad \logtwo\sq\pbr{n},
     \quad \logten\pbr{n},
-    \quad \sinc\pbr{\omega},
     \quad \polylog
-\end{equation*}
-
-Statistical operators:
-\begin{equation*}
-    \Cov\pbr{X, Y} = \expect{XY} - \expect{X}\expect{Y}
 \end{equation*}
 
 The \mintinline{latex}{rgets}/\mintinline{latex}{sgets} commands render a random\-/sampling arrow (if you find a way to create them without using \mintinline{latex}{tikz}, let me know):
@@ -96,12 +113,11 @@ The \mintinline{latex}{rgets}/\mintinline{latex}{sgets} commands render a random
 \subsection{Expected Value and Variance}
 
 Expected value and variance:
-\begin{equation*}
-    \expect{X} = \sum_{x \in \mathcal{X}} x \cdot \prob{X = x}
-\end{equation*}
-\begin{equation*}
-    \Var\pbr{X} = \sigmasq\pbr{X} = \expect{\abr{X - \expect{X}}\sq} = \expectsq{X} - \expect{X}\sq
-\end{equation*}
+\begin{align*}
+    \expect{X}     &= \sum_{x \in \mathcal{X}} x \cdot \prob{X = x}                                     \\
+    \Var\pbr{X}    &= \sigmasq\pbr{X} = \expect{\abr{X - \expect{X}}\sq} = \expectsq{X} - \expect{X}\sq \\
+    \Cov\pbr{X, Y} &= \expect{XY} - \expect{X}\expect{Y}
+\end{align*}
 
 \subsection{Sets, Transforms, and Notation}
 
@@ -157,7 +173,7 @@ A piecewise\-/defined function using \mintinline{latex}{cif} and \mintinline{lat
 We also use \mintinline{latex}{mathclap} to fix spacing in subscripts:
 \begin{equation*}
     \sum_{1 \leq i < j \leq n} a_{ij}
-    \qquad \text{vs} \qquad
+    \quad \text{vs} \quad
     \sum_{\mathclap{1 \leq i < j \leq n}} a_{ij}
 \end{equation*}
 
@@ -206,11 +222,6 @@ The \mintinline{latex}{newunicodechar} package allows direct use of Unicode symb
 \end{equation*}
 
 \subsection{Miscellaneous}
-
-Bold vector notation using \mintinline{latex}{bm}:
-\begin{equation*}
-    \bm{F} = m \bm{a}
-\end{equation*}
 
 For matrices and vectors, use the respective commands \mintinline{latex}{\mat} and \mintinline{latex}{\vect} for ease of switching notation, which depends on the setting. Here, \mintinline{latex}{\mat} produces \mintinline{latex}{\mathbf}, while \mintinline{latex}{\vect} produces \mintinline{latex}{\bm}:
 \begin{equation*}

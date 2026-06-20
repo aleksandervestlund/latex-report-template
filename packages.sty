@@ -235,13 +235,9 @@
 \NewCommandCopy{\oldsfrac}{\sfrac}
 \RenewDocumentCommand{\sfrac}{o m o m}{%
   \IfValueTF{#1}{%
-    \IfValueTF{#3}
-      {\oldsfrac[#1]{{#2}}[#3]{{#4}}}
-      {\oldsfrac[#1]{{#2}}{{#4}}}
+    \IfValueTF{#3}{\oldsfrac[#1]{{#2}}[#3]{{#4}}}{\oldsfrac[#1]{{#2}}{{#4}}}%
   }{%
-    \IfValueTF{#3}
-      {\oldsfrac{{#2}}[#3]{{#4}}}
-      {\oldsfrac{{#2}}{{#4}}}
+    \IfValueTF{#3}{\oldsfrac{{#2}}[#3]{{#4}}}    {\oldsfrac{{#2}}{{#4}}}%
   }%
 }
 
@@ -262,22 +258,22 @@
 
 % Both English and Norwegian versions:
 \declaretheorem[numberwithin=section]{
-  example,eksempel,
+  example, eksempel,
   exercise,oppgave,
   problem,
   theorem % Cannot have trailing comma
 }
 \declaretheorem[sibling=theorem]{
-  assumption,antagelse,
-  claim,påstand,
-  conjecture,konjektur,
-  corollary,korollar,
-  definition,definisjon,
-  fact,faktum,
+  assumption, antagelse,
+  claim,      påstand,
+  conjecture, konjektur,
+  corollary,  korollar,
+  definition, definisjon,
+  fact,       faktum,
   lemma,
   observation,observasjon,
-  principle,prinsipp,
-  property,egenskap,
+  principle,  prinsipp,
+  property,   egenskap,
   proposition,forslag,
   teorem
 }
@@ -285,7 +281,7 @@
   numbered=no,
   style=remark,
 ]{
-  aside,avsporing,
+  aside, avsporing,
   remark,merk
 }
 
@@ -505,18 +501,18 @@
 \newcommand*{\sgets}{\xgets{\$}}
 
 \RequirePackage{centernot}
-\newcommand*{\ndashv}    {\centernot\dashv}
-\newcommand*{\nmodels}   {\centernot\models}
-\newcommand*{\nperp}     {\centernot\perp}
-\newcommand*{\npropto}   {\centernot\propto}
-\newcommand*{\nsubsetneq}{\centernot\subsetneq}
-\newcommand*{\nsupsetneq}{\centernot\supsetneq}
+\newcommand*{\ndashv}    {\centernot{\dashv}}
+\newcommand*{\nmodels}   {\centernot{\models}}
+\newcommand*{\nperp}     {\centernot{\perp}}
+\newcommand*{\npropto}   {\centernot{\propto}}
+\newcommand*{\nsubsetneq}{\centernot{\subsetneq}}
+\newcommand*{\nsupsetneq}{\centernot{\supsetneq}}
 
 % From unicode-math when using newpx or newtx:
-\providecommand*{\napprox}{\centernot\approx}
-\providecommand*{\nequiv} {\centernot\equiv}
-\providecommand*{\nsubset}{\centernot\subset}
-\providecommand*{\nsupset}{\centernot\supset}
+\providecommand*{\napprox}{\centernot{\approx}}
+\providecommand*{\nequiv} {\centernot{\equiv}}
+\providecommand*{\nsubset}{\centernot{\subset}}
+\providecommand*{\nsupset}{\centernot{\supset}}
 
 \makeatletter
 \ifbool{packages@slant}{
