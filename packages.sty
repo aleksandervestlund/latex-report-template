@@ -259,15 +259,6 @@
 \allowdisplaybreaks
 
 % Both English and Norwegian versions:
-\newcommand*{\attackgametexten}       {Attack Game}
-\newcommand*{\functionalitygoaltexten}{Functionality Goal}
-\newcommand*{\informaltheoremtexten}  {Informal Theorem}
-\newcommand*{\securitygoaltexten}     {Security Goal}
-\newcommand*{\attackgametextno}       {Angrepsspill}
-\newcommand*{\functionalitygoaltextno}{Funksjonalitetsmål}
-\newcommand*{\informaltheoremtextno}  {Uformelt teorem}
-\newcommand*{\securitygoaltextno}     {Sikkerhetsmål}
-
 \declaretheorem[numberwithin=section]{
   example, eksempel,
   exercise,oppgave,
@@ -275,7 +266,7 @@
   theorem % Cannot have trailing comma
 }
 \declaretheorem[sibling=theorem]{
-  assumption,  antagelse,
+  assumption,  antakelse,
   claim,       påstand,
   conjecture,  konjektur,
   construction,konstruksjon,
@@ -296,14 +287,38 @@
   aside, avsporing,
   remark,merk
 }
-\declaretheorem[name=\informaltheoremtexten,   sibling=theorem]{informaltheorem}
-\declaretheorem[name=\attackgametexten,        sibling=theorem]{attackgame}
-\declaretheorem[name=\securitygoaltexten,      sibling=theorem]{securitygoal}
-\declaretheorem[name=\functionalitygoaltexten, sibling=theorem]{functionalitygoal}
-\declaretheorem[name=\informaltheoremtextno,   sibling=theorem]{uformeltteorem}
-\declaretheorem[name=\attackgametextno,        sibling=theorem]{angrepsspill}
-\declaretheorem[name=\securitygoaltextno,      sibling=theorem]{sikkerhetsmål}
-\declaretheorem[name=\functionalitygoaltextno, sibling=theorem]{funksjonalitetsmål}
+\declaretheorem[
+  name={Attack Game},
+  sibling=theorem,
+]{attackgame}
+\declaretheorem[
+  name={Angrepsspill},
+  sibling=theorem,
+]{angrepsspill}
+\declaretheorem[
+  name={Functionality Goal},
+  sibling=theorem,
+]{functionalitygoal}
+\declaretheorem[
+  name={Funksjonalitetsmål},
+  sibling=theorem,
+]{funksjonalitetsmål}
+\declaretheorem[
+  name={Informal Theorem},
+  sibling=theorem,
+]{informaltheorem}
+\declaretheorem[
+  name={Uformelt teorem},
+  sibling=theorem,
+]{uformeltteorem}
+\declaretheorem[
+  name={Security Goal},
+  sibling=theorem,
+]{securitygoal}
+\declaretheorem[
+  name={Sikkerhetsmål},
+  sibling=theorem,
+]{sikkerhetsmål}
 
 \newcommand*{\proofideatext}  {Proof Idea}
 \newcommand*{\proofsketchtext}{Proof Sketch}
@@ -1053,23 +1068,71 @@
 \newcommand*{\creflastconjunction}     {, and~}
 \newcommand*{\creflastgroupconjunction}{, and~}
 
-\makeatletter
-\cref@addlanguagedefs{american}{
-  \crefformat{procedure}     {Procedure~#2#1#3}
-  \crefrangeformat{procedure}{Procedures~#3#1#4 to~#5#2#6}
-  \crefmultiformat{procedure}{Procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+\newcommand*{\setcrefenglish}[3]{
+  \crefformat{#1}{#2~##2##1##3}
+  \crefrangeformat{#1}{#3~##3##1##4 to~##5##2##6}
+  \crefmultiformat{#1}{#3~##2##1##3}{ and~##2##1##3}{, ##2##1##3}{, and~##2##1##3}
 }
-\cref@addlanguagedefs{british}{
-  \crefformat{procedure}     {Procedure~#2#1#3}
-  \crefrangeformat{procedure}{Procedures~#3#1#4 to~#5#2#6}
-  \crefmultiformat{procedure}{Procedures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
-}
-\cref@addlanguagedefs{norsk}{
-  \crefformat{procedure}     {Prosedyre~#2#1#3}
-  \crefrangeformat{procedure}{Prosedyrer~#3#1#4 til~#5#2#6}
-  \crefmultiformat{procedure}{Prosedyrer~#2#1#3}{ og~#2#1#3}{, #2#1#3}{, og~#2#1#3}
+\newcommand*{\setcrefnorsk}[3]{
+  \crefformat{#1}{#2~##2##1##3}
+  \crefrangeformat{#1}{#3~##3##1##4 til~##5##2##6}
+  \crefmultiformat{#1}{#3~##2##1##3}{ og~##2##1##3}{, ##2##1##3}{ og~##2##1##3}
 }
 
+\makeatletter
+\cref@addlanguagedefs{american}{
+  \setcrefenglish{procedure}        {Procedure}         {Procedures}
+  \setcrefenglish{informaltheorem}  {Informal Theorem}  {Informal Theorems}
+  \setcrefenglish{assumption}       {Assumption}        {Assumptions}
+  \setcrefenglish{claim}            {Claim}             {Claims}
+  \setcrefenglish{fact}             {Fact}              {Facts}
+  \setcrefenglish{observation}      {Observation}       {Observations}
+  \setcrefenglish{principle}        {Principle}         {Principles}
+  \setcrefenglish{property}         {Property}          {Properties}
+  \setcrefenglish{exercise}         {Exercise}          {Exercises}
+  \setcrefenglish{problem}          {Problem}           {Problems}
+  \setcrefenglish{attackgame}       {Attack Game}       {Attack Games}
+  \setcrefenglish{functionalitygoal}{Functionality Goal}{Functionality Goals}
+  \setcrefenglish{securitygoal}     {Security Goal}     {Security Goals}
+}
+\cref@addlanguagedefs{british}{
+  \setcrefenglish{procedure}        {Procedure}         {Procedures}
+  \setcrefenglish{informaltheorem}  {Informal Theorem}  {Informal Theorems}
+  \setcrefenglish{assumption}       {Assumption}        {Assumptions}
+  \setcrefenglish{claim}            {Claim}             {Claims}
+  \setcrefenglish{fact}             {Fact}              {Facts}
+  \setcrefenglish{observation}      {Observation}       {Observations}
+  \setcrefenglish{principle}        {Principle}         {Principles}
+  \setcrefenglish{property}         {Property}          {Properties}
+  \setcrefenglish{exercise}         {Exercise}          {Exercises}
+  \setcrefenglish{problem}          {Problem}           {Problems}
+  \setcrefenglish{attackgame}       {Attack Game}       {Attack Games}
+  \setcrefenglish{functionalitygoal}{Functionality Goal}{Functionality Goals}
+  \setcrefenglish{securitygoal}     {Security Goal}     {Security Goals}
+}
+\cref@addlanguagedefs{norsk}{
+  \setcrefnorsk{angrepsspill}      {Angrepsspill}      {Angrepsspill}
+  \setcrefnorsk{antakelse}         {Antakelse}         {Antakelser}
+  \setcrefnorsk{definisjon}        {Definisjon}        {Definisjoner}
+  \setcrefnorsk{egenskap}          {Egenskap}          {Egenskaper}
+  \setcrefnorsk{eksempel}          {Eksempel}          {Eksempler}
+  \setcrefnorsk{faktum}            {Faktum}            {Fakta}
+  \setcrefnorsk{forslag}           {Forslag}           {Forslag}
+  \setcrefnorsk{funksjonalitetsmål}{Funksjonalitetsmål}{Funksjonalitetsmål}
+  \setcrefnorsk{korollar}          {Korrolar}          {Korollarer}
+  \setcrefnorsk{observasjon}       {Observasjon}       {Observasjoner}
+  \setcrefnorsk{oppgave}           {Oppgave}           {Oppgaver}
+  \setcrefnorsk{prinsipp}          {Prinsipp}          {Prinsipp}
+  \setcrefnorsk{problem}           {Problem}           {Problem}
+  \setcrefnorsk{procedure}         {Prosedyre}         {Prosedyrer}
+  \setcrefnorsk{påstand}           {Påstand}           {Påstander}
+  \setcrefnorsk{sikkerhetsmål}     {Sikkerhetsmål}     {Sikkerhetsmål}
+  \setcrefnorsk{teorem}            {Teorem}            {Teorem}
+  \setcrefnorsk{uformeltteorem}    {Uformelt teorem}   {Uformelle teorem}
+}
+\makeatother
+
+\makeatletter
 \newcommand*{\refcheckize}[1]{%
   \expandafter\let\csname @@\string#1\endcsname#1%
   \expandafter\DeclareRobustCommand\csname relax\string#1\endcsname[1]{%
@@ -1260,7 +1323,7 @@
   \renewcommand*{\proofideatext}           {Bevisidé}
   \renewcommand*{\proofsketchtext}         {Bevisutkast}
   \renewenvironment*{aside}            {\begin{avsporing}}         {\end{avsporing}}
-  \renewenvironment*{assumption}       {\begin{antagelse}}         {\end{antagelse}}
+  \renewenvironment*{assumption}       {\begin{antakelse}}         {\end{antakelse}}
   \renewenvironment*{attackgame}       {\begin{angrepsspill}}      {\end{angrepsspill}}
   \renewenvironment*{claim}            {\begin{påstand}}           {\end{påstand}}
   \renewenvironment*{conjecture}       {\begin{konjektur}}         {\end{konjektur}}
