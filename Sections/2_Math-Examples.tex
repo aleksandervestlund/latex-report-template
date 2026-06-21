@@ -83,7 +83,7 @@ Declared math operators:
     \quad \grad\pbr{n},
     \quad \id\pbr{n},
     \quad \Im\pbr{n},
-    \quad \integer\pbr{n}
+    \quad \integer\pbr{n},
 \end{equation*}
 \begin{equation*}
     \Law\pbr{n},
@@ -93,13 +93,13 @@ Declared math operators:
     \quad \rank\pbr{n},
     \quad \Re\pbr{n},
     \quad \rot\pbr{n},
-    \quad \sinc\pbr{\omega}
+    \quad \sinc\pbr{\omega},
 \end{equation*}
 \begin{equation*}
     \sgn\pbr{n},
     \quad \supp\pbr{n},
     \quad \tr\pbr{n},
-    \quad \softmax\pbr{n},
+    \quad \softmax_n\pbr{n},
     \quad \logtwo\sq\pbr{n},
     \quad \logten\pbr{n},
     \quad \polylog
@@ -288,6 +288,9 @@ The template declares a wide range of theorem-like environments using \mintinlin
 \begin{theorem}[Extreme Value Theorem]
     Let $f$ be a continuous function on a closed interval $\intcc{a}{b}$. Then $f$ attains both its maximum and minimum on $\intcc{a}{b}$.
 \end{theorem}
+\begin{informaltheorem}
+    Informal theorem.
+\end{informaltheorem}
 \begin{proof}
     By the Extreme Value Theorem, a continuous function on a compact set attains its bounds.
 \end{proof}
@@ -298,36 +301,36 @@ The template declares a wide range of theorem-like environments using \mintinlin
     Cover $\intcc{a}{b}$ by open sets, extract a finite subcover, and simply apply continuity.
 \end{proofsketch}
 
-\begin{lemma}
-    For all $n \in \NN$, we have $n\sq \geq n$.
-\end{lemma}
+\begin{assumption}
+    We assume throughout that all graphs are simple and undirected.
+\end{assumption}
 \begin{corollary}
     In particular, $n\sq - n \geq 0$ for all $n \in \NN$.
 \end{corollary}
-\begin{proposition}
-    Every prime greater than $2$ is odd.
-\end{proposition}
 \begin{claim}
     The sum of two even integers is even.
 \end{claim}
 \begin{definition}
     A \defn{prime number} is a natural number greater than $1$ with no positive divisors other than $1$ and itself.
 \end{definition}
-\begin{assumption}
-    We assume throughout that all graphs are simple and undirected.
-\end{assumption}
-\begin{observation}
-    The degree sequence of a tree on $n$ vertices sums to $2\pbr{n - 1}$.
-\end{observation}
 \begin{fact}
     Every finite group of prime order is cyclic.
 \end{fact}
-\begin{property}
-    The identity element of a group is unique.
-\end{property}
+\begin{lemma}
+    For all $n \in \NN$, we have $n\sq \geq n$.
+\end{lemma}
+\begin{observation}
+    The degree sequence of a tree on $n$ vertices sums to $2\pbr{n - 1}$.
+\end{observation}
 \begin{principle}
     By the pigeonhole principle, if $n + 1$ items are placed in $n$ containers, at least one container holds more than one item.
 \end{principle}
+\begin{property}
+    The identity element of a group is unique.
+\end{property}
+\begin{proposition}
+    Every prime greater than $2$ is odd.
+\end{proposition}
 \begin{example}
     The numbers $2, 3, 5, 7$, and $11$ are all prime.
 \end{example}
@@ -343,6 +346,15 @@ The template declares a wide range of theorem-like environments using \mintinlin
 \begin{remark}
     Note that $1$ is not considered a prime number by convention.
 \end{remark}
+\begin{attackgame}
+    Attack game.
+\end{attackgame}
+\begin{functionalitygoal}
+    Functionality goal.
+\end{functionalitygoal}
+\begin{securitygoal}
+    Security goal.
+\end{securitygoal}
 
 \begin{resultbox}
     Hence, stuff.

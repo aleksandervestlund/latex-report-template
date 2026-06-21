@@ -259,6 +259,15 @@
 \allowdisplaybreaks
 
 % Both English and Norwegian versions:
+\newcommand*{\attackgametexten}       {Attack Game}
+\newcommand*{\functionalitygoaltexten}{Functionality Goal}
+\newcommand*{\informaltheoremtexten}  {Informal Theorem}
+\newcommand*{\securitygoaltexten}     {Security Goal}
+\newcommand*{\attackgametextno}       {Angrepsspill}
+\newcommand*{\functionalitygoaltextno}{Funksjonalitetsmål}
+\newcommand*{\informaltheoremtextno}  {Uformelt teorem}
+\newcommand*{\securitygoaltextno}     {Sikkerhetsmål}
+
 \declaretheorem[numberwithin=section]{
   example, eksempel,
   exercise,oppgave,
@@ -266,17 +275,18 @@
   theorem % Cannot have trailing comma
 }
 \declaretheorem[sibling=theorem]{
-  assumption, antagelse,
-  claim,      påstand,
-  conjecture, konjektur,
-  corollary,  korollar,
-  definition, definisjon,
-  fact,       faktum,
+  assumption,  antagelse,
+  claim,       påstand,
+  conjecture,  konjektur,
+  construction,konstruksjon,
+  corollary,   korollar,
+  definition,  definisjon,
+  fact,        faktum,
   lemma,
-  observation,observasjon,
-  principle,  prinsipp,
-  property,   egenskap,
-  proposition,forslag,
+  observation, observasjon,
+  principle,   prinsipp,
+  property,    egenskap,
+  proposition, forslag,
   teorem
 }
 \declaretheorem[
@@ -286,6 +296,14 @@
   aside, avsporing,
   remark,merk
 }
+\declaretheorem[name=\informaltheoremtexten,   sibling=theorem]{informaltheorem}
+\declaretheorem[name=\attackgametexten,        sibling=theorem]{attackgame}
+\declaretheorem[name=\securitygoaltexten,      sibling=theorem]{securitygoal}
+\declaretheorem[name=\functionalitygoaltexten, sibling=theorem]{functionalitygoal}
+\declaretheorem[name=\informaltheoremtextno,   sibling=theorem]{uformeltteorem}
+\declaretheorem[name=\attackgametextno,        sibling=theorem]{angrepsspill}
+\declaretheorem[name=\securitygoaltextno,      sibling=theorem]{sikkerhetsmål}
+\declaretheorem[name=\functionalitygoaltextno, sibling=theorem]{funksjonalitetsmål}
 
 \newcommand*{\proofideatext}  {Proof Idea}
 \newcommand*{\proofsketchtext}{Proof Sketch}
@@ -307,7 +325,6 @@
 \newcommand*{\pbr}  [1]{\pdelim*{#1}}
 \newcommand*{\sbr}  [1]{\bdelim*{#1}}
 \newcommand*{\cbr}  [1]{\cdelim*{#1}}
-\newcommand*{\set}  [1]{\cbr{#1}}
 \newcommand*{\round}[1]{\rdelim*{#1}}
 
 \newcommand*{\intoo}[2]{\pbr{#1, #2}}
@@ -488,18 +505,27 @@
   \mathit{#1/#2/#3/#4/#5}%
 }
 
-\newcommand*{\xgets}[2][]{
-  \mathrel{
-    \tikz[
-      baseline=-0.1873em,
-      inner sep=0em,
-      outer sep=0em,
-    ]{
-      \ifblank{#2}{}{\node at (0.05,0.15) {\tiny #2};}
-      \node at (0,0) {$\gets$};
-      \ifblank{#2}{}{\node at (0.05,-0.1) {\tiny #1};}
-    }
+% \newcommand*{\xgets}[2][]{
+%   \mathrel{
+%     \tikz[
+%       baseline=-0.1873em,
+%       inner sep=0em,
+%       outer sep=0em,
+%     ]{
+%       \ifblank{#2}{}{\node at (0.05,0.15) {\tiny #2};}
+%       \node at (0,0) {$\gets$};
+%       \ifblank{#2}{}{\node at (0.05,-0.1) {\tiny #1};}
+%     }
+%   }
+% }
+\newcommand*{\xgets}[1]{%
+  \mathrel{%
+    \mathchoice{\XGETS{#1}{\displaystyle}}{\XGETS{#1}{\textstyle}}{\XGETS{#1}{\scriptstyle}}{\XGETS{#1}{\scriptscriptstyle}}%
   }
+}
+\newcommand*{\XGETS}[2]{%
+  \setbox0\hbox{$#2\gets$}%
+  \rlap{\hbox to \wd0{\hss\raisebox{1.2\height}{\scalebox{0.5}{$#2\text{\ #1}$}}\hss}}\box0
 }
 \newcommand*{\rgets}{\xgets{R}}
 \newcommand*{\sgets}{\xgets{\$}}
@@ -586,8 +612,8 @@
 \newunicodechar{∏}{\Pi}
 \newunicodechar{∑}{\Sigma}
 \newunicodechar{√}{\surd}
-\renewunicodechar{°}{\unit{\degree}}
-\renewunicodechar{±}{\pm}
+\renewunicodechar{°}{\ensuremath{\unit{\degree}}}
+\renewunicodechar{±}{\ensuremath{\pm}}
 
 \RequirePackage{aliascnt}
 \newaliascnt{ineq}{equation}
@@ -603,6 +629,7 @@
 \makeatother
 
 % ------- Figures and tables --------
+\RequirePackage{capt-of}
 \RequirePackage{graphicx}
 \RequirePackage[list=true]{subcaption}
 \RequirePackage{tabularray}
@@ -621,11 +648,13 @@
 
 \RequirePackage{tikz}
 \usetikzlibrary{
-  arrows.meta,
+  arrows,
   calc,
   decorations.markings,
   fit,
   % overlay-beamer-styles,
+  positioning,
+  shapes.geometric,
 }
 
 \RequirePackage[edges]{forest}
@@ -832,36 +861,114 @@
 \createprocedureblock {procb}  {center,boxed}{}{}                     {}
 \createpseudocodeblock{pcb}    {center,boxed}{}{}                     {}
 
-\newcommand*{\answer}     {\pcalgostyle{Answer}}
-\newcommand*{\commit}     {\pcalgostyle{Com}}
-\newcommand*{\detect}     {\pcalgostyle{Detect}}
-\newcommand*{\extend}     {\pcalgostyle{Extend}}
-\newcommand*{\gen}        {\pcalgostyle{Gen}}
-\newcommand*{\ideal}      {\pcalgostyle{Ideal}}
-\newcommand*{\len}        {\pcalgostyle{len}}
-\newcommand*{\Mark}       {\pcalgostyle{Mark}}
-\newcommand*{\query}      {\pcalgostyle{Query}}
-\newcommand*{\real}       {\pcalgostyle{Real}}
-\newcommand*{\reconstruct}{\pcalgostyle{Reconstruct}}
-\newcommand*{\seal}       {\pcalgostyle{Seal}}
-\newcommand*{\share}      {\pcalgostyle{Share}}
-\newcommand*{\unseal}     {\pcalgostyle{Unseal}}
-\newcommand*{\view}       {\pcalgostyle{View}}
+\newcommand*{\accept}         {\pcalgostyle{Accept}}
+\newcommand*{\access}         {\pcalgostyle{Access}}
+\newcommand*{\aggregate}      {\pcalgostyle{Agg}}
+\newcommand*{\answer}         {\pcalgostyle{Answer}}
+\newcommand*{\apply}          {\pcalgostyle{Apply}}
+\newcommand*{\auth}           {\pcalgostyle{Auth}}
+\newcommand*{\Choose}         {\pcalgostyle{Choose}}
+\newcommand*{\combine}        {\pcalgostyle{Combine}}
+\newcommand*{\commit}         {\pcalgostyle{Com}}
+\newcommand*{\constrain}      {\pcalgostyle{Constrain}}
+\newcommand*{\conv}           {\pcalgostyle{Conv}}
+\newcommand*{\corr}           {\pcalgostyle{Corr}}
+\newcommand*{\decide}         {\pcalgostyle{Decide}}
+\newcommand*{\decomp}         {\pcalgostyle{Decomp}}
+\newcommand*{\delegate}       {\pcalgostyle{Del}}
+\newcommand*{\derive}         {\pcalgostyle{Der}}
+\newcommand*{\detect}         {\pcalgostyle{Detect}}
+\newcommand*{\enroll}         {\pcalgostyle{enrl}}
+\newcommand*{\evict}          {\pcalgostyle{Evict}}
+\newcommand*{\expand}         {\pcalgostyle{Expand}}
+\newcommand*{\extend}         {\pcalgostyle{Extend}}
+\newcommand*{\fetch}          {\pcalgostyle{Fetch}}
+\newcommand*{\finalize}       {\pcalgostyle{Finalize}}
+\newcommand*{\findcover}      {\pcalgostyle{FindCover}}
+\newcommand*{\forward}        {\pcalgostyle{Fwd}}
+\newcommand*{\gen}            {\pcalgostyle{Gen}}
+\newcommand*{\gentoken}       {\gen\pcalgostyle{Token}}
+\newcommand*{\genwith}        {\gen\pcalgostyle{With}}
+\newcommand*{\Hint}           {\pcalgostyle{Hint}}
+\newcommand*{\hyb}            {\pcalgostyle{Hyb}}
+\newcommand*{\ideal}          {\pcalgostyle{Ideal}}
+\newcommand*{\Index}          {\pcalgostyle{Index}}
+\newcommand*{\inset}          {\pcalgostyle{InSet}}
+\newcommand*{\join}           {\pcalgostyle{Join}}
+\newcommand*{\judge}          {\pcalgostyle{Judge}}
+\newcommand*{\keyderivation}  {\pcalgostyle{Key}\derive}
+\newcommand*{\keycompression} {\pcalgostyle{KeyComp}}
+\newcommand*{\len}            {\pcalgostyle{len}}
+\newcommand*{\link}           {\pcalgostyle{Link}}
+\newcommand*{\macverify}      {\mac\pcalgostyle{.}\verify}
+\newcommand*{\macsign}        {\mac\pcalgostyle{.}\sign}
+\newcommand*{\Mark}           {\pcalgostyle{Mark}}
+\newcommand*{\nextstep}       {\pcalgostyle{NextStep}}
+\newcommand*{\obliviousaccess}{\pcalgostyle{OAccess}}
+\newcommand*{\open}           {\pcalgostyle{Open}}
+\newcommand*{\preprocess}     {\pcalgostyle{Preprocess}}
+\newcommand*{\prfeval}        {\prf\eval}
+\newcommand*{\prfgen}         {\prf\gen}
+\newcommand*{\prfpuncture}    {\prf\puncture}
+\newcommand*{\prove}          {\pcalgostyle{Prove}}
+\newcommand*{\query}          {\pcalgostyle{Query}}
+\newcommand*{\rand}           {\pcalgostyle{Rand}}
+\newcommand*{\Read}           {\pcalgostyle{Read}}
+\newcommand*{\real}           {\pcalgostyle{Real}}
+\newcommand*{\recomp}         {\pcalgostyle{Recomp}}
+\newcommand*{\reconstruct}    {\pcalgostyle{Reconstruct}}
+\newcommand*{\recover}        {\pcalgostyle{Recover}}
+\newcommand*{\register}       {\pcalgostyle{Reg}}
+\newcommand*{\request}        {\pcalgostyle{Request}}
+\newcommand*{\rerandomize}    {\pcalgostyle{ReRand}}
+\newcommand*{\respond}        {\pcalgostyle{Respond}}
+\newcommand*{\rotate}         {\pcalgostyle{Rotate}}
+\newcommand*{\seal}           {\pcalgostyle{Seal}}
+\newcommand*{\setup}          {\pcalgostyle{Setup}}
+\newcommand*{\share}          {\pcalgostyle{Share}}
+\newcommand*{\shift}          {\pcalgostyle{Shift}}
+\newcommand*{\store}          {\pcalgostyle{store}}
+\newcommand*{\Supp}           {\pcalgostyle{Supp}}
+\newcommand*{\test}           {\pcalgostyle{Test}}
+\newcommand*{\toblock}        {\pcalgostyle{ToBlock}}
+\newcommand*{\tostring}       {\pcalgostyle{ToString}}
+\newcommand*{\tofunc}         {\pcalgostyle{ToFunc}}
+\newcommand*{\tofuncs}        {\pcalgostyle{ToFuncs}}
+\newcommand*{\trace}          {\pcalgostyle{Trace}}
+\newcommand*{\unseal}         {\pcalgostyle{Unseal}}
+\newcommand*{\update}         {\pcalgostyle{Update}}
+\newcommand*{\validate}       {\pcalgostyle{val}}
+\newcommand*{\view}           {\pcalgostyle{View}}
+\newcommand*{\viewv}          {\view_{\mathcal{V}^*}}
+\newcommand*{\Write}          {\pcalgostyle{Write}}
 
 \newcommand*{\circuit}     {\mathcal{C}}
 \newcommand*{\proveralgo}  {\mathcal{P}}
 \newcommand*{\verifieralgo}{\mathcal{V}}
 
+\newcommand*{\binn} {\bin^n}
+\newcommand*{\FFp}  {\FF_p}
+\newcommand*{\FFq}  {\FF_q}
+\newcommand*{\FFtwo}{\FF_2}
+\newcommand*{\ZZp}  {\ZZ_p}
+\newcommand*{\ZZq}  {\ZZ_q}
+\newcommand*{\ZZtwo}{\ZZ_2}
+
 \newcommand*{\cpa} {\pcalgostyle{CPA}}
+\newcommand*{\csat}{\pcalgostyle{circuit\pcmathhyphen{}SAT}}
+\newcommand*{\ddh} {\pcalgostyle{DDH}}
 \newcommand*{\dlog}{\pcalgostyle{DLOG}}
 \newcommand*{\lwe} {\pcalgostyle{LWE}}
 \newcommand*{\mpc} {\pcalgostyle{MPC}}
 \newcommand*{\pir} {\pcalgostyle{PIR}}
+\newcommand*{\pprf}{\pcalgostyle{p}\prf}
+\newcommand*{\ps}  {\pcalgostyle{PS}}
 
 \newcommand*{\dtime} {\pccomplexitystyle{DTIME}}
 \newcommand*{\ip}    {\pccomplexitystyle{IP}}
 \newcommand*{\pspace}{\pccomplexitystyle{PSPACE}}
 
+\newcommand*{\aes}           {\pcalgostyle{AES}}
 \newcommand*{\groth}         {\pcalgostyle{Groth16}}
 \newcommand*{\mimc}          {\pcalgostyle{MiMC}}
 \newcommand*{\pinocchio}     {\pcalgostyle{Pinocchio}}
@@ -874,15 +981,20 @@
 \newcommand*{\ans}   {\key[ans]}
 \newcommand*{\cert}  {\key[cert]}
 \newcommand*{\ck}    {\key[ck]}
+\newcommand*{\col}   {\key[col]}
 \newcommand*{\com}   {\key[com]}
 \newcommand*{\ct}    {\key[ct]}
 \newcommand*{\cteval}{\tilde{\ct}}
+\newcommand*{\db}    {\key[db]}
+\newcommand*{\dummy} {\key[dummy]}
 \newcommand*{\ek}    {\key[ek]}
 \newcommand*{\epk}   {\key[epk]}
 \newcommand*{\eprek} {\key[eprek]}
 \newcommand*{\eprepk}{\key[eprepk]}
+\newcommand*{\hint}  {\key[hint]}
 \newcommand*{\ik}    {\key[ik]}
 \newcommand*{\ipk}   {\key[ipk]}
+\newcommand*{\iv}    {\key[IV]}
 \newcommand*{\mk}    {\key[mk]}
 \newcommand*{\ppar}  {\key[pp]}
 \newcommand*{\prek}  {\key[prek]}
@@ -891,6 +1003,8 @@
 \newcommand*{\qu}    {\key[qu]}
 \newcommand*{\rchk}  {\key[rchk]}
 \newcommand*{\rchpk} {\key[rchpk]}
+\newcommand*{\row}   {\key[row]}
+\newcommand*{\seed}  {\key[seed]}
 
 \renewcommand*{\expect}[1]{\operatorname{\expectationname}\abr{#1}}
 \renewcommand*{\prob}  [1]{\operatorname{\probname}\abr{#1}}
@@ -898,14 +1012,24 @@
 
 \renewcommand*{\kgen}    {\pcalgostyle{Key}\gen}
 \renewcommand*{\probname}{\mathbb{P}}
+\renewcommand*{\puncture}{\pcalgostyle{Punc}}
 \renewcommand*{\verify}  {\pcalgostyle{Ver}}
 
 \newcommand*{\funs} [2]{\pcalgostyle{Funs}\abr{#1, #2}} % func1, func2
 \newcommand*{\perms}[1]{\pcalgostyle{Perms}\abr{#1}}    % func
+\newcommand*{\pok}  [2]{\pcalgostyle{PoK}\cbr{#1 : #2}} % witness, statement
 
-\newcommand*{\cpaadv}[2]{\cpa\pcadvantagename\abr{#1, #2}} % adv, func
-\newcommand*{\prfadv}[2]{\prf\pcadvantagename\abr{#1, #2}} % adv, func
-\newcommand*{\prpadv}[2]{\prp\pcadvantagename\abr{#1, #2}} % adv, func
+\newcommand*{\cpaadv}  {\cpa\pcadvantagename}
+\newcommand*{\ddhadv}  {\ddh\pcadvantagename}
+\newcommand*{\distadv} {\dist\pcadvantagename}
+\newcommand*{\piradv}  {\pir\pcadvantagename}
+\newcommand*{\pprfadv} {\pcalgostyle{p}\prfadv}
+\newcommand*{\pprfadvu}{\pprfadv^{unp}}
+\newcommand*{\prfadv}  {\prf\pcadvantagename}
+\newcommand*{\prgadv}  {\prg\pcadvantagename}
+\newcommand*{\prpadv}  {\prp\pcadvantagename}
+\newcommand*{\psadv}   {\ps\pcadvantagename}
+\newcommand*{\psseladv}{\ps\pcalgostyle{sel}\pcadvantagename}
 
 \newcommand*{\expectsq}[1]         {\operatorname{\expectationname}\sq\pbr{#1}}
 \newcommand*{\gf}      [1]         {\pcalgostyle{GF}\abr{#1}}
@@ -1135,22 +1259,27 @@
   \renewcommand*{\possessivestring}        {s}
   \renewcommand*{\proofideatext}           {Bevisidé}
   \renewcommand*{\proofsketchtext}         {Bevisutkast}
-  \renewcommand*{\ntnulogo}                {NTNU_logo_NB}
-  \renewenvironment*{aside}      {\begin{avsporing}}  {\end{avsporing}}
-  \renewenvironment*{assumption} {\begin{antagelse}}  {\end{antagelse}}
-  \renewenvironment*{claim}      {\begin{påstand}}    {\end{påstand}}
-  \renewenvironment*{conjecture} {\begin{konjektur}}  {\end{konjektur}}
-  \renewenvironment*{corollary}  {\begin{korollar}}   {\end{korollar}}
-  \renewenvironment*{definition} {\begin{definisjon}} {\end{definisjon}}
-  \renewenvironment*{example}    {\begin{eksempel}}   {\end{eksempel}}
-  \renewenvironment*{exercise}   {\begin{oppgave}}    {\end{oppgave}}
-  \renewenvironment*{fact}       {\begin{faktum}}     {\end{faktum}}
-  \renewenvironment*{observation}{\begin{observasjon}}{\end{observasjon}}
-  \renewenvironment*{principle}  {\begin{prinsipp}}   {\end{prinsipp}}
-  \renewenvironment*{property}   {\begin{egenskap}}   {\end{egenskap}}
-  \renewenvironment*{proposition}{\begin{forslag}}    {\end{forslag}}
-  \renewenvironment*{remark}     {\begin{merk}}       {\end{merk}}
-  \renewenvironment*{theorem}    {\begin{teorem}}     {\end{teorem}}
+  \renewenvironment*{aside}            {\begin{avsporing}}         {\end{avsporing}}
+  \renewenvironment*{assumption}       {\begin{antagelse}}         {\end{antagelse}}
+  \renewenvironment*{attackgame}       {\begin{angrepsspill}}      {\end{angrepsspill}}
+  \renewenvironment*{claim}            {\begin{påstand}}           {\end{påstand}}
+  \renewenvironment*{conjecture}       {\begin{konjektur}}         {\end{konjektur}}
+  \renewenvironment*{construction}     {\begin{konstruksjon}}      {\end{konstruksjon}}
+  \renewenvironment*{corollary}        {\begin{korollar}}          {\end{korollar}}
+  \renewenvironment*{definition}       {\begin{definisjon}}        {\end{definisjon}}
+  \renewenvironment*{example}          {\begin{eksempel}}          {\end{eksempel}}
+  \renewenvironment*{exercise}         {\begin{oppgave}}           {\end{oppgave}}
+  \renewenvironment*{fact}             {\begin{faktum}}            {\end{faktum}}
+  \renewenvironment*{functionalitygoal}{\begin{funksjonalitetsmål}}{\end{funksjonalitetsmål}}
+  \renewenvironment*{informaltheorem}  {\begin{uformeltteorem}}    {\end{uformeltteorem}}
+  \renewenvironment*{observation}      {\begin{observasjon}}       {\end{observasjon}}
+  \renewenvironment*{principle}        {\begin{prinsipp}}          {\end{prinsipp}}
+  \renewenvironment*{property}         {\begin{egenskap}}          {\end{egenskap}}
+  \renewenvironment*{proposition}      {\begin{forslag}}           {\end{forslag}}
+  \renewenvironment*{remark}           {\begin{merk}}              {\end{merk}}
+  \renewenvironment*{securitygoal}     {\begin{sikkerhetsmål}}     {\end{sikkerhetsmål}}
+  \renewenvironment*{theorem}          {\begin{teorem}}            {\end{teorem}}
+  \renewcommand*{\ntnulogo}{NTNU_logo_NB}
   \crefname{ineq}         {Ulikhet}     {Ulikheter}
   \crefname{inva}         {Invariant}   {Invarianter}
   \crefname{subsection}   {Underseksjon}{Underseksjoner}
