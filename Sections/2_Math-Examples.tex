@@ -1,22 +1,21 @@
 \section{Math Examples}
 This section demonstrates various mathematical features supported by the template. Every package listed under the \enquote{Mathematics} category in \mintinline{latex}{packages.sty} is represented here with a usage example. Some of these examples are purely illustrative and are not necessarily mathematically meaningful.
 
-The \gls{gcd} and \gls{lcm} are fundamental concepts in number theory. The \gls{lcm} of two numbers is the smallest number that is a multiple of both.
+The \gls{gcd} and \gls{lcm} are fundamental concepts in number theory. The \gls{lcm} of two numbers is the smallest number that is a multiple of both. We begin with examples of custom\-/defined relation symbols:
 \begin{equation*}
-    \gcd\pbr{a, b} = \mathit{\glsxtrshort{gcd}}\pbr{a, b}
-\end{equation*}
-\begin{equation*}
-    \lcm\pbr{a, b} = \mathit{\glsxtrshort{lcm}}\pbr{a, b}
+    U \qmeq V,
+    \quad M \meq N,
+    \quad p \hateq q,
+    \quad a \whateq b,
+    \quad x \pluseq 3,
+    \quad y \mineq 4
 \end{equation*}
 
-We begin with examples of custom\-/defined relation symbols:
+There are three (four) ways to defined a variable:
 \begin{equation*}
     x \defeq y + z,
-    \quad a \whateq b,
-    \quad p \hateq q,
-    \quad f \coloneqq g,
-    \quad M \meq N,
-    \quad U \qmeq V
+    \quad a \triangleq b + c,
+    \quad i \coloneq j + k\ (A \eqcolon B)
 \end{equation*}
 
 Superscript shorthands for inverse and transpose:
@@ -40,9 +39,14 @@ The number of combinations (binomial coefficient) is:
     \choose{n}{r} = \comb{n}{r} = \frac{n!}{r!\pbr{n - r}!}
 \end{equation*}
 
-We can also use floor and ceiling functions:
+We can also use bracket functions:
 \begin{equation*}
-    \ceil{1.2} = 2, \quad \floor{\frac{11}{5}} = 2
+    \ceil{1.2} = 2,
+    \quad \floor{\frac{11}{5}} = 2,
+    \quad \Angle{x, y},
+    \quad \abs{-2} = 2,
+    \quad \round{2.6} = 3,
+    \quad \round{2.4} = 2
 \end{equation*}
 
 The \mintinline{latex}{narrowarray} and \mintinline{latex}{normalarray} commands adjust column spacing in arrays:
@@ -60,6 +64,11 @@ The \mintinline{latex}{narrowarray} and \mintinline{latex}{normalarray} commands
     \end{pmatrix}
 \end{equation*}
 
+Intervals:
+\begin{equation*}
+    \intoo{1}{2}, \quad \intoc{1}{2}, \quad \intco{1}{2}, \quad \intcc{1}{2}
+\end{equation*}
+
 And comma\-/separated matrix environment:
 \begin{equation*}
     \begin{pvector}
@@ -67,45 +76,56 @@ And comma\-/separated matrix environment:
     \end{pvector}
 \end{equation*}
 
-And auto delimiters:
+And automatic sizing of delimiters:
+\begin{equation*}
+    \pbr{1 + \frac{1}{2}},
+    \quad \sbr{2 + \frac{2}{3}},
+    \quad \cbr{3 + \frac{3}{4}},
+    \quad \sequence{4 + \frac{4}{5}},
+    \quad \set{5 + \frac{5}{6}}
+\end{equation*}
+
+\mintinline{latex}{\pbr} and \mintinline{latex}{\sequence} are the same commands for different settings. Same for \mintinline{latex}{\cbr} and \mintinline{latex}{\set}. Further, automatic type of delimiters:
 \begin{equation*}
     a + \abr{b + \abr{c + \abr{d + \abr{e + \abr{f + \abr{g + h} + \abr{i + j} + k} + l} + m} + n} + o} + p
+\end{equation*}
+
+Some machine learning constants:
+\begin{equation*}
+    \data,
+    \quad \loss,
+    \quad \hypothesis
 \end{equation*}
 
 \subsection{Operators}
 
 Declared math operators:
-\begin{equation*}
-    \Adj\pbr{A},
-    \quad \Cov\pbr{n},
+\begin{align*}
+    &\Adj\pbr{A},
     \quad \divergence\pbr{n},
     \quad \fraction\pbr{n},
     \quad \grad\pbr{n},
     \quad \id\pbr{n},
     \quad \Im\pbr{n},
     \quad \integer\pbr{n},
-\end{equation*}
-\begin{equation*}
-    \Law\pbr{n},
-    \quad \lb\pbr{n},
+    \quad \Law\pbr{n}, \\
+    &\lb\pbr{n},
     \quad \lcm\pbr{n},
     \quad \ord\pbr{n},
     \quad \rank\pbr{n},
     \quad \Re\pbr{n},
     \quad \rot\pbr{n},
     \quad \sinc\pbr{\omega},
-\end{equation*}
-\begin{equation*}
-    \sgn\pbr{n},
-    \quad \supp\pbr{n},
+    \quad \sgn\pbr{n}, \\
+    &\supp\pbr{n},
     \quad \tr\pbr{n},
     \quad \softmax_n\pbr{n},
     \quad \logtwo\sq\pbr{n},
     \quad \logten\pbr{n},
     \quad \polylog
-\end{equation*}
+\end{align*}
 
-The \mintinline{latex}{rgets}/\mintinline{latex}{sgets} commands render a random\-/sampling arrow (if you find a way to create them without using \mintinline{latex}{tikz}, let me know):
+The \mintinline{latex}{rgets}/\mintinline{latex}{sgets} commands render a random\-/sampling arrow:
 \begin{equation*}
     k \rgets \bin^\secpar = k \xleftarrow{R} \bin^\secpar = k \sgets \bin^\secpar = k \sample \bin^\secpar
 \end{equation*}
@@ -119,6 +139,11 @@ Expected value and variance:
     \Cov\pbr{X, Y} &= \expect{XY} - \expect{X}\expect{Y}
 \end{align*}
 
+And the indicator function:
+\begin{equation*}
+    n = \sum_i \indicator{i > \frac{2\abr{n + 1}}{3}}
+\end{equation*}
+
 \subsection{Sets, Transforms, and Notation}
 
 Commonly used mathematical sets and transforms:
@@ -131,13 +156,18 @@ Commonly used mathematical sets and transforms:
 
 \subsection{Calculus and Differentials}
 
+Defining a function:
+\begin{equation*}
+    \func{f}{A \times B}{C},
+    \quad \func{g}{X \times Y}{Z}[\pbr{x, y}][x + y]
+\end{equation*}
+
 Ordinary and partial derivatives using \mintinline{latex}{diffcoeff}:
 \begin{equation*}
     \dl f,
     \quad \diff{f}{x},
     \quad \diff[2]{f}{x},
-    \quad \diffp{f}{x},
-    \quad \diffp{f}{{x}{y}}
+    \quad \diffp*{f}{x}
 \end{equation*}
 
 \subsection{Equations}
@@ -162,7 +192,7 @@ The custom \mintinline{latex}{invariant} environment also assigns a label like a
     E = m\gls{c}\sq
 \end{equation*}
 
-A piecewise\-/defined function using \mintinline{latex}{cif} and \mintinline{latex}{cotherwise}:
+A piecewise\-/defined function using \mintinline{latex}{cif} and \mintinline{latex}{cow}:
 \begin{equation*}
     f\pbr{x} = \begin{cases}
         x\sq & \cif{x \geq 0} \\
@@ -173,7 +203,7 @@ A piecewise\-/defined function using \mintinline{latex}{cif} and \mintinline{lat
 We also use \mintinline{latex}{mathclap} to fix spacing in subscripts:
 \begin{equation*}
     \sum_{1 \leq i < j \leq n} a_{ij}
-    \quad \text{vs} \quad
+    \quad \text{vs.} \quad
     \sum_{\mathclap{1 \leq i < j \leq n}} a_{ij}
 \end{equation*}
 
@@ -200,6 +230,12 @@ Negated relations from \mintinline{latex}{centernot}:
     \quad \ndashv
 \end{equation*}
 
+Empty set notation (both will produce the same and is decided by the option passed in the main file):
+\begin{equation*}
+    \emptyset,
+    \quad \varnothing
+\end{equation*}
+
 \subsection{Bitwise and Shift Operators}
 
 Bitwise and shift operators for use in algorithms or hardware descriptions:
@@ -207,6 +243,8 @@ Bitwise and shift operators for use in algorithms or hardware descriptions:
     a \band b,
     \quad a \bor b,
 \end{equation*}
+
+And bitshifting:
 \begin{equation*}
     a \sll b = a \ll b,
     \quad a \sgg b = a \gg b,
@@ -234,6 +272,26 @@ Cancellation of terms using \mintinline{latex}{cancel}:
 \end{equation*}
 
 The \mintinline{latex}{xfrac} package provides better inline fractions: $\sfrac{a}{b}$ is cleaner than $\frac{a}{b}$ or $a/b$.
+
+Decision rule:
+\begin{equation*}
+    \ell \decisionrule{a = 1}{a = -1} \eta
+\end{equation*}
+
+Kendall notation:
+\begin{align*}
+    &\kendall,
+    \quad \kendall[D],
+    \quad \kendall[D][D], \\
+    &\kendall[D][D][2],
+    \quad \kendall[D][D][2][2],
+    \quad \kendall[D][D][2][2][LIFO]
+\end{align*}
+
+Can fuse characters:
+\begin{equation*}
+    \charfusion{\cdot}{\cup}\charfusion{\cdot}{\cup}
+\end{equation*}
 
 \subsection{Probability Distributions}
 
@@ -265,20 +323,18 @@ According to \href{https://webusers.imj-prg.fr/~jean-yves.ducloux/Typographie/IS
     \hermite{n}\pbr{z}                 &= \pbr{-1}^n \eu^{z\sq} \diff*[n]{\eu^{-z\sq}}{z}                                                                                          \\
     \laguerre{n}\pbr{z}                &= \eu^z \diff*[n]{\pbr{z^n \eu^{-z}}}{z}                                                                                                   \\
     \laguerre{n}[m]\pbr{z}             &= \diff*[m]{\laguerre{n}\pbr{z}}{z}                                                                                                        \\
-    \chebyshevfirst{n}\pbr{z}          &= \cos\abr{n\arccos\abr{z}}                                                                                                                \\
+    \chebyshev{n}\pbr{z}               &= \cos\abr{n\arccos\abr{z}}                                                                                                                \\
     \chebyshevsecond{n}\pbr{z}         &= \sin\abr{\frac{\abr{n + 1}\arccos\abr{z}}{\sin\abr{\arccos\abr{z}}}}                                                                     \\
     \besselj{v}\pbr{z}                 &= \sum_{k = 0}^\infty \frac{\pbr{-1}^k \pbr{\sfrac{z}{2}}^{v + 2k}}{k!\Gamma\pbr{v + k + 1}}                                               \\
     \neumann{v}\pbr{z}                 &= \frac{\besselj{v}\pbr{z}\cos\pbr{v\pi} - \besselj{-v}\pbr{z}}{\sin\pbr{v\pi}}                                                            \\
-    \hankelfirst{v}\pbr{z}             &= \besselj{v}\pbr{z} + \iu\neumann{v}\pbr{z}                                                                                               \\
+    \hankel{v}\pbr{z}                  &= \besselj{v}\pbr{z} + \iu\neumann{v}\pbr{z}                                                                                               \\
     \hankelsecond{v}\pbr{z}            &= \besselj{v}\pbr{z} - \iu\neumann{v}\pbr{z}                                                                                               \\
     \besseli{v}\pbr{z}                 &= \eu^{\sfrac{-\iu v\pi}{2}} \besselj{v}\pbr{\eu^{\sfrac{\iu\pi}{2}} z}                                                                    \\
-    \besselk{v}\pbr{z}                 &= \frac{\iu\pi}{2} \eu^{\sfrac{\iu v\pi}{2}} \hankelfirst{v}\pbr{\eu^{\sfrac{\iu\pi}{2}} z}                                                \\
+    \besselk{v}\pbr{z}                 &= \frac{\iu\pi}{2} \eu^{\sfrac{\iu v\pi}{2}} \hankel{v}\pbr{\eu^{\sfrac{\iu\pi}{2}} z}                                                     \\
     \besseljs{l}\pbr{z}                &= \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \besselj{l + \sfrac{1}{2}}\pbr{z}                                                                    \\
     \neumanns{l}\pbr{z}                &= \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \neumann{l + \sfrac{1}{2}}\pbr{z}                                                                    \\
-    \hankelfirsts{l}\pbr{z}            &= \besseljs{l}\pbr{z} + \iu\neumanns{l}\pbr{z} = \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \hankelfirst{l + \sfrac{1}{2}}\pbr{z}                 \\
-    \hankelseconds{l}\pbr{z}           &= \besseljs{l}\pbr{z} - \iu\neumanns{l}\pbr{z} = \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \hankelsecond{l + \sfrac{1}{2}}\pbr{z}                \\
-    \airy\pbr{z}                       &= \frac{\sqrt{z}}{3}\abr{\besseli{\sfrac{-1}{3}}\abr{w} - \besseli{\sfrac{1}{3}}\abr{w}}                                                   \\
-    \biry\pbr{z}                       &= \sqrt{\frac{z}{3}}\abr{\besseli{\sfrac{-1}{3}}\abr{w} + \besseli{\sfrac{1}{3}}\abr{w}}
+    \hankels{l}\pbr{z}                 &= \besseljs{l}\pbr{z} + \iu\neumanns{l}\pbr{z} = \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \hankel{l + \sfrac{1}{2}}\pbr{z}                      \\
+    \hankelseconds{l}\pbr{z}           &= \besseljs{l}\pbr{z} - \iu\neumanns{l}\pbr{z} = \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \hankelsecond{l + \sfrac{1}{2}}\pbr{z}
 \end{align*}
 
 \subsection{Theorem Environments}
@@ -310,6 +366,9 @@ The template declares a wide range of theorem-like environments using \mintinlin
 \begin{claim}
     The sum of two even integers is even.
 \end{claim}
+\begin{construction}
+    Construction.
+\end{construction}
 \begin{definition}
     A \defn{prime number} is a natural number greater than $1$ with no positive divisors other than $1$ and itself.
 \end{definition}

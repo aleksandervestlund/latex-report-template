@@ -62,6 +62,7 @@
 \DeclareStringOption[lmodern]   {font}
 \DeclareStringOption[varnothing]{setnotation}
 \DeclareBoolOption{glscount}
+\DeclareBoolOption{knuth}
 \DeclareBoolOption{slant}
 \ProcessKeyvalOptions*
 
@@ -230,8 +231,11 @@
 ]{diffcoeff}
 \RequirePackage{faktor}
 \RequirePackage{mathrsfs}
-\RequirePackage{mathtools}
 \RequirePackage{thmtools}
+
+\RequirePackage{mathtools}
+\mathtoolsset{centercolon}
+\renewenvironment*{cases}{\begin{dcases}}{\end{dcases}}
 
 \RequirePackage{xfrac}
 \NewCommandCopy{\oldsfrac}{\sfrac}
@@ -402,26 +406,30 @@
 \newcommand*{\qmeq}  {\overset{?}{=}}
 \newcommand*{\hateq} {\mathrel{\hat{=}}}
 \newcommand*{\whateq}{\mathrel{\widehat{=}}}
-\newcommand*{\cdoteq}{\mathrel{\cdot}=}
 \newcommand*{\mineq} {\mathrel{-}=}
 \newcommand*{\pluseq}{\mathrel{+}=}
 
-\let\Re\undefined
-\let\Im\undefined
+\makeatletter
+\ifbool{packages@knuth}{}{
+  \let\Re\undefined
+  \let\Im\undefined
+  \DeclareMathOperator{\Im}{Im} % imaginary part
+  \DeclareMathOperator{\Re}{Re} % real part
+}
+\makeatother
+
 \DeclareMathOperator {\Adj}       {Adj}           % adjugate
 \DeclareMathOperator {\Cov}       {Cov}           % covariance
 \DeclareMathOperator {\divergence}{div}           % divergence
 \DeclareMathOperator {\fraction}  {frac}          % fractional part
 \DeclareMathOperator {\grad}      {\mathbf{grad}} % gradient
 \DeclareMathOperator {\id}        {id}            % identity relation
-\DeclareMathOperator {\Im}        {Im}            % imaginary
 \DeclareMathOperator {\integer}   {int}           % integer part
 \DeclareMathOperator {\Law}       {Law}           % law
 \DeclareMathOperator {\lb}        {lb}            % log2
 \DeclareMathOperator {\lcm}       {lcm}           % least common multiple
 \DeclareMathOperator {\ord}       {ord}           % order
 \DeclareMathOperator {\rank}      {rank}          % rank
-\DeclareMathOperator {\Re}        {Re}            % real
 \DeclareMathOperator {\rot}       {\mathbf{rot}}  % rotation
 \DeclareMathOperator {\sinc}      {sinc}          % sine cardinal
 \DeclareMathOperator {\sgn}       {sgn}           % signum
@@ -438,8 +446,6 @@
 \newcommand*{\iu}{\mathrm{i}}
 \newcommand*{\ju}{\mathrm{j}}
 
-\newcommand*{\airy}              {\operatorname{Ai}}
-\newcommand*{\biry}              {\operatorname{Bi}}
 \newcommand*{\bernoullinumber}[1]{\mathrm{B}_{#1}}
 \newcommand*{\besseli}        [1]{\mathrm{I}_{#1}}
 \newcommand*{\besselis}       [1]{\mathrm{i}_{#1}}
@@ -447,10 +453,10 @@
 \newcommand*{\besseljs}       [1]{\mathrm{j}_{#1}}
 \newcommand*{\besselk}        [1]{\mathrm{K}_{#1}}
 \newcommand*{\besselks}       [1]{\mathrm{k}_{#1}}
-\newcommand*{\chebyshevfirst} [1]{\mathrm{T}_{#1}}
+\newcommand*{\chebyshev}      [1]{\mathrm{T}_{#1}}
 \newcommand*{\chebyshevsecond}[1]{\mathrm{U}_{#1}}
-\newcommand*{\hankelfirst}    [1]{\mathrm{H}_{#1}^{\pbr{1}}}
-\newcommand*{\hankelfirsts}   [1]{\mathrm{h}_{#1}^{\pbr{1}}}
+\newcommand*{\hankel}         [1]{\mathrm{H}_{#1}^{\pbr{1}}}
+\newcommand*{\hankels}        [1]{\mathrm{h}_{#1}^{\pbr{1}}}
 \newcommand*{\hankelsecond}   [1]{\mathrm{H}_{#1}^{\pbr{2}}}
 \newcommand*{\hankelseconds}  [1]{\mathrm{h}_{#1}^{\pbr{2}}}
 \newcommand*{\harmonics}      [2]{\mathrm{Y}_{#1}^{#2}}
@@ -482,7 +488,14 @@
 \newcommand*{\sll} {\overset{s}{\ll}} % Or just \ll
 \newcommand*{\ull} {\overset{u}{\ll}} % Or \lll
 
-\newcommand*{\func}[3]{#1 : #2 \to #3}
+\NewDocumentCommand{\func}{m m m o o}{
+  \IfValueTF{#4}{
+    \begin{aligned}[t]
+      #1 : #2 &\to     #3 \\
+      #4      &\mapsto #5
+    \end{aligned}
+  }{#1 : #2 \to #3}
+}
 
 \newcommand*{\decisionrule}[2]{\underset{#2}{\overset{#1}{\gtrless}}}
 \newcommand*{\perm}        [2]{{}^{#1}P_{#2}}
@@ -520,19 +533,19 @@
   \mathit{#1/#2/#3/#4/#5}%
 }
 
-% \newcommand*{\xgets}[2][]{
-%   \mathrel{
-%     \tikz[
-%       baseline=-0.1873em,
-%       inner sep=0em,
-%       outer sep=0em,
-%     ]{
-%       \ifblank{#2}{}{\node at (0.05,0.15) {\tiny #2};}
-%       \node at (0,0) {$\gets$};
-%       \ifblank{#2}{}{\node at (0.05,-0.1) {\tiny #1};}
-%     }
-%   }
-% }
+\newcommand*{\getsx}[2][]{
+  \mathrel{
+    \tikz[
+      baseline=-0.1873em,
+      inner sep=0em,
+      outer sep=0em,
+    ]{
+      \ifblank{#2}{}{\node at (0.05,0.15) {\tiny #2};}
+      \node at (0,0) {$\gets$};
+      \ifblank{#2}{}{\node at (0.05,-0.1) {\tiny #1};}
+    }
+  }
+}
 \newcommand*{\xgets}[1]{%
   \mathrel{%
     \mathchoice{\XGETS{#1}{\displaystyle}}{\XGETS{#1}{\textstyle}}{\XGETS{#1}{\scriptstyle}}{\XGETS{#1}{\scriptscriptstyle}}%
@@ -540,10 +553,26 @@
 }
 \newcommand*{\XGETS}[2]{%
   \setbox0\hbox{$#2\gets$}%
-  \rlap{\hbox to \wd0{\hss\raisebox{1.2\height}{\scalebox{0.5}{$#2\text{\ #1}$}}\hss}}\box0
+  \rlap{\hbox to\wd0{\hss\raisebox{1.2\height}{\scalebox{0.5}{$#2\text{\ #1}$}}\hss}}\box0
 }
 \newcommand*{\rgets}{\xgets{R}}
 \newcommand*{\sgets}{\xgets{\$}}
+
+\makeatletter
+\newcommand*{\moverlay}{\mathpalette\mov@rlay}
+\newcommand*{\mov@rlay}[2]{%
+  \leavevmode\vtop{%
+    \baselineskip\z@skip\lineskiplimit-\maxdimen%
+    \ialign{\hfil$\m@th#1##$\hfil\cr#2\crcr}%
+  }%
+}
+\newcommand*{\charfusion}[3][\mathord]{%
+  #1%
+  {\ifx#1\mathop\vphantom{#2}\fi%
+  \mathpalette\mov@rlay{#2\cr#3}}%
+  \ifx#1\mathop\expandafter\displaylimits\fi%
+}
+\makeatother
 
 \RequirePackage{centernot}
 \newcommand*{\ndashv}    {\centernot{\dashv}}
@@ -962,9 +991,11 @@
 \newcommand*{\verifieralgo}{\mathcal{V}}
 
 \newcommand*{\binn} {\bin^n}
+\newcommand*{\FFbar}{\overline{\FF}}
 \newcommand*{\FFp}  {\FF_p}
 \newcommand*{\FFq}  {\FF_q}
 \newcommand*{\FFtwo}{\FF_2}
+\newcommand*{\QQbar}{\overline{\QQ}}
 \newcommand*{\ZZp}  {\ZZ_p}
 \newcommand*{\ZZq}  {\ZZ_q}
 \newcommand*{\ZZtwo}{\ZZ_2}
@@ -1081,33 +1112,35 @@
 
 \makeatletter
 \cref@addlanguagedefs{american}{
-  \setcrefenglish{procedure}        {Procedure}         {Procedures}
-  \setcrefenglish{informaltheorem}  {Informal Theorem}  {Informal Theorems}
   \setcrefenglish{assumption}       {Assumption}        {Assumptions}
+  \setcrefenglish{attackgame}       {Attack Game}       {Attack Games}
   \setcrefenglish{claim}            {Claim}             {Claims}
+  \setcrefenglish{construction}     {Construction}      {Constructions}
+  \setcrefenglish{exercise}         {Exercise}          {Exercises}
   \setcrefenglish{fact}             {Fact}              {Facts}
+  \setcrefenglish{functionalitygoal}{Functionality Goal}{Functionality Goals}
+  \setcrefenglish{informaltheorem}  {Informal Theorem}  {Informal Theorems}
   \setcrefenglish{observation}      {Observation}       {Observations}
   \setcrefenglish{principle}        {Principle}         {Principles}
-  \setcrefenglish{property}         {Property}          {Properties}
-  \setcrefenglish{exercise}         {Exercise}          {Exercises}
   \setcrefenglish{problem}          {Problem}           {Problems}
-  \setcrefenglish{attackgame}       {Attack Game}       {Attack Games}
-  \setcrefenglish{functionalitygoal}{Functionality Goal}{Functionality Goals}
+  \setcrefenglish{procedure}        {Procedure}         {Procedures}
+  \setcrefenglish{property}         {Property}          {Properties}
   \setcrefenglish{securitygoal}     {Security Goal}     {Security Goals}
 }
 \cref@addlanguagedefs{british}{
-  \setcrefenglish{procedure}        {Procedure}         {Procedures}
-  \setcrefenglish{informaltheorem}  {Informal Theorem}  {Informal Theorems}
   \setcrefenglish{assumption}       {Assumption}        {Assumptions}
+  \setcrefenglish{attackgame}       {Attack Game}       {Attack Games}
   \setcrefenglish{claim}            {Claim}             {Claims}
+  \setcrefenglish{construction}     {Construction}      {Constructions}
+  \setcrefenglish{exercise}         {Exercise}          {Exercises}
   \setcrefenglish{fact}             {Fact}              {Facts}
+  \setcrefenglish{functionalitygoal}{Functionality Goal}{Functionality Goals}
+  \setcrefenglish{informaltheorem}  {Informal Theorem}  {Informal Theorems}
   \setcrefenglish{observation}      {Observation}       {Observations}
   \setcrefenglish{principle}        {Principle}         {Principles}
-  \setcrefenglish{property}         {Property}          {Properties}
-  \setcrefenglish{exercise}         {Exercise}          {Exercises}
   \setcrefenglish{problem}          {Problem}           {Problems}
-  \setcrefenglish{attackgame}       {Attack Game}       {Attack Games}
-  \setcrefenglish{functionalitygoal}{Functionality Goal}{Functionality Goals}
+  \setcrefenglish{procedure}        {Procedure}         {Procedures}
+  \setcrefenglish{property}         {Property}          {Properties}
   \setcrefenglish{securitygoal}     {Security Goal}     {Security Goals}
 }
 \cref@addlanguagedefs{norsk}{
@@ -1119,6 +1152,7 @@
   \setcrefnorsk{faktum}            {Faktum}            {Fakta}
   \setcrefnorsk{forslag}           {Forslag}           {Forslag}
   \setcrefnorsk{funksjonalitetsmål}{Funksjonalitetsmål}{Funksjonalitetsmål}
+  \setcrefnorsk{konstruksjon}      {Konstruksjon}      {Konstruksjoner}
   \setcrefnorsk{korollar}          {Korrolar}          {Korollarer}
   \setcrefnorsk{observasjon}       {Observasjon}       {Observasjoner}
   \setcrefnorsk{oppgave}           {Oppgave}           {Oppgaver}
