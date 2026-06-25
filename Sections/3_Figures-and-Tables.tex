@@ -13,25 +13,25 @@ In this section, we demonstrate how to include and format both figures and table
     \centering
     \caption{A 2x2 grid of subfigures using the \mintinline{latex}{subcaption} package.}
     \label{fig:subfigures}
-    \begin{subfigure}{0.45\textwidth}
+    \begin{subfigure}{0.45\linewidth}
         \centering
         \includegraphics{the_way}
         \subcaption{Top\-/left subfigure.}
     \end{subfigure}
     \hfill
-    \begin{subfigure}{0.45\textwidth}
+    \begin{subfigure}{0.45\linewidth}
         \centering
         \includegraphics{the_way}
         \subcaption{Top\-/right subfigure.}
     \end{subfigure}
     \vskip\baselineskip
-    \begin{subfigure}{0.45\textwidth}
+    \begin{subfigure}{0.45\linewidth}
         \centering
         \includegraphics{the_way}
         \subcaption{Bottom\-/left subfigure.}
     \end{subfigure}
     \hfill
-    \begin{subfigure}{0.45\textwidth}
+    \begin{subfigure}{0.45\linewidth}
         \centering
         \includegraphics{the_way}
         \subcaption{Bottom\-/right subfigure.}
@@ -71,7 +71,7 @@ A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \min
 
 \begin{figure}
     \centering
-    \begin{subfigure}{0.325\textwidth}
+    \begin{subfigure}{0.325\linewidth}
         \begin{tikzpicture}
             \draw[->] (0,0) -- (3.25,0) node[right] {$t$};
             \draw[->] (0,-2) -- (0,2) node[above] {$s_1\pbr{t}$};
@@ -88,7 +88,7 @@ A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \min
         \caption{$s_1\pbr{t}$.}
     \end{subfigure}
     \hfill
-    \begin{subfigure}{0.325\textwidth}
+    \begin{subfigure}{0.325\linewidth}
         \begin{tikzpicture}
             \draw[->] (0,0) -- (3.25,0) node[right] {$t$};
             \draw[->] (0,-2) -- (0,2) node[above] {$s_1\pbr{T - t}$};
@@ -105,7 +105,7 @@ A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \min
         \caption{$s_1\pbr{T - t}$.}
     \end{subfigure}
     \hfill
-    \begin{subfigure}{0.325\textwidth}
+    \begin{subfigure}{0.325\linewidth}
         \begin{tikzpicture}
             \draw[->] (0,0) -- (3.25,0) node[right] {$t$};
             \draw[->] (0,-2) -- (0,2) node[above] {$s_2\pbr{t}$};

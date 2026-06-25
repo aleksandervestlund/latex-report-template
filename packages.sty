@@ -61,9 +61,9 @@
 % TODO: Consider adding libertine font support
 \DeclareStringOption[lmodern]   {font}
 \DeclareStringOption[varnothing]{setnotation}
-\DeclareBoolOption{glscount}
-\DeclareBoolOption{knuth}
-\DeclareBoolOption{slant}
+\DeclareBoolOption[false]{glscount}
+\DeclareBoolOption[true] {knuth}
+\DeclareBoolOption[false]{slant}
 \ProcessKeyvalOptions*
 
 \newif\ifusepxortx
@@ -291,38 +291,14 @@
   aside, avsporing,
   remark,merk
 }
-\declaretheorem[
-  name={Attack Game},
-  sibling=theorem,
-]{attackgame}
-\declaretheorem[
-  name={Angrepsspill},
-  sibling=theorem,
-]{angrepsspill}
-\declaretheorem[
-  name={Functionality Goal},
-  sibling=theorem,
-]{functionalitygoal}
-\declaretheorem[
-  name={Funksjonalitetsmål},
-  sibling=theorem,
-]{funksjonalitetsmål}
-\declaretheorem[
-  name={Informal Theorem},
-  sibling=theorem,
-]{informaltheorem}
-\declaretheorem[
-  name={Uformelt teorem},
-  sibling=theorem,
-]{uformeltteorem}
-\declaretheorem[
-  name={Security Goal},
-  sibling=theorem,
-]{securitygoal}
-\declaretheorem[
-  name={Sikkerhetsmål},
-  sibling=theorem,
-]{sikkerhetsmål}
+\declaretheorem[sibling=theorem, name={Attack Game}]       {attackgame}
+\declaretheorem[sibling=theorem, name={Angrepsspill}]      {angrepsspill}
+\declaretheorem[sibling=theorem, name={Functionality Goal}]{functionalitygoal}
+\declaretheorem[sibling=theorem, name={Funksjonalitetsmål}]{funksjonalitetsmål}
+\declaretheorem[sibling=theorem, name={Informal Theorem}]  {informaltheorem}
+\declaretheorem[sibling=theorem, name={Uformelt teorem}]   {uformeltteorem}
+\declaretheorem[sibling=theorem, name={Security Goal}]     {securitygoal}
+\declaretheorem[sibling=theorem, name={Sikkerhetsmål}]     {sikkerhetsmål}
 
 \newcommand*{\proofideatext}  {Proof Idea}
 \newcommand*{\proofsketchtext}{Proof Sketch}
@@ -396,7 +372,7 @@
   \def\@arraycr{\global\@firstcoltrue\org@arraycr}%
   \array{*{20}{>{\if@firstcol\global\@firstcolfalse\else,\,\fi}c}}%
 }
-\newenvironment{comma@array}{\env@vectorlogic}{\endarray}
+\newenvironment*{comma@array}{\env@vectorlogic}{\endarray}
 \makeatother
 
 \NewDocumentEnvironment{pvector}{+b}{\pbr{\begin{comma@array}#1\end{comma@array}}}{}
@@ -492,7 +468,7 @@
   \IfValueTF{#4}{
     \begin{aligned}[t]
       #1 : #2 &\to     #3 \\
-      #4      &\mapsto #5
+           #4 &\mapsto #5
     \end{aligned}
   }{#1 : #2 \to #3}
 }
@@ -901,9 +877,9 @@
 ]{cryptocode} % Must load after hyperref and before cleveref
 \let\AC\undefined % Conflicts with glossaries-extra
 
-\createprocedureblock {expproc}{center,boxed}{}{$\mathrm{Experiment}$}{}
-\createprocedureblock {procb}  {center,boxed}{}{}                     {}
-\createpseudocodeblock{pcb}    {center,boxed}{}{}                     {}
+\createprocedureblock {expprocb}{center,boxed}{}{$\mathrm{Experiment}$}{}
+\createprocedureblock {procb}   {center,boxed}{}{}                     {}
+\createpseudocodeblock{pcb}     {center,boxed}{}{}                     {}
 
 \newcommand*{\accept}         {\pcalgostyle{Accept}}
 \newcommand*{\access}         {\pcalgostyle{Access}}
@@ -990,7 +966,7 @@
 \newcommand*{\proveralgo}  {\mathcal{P}}
 \newcommand*{\verifieralgo}{\mathcal{V}}
 
-\newcommand*{\binn} {\bin^n}
+\newcommand*{\bins} {\bin^\secpar}
 \newcommand*{\FFbar}{\overline{\FF}}
 \newcommand*{\FFp}  {\FF_p}
 \newcommand*{\FFq}  {\FF_q}
@@ -1042,7 +1018,6 @@
 \newcommand*{\ipk}   {\key[ipk]}
 \newcommand*{\iv}    {\key[IV]}
 \newcommand*{\mk}    {\key[mk]}
-\newcommand*{\ppar}  {\key[pp]}
 \newcommand*{\prek}  {\key[prek]}
 \newcommand*{\prepk} {\key[prepk]}
 \newcommand*{\pt}    {\key[pt]}
@@ -1051,13 +1026,14 @@
 \newcommand*{\rchpk} {\key[rchpk]}
 \newcommand*{\row}   {\key[row]}
 \newcommand*{\seed}  {\key[seed]}
+\renewcommand*{\pp}  {\key[pp]}
 
 \renewcommand*{\expect}[1]{\operatorname{\expectationname}\abr{#1}}
 \renewcommand*{\prob}  [1]{\operatorname{\probname}\abr{#1}}
 \renewcommand*{\smallO}[1]{\ensuremath{o}\pbr{#1}}
 
 \renewcommand*{\kgen}    {\pcalgostyle{Key}\gen}
-\renewcommand*{\probname}{\mathbb{P}}
+% \renewcommand*{\probname}{\mathbb{P}}
 \renewcommand*{\puncture}{\pcalgostyle{Punc}}
 \renewcommand*{\verify}  {\pcalgostyle{Ver}}
 
@@ -1070,14 +1046,14 @@
 \newcommand*{\distadv} {\dist\pcadvantagename}
 \newcommand*{\piradv}  {\pir\pcadvantagename}
 \newcommand*{\pprfadv} {\pcalgostyle{p}\prfadv}
-\newcommand*{\pprfadvu}{\pprfadv^{unp}}
+\newcommand*{\pprfadvu}{\pprfadv^{\pcalgostyle{unp}}}
 \newcommand*{\prfadv}  {\prf\pcadvantagename}
 \newcommand*{\prgadv}  {\prg\pcadvantagename}
 \newcommand*{\prpadv}  {\prp\pcadvantagename}
 \newcommand*{\psadv}   {\ps\pcadvantagename}
 \newcommand*{\psseladv}{\ps\pcalgostyle{sel}\pcadvantagename}
 
-\newcommand*{\expectsq}[1]         {\operatorname{\expectationname}\sq\pbr{#1}}
+\newcommand*{\expectsq}[1]         {\operatorname{\expectationname}\sq\abr{#1}}
 \newcommand*{\gf}      [1]         {\pcalgostyle{GF}\abr{#1}}
 \newcommand*{\polylog} [1][\secpar]{\pcpolynomialstyle{polylog}\ifblank{#1}{}{\pbr{#1}}}
 

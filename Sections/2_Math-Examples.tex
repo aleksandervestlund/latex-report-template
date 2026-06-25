@@ -127,7 +127,7 @@ Declared math operators:
 
 The \mintinline{latex}{rgets}/\mintinline{latex}{sgets} commands render a random\-/sampling arrow:
 \begin{equation*}
-    k \rgets \bin^\secpar = k \xleftarrow{R} \bin^\secpar = k \sgets \bin^\secpar = k \sample \bin^\secpar
+    k \rgets \bins = k \xleftarrow{R} \bins = k \sgets \bins = k \sample \bins
 \end{equation*}
 
 \subsection{Expected Value and Variance}
@@ -281,11 +281,11 @@ Decision rule:
 Kendall notation:
 \begin{align*}
     &\kendall,
-    \quad \kendall[D],
-    \quad \kendall[D][D], \\
+    \quad &&\kendall[D],
+    \quad &&\kendall[D][D], \\
     &\kendall[D][D][2],
-    \quad \kendall[D][D][2][2],
-    \quad \kendall[D][D][2][2][LIFO]
+    \quad &&\kendall[D][D][2][2],
+    \quad &&\kendall[D][D][2][2][LIFO]
 \end{align*}
 
 Can fuse characters:
@@ -421,3 +421,270 @@ The template declares a wide range of theorem-like environments using \mintinlin
 \begin{remarkbox}
     Note that $2$ is the only even prime number.
 \end{remarkbox}
+
+\subsection{Cryptocode Examples}
+
+This subsection demonstrates the custom cryptographic commands and naming conventions configured via the \mintinline{latex}{cryptocode} package.
+
+\subsubsection{Algorithmic Styles and Operations}
+
+Some crypto functions:
+\begin{align*}
+    &\accept,
+    \quad \access,
+    \quad \aggregate,
+    \quad \answer,
+    \quad \apply,
+    \quad \auth,
+    \quad \Choose,
+    \quad \combine,
+    \quad \commit, \\
+    &\constrain,
+    \quad \conv,
+    \quad \corr,
+    \quad \decide,
+    \quad \decomp,
+    \quad \delegate,
+    \quad \derive,
+    \quad \detect,
+    \quad \enroll, \\
+    &\evict,
+    \quad \expand,
+    \quad \extend,
+    \quad \fetch,
+    \quad \finalize,
+    \quad \findcover,
+    \quad \forward,
+    \quad \gen, \\
+    &\gentoken,
+    \quad \genwith,
+    \quad \Hint,
+    \quad \hyb,
+    \quad \ideal,
+    \quad \Index,
+    \quad \inset,
+    \quad \join,
+    \quad \judge, \\
+    &\keyderivation,
+    \quad \keycompression,
+    \quad \len,
+    \quad \link,
+    \quad \macverify,
+    \quad \macsign,
+    \quad \Mark,
+    \quad \nextstep, \\
+    &\obliviousaccess,
+    \quad \open,
+    \quad \preprocess,
+    \quad \prfeval,
+    \quad \prfgen,
+    \quad \prfpuncture,
+    \quad \prove, \\
+    &\query,
+    \quad \rand,
+    \quad \Read,
+    \quad \real,
+    \quad \recomp,
+    \quad \reconstruct,
+    \quad \recover,
+    \quad \register, \\
+    &\request,
+    \quad \rerandomize,
+    \quad \respond,
+    \quad \rotate,
+    \quad \seal,
+    \quad \setup,
+    \quad \share,
+    \quad \shift,
+    \quad \store, \\
+    &\Supp,
+    \quad \test,
+    \quad \toblock,
+    \quad \tostring,
+    \quad \tofunc,
+    \quad \tofuncs,
+    \quad \trace,
+    \quad \unseal, \\
+    &\update,
+    \quad \validate,
+    \quad \view,
+    \quad \viewv,
+    \quad \Write
+\end{align*}
+
+Modified base algorithms from the package:
+\begin{equation*}
+    \kgen,
+    \quad \puncture,
+    \quad \verify
+\end{equation*}
+
+\subsubsection{Parties and Algebraic Structures}
+
+Standard algorithmic structures for entities:
+\begin{equation*}
+    \circuit,
+    \quad \proveralgo,
+    \quad \verifieralgo
+\end{equation*}
+
+Common cryptographic fields and sets:
+\begin{equation*}
+    \bins,
+    \quad \FFbar,
+    \quad \FFp,
+    \quad \FFq,
+    \quad \FFtwo,
+    \quad \QQbar,
+    \quad \ZZp,
+    \quad \ZZq,
+    \quad \ZZtwo,
+    \quad \gf{p^n}
+\end{equation*}
+
+\subsubsection{Hardness Assumptions, Systems, and Primitives}
+
+Standard cryptographic assumptions and system models:
+\begin{equation*}
+    \cpa,
+    \quad \csat,
+    \quad \ddh,
+    \quad \dlog,
+    \quad \lwe,
+    \quad \mpc,
+    \quad \pir,
+    \quad \pprf,
+    \quad \ps
+\end{equation*}
+
+Complexity classes:
+\begin{equation*}
+    \dtime,
+    \quad \ip,
+    \quad \pspace
+\end{equation*}
+
+Concrete primitive implementations and constructions:
+\begin{align*}
+    &\aes,
+    \quad \groth,
+    \quad \mimc,
+    \quad \pinocchio,
+    \quad \poseidon,
+    \quad \plonk,
+    \quad \rescue,
+    \quad \shatwofiftysix, \\
+    &\vision
+\end{align*}
+
+\subsubsection{Key and Variable Styles}
+
+Uniform notation for keys, parameters, and ciphertexts using \mintinline{latex}{\key}:
+\begin{align*}
+    &\ans,
+    \quad \cert,
+    \quad \ck,
+    \quad \col,
+    \quad \com,
+    \quad \ct,
+    \quad \cteval,
+    \quad \db,
+    \quad \dummy,
+    \quad \ek,
+    \quad \epk,
+    \quad \eprek, \\
+    &\eprepk,
+    \quad \hint,
+    \quad \ik,
+    \quad \ipk,
+    \quad \iv,
+    \quad \mk,
+    \quad \pp,
+    \quad \prek,
+    \quad \prepk,
+    \quad \pt,
+    \quad \qu,
+    \quad \rchk, \\
+    &\rchpk,
+    \quad \row,
+    \quad \seed
+\end{align*}
+
+\subsubsection{Functions, Sets, and Proofs}
+
+Function spaces, permutations, and proofs of knowledge:
+\begin{equation*}
+    \funs{\mathcal{X}}{\mathcal{Y}}, \quad \perms{\mathcal{X}}, \quad \pok{w}{\mathcal{R}\pbr{x, w}}
+\end{equation*}
+
+\subsubsection{Security Advantages}
+
+Advantage expressions for concrete security proofs:
+\begin{align*}
+    &\cpaadv,
+    \quad \ddhadv,
+    \quad \distadv,
+    \quad \piradv,
+    \quad \pprfadv,
+    \quad \pprfadvu,
+    \quad \prfadv, \\
+    &\prgadv,
+    \quad \prpadv,
+    \quad \psadv,
+    \quad \psseladv
+\end{align*}
+
+\subsubsection{Probability, Expectation, and Asymptotics}
+
+Asymptotic notation variants:
+\begin{equation*}
+    \smallOmega{n},
+    \quad \smallOmegatilde{n},
+    \quad \bigOmega{n},
+    \quad \bigOmegatilde{n},
+    \quad \bigTheta{n},
+    \quad \bigThetatilde{n},
+    \quad \bigO{n},
+    \quad \bigOtilde{n},
+    \quad \smallO{n},
+    \quad \smallOtilde{n}
+\end{equation*}
+
+Custom landau definitions:
+\begin{equation*}
+    \poly,
+    \quad \poly[n],
+    \quad \polylog,
+    \quad \polylog[n]
+\end{equation*}
+
+\subsubsection{Procedure}
+
+\begin{minipage}{\linewidth}
+    \centering
+    \begin{pcimage}
+        \procb[colspace=0em]{ZK Battleship}{
+            \textbf{Alice}                                                \<                                   \< \textbf{Bob}                                                          \pclb
+            \pcintertext[dotted]{Setup / Commitment Phase}
+            B_A \gets \pcalgostyle{PlaceShips}\pbr{}                      \<                                   \<                                                                       \\
+            r_A \sample \bins                                             \<                                   \<                                                                       \\
+            \mathcal{R}_A \gets \commit\pbr{B_A; r_A}                     \<                                   \<                                                                       \\
+                                                                          \< \sendmessageright*{\mathcal{R}_A} \<                                                                       \\
+                                                                          \<                                   \< B_B \gets \pcalgostyle{PlaceShips}\pbr{}                              \\
+                                                                          \<                                   \< r_B \sample \bins                                                     \\
+                                                                          \<                                   \< \mathcal{R}_B \gets \commit\pbr{B_B; r_B}                             \\
+                                                                          \< \sendmessageleft*{\mathcal{R}_B}  \<                                                                       \pclb
+            \pcintertext[dotted]{Move Phase}
+            x, y \gets \pcalgostyle{ChooseShot}\pbr{}                     \<                                   \<                                                                       \\
+                                                                          \< \sendmessageright*{x, y}          \<                                                                       \pclb
+            \pcintertext[dotted]{Proof / Response Phase}
+                                                                          \<                                   \< z \gets f\pbr{B_B, x, y}                                              \\
+                                                                          \<                                   \< \pi_B \gets \pcalgostyle{Prove}\pbr{B_B, r_B, x, y, z, \mathcal{R}_B} \\
+                                                                          \< \sendmessageleft*{z, \pi_B}       \<                                                                       \pclb
+            \pcintertext[dotted]{Verification Phase}
+            \key[accept] \gets \verify\pbr{\mathcal{R}_B, x, y, z, \pi_B} \<                                   \<
+        }
+    \end{pcimage}
+    \captionsetup{hypcap=false}
+    \captionof{figure}{Game Procedure.}
+\end{minipage}
