@@ -15,7 +15,8 @@ There are three (four) ways to defined a variable:
 \begin{equation*}
     x \defeq y + z,
     \quad a \triangleq b + c,
-    \quad i \coloneq j + k\ (A \eqcolon B)
+    \quad i \coloneq j + k
+    \quad \pbr{A \eqcolon B}
 \end{equation*}
 
 Superscript shorthands for inverse and transpose:
@@ -127,7 +128,7 @@ Declared math operators:
 
 The \mintinline{latex}{rgets}/\mintinline{latex}{sgets} commands render a random\-/sampling arrow:
 \begin{equation*}
-    k \rgets \bins = k \xleftarrow{R} \bins = k \sgets \bins = k \sample \bins
+    k \rgets \bins = k \getsx{R} \bins = k \xleftarrow{R} \bins = k \sgets \bins = k \sample \bins
 \end{equation*}
 
 \subsection{Expected Value and Variance}
@@ -151,7 +152,7 @@ Commonly used mathematical sets and transforms:
     \NN \subset \ZZ \subset \QQ \subset \RR \subset \CC,
     \quad \laplaceinvt{\laplacet{x}} = x,
     \quad \fourierinvt{\fouriert{x}} = x,
-    \quad \compl A
+    \quad \compl{A}
 \end{equation*}
 
 \subsection{Calculus and Differentials}
@@ -167,7 +168,7 @@ Ordinary and partial derivatives using \mintinline{latex}{diffcoeff}:
     \dl f,
     \quad \diff{f}{x},
     \quad \diff[2]{f}{x},
-    \quad \diffp*{f}{x}
+    \quad \diffp*{\pbr{f + g}}{x}
 \end{equation*}
 
 \subsection{Equations}
@@ -214,7 +215,18 @@ Quotient group notation using \mintinline{latex}{faktor}:
 
 \subsection{Logic and Negations}
 
-Logical symbols: $\forall$, $\exists$, $\nexists$, $\implies$, $\iff$, $\neg/\lnot$, $\land$, $\lor$, and $\top$.
+Logical symbols:
+\begin{equation*}
+    \forall,
+    \quad \exists,
+    \quad \nexists,
+    \quad \implies,
+    \quad \iff,
+    \quad \neg/\lnot,
+    \quad \land,
+    \quad \lor,
+    \quad \top
+\end{equation*}
 
 Negated relations from \mintinline{latex}{centernot}:
 \begin{equation*}
@@ -224,8 +236,6 @@ Negated relations from \mintinline{latex}{centernot}:
     \quad \npropto,
     \quad \nsubset,
     \quad \nsupset,
-    \quad \nsubsetneq,
-    \quad \nsupsetneq,
     \quad \nmodels,
     \quad \ndashv
 \end{equation*}
@@ -573,8 +583,10 @@ Concrete primitive implementations and constructions:
     \quad \poseidon,
     \quad \plonk,
     \quad \rescue,
-    \quad \shatwofiftysix, \\
-    &\vision
+    \quad \sha, \\
+    &\shatwofiftysix,
+    \quad \shafivetwelve,
+    \quad \vision
 \end{align*}
 
 \subsubsection{Key and Variable Styles}
@@ -664,25 +676,25 @@ Custom landau definitions:
     \centering
     \begin{pcimage}
         \procb[colspace=0em]{ZK Battleship}{
-            \textbf{Alice}                                                \<                                   \< \textbf{Bob}                                                          \pclb
+            \textbf{Alice}                                      \<                             \< \textbf{Bob}                                                \pclb
             \pcintertext[dotted]{Setup / Commitment Phase}
-            B_A \gets \pcalgostyle{PlaceShips}\pbr{}                      \<                                   \<                                                                       \\
-            r_A \sample \bins                                             \<                                   \<                                                                       \\
-            \mathcal{R}_A \gets \commit\pbr{B_A; r_A}                     \<                                   \<                                                                       \\
-                                                                          \< \sendmessageright*{\mathcal{R}_A} \<                                                                       \\
-                                                                          \<                                   \< B_B \gets \pcalgostyle{PlaceShips}\pbr{}                              \\
-                                                                          \<                                   \< r_B \sample \bins                                                     \\
-                                                                          \<                                   \< \mathcal{R}_B \gets \commit\pbr{B_B; r_B}                             \\
-                                                                          \< \sendmessageleft*{\mathcal{R}_B}  \<                                                                       \pclb
+            B_A \gets \pcalgostyle{PlaceShips}\pbr{}            \<                             \<                                                             \\
+            r_A \rgets \bins                                    \<                             \<                                                             \\
+            R_A \gets \commit\pbr{B_A; r_A}                     \<                             \<                                                             \\
+                                                                \< \sendmessageright*{R_A}     \<                                                             \\
+                                                                \<                             \< B_B \gets \pcalgostyle{PlaceShips}\pbr{}                    \\
+                                                                \<                             \< r_B \rgets \bins                                            \\
+                                                                \<                             \< R_B \gets \commit\pbr{B_B; r_B}                             \\
+                                                                \< \sendmessageleft*{R_B}      \<                                                             \pclb
             \pcintertext[dotted]{Move Phase}
-            x, y \gets \pcalgostyle{ChooseShot}\pbr{}                     \<                                   \<                                                                       \\
-                                                                          \< \sendmessageright*{x, y}          \<                                                                       \pclb
+            x, y \gets \pcalgostyle{ChooseShot}\pbr{}           \<                             \<                                                             \\
+                                                                \< \sendmessageright*{x, y}    \<                                                             \pclb
             \pcintertext[dotted]{Proof / Response Phase}
-                                                                          \<                                   \< z \gets f\pbr{B_B, x, y}                                              \\
-                                                                          \<                                   \< \pi_B \gets \pcalgostyle{Prove}\pbr{B_B, r_B, x, y, z, \mathcal{R}_B} \\
-                                                                          \< \sendmessageleft*{z, \pi_B}       \<                                                                       \pclb
+                                                                \<                             \< z \gets f\pbr{B_B, x, y}                                    \\
+                                                                \<                             \< \pi_B \gets \pcalgostyle{Prove}\pbr{B_B, r_B, x, y, z, R_B} \\
+                                                                \< \sendmessageleft*{z, \pi_B} \<                                                             \pclb
             \pcintertext[dotted]{Verification Phase}
-            \key[accept] \gets \verify\pbr{\mathcal{R}_B, x, y, z, \pi_B} \<                                   \<
+            \key[accept] \gets \verify\pbr{R_B, x, y, z, \pi_B} \<                             \<
         }
     \end{pcimage}
     \captionsetup{hypcap=false}

@@ -166,8 +166,8 @@
 
 % ------- Document structure --------
 \RequirePackage{silence} % Must load after authblk
-\WarningFilter{latex}{Command \showhyphens has changed}
-\WarningFilter{latex}{Command `\theH} % https://github.com/arnomi/cryptocode/issues/28
+\WarningFilter{latex}{Command \showhyphens has changed} % https://github.com/schlcht/microtype/issues/53
+\WarningFilter{latex}{Command `\theH}                   % https://github.com/arnomi/cryptocode/issues/28
 
 \newcommand*{\frontmatter}{\pagenumbering{roman}}
 \newcommand*{\mainmatter} {
@@ -227,7 +227,7 @@
 \RequirePackage[
   ISO,
   mleftright,
-  spaced=1,
+  spaced=-1,
 ]{diffcoeff}
 \RequirePackage{faktor}
 \RequirePackage{mathrsfs}
@@ -451,10 +451,9 @@
 \newcommand*{\loss}      {\mathcal{L}}
 \newcommand*{\hypothesis}{\mathcal{H}}
 
-\newcommand*{\compl}    {{}^\mathsf{c}\!}
-\newcommand*{\sq}       {^2}
 \newcommand*{\inv}      {^{-1}}
-\newcommand*{\transpose}{^\top}
+\newcommand*{\sq}       {^2}
+\newcommand*{\transpose}{^\top} % Or \intercal
 \newcommand*{\sigmasq}  {\sigma\sq}
 
 \newcommand*{\band}{\mathbin{\&}}
@@ -473,12 +472,13 @@
   }{#1 : #2 \to #3}
 }
 
-\newcommand*{\decisionrule}[2]{\underset{#2}{\overset{#1}{\gtrless}}}
-\newcommand*{\perm}        [2]{{}^{#1}P_{#2}}
-\newcommand*{\comb}        [2]{{}^{#1}C_{#2}}
-\renewcommand*{\choose}[2]{\dbinom{#1}{#2}}
+\newcommand*{\decisionrule}[2]  {\underset{#2}{\overset{#1}{\gtrless}}}
+\newcommand*{\perm}        [3][]{\prescript{#2}{#1}{P}_{#3}}
+\newcommand*{\comb}        [3][]{\prescript{#2}{#1}{C}_{#3}}
+\renewcommand*{\choose}    [2]  {\dbinom{#1}{#2}}
 
 \newcommand*{\amortized}  [1]{\widehat{#1}}
+\newcommand*{\compl}      [1]{#1^\complement}
 \newcommand*{\defn}       [1]{\textbf{\textit{#1}}}
 \newcommand*{\fouriert}   [1]{\mathcal{F}\abr{#1}}
 \newcommand*{\fourierinvt}[1]{\mathcal{F}\inv\abr{#1}}
@@ -496,13 +496,13 @@
 \newcommand*{\binomial}        [2]{\operatorname{Bin}\abr{#1, #2}}    % n, p
 \newcommand*{\chisq}           [1]{\chi\sq_{#1}}                      % nu
 \newcommand*{\exponential}     [1]{\operatorname{Exp}\abr{#1}}        % lambda
-\newcommand*{\hypergeometric}  [3]{\mathrm{h}\abr{#1, #2, #3}}        % N, k, n
+\newcommand*{\hypergeometric}  [3]{\operatorname{h}\abr{#1, #2, #3}}  % N, k, n
 \newcommand*{\gammadist}       [2]{\operatorname{Ga}\abr{#1, #2}}     % alpha, beta
 \newcommand*{\gaussian}        [2]{\mathcal{N}\abr{#1, #2}}           % mu, sigma^2
 \newcommand*{\geometric}       [1]{\operatorname{Geom}\abr{#1}}       % p
 \newcommand*{\negativebinomial}[2]{\operatorname{NegBin}\abr{#1, #2}} % k, p
 \newcommand*{\poisson}         [1]{\operatorname{Pois}\abr{#1}}       % mu = lambda*t
-\newcommand*{\studentt}        [1]{t_{#1}}                            % nu
+\newcommand*{\studentt}        [1]{\ensuremath{t}_{#1}}               % nu
 \newcommand*{\uniform}         [2]{\operatorname{Unif}\abr{#1, #2}}   % a, b
 
 \NewDocumentCommand{\kendall}{O{M} O{M} O{1} O{\infty} O{FIFO}}{%
@@ -522,14 +522,10 @@
     }
   }
 }
-\newcommand*{\xgets}[1]{%
-  \mathrel{%
-    \mathchoice{\XGETS{#1}{\displaystyle}}{\XGETS{#1}{\textstyle}}{\XGETS{#1}{\scriptstyle}}{\XGETS{#1}{\scriptscriptstyle}}%
-  }
-}
+\newcommand*{\xgets}[1]{\mathrel{\mathpalette{\XGETS}{#1}}}
 \newcommand*{\XGETS}[2]{%
-  \setbox0\hbox{$#2\gets$}%
-  \rlap{\hbox to\wd0{\hss\raisebox{1.2\height}{\scalebox{0.5}{$#2\text{\ #1}$}}\hss}}\box0
+  \setbox0\hbox{$#1\gets$}%
+  \rlap{\hbox to\wd0{\hss\raisebox{1.2\height}{\scalebox{0.5}{$#1\ \mathrm{#2}$}}\hss}}\box0%
 }
 \newcommand*{\rgets}{\xgets{R}}
 \newcommand*{\sgets}{\xgets{\$}}
@@ -543,20 +539,19 @@
   }%
 }
 \newcommand*{\charfusion}[3][\mathord]{%
-  #1%
-  {\ifx#1\mathop\vphantom{#2}\fi%
-  \mathpalette\mov@rlay{#2\cr#3}}%
+  #1{%
+    \ifx#1\mathop\vphantom{#2}\fi%
+    \mathpalette\mov@rlay{#2\cr#3}%
+  }%
   \ifx#1\mathop\expandafter\displaylimits\fi%
 }
 \makeatother
 
 \RequirePackage{centernot}
-\newcommand*{\ndashv}    {\centernot{\dashv}}
-\newcommand*{\nmodels}   {\centernot{\models}}
-\newcommand*{\nperp}     {\centernot{\perp}}
-\newcommand*{\npropto}   {\centernot{\propto}}
-\newcommand*{\nsubsetneq}{\centernot{\subsetneq}}
-\newcommand*{\nsupsetneq}{\centernot{\supsetneq}}
+\newcommand*{\ndashv} {\centernot{\dashv}}
+\newcommand*{\nmodels}{\centernot{\models}}
+\newcommand*{\nperp}  {\centernot{\perp}}
+\newcommand*{\npropto}{\centernot{\propto}}
 
 % From unicode-math when using newpx or newtx:
 \providecommand*{\napprox}{\centernot{\approx}}
@@ -582,8 +577,8 @@
     \renewcommand*{\varnothing}{\emptyset}
   }{
     \ifdefstring{\packages@setnotation}{oe}{
-      \renewcommand*{\emptyset}  {\text{Ø}}
-      \renewcommand*{\varnothing}{\text{Ø}}
+      \renewcommand*{\emptyset}  {\mathrm{Ø}}
+      \renewcommand*{\varnothing}{\mathrm{Ø}}
     }{
       \ifdefstring{\packages@setnotation}{brackets}{
         \renewcommand*{\emptyset}  {\set{}}
@@ -770,7 +765,6 @@
   % autogobble=true,
   baselinestretch=1,
   breaklines=true,
-  % fontsize=\small, % Optional
   mathescape,
   style=default,
 }
@@ -819,6 +813,7 @@
 \newcommand*{\listofprocedures} {\listof{procedure}{\listprocedurename}}
 
 % ---------- Bibliography -----------
+% TODO: Add package options for bib
 \RequirePackage[
   backend=biber,
   dashed=false, % Comment out if using alphabetic style
@@ -997,7 +992,9 @@
 \newcommand*{\poseidon}      {\pcalgostyle{Poseidon}}
 \newcommand*{\plonk}         {\mathcal{P}\mathfrak{lon}\mathcal{K}}
 \newcommand*{\rescue}        {\pcalgostyle{Rescue}}
-\newcommand*{\shatwofiftysix}{\pcalgostyle{SHA\pcmathhyphen{}256}}
+\newcommand*{\sha}           {\pcalgostyle{SHA}}
+\newcommand*{\shatwofiftysix}{\sha\pcmathhyphen\pcalgostyle{256}}
+\newcommand*{\shafivetwelve} {\sha\pcmathhyphen\pcalgostyle{512}}
 \newcommand*{\vision}        {\pcalgostyle{Vision}}
 
 \newcommand*{\ans}   {\key[ans]}
@@ -1006,7 +1003,7 @@
 \newcommand*{\col}   {\key[col]}
 \newcommand*{\com}   {\key[com]}
 \newcommand*{\ct}    {\key[ct]}
-\newcommand*{\cteval}{\tilde{\ct}}
+\newcommand*{\cteval}{\widetilde{\ct}}
 \newcommand*{\db}    {\key[db]}
 \newcommand*{\dummy} {\key[dummy]}
 \newcommand*{\ek}    {\key[ek]}
@@ -1033,7 +1030,7 @@
 \renewcommand*{\smallO}[1]{\ensuremath{o}\pbr{#1}}
 
 \renewcommand*{\kgen}    {\pcalgostyle{Key}\gen}
-% \renewcommand*{\probname}{\mathbb{P}}
+\renewcommand*{\probname}{\mathbb{P}}
 \renewcommand*{\puncture}{\pcalgostyle{Punc}}
 \renewcommand*{\verify}  {\pcalgostyle{Ver}}
 
@@ -1120,25 +1117,25 @@
   \setcrefenglish{securitygoal}     {Security Goal}     {Security Goals}
 }
 \cref@addlanguagedefs{norsk}{
-  \setcrefnorsk{angrepsspill}      {Angrepsspill}      {Angrepsspill}
-  \setcrefnorsk{antakelse}         {Antakelse}         {Antakelser}
-  \setcrefnorsk{definisjon}        {Definisjon}        {Definisjoner}
-  \setcrefnorsk{egenskap}          {Egenskap}          {Egenskaper}
-  \setcrefnorsk{eksempel}          {Eksempel}          {Eksempler}
-  \setcrefnorsk{faktum}            {Faktum}            {Fakta}
-  \setcrefnorsk{forslag}           {Forslag}           {Forslag}
-  \setcrefnorsk{funksjonalitetsmål}{Funksjonalitetsmål}{Funksjonalitetsmål}
-  \setcrefnorsk{konstruksjon}      {Konstruksjon}      {Konstruksjoner}
-  \setcrefnorsk{korollar}          {Korrolar}          {Korollarer}
-  \setcrefnorsk{observasjon}       {Observasjon}       {Observasjoner}
-  \setcrefnorsk{oppgave}           {Oppgave}           {Oppgaver}
-  \setcrefnorsk{prinsipp}          {Prinsipp}          {Prinsipp}
-  \setcrefnorsk{problem}           {Problem}           {Problem}
-  \setcrefnorsk{procedure}         {Prosedyre}         {Prosedyrer}
-  \setcrefnorsk{påstand}           {Påstand}           {Påstander}
-  \setcrefnorsk{sikkerhetsmål}     {Sikkerhetsmål}     {Sikkerhetsmål}
-  \setcrefnorsk{teorem}            {Teorem}            {Teorem}
-  \setcrefnorsk{uformeltteorem}    {Uformelt teorem}   {Uformelle teorem}
+  \setcrefnorsk{angrepsspill}      {Angrepsspill}      {Angrepsspillene}
+  \setcrefnorsk{antakelse}         {Antakelse}         {Antakelsene}
+  \setcrefnorsk{definisjon}        {Definisjon}        {Definisjonene}
+  \setcrefnorsk{egenskap}          {Egenskap}          {Egenskapene}
+  \setcrefnorsk{eksempel}          {Eksempel}          {Eksemplene}
+  \setcrefnorsk{faktum}            {Faktum}            {Faktaene}
+  \setcrefnorsk{forslag}           {Forslag}           {Forslagene}
+  \setcrefnorsk{funksjonalitetsmål}{Funksjonalitetsmål}{Funksjonalitetsmålene}
+  \setcrefnorsk{konstruksjon}      {Konstruksjon}      {Konstruksjonene}
+  \setcrefnorsk{korollar}          {Korrolar}          {Korollarene}
+  \setcrefnorsk{observasjon}       {Observasjon}       {Observasjonene}
+  \setcrefnorsk{oppgave}           {Oppgave}           {Oppgavene}
+  \setcrefnorsk{prinsipp}          {Prinsipp}          {Prinsippene}
+  \setcrefnorsk{problem}           {Problem}           {Problemene}
+  \setcrefnorsk{procedure}         {Prosedyre}         {Prosedyrene}
+  \setcrefnorsk{påstand}           {Påstand}           {Påstandene}
+  \setcrefnorsk{sikkerhetsmål}     {Sikkerhetsmål}     {Sikkerhetsmålene}
+  \setcrefnorsk{teorem}            {Teorem}            {Teoremene}
+  \setcrefnorsk{uformeltteorem}    {Uformelt teorem}   {Uformelle teoremene}
 }
 \makeatother
 
@@ -1353,8 +1350,8 @@
   \renewenvironment*{securitygoal}     {\begin{sikkerhetsmål}}     {\end{sikkerhetsmål}}
   \renewenvironment*{theorem}          {\begin{teorem}}            {\end{teorem}}
   \renewcommand*{\ntnulogo}{NTNU_logo_NB}
-  \crefname{ineq}         {Ulikhet}     {Ulikheter}
-  \crefname{inva}         {Invariant}   {Invarianter}
+  \crefname{ineq}         {Ulikhet}     {Ulikhetene}
+  \crefname{inva}         {Invariant}   {Invariantene}
   \crefname{subsection}   {Underseksjon}{Underseksjoner}
   \crefname{subsubsection}{Underseksjon}{Underseksjoner}
 }
