@@ -32,12 +32,12 @@ The \mintinline{latex}{amortized} command denotes amortized cost: $\amortized{T}
 
 The number of permutations of $r$ items from a set of $n$ elements is given by:
 \begin{equation*}
-    \perm{n}{r} = \frac{n!}{\pbr{n - r}!}
+    \perm{n}{r} = \frac{\fac{n}}{\fac{\pbr{n - r}}}
 \end{equation*}
 
 The number of combinations (binomial coefficient) is:
 \begin{equation*}
-    \choose{n}{r} = \comb{n}{r} = \frac{n!}{r!\pbr{n - r}!}
+    \choose{n}{r} = \comb{n}{r} = \frac{\fac{n}}{\fac{r}\fac{\pbr{n - r}}}
 \end{equation*}
 
 We can also use bracket functions:
@@ -128,7 +128,7 @@ Declared math operators:
 
 The \mintinline{latex}{rgets}/\mintinline{latex}{sgets} commands render a random\-/sampling arrow:
 \begin{equation*}
-    k \rgets \bins = k \getsx{R} \bins = k \xleftarrow{R} \bins = k \sgets \bins = k \sample \bins
+    k \rgets \bin = k \getsx{R} \bin = k \xleftarrow{R} \bin = k \sgets \bin = k \getsx{\$} \bin = k \sample \bin
 \end{equation*}
 
 \subsection{Expected Value and Variance}
@@ -303,6 +303,10 @@ Can fuse characters:
     \charfusion{\cdot}{\cup}\charfusion{\cdot}{\cup}
 \end{equation*}
 
+\section*{Factorial Spacing Tests}
+
+Here we test the custom \texttt{\textbackslash fac\{\}} command against various trailing characters to ensure the thin space is inserted (or omitted) correctly.
+
 \subsection{Probability Distributions}
 
 Common probability distributions in aligned notation:
@@ -325,25 +329,25 @@ Common probability distributions in aligned notation:
 
 According to \href{https://webusers.imj-prg.fr/~jean-yves.ducloux/Typographie/ISO80000-2.pdf}{ISO 80000}, some math characters should be upright:
 \begin{align*}
-    \eu                                &= \lim_{n\to\infty}\pbr{1 + \frac{1}{n}}^n                                                                                                 \\
-    \iu = \ju                          &= \sqrt{-1}                                                                                                                                \\
-    \legendre{n}\pbr{z}                &= \frac{1}{2^n n!} \diff*[n]{\pbr{z\sq - 1}^n}{z}                                                                                          \\
-    \legendre{n}[m]\pbr{z}             &= \pbr{-1}^m \pbr{1 - z\sq}^{\sfrac{m}{2}} \diff*[n]{\legendre{n}\pbr{z}}{z}                                                               \\
-    \harmonics{l}{m}\pbr{\nu, \varphi} &= \abr{\frac{\abr{2l + 1}\abr{l - \abs{m}}!}{4\pi\abr{l + \abs{m}}!}}^{\sfrac{1}{2}} \legendre{l}[\abs{m}] \cos\pbr{\nu}\eu^{\iu m\varphi} \\
-    \hermite{n}\pbr{z}                 &= \pbr{-1}^n \eu^{z\sq} \diff*[n]{\eu^{-z\sq}}{z}                                                                                          \\
-    \laguerre{n}\pbr{z}                &= \eu^z \diff*[n]{\pbr{z^n \eu^{-z}}}{z}                                                                                                   \\
-    \laguerre{n}[m]\pbr{z}             &= \diff*[m]{\laguerre{n}\pbr{z}}{z}                                                                                                        \\
-    \chebyshev{n}\pbr{z}               &= \cos\abr{n\arccos\abr{z}}                                                                                                                \\
-    \chebyshevsecond{n}\pbr{z}         &= \sin\abr{\frac{\abr{n + 1}\arccos\abr{z}}{\sin\abr{\arccos\abr{z}}}}                                                                     \\
-    \besselj{v}\pbr{z}                 &= \sum_{k = 0}^\infty \frac{\pbr{-1}^k \pbr{\sfrac{z}{2}}^{v + 2k}}{k!\Gamma\pbr{v + k + 1}}                                               \\
-    \neumann{v}\pbr{z}                 &= \frac{\besselj{v}\pbr{z}\cos\pbr{v\pi} - \besselj{-v}\pbr{z}}{\sin\pbr{v\pi}}                                                            \\
-    \hankel{v}\pbr{z}                  &= \besselj{v}\pbr{z} + \iu\neumann{v}\pbr{z}                                                                                               \\
-    \hankelsecond{v}\pbr{z}            &= \besselj{v}\pbr{z} - \iu\neumann{v}\pbr{z}                                                                                               \\
-    \besseli{v}\pbr{z}                 &= \eu^{\sfrac{-\iu v\pi}{2}} \besselj{v}\pbr{\eu^{\sfrac{\iu\pi}{2}} z}                                                                    \\
-    \besselk{v}\pbr{z}                 &= \frac{\iu\pi}{2} \eu^{\sfrac{\iu v\pi}{2}} \hankel{v}\pbr{\eu^{\sfrac{\iu\pi}{2}} z}                                                     \\
-    \besseljs{l}\pbr{z}                &= \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \besselj{l + \sfrac{1}{2}}\pbr{z}                                                                    \\
-    \neumanns{l}\pbr{z}                &= \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \neumann{l + \sfrac{1}{2}}\pbr{z}                                                                    \\
-    \hankels{l}\pbr{z}                 &= \besseljs{l}\pbr{z} + \iu\neumanns{l}\pbr{z} = \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \hankel{l + \sfrac{1}{2}}\pbr{z}                      \\
+    \eu                                &= \lim_{n\to\infty}\pbr{1 + \frac{1}{n}}^n                                                                                                           \\
+    \iu = \ju                          &= \sqrt{-1}                                                                                                                                          \\
+    \legendre{n}\pbr{z}                &= \frac{1}{2^n\fac{n}}\diff*[n]{\pbr{z\sq - 1}^n}{z}                                                                                                 \\
+    \legendre{n}[m]\pbr{z}             &= \pbr{-1}^m \pbr{1 - z\sq}^{\sfrac{m}{2}} \diff*[n]{\legendre{n}\pbr{z}}{z}                                                                         \\
+    \harmonics{l}{m}\pbr{\nu, \varphi} &= \abr{\frac{\abr{2l + 1}\fac{\abr{l - \abs{m}}}}{4\pi\fac{\abr{l + \abs{m}}}}}^{\sfrac{1}{2}} \legendre{l}[\abs{m}] \cos\pbr{\nu}\eu^{\iu m\varphi} \\
+    \hermite{n}\pbr{z}                 &= \pbr{-1}^n \eu^{z\sq} \diff*[n]{\eu^{-z\sq}}{z}                                                                                                    \\
+    \laguerre{n}\pbr{z}                &= \eu^z \diff*[n]{\pbr{z^n \eu^{-z}}}{z}                                                                                                             \\
+    \laguerre{n}[m]\pbr{z}             &= \diff*[m]{\laguerre{n}\pbr{z}}{z}                                                                                                                  \\
+    \chebyshev{n}\pbr{z}               &= \cos\abr{n\arccos\abr{z}}                                                                                                                          \\
+    \chebyshevsecond{n}\pbr{z}         &= \sin\abr{\frac{\abr{n + 1}\arccos\abr{z}}{\sin\abr{\arccos\abr{z}}}}                                                                               \\
+    \besselj{v}\pbr{z}                 &= \sum_{k = 0}^\infty \frac{\pbr{-1}^k \pbr{\sfrac{z}{2}}^{v + 2k}}{\fac{k}\Gamma\pbr{v + k + 1}}                                                    \\
+    \neumann{v}\pbr{z}                 &= \frac{\besselj{v}\pbr{z}\cos\pbr{v\pi} - \besselj{-v}\pbr{z}}{\sin\pbr{v\pi}}                                                                      \\
+    \hankel{v}\pbr{z}                  &= \besselj{v}\pbr{z} + \iu\neumann{v}\pbr{z}                                                                                                         \\
+    \hankelsecond{v}\pbr{z}            &= \besselj{v}\pbr{z} - \iu\neumann{v}\pbr{z}                                                                                                         \\
+    \besseli{v}\pbr{z}                 &= \eu^{\sfrac{-\iu v\pi}{2}} \besselj{v}\pbr{\eu^{\sfrac{\iu\pi}{2}} z}                                                                              \\
+    \besselk{v}\pbr{z}                 &= \frac{\iu\pi}{2} \eu^{\sfrac{\iu v\pi}{2}} \hankel{v}\pbr{\eu^{\sfrac{\iu\pi}{2}} z}                                                               \\
+    \besseljs{l}\pbr{z}                &= \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \besselj{l + \sfrac{1}{2}}\pbr{z}                                                                              \\
+    \neumanns{l}\pbr{z}                &= \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \neumann{l + \sfrac{1}{2}}\pbr{z}                                                                              \\
+    \hankels{l}\pbr{z}                 &= \besseljs{l}\pbr{z} + \iu\neumanns{l}\pbr{z} = \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \hankel{l + \sfrac{1}{2}}\pbr{z}                                \\
     \hankelseconds{l}\pbr{z}           &= \besseljs{l}\pbr{z} - \iu\neumanns{l}\pbr{z} = \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \hankelsecond{l + \sfrac{1}{2}}\pbr{z}
 \end{align*}
 

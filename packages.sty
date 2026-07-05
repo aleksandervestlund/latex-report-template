@@ -394,28 +394,28 @@
 }
 \makeatother
 
-\DeclareMathOperator {\Adj}       {Adj}           % adjugate
-\DeclareMathOperator {\Cov}       {Cov}           % covariance
-\DeclareMathOperator {\divergence}{div}           % divergence
-\DeclareMathOperator {\fraction}  {frac}          % fractional part
-\DeclareMathOperator {\grad}      {\mathbf{grad}} % gradient
-\DeclareMathOperator {\id}        {id}            % identity relation
-\DeclareMathOperator {\integer}   {int}           % integer part
-\DeclareMathOperator {\Law}       {Law}           % law
-\DeclareMathOperator {\lb}        {lb}            % log2
-\DeclareMathOperator {\lcm}       {lcm}           % least common multiple
-\DeclareMathOperator {\ord}       {ord}           % order
-\DeclareMathOperator {\rank}      {rank}          % rank
-\DeclareMathOperator {\rot}       {\mathbf{rot}}  % rotation
-\DeclareMathOperator {\sinc}      {sinc}          % sine cardinal
-\DeclareMathOperator {\sgn}       {sgn}           % signum
-\DeclareMathOperator {\supp}      {supp}          % support
-\DeclareMathOperator {\tr}        {tr}            % trace
-\DeclareMathOperator {\Var}       {Var}           % variance
-\DeclareMathOperator*{\softmax}   {softmax}       % softmax
+\DeclareMathOperator {\Adj}       {Adj}     % adjugate
+\DeclareMathOperator {\Cov}       {Cov}     % covariance
+\DeclareMathOperator {\divergence}{div}     % divergence
+\DeclareMathOperator {\fraction}  {frac}    % fractional part
+\DeclareMathOperator {\id}        {id}      % identity relation
+\DeclareMathOperator {\integer}   {int}     % integer part
+\DeclareMathOperator {\Law}       {Law}     % law
+\DeclareMathOperator {\lb}        {lb}      % log2
+\DeclareMathOperator {\lcm}       {lcm}     % least common multiple
+\DeclareMathOperator {\ord}       {ord}     % order
+\DeclareMathOperator {\rank}      {rank}    % rank
+\DeclareMathOperator {\sinc}      {sinc}    % sine cardinal
+\DeclareMathOperator {\sgn}       {sgn}     % signum
+\DeclareMathOperator {\supp}      {supp}    % support
+\DeclareMathOperator {\tr}        {tr}      % trace
+\DeclareMathOperator {\Var}       {Var}     % variance
+\DeclareMathOperator*{\softmax}   {softmax} % softmax
 
 \newcommand*{\logtwo}{\log_2}
 \newcommand*{\logten}{\log_{10}}
+\newcommand*{\grad}  {\mathop{\mathbf{grad}}} % gradient
+\newcommand*{\rot}   {\mathop{\mathbf{rot}}}  % rotation
 
 % Upright "e", "i", and "j", per ISO 80000:
 \newcommand*{\eu}{\mathrm{e}}
@@ -522,10 +522,10 @@
     }
   }
 }
-\newcommand*{\xgets}[1]{\mathrel{\mathpalette{\XGETS}{#1}}}
+\newcommand*{\xgets}[1]{\mathrel{\mathpalette\XGETS{#1}}}
 \newcommand*{\XGETS}[2]{%
   \setbox0\hbox{$#1\gets$}%
-  \rlap{\hbox to\wd0{\hss\raisebox{1.2\height}{\scalebox{0.5}{$#1\ \mathrm{#2}$}}\hss}}\box0%
+  \rlap{\hbox to\wd0{\hss\raisebox{1.2\height}{\scalebox{0.5}{$#1\:\:\mathrm{#2}$}}\hss}}\box0%
 }
 \newcommand*{\rgets}{\xgets{R}}
 \newcommand*{\sgets}{\xgets{\$}}
@@ -642,6 +642,26 @@
 \def\endinequality{\eqno\hbox{\@eqnnum}$$\@ignoretrue}
 \def\endinvariant {\eqno\hbox{\@eqnnum}$$\@ignoretrue}
 \makeatother
+
+% WIP:
+\RequirePackage{xparse}
+\ExplSyntaxOn
+\newcommand*{\fac}[1]{ % Must add manual space for numbers. Might delete. TODO: Add more
+  #1!
+     \peek_catcode_ignore_spaces:NTF a     {\,}
+    {\peek_meaning_ignore_spaces:NTF \pbr  {\,}
+    {\peek_meaning_ignore_spaces:NTF \abr  {\,}
+    {\peek_meaning_ignore_spaces:NTF \floor{\,}
+    {\peek_meaning_ignore_spaces:NTF \ceil {\,}
+    {\peek_meaning_ignore_spaces:NTF \round{\,}
+    {\peek_meaning_ignore_spaces:NTF \Angle{\,}
+    {\peek_meaning_ignore_spaces:NTF \abs  {\,}
+    {\peek_meaning_ignore_spaces:NTF \norm {\,}
+    {\peek_meaning_ignore_spaces:NTF \Gamma{\,}
+    {}
+    }}}}}}}}}
+}
+\ExplSyntaxOff
 
 % ------- Figures and tables --------
 \RequirePackage{capt-of}
@@ -1025,8 +1045,8 @@
 \newcommand*{\seed}  {\key[seed]}
 \renewcommand*{\pp}  {\key[pp]}
 
-\renewcommand*{\expect}[1]{\operatorname{\expectationname}\abr{#1}}
-\renewcommand*{\prob}  [1]{\operatorname{\probname}\abr{#1}}
+\renewcommand*{\expect}[1]{\expectationname\abr{#1}}
+\renewcommand*{\prob}  [1]{\probname\abr{#1}}
 \renewcommand*{\smallO}[1]{\ensuremath{o}\pbr{#1}}
 
 \renewcommand*{\kgen}    {\pcalgostyle{Key}\gen}
@@ -1288,6 +1308,10 @@
 \makeatother
 
 % ------------ Language -------------
+\RequirePackage{xspace}
+\newcommand*{\naive}{na{\"\i}ve\xspace}
+\newcommand*{\Naive}{Na{\"\i}ve\xspace}
+
 \addto{\captionsamerican}{
   \floatname{procedure}{Procedure}
   \renewcommand*{\contentsname}     {Table of Contents}
@@ -1326,6 +1350,8 @@
   \renewcommand*{\listoflistingscaption}   {Opplistinger}
   \renewcommand*{\listprocedurename}       {Prosedyrer}
   \renewcommand*{\listtheoremname}         {Teorem}
+  \renewcommand*{\naive}                   {naiv}
+  \renewcommand*{\Naive}                   {Naiv}
   \renewcommand*{\possessivestring}        {s}
   \renewcommand*{\proofideatext}           {Bevisidé}
   \renewcommand*{\proofsketchtext}         {Bevisutkast}
