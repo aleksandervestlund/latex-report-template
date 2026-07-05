@@ -472,13 +472,13 @@
   }{#1 : #2 \to #3}
 }
 
-\newcommand*{\decisionrule}[2]  {\underset{#2}{\overset{#1}{\gtrless}}}
+\newcommand*{\decisionrule}[2]  {\mathrel{\mathop{\gtrless}\limits_{#2}^{#1}}}
 \newcommand*{\perm}        [3][]{\prescript{#2}{#1}{P}_{#3}}
 \newcommand*{\comb}        [3][]{\prescript{#2}{#1}{C}_{#3}}
-\renewcommand*{\choose}    [2]  {\dbinom{#1}{#2}}
+\renewcommand*{\choose}    [2]  {\binom{#1}{#2}}
 
 \newcommand*{\amortized}  [1]{\widehat{#1}}
-\newcommand*{\compl}      [1]{#1^\complement}
+\newcommand*{\compl}      [1]{#1^\complement} % Or \mathsf{c}
 \newcommand*{\defn}       [1]{\textbf{\textit{#1}}}
 \newcommand*{\fouriert}   [1]{\mathcal{F}\abr{#1}}
 \newcommand*{\fourierinvt}[1]{\mathcal{F}\inv\abr{#1}}
@@ -506,7 +506,7 @@
 \newcommand*{\uniform}         [2]{\operatorname{Unif}\abr{#1, #2}}   % a, b
 
 \NewDocumentCommand{\kendall}{O{M} O{M} O{1} O{\infty} O{FIFO}}{%
-  \mathit{#1/#2/#3/#4/#5}%
+  \mathit{#1}/\mathit{#2}/#3/#4/\mathit{#5}%
 }
 
 \newcommand*{\getsx}[2][]{
