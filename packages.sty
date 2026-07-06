@@ -31,16 +31,17 @@
   tracking=true,
 ]{microtype}
 \RequirePackage[
-  left=30mm,
-  right=30mm,
-  bottom=26mm,
-  top=26mm,
   a4paper,
+  bottom=26mm,
   footskip=14mm,
   headheight=5.1mm,
+  heightrounded=true,
+  left=30mm,
   mag=1000,
-  marginparsep=0mm,
+  marginparsep=0em,
   marginparwidth=20mm,
+  right=30mm,
+  top=26mm,
 ]{geometry}
 \RequirePackage[onehalfspacing]{setspace}
 \RequirePackage[
@@ -55,7 +56,7 @@
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{
   family=packages,
-  prefix=packages@
+  prefix=packages@,
 }
 
 % TODO: Consider adding libertine font support
@@ -124,9 +125,9 @@
 
 \RequirePackage[blocks]{authblk}
 \renewcommand*{\Affilfont}{\small}
-\renewcommand*{\Authsep}  {\\}
 \renewcommand*{\Authand}  {\\}
 \renewcommand*{\Authands} {\\}
+\renewcommand*{\Authsep}  {\\}
 
 \newcommand*{\authorstring}     {Author}
 \newcommand*{\authorsstring}    {Authors}
@@ -648,27 +649,37 @@
 \ExplSyntaxOn
 \newcommand*{\fac}[1]{ % Must add manual space for numbers. Might delete. TODO: Add more
   #1!
-     \peek_catcode_ignore_spaces:NTF a     {\,}
-    {\peek_meaning_ignore_spaces:NTF \pbr  {\,}
-    {\peek_meaning_ignore_spaces:NTF \abr  {\,}
-    {\peek_meaning_ignore_spaces:NTF \floor{\,}
-    {\peek_meaning_ignore_spaces:NTF \ceil {\,}
-    {\peek_meaning_ignore_spaces:NTF \round{\,}
-    {\peek_meaning_ignore_spaces:NTF \Angle{\,}
-    {\peek_meaning_ignore_spaces:NTF \abs  {\,}
-    {\peek_meaning_ignore_spaces:NTF \norm {\,}
-    {\peek_meaning_ignore_spaces:NTF \Gamma{\,}
-    {}
-    }}}}}}}}}
+    \peek_catcode_ignore_spaces:NTF a     {\,}{
+    \peek_meaning_ignore_spaces:NTF \abr  {\,}{
+    \peek_meaning_ignore_spaces:NTF \abs  {\,}{
+    \peek_meaning_ignore_spaces:NTF \Angle{\,}{
+    \peek_meaning_ignore_spaces:NTF \ceil {\,}{
+    \peek_meaning_ignore_spaces:NTF \eu   {\,}{
+    \peek_meaning_ignore_spaces:NTF \floor{\,}{
+    \peek_meaning_ignore_spaces:NTF \Gamma{\,}{
+    \peek_meaning_ignore_spaces:NTF \iu   {\,}{
+    \peek_meaning_ignore_spaces:NTF \ju   {\,}{
+    \peek_meaning_ignore_spaces:NTF \norm {\,}{
+    \peek_meaning_ignore_spaces:NTF \pbr  {\,}{
+    \peek_meaning_ignore_spaces:NTF \pi   {\,}{
+    \peek_meaning_ignore_spaces:NTF \round{\,}{
+    \peek_meaning_ignore_spaces:NTF \tau  {\,}{
+  }}}}}}}}}}}}}}}
 }
 \ExplSyntaxOff
 
 % ------- Figures and tables --------
 \RequirePackage{capt-of}
-\RequirePackage{graphicx}
 \RequirePackage[list=true]{subcaption}
 \RequirePackage{tabularray}
 \RequirePackage[nottoc]{tocbibind}
+
+\RequirePackage{graphicx}
+\setkeys{Gin}{
+  keepaspectratio,
+  totalheight=0.95\textheight,
+  width=0.95\linewidth,
+}
 
 \RequirePackage[
   figureposition=bottom,
@@ -682,6 +693,8 @@
 \fnbelowfloat
 
 \RequirePackage{tikz}
+\RequirePackage[edges]{forest}
+\RequirePackage{pgfplots}
 \usetikzlibrary{
   arrows,
   calc,
@@ -691,10 +704,6 @@
   positioning,
   shapes.geometric,
 }
-
-\RequirePackage[edges]{forest}
-
-\RequirePackage{pgfplots}
 \pgfplotsset{
   compat=newest,
   cycle list name=color list,
@@ -708,12 +717,6 @@
   width=0.95\linewidth,
   samples=101,
   scale=1.0,
-}
-
-\setkeys{Gin}{
-  keepaspectratio,
-  totalheight=0.95\textheight,
-  width=0.95\linewidth,
 }
 
 \RequirePackage{floatrow}
@@ -736,7 +739,6 @@
 \setlength{\intextsep}   {0.8em plus 0.2em minus 0.2em}
 \setlength{\textfloatsep}{1.0em plus 0.2em minus 0.2em}
 
-\RequirePackage{xspace}
 \RequirePackage[export]{adjustbox}
 \RequirePackage{float} % Must load after floatrow
 \RequirePackage{longtable}
@@ -746,9 +748,6 @@
 
 \RequirePackage{multicol}
 \setlength{\multicolsep}{0em}
-
-\newcommand*{\HRule}            {\rule{\linewidth}{0.5mm}}
-\newcommand*{\specialcell}[2][c]{\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
 
 \makeatletter
 \newcommand*{\input@path}{{Sections/}}
@@ -782,7 +781,6 @@
 
 \RequirePackage{minted}
 \setminted{
-  % autogobble=true,
   baselinestretch=1,
   breaklines=true,
   mathescape,
@@ -823,7 +821,7 @@
 }
 
 % ----------- Algorithms ------------
-% Alternatively, check out clrscode4e: https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/11599/clrscode4e.pdf
+% Alternatively, check out: https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/11599/clrscode4e.pdf
 \RequirePackage{algorithm}
 \RequirePackage{algpseudocode}
 
@@ -967,8 +965,8 @@
 \newcommand*{\test}           {\pcalgostyle{Test}}
 \newcommand*{\toblock}        {\pcalgostyle{ToBlock}}
 \newcommand*{\tostring}       {\pcalgostyle{ToString}}
-\newcommand*{\tofunc}         {\pcalgostyle{ToFunc}}
-\newcommand*{\tofuncs}        {\pcalgostyle{ToFuncs}}
+\newcommand*{\tofunc}         {\pcalgostyle{ToFun}}
+\newcommand*{\tofuncs}        {\pcalgostyle{ToFuns}}
 \newcommand*{\trace}          {\pcalgostyle{Trace}}
 \newcommand*{\unseal}         {\pcalgostyle{Unseal}}
 \newcommand*{\update}         {\pcalgostyle{Update}}
@@ -1279,6 +1277,7 @@
 \RequirePackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
+\newcommand*{\HRule}{\rule{\linewidth}{0.1em}}
 \renewcommand*{\headrulewidth}{0.05em}
 \renewcommand*{\footrulewidth}{0.05em}
 \fancyfoot[C]{\thepage}
@@ -1289,14 +1288,14 @@
 % ---- Numbering within sections ----
 % \setcounter{secnumdepth}{0}
 \ifnum\value{secnumdepth} > 0
+  \numberwithin{algorithm}{section}
   \numberwithin{equation} {section}
   \numberwithin{figure}   {section}
   \numberwithin{ineq}     {section}
   \numberwithin{inva}     {section}
-  \numberwithin{table}    {section}
-  \numberwithin{algorithm}{section}
   \numberwithin{listing}  {section}
   \numberwithin{procedure}{section}
+  \numberwithin{table}    {section}
 \fi
 
 % These are the default values for (ext)article. Configure if double-digit numbers:
