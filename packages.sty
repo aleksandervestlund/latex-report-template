@@ -407,7 +407,6 @@
 \DeclareMathOperator {\rank}      {rank}    % rank
 \DeclareMathOperator {\sinc}      {sinc}    % sine cardinal
 \DeclareMathOperator {\sgn}       {sgn}     % signum
-\DeclareMathOperator {\supp}      {supp}    % support
 \DeclareMathOperator {\tr}        {tr}      % trace
 \DeclareMathOperator {\Var}       {Var}     % variance
 \DeclareMathOperator*{\softmax}   {softmax} % softmax
@@ -516,9 +515,9 @@
       inner sep=0em,
       outer sep=0em,
     ]{
-      \ifblank{#2}{}{\node at (0.05,0.15) {\tiny #2};}
+      \ifblank{#2}{}{\node at (0.05,0.17) {$\scriptscriptstyle\mathrm{#2}$};}
       \node at (0,0) {$\gets$};
-      \ifblank{#2}{}{\node at (0.05,-0.1) {\tiny #1};}
+      \ifblank{#2}{}{\node at (0.05,-0.1) {$\scriptscriptstyle\mathrm{#1}$};}
     }
   }
 }
@@ -889,19 +888,24 @@
 ]{cryptocode} % Must load after hyperref and before cleveref
 \let\AC\undefined % Conflicts with glossaries-extra
 \let\sequence\undefined % Broken by patch below
+\let\texpect\undefined
+\let\texpsub\undefined
+\let\tprob\undefined
+\let\tprobsub\undefined
 
 \makeatletter
 \RenewDocumentCommand{\pc@elrk}{s m}{\abr{#2}}
 \RenewDocumentCommand{\pc@olrk}{s m}{\abr{#2}}
 \makeatother
+\patchcmd{\expsub} {\operatorname}{\operatorname*}{}{}
+\patchcmd{\probsub}{\operatorname}{\operatorname*}{}{}
 
 \renewcommand*{\smallO}[1]{\ensuremath{o}\abr{#1}}
-
-\renewcommand*{\kgen}    {\pcalgostyle{Key}\gen}
-\renewcommand*{\pp}      {\key[pp]}
-\renewcommand*{\probname}{\mathbb{P}}
-\renewcommand*{\puncture}{\pcalgostyle{Punc}}
-\renewcommand*{\verify}  {\pcalgostyle{Ver}}
+\renewcommand*{\kgen}     {\pcalgostyle{Key}\gen}
+\renewcommand*{\pp}       {\key[pp]}
+\renewcommand*{\probname} {\mathbb{P}}
+\renewcommand*{\puncture} {\pcalgostyle{Punc}}
+\renewcommand*{\verify}   {\pcalgostyle{Ver}}
 
 \createprocedureblock {expprocb}{center,boxed}{}{$\mathrm{Experiment}$}{}
 \createprocedureblock {procb}   {center,boxed}{}{}                     {}
