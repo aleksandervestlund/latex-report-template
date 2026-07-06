@@ -888,6 +888,20 @@
   sets,
 ]{cryptocode} % Must load after hyperref and before cleveref
 \let\AC\undefined % Conflicts with glossaries-extra
+\let\sequence\undefined % Broken by patch below
+
+\makeatletter
+\RenewDocumentCommand{\pc@elrk}{s m}{\abr{#2}}
+\RenewDocumentCommand{\pc@olrk}{s m}{\abr{#2}}
+\makeatother
+
+\renewcommand*{\smallO}[1]{\ensuremath{o}\abr{#1}}
+
+\renewcommand*{\kgen}    {\pcalgostyle{Key}\gen}
+\renewcommand*{\pp}      {\key[pp]}
+\renewcommand*{\probname}{\mathbb{P}}
+\renewcommand*{\puncture}{\pcalgostyle{Punc}}
+\renewcommand*{\verify}  {\pcalgostyle{Ver}}
 
 \createprocedureblock {expprocb}{center,boxed}{}{$\mathrm{Experiment}$}{}
 \createprocedureblock {procb}   {center,boxed}{}{}                     {}
@@ -960,7 +974,6 @@
 \newcommand*{\share}          {\pcalgostyle{Share}}
 \newcommand*{\shift}          {\pcalgostyle{Shift}}
 \newcommand*{\store}          {\pcalgostyle{store}}
-\newcommand*{\Supp}           {\pcalgostyle{Supp}}
 \newcommand*{\test}           {\pcalgostyle{Test}}
 \newcommand*{\toblock}        {\pcalgostyle{ToBlock}}
 \newcommand*{\tostring}       {\pcalgostyle{ToString}}
@@ -1041,16 +1054,6 @@
 \newcommand*{\rchpk} {\key[rchpk]}
 \newcommand*{\row}   {\key[row]}
 \newcommand*{\seed}  {\key[seed]}
-\renewcommand*{\pp}  {\key[pp]}
-
-\renewcommand*{\expect}[1]{\expectationname\abr{#1}}
-\renewcommand*{\prob}  [1]{\probname\abr{#1}}
-\renewcommand*{\smallO}[1]{\ensuremath{o}\pbr{#1}}
-
-\renewcommand*{\kgen}    {\pcalgostyle{Key}\gen}
-\renewcommand*{\probname}{\mathbb{P}}
-\renewcommand*{\puncture}{\pcalgostyle{Punc}}
-\renewcommand*{\verify}  {\pcalgostyle{Ver}}
 
 \newcommand*{\funs} [2]{\pcalgostyle{Funs}\abr{#1, #2}} % func1, func2
 \newcommand*{\perms}[1]{\pcalgostyle{Perms}\abr{#1}}    % func
@@ -1068,15 +1071,15 @@
 \newcommand*{\psadv}   {\ps\pcadvantagename}
 \newcommand*{\psseladv}{\ps\pcalgostyle{sel}\pcadvantagename}
 
-\newcommand*{\expectsq}[1]         {\operatorname{\expectationname}\sq\abr{#1}}
+\newcommand*{\expectsq}[1]         {\expectationname\sq\abr{#1}}
 \newcommand*{\gf}      [1]         {\pcalgostyle{GF}\abr{#1}}
-\newcommand*{\polylog} [1][\secpar]{\pcpolynomialstyle{polylog}\ifblank{#1}{}{\pbr{#1}}}
+\newcommand*{\polylog} [1][\secpar]{\pcpolynomialstyle{polylog}\ifblank{#1}{}{\abr{#1}}}
 
-\newcommand*{\smallOmegatilde}[1]{\tilde{\omega}\pbr{#1}}
-\newcommand*{\bigOmegatilde}  [1]{\widetilde{\Omega}\pbr{#1}}
-\newcommand*{\bigThetatilde}  [1]{\widetilde{\Theta}\pbr{#1}}
-\newcommand*{\bigOtilde}      [1]{\widetilde{\mathcal{O}}\pbr{#1}}
-\newcommand*{\smallOtilde}    [1]{\tilde{\ensuremath{o}}\pbr{#1}}
+\newcommand*{\smallOmegatilde}[1]{\tilde{\omega}\abr{#1}}
+\newcommand*{\bigOmegatilde}  [1]{\widetilde{\Omega}\abr{#1}}
+\newcommand*{\bigThetatilde}  [1]{\widetilde{\Theta}\abr{#1}}
+\newcommand*{\bigOtilde}      [1]{\widetilde{\mathcal{O}}\abr{#1}}
+\newcommand*{\smallOtilde}    [1]{\tilde{\ensuremath{o}}\abr{#1}}
 
 % TODO: Switch to zref-clever when it supports Norwegian
 \RequirePackage[
