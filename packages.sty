@@ -524,8 +524,8 @@
 }
 \newcommand*{\xgets}[1]{\mathrel{\mathpalette\XGETS{#1}}}
 \newcommand*{\XGETS}[2]{%
-  \setbox0\hbox{$#1\gets$}%
-  \rlap{\hbox to\wd0{\hss\raisebox{1.2\height}{\scalebox{0.5}{$#1\:\:\mathrm{#2}$}}\hss}}\box0%
+  \ooalign{$#1\gets$\cr%
+  \hidewidth\raisebox{1.2\height}{\scalebox{0.5}{$#1\:\:\mathrm{#2}$}}\hidewidth\cr}%
 }
 \newcommand*{\rgets}{\xgets{R}}
 \newcommand*{\sgets}{\xgets{\$}}
@@ -988,8 +988,9 @@
 \newcommand*{\ZZq}  {\ZZ_q}
 \newcommand*{\ZZtwo}{\ZZ_2}
 
+\newcommand*{\cdh} {\pcalgostyle{CDH}}
 \newcommand*{\cpa} {\pcalgostyle{CPA}}
-\newcommand*{\csat}{\pcalgostyle{circuit\pcmathhyphen{}SAT}}
+\newcommand*{\csat}{\pcalgostyle{circuit}\pcmathhyphen\pcalgostyle{SAT}}
 \newcommand*{\ddh} {\pcalgostyle{DDH}}
 \newcommand*{\dlog}{\pcalgostyle{DLOG}}
 \newcommand*{\lwe} {\pcalgostyle{LWE}}
