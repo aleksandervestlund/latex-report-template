@@ -332,34 +332,33 @@
 \newcount\ad@currentdepth
 \newcount\ad@maxdepth
 \newcount\ad@type
+\newcommand*{\ad@measure}[1]{%
+  \global\advance\ad@currentdepth by 1\relax
+  \ifnum\ad@currentdepth > \ad@maxdepth
+    \global\ad@maxdepth=\ad@currentdepth
+  \fi
+  #1%
+  \global\advance\ad@currentdepth by -1\relax
+}
 \DeclareRobustCommand*{\abr}[1]{%
   \begingroup
-    \def\abr##1{%
-      \global\advance\ad@currentdepth by 1\relax
-      \ifnum\ad@currentdepth>\ad@maxdepth
-        \global\ad@maxdepth=\ad@currentdepth
-      \fi
-      ##1%
-      \global\advance\ad@currentdepth by -1\relax
-    }%
+    \let\abr\ad@measure
     \global\ad@maxdepth=0\relax
     \global\ad@currentdepth=0\relax
     \setbox\z@=\hbox{$#1$}%
-    \ad@type=\ad@maxdepth\relax
-    \@tempcnta=\ad@type
-    \divide\@tempcnta by 3\relax
-    \multiply\@tempcnta by 3\relax
-    \advance\ad@type by -\@tempcnta\relax
-    \ifcase\ad@type
-      \def\ad@next{\pbr{#1}}%
-    \or
-      \def\ad@next{\sbr{#1}}%
-    \or
-      \def\ad@next{\cbr{#1}}%
-    \fi
-    \expandafter
   \endgroup
-  \ad@next
+  \ad@type=\ad@maxdepth\relax
+  \@tempcnta=\ad@type
+  \divide\@tempcnta by 3\relax
+  \multiply\@tempcnta by 3\relax
+  \advance\ad@type by -\@tempcnta\relax
+  \ifcase\ad@type
+    \pbr{#1}%
+  \or
+    \sbr{#1}%
+  \or
+    \cbr{#1}%
+  \fi
 }
 \makeatother
 
@@ -965,8 +964,8 @@
 \newcommand*{\test}           {\pcalgostyle{Test}}
 \newcommand*{\toblock}        {\pcalgostyle{ToBlock}}
 \newcommand*{\tostring}       {\pcalgostyle{ToString}}
-\newcommand*{\tofunc}         {\pcalgostyle{ToFun}}
-\newcommand*{\tofuncs}        {\pcalgostyle{ToFuns}}
+\newcommand*{\tofun}          {\pcalgostyle{ToFun}}
+\newcommand*{\tofuns}         {\pcalgostyle{ToFuns}}
 \newcommand*{\trace}          {\pcalgostyle{Trace}}
 \newcommand*{\unseal}         {\pcalgostyle{Unseal}}
 \newcommand*{\update}         {\pcalgostyle{Update}}
@@ -1178,13 +1177,13 @@
 \PassOptionsToPackage{lang-warn=false}{datatool-base}
 % More styles: https://www.dickimaw-books.com/gallery/glossaries-styles/
 \RequirePackage[
-  abbreviations, % Comment out this line if not using abbreviations (can still use initialisms)
+  abbreviations,    % Comment out this line if not using abbreviations (can still use initialisms)
   acronyms,
   automake,
-  % nomain, % Decomment this line if not using standard glossary
+  % nomain,         % Decomment this line if not using standard glossary
   shortcuts,
   style=altlong4col,
-  symbols, % Comment out this line if not using symbols
+  symbols,          % Comment out this line if not using symbols
   translate=babel,
 ]{glossaries-extra} % Must load after hyperref
 
