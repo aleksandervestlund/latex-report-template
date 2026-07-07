@@ -59,7 +59,6 @@
   prefix=packages@,
 }
 
-% TODO: Consider adding libertine font support
 \DeclareStringOption[lmodern]   {font}
 \DeclareStringOption[varnothing]{setnotation}
 \DeclareBoolOption[false]{glscount}
@@ -68,31 +67,30 @@
 \ProcessKeyvalOptions*
 
 \newif\ifusepxortx
-\makeatletter
-\ifdefstring{\packages@font}{newpx}{
-  \usepxortxtrue
-}{
-  \ifdefstring{\packages@font}{newtx}{
-    \usepxortxtrue
-  }{}
-}
-\makeatother
 
 \ifpdftex
   \RequirePackage[utf8]{inputenc}
   \RequirePackage[T1]{fontenc}
   \RequirePackage{morewrites}
   \makeatletter
-  \ifdefstring{\packages@font}{lmodern}{
-    \RequirePackage{lmodern}
+  \ifdefstring{\packages@font}{libertine}{
+    \RequirePackage{libertine}
+    \DeclareSymbolFont{libertinepunc}{T1}{LinuxLibertineT-TLF}{m}{n}
+    \AtBeginDocument{\DeclareMathSymbol{\pcmathhyphen}{\mathord}{libertinepunc}{"2D}}
   }{
-    \ifdefstring{\packages@font}{newtx}{
-      \RequirePackage{newtxtext}
+    \ifdefstring{\packages@font}{lmodern}{
+      \RequirePackage{lmodern}
     }{
-      \ifdefstring{\packages@font}{newpx}{
-        \RequirePackage{newpxtext}
+      \ifdefstring{\packages@font}{newtx}{
+        \RequirePackage{newtxtext}
+        \usepxortxtrue
       }{
-        \PackageError{packages}{Undefined font}{}
+        \ifdefstring{\packages@font}{newpx}{
+          \RequirePackage{newpxtext}
+          \usepxortxtrue
+        }{
+          \PackageError{packages}{Undefined font}{}
+        }
       }
     }
   }
@@ -259,6 +257,12 @@
   \makeatother
   \RequirePackage[cal=cm]{mathalpha}
 \fi
+
+\makeatletter
+\ifdefstring{\packages@font}{libertine}{
+  \RequirePackage{libertinust1math}
+}
+\makeatother
 
 \interdisplaylinepenalty=2500
 \allowdisplaybreaks
@@ -571,8 +575,9 @@
   \renewcommand*{\geqslant}{\geq}
 }
 
-\ifdefstring{\packages@setnotation}{varnothing}{
-  \renewcommand*{\emptyset}{\varnothing}
+\ifdefstring{\packages@setnotation}{brackets}{
+  \renewcommand*{\emptyset}  {\set{}}
+  \renewcommand*{\varnothing}{\set{}}
 }{
   \ifdefstring{\packages@setnotation}{emptyset}{
     \renewcommand*{\varnothing}{\emptyset}
@@ -581,9 +586,8 @@
       \renewcommand*{\emptyset}  {\mathrm{Ø}}
       \renewcommand*{\varnothing}{\mathrm{Ø}}
     }{
-      \ifdefstring{\packages@setnotation}{brackets}{
-        \renewcommand*{\emptyset}  {\set{}}
-        \renewcommand*{\varnothing}{\set{}}
+      \ifdefstring{\packages@setnotation}{varnothing}{
+        \renewcommand*{\emptyset}{\varnothing}
       }{
         \PackageError{packages}{Undefined set notation}{}
       }
@@ -647,7 +651,7 @@
 % WIP:
 \RequirePackage{xparse}
 \ExplSyntaxOn
-\newcommand*{\fac}[1]{ % Must add manual space for numbers. Might delete. TODO: Add more
+\newcommand*{\fac}[1]{% TODO: Add more cases continuously
   #1!
     \peek_catcode_ignore_spaces:NTF a     {\,}{
     \peek_meaning_ignore_spaces:NTF \abr  {\,}{
@@ -1324,19 +1328,15 @@
   \floatname{procedure}{Procedure}
   \renewcommand*{\contentsname}     {Table of Contents}
   \renewcommand*{\abbreviationsname}{Abbreviations}
-  \crefname{ineq}         {Inequality}   {Inequalities}
-  \crefname{inva}         {Invariant}    {Invariants}
-  \crefname{subsection}   {Subsection}   {Subsections}
-  \crefname{subsubsection}{Subsubsection}{Subsubsections}
+  \crefname{ineq}{Inequality}{Inequalities}
+  \crefname{inva}{Invariant} {Invariants}
 }
 \addto{\captionsbritish}{
   \floatname{procedure}{Procedure}
   \renewcommand*{\contentsname}     {Table of Contents}
   \renewcommand*{\abbreviationsname}{Abbreviations}
-  \crefname{ineq}         {Inequality}   {Inequalities}
-  \crefname{inva}         {Invariant}    {Invariants}
-  \crefname{subsection}   {Subsection}   {Subsections}
-  \crefname{subsubsection}{Subsubsection}{Subsubsections}
+  \crefname{ineq}{Inequality}{Inequalities}
+  \crefname{inva}{Invariant} {Invariants}
 }
 \addto{\captionsnorsk}{
   \floatname{procedure}{Prosedyre}
@@ -1384,10 +1384,8 @@
   \renewenvironment*{securitygoal}     {\begin{sikkerhetsmål}}     {\end{sikkerhetsmål}}
   \renewenvironment*{theorem}          {\begin{teorem}}            {\end{teorem}}
   \renewcommand*{\ntnulogo}{NTNU_logo_NB}
-  \crefname{ineq}         {Ulikhet}     {Ulikhetene}
-  \crefname{inva}         {Invariant}   {Invariantene}
-  \crefname{subsection}   {Underseksjon}{Underseksjoner}
-  \crefname{subsubsection}{Underseksjon}{Underseksjoner}
+  \crefname{ineq}{Ulikhet}  {Ulikhetene}
+  \crefname{inva}{Invariant}{Invariantene}
 }
 
 \DeclareSymbolFont{operatorsT1}{T1}{cmr}{m}{n} % Slots: https://en.wikipedia.org/wiki/Cork_encoding
