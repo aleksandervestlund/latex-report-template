@@ -508,29 +508,31 @@
   \mathit{#1}/\mathit{#2}/#3/#4/\mathit{#5}%
 }
 
-\newcommand*{\getsx}[2][]{
-  \mathrel{
-    \tikz[
-      baseline=-0.1873em,
-      inner sep=0em,
-      outer sep=0em,
-    ]{
-      \ifblank{#2}{}{\node at (0.05,0.17) {$\scriptscriptstyle\mathrm{#2}$};}
-      \node at (0,0) {$\gets$};
-      \ifblank{#2}{}{\node at (0.05,-0.1) {$\scriptscriptstyle\mathrm{#1}$};}
-    }
-  }
+\newcommand*{\getsx}[2][]{\mathrel{\GETSX{#1}{#2}}}
+\newcommand*{\GETSX}[2]  {%
+  \tikz[
+    baseline=-0.1873em,
+    inner sep=0em,
+    outer sep=0em,
+  ]{
+    \ifblank{#2}{}{\node at (0.05,0.165) {$\scriptscriptstyle\mathrm{#2}$};}
+    \node at (0,0) {$\gets$};
+    \ifblank{#1}{}{\node at (0.05,-0.11) {$\scriptscriptstyle\mathrm{#1}$};}
+  }%
 }
-\newcommand*{\xgets}[1]{\mathrel{\mathpalette\XGETS{#1}}}
-\newcommand*{\XGETS}[2]{%
-  \ooalign{$#1\gets$\cr%
-  \hidewidth\raisebox{1.2\height}{\scalebox{0.5}{$#1\:\:\mathrm{#2}$}}\hidewidth\cr}%
+\newcommand*{\xgets}[2][]{\mathrel{\mathpalette{\XGETS{#1}}{#2}}}
+\newcommand*{\XGETS}[3]  {%
+  \ooalign{%
+    $#2\gets$\cr%
+    \ifblank{#3}{}{\hidewidth\raisebox{1.15\height}{\scalebox{0.5}{$#2\:\:\mathrm{#3}$}}\hidewidth\cr}%
+    \ifblank{#1}{}{\hidewidth\raisebox{-0.7\height}{\scalebox{0.5}{$#2\:\:\mathrm{#1}$}}\hidewidth\cr}%
+  }%
 }
 \newcommand*{\rgets}{\xgets{R}}
 \newcommand*{\sgets}{\xgets{\$}}
 
 \makeatletter
-\newcommand*{\moverlay}{\mathpalette\mov@rlay}
+\newcommand*{\moverlay}   {\mathpalette\mov@rlay}
 \newcommand*{\mov@rlay}[2]{%
   \leavevmode\vtop{%
     \baselineskip\z@skip\lineskiplimit-\maxdimen%
