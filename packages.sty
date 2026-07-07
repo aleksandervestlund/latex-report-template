@@ -81,12 +81,12 @@
     \ifdefstring{\packages@font}{lmodern}{
       \RequirePackage{lmodern}
     }{
-      \ifdefstring{\packages@font}{newtx}{
-        \RequirePackage{newtxtext}
+      \ifdefstring{\packages@font}{newpx}{
         \usepxortxtrue
+        \RequirePackage{newpxtext}
       }{
-        \ifdefstring{\packages@font}{newpx}{
-          \RequirePackage{newpxtext}
+        \ifdefstring{\packages@font}{newtx}{
+          \RequirePackage{newtxtext}
           \usepxortxtrue
         }{
           \PackageError{packages}{Undefined font}{}
@@ -246,22 +246,19 @@
   }%
 }
 
-\ifusepxortx
+\makeatletter
+\ifpdftex\ifusepxortx
   \let\mathscr\undefined
-  \makeatletter
   \ifdefstring{\packages@font}{newpx}{
     \RequirePackage{newpxmath}
   }{
     \RequirePackage{newtxmath}
   }
-  \makeatother
   \RequirePackage[cal=cm]{mathalpha}
-\fi
-
-\makeatletter
-\ifdefstring{\packages@font}{libertine}{
+\else\ifdefstring{\packages@font}{libertine}{
   \RequirePackage{libertinust1math}
 }
+\fi\fi
 \makeatother
 
 \interdisplaylinepenalty=2500
