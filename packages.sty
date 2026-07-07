@@ -275,7 +275,6 @@
 ]{
   example, eksempel,
   exercise,oppgave,
-  problem,
   solution,løsning,
   theorem % Cannot have trailing comma
 }
@@ -288,6 +287,7 @@
   lemma,
   observation,observasjon,
   principle,  prinsipp,
+  problem,
   property,   egenskap,
   result,     resultat,
   teorem
@@ -295,7 +295,10 @@
 \declaretheorem[
   numbered=no,
   style=plain,
-]{claim,påstand}
+]{
+  claim,   påstand,
+  question,spørsmål
+}
 \declaretheorem[
   sibling=theorem,
   style=definition,
@@ -446,20 +449,23 @@
 
 \DeclareMathOperator {\Adj}       {Adj}     % adjugate
 \DeclareMathOperator {\Cov}       {Cov}     % covariance
+\DeclareMathOperator {\distance}  {d}       % distance/period
 \DeclareMathOperator {\divergence}{div}     % divergence
+\DeclareMathOperator {\Fix}       {Fix}     % fixate
 \DeclareMathOperator {\fraction}  {frac}    % fractional part
 \DeclareMathOperator {\id}        {id}      % identity relation
 \DeclareMathOperator {\integer}   {int}     % integer part
 \DeclareMathOperator {\Law}       {Law}     % law
 \DeclareMathOperator {\lb}        {lb}      % log2
 \DeclareMathOperator {\lcm}       {lcm}     % least common multiple
+\DeclareMathOperator {\Maj}       {Maj}     % majority
 \DeclareMathOperator {\ord}       {ord}     % order
 \DeclareMathOperator {\rank}      {rank}    % rank
 \DeclareMathOperator {\sinc}      {sinc}    % sine cardinal
 \DeclareMathOperator {\sgn}       {sgn}     % signum
 \DeclareMathOperator {\tr}        {tr}      % trace
 \DeclareMathOperator {\Var}       {Var}     % variance
-\DeclareMathOperator*{\per}       {per}
+\DeclareMathOperator*{\per}       {per}     % permanent
 \DeclareMathOperator*{\softmax}   {softmax} % softmax
 
 \newcommand*{\logtwo}{\log_2}
@@ -498,13 +504,17 @@
 }
 
 \newcommand*{\data}      {\mathcal{D}}
-\newcommand*{\loss}      {\mathcal{L}}
 \newcommand*{\hypothesis}{\mathcal{H}}
+\newcommand*{\loss}      {\mathcal{L}}
+\newcommand*{\snr}       {\mathit{SNR}}
 
 \newcommand*{\inv}      {^{-1}}
 \newcommand*{\sq}       {^2}
 \newcommand*{\transpose}{^\top} % Or \intercal
 \newcommand*{\sigmasq}  {\sigma\sq}
+
+\newcommand*{\cross} {\times}
+\newcommand*{\goesto}{\to}
 
 \newcommand*{\band}{\mathbin{\&}}
 \newcommand*{\bor} {\mid}
@@ -1431,6 +1441,7 @@
   \renewenvironment*{principle}        {\begin{prinsipp}}          {\end{prinsipp}}
   \renewenvironment*{property}         {\begin{egenskap}}          {\end{egenskap}}
   \renewenvironment*{proposition}      {\begin{proposisjon}}       {\end{proposisjon}}
+  \renewenvironment*{question}         {\begin{spørsmål}}          {\end{spørsmål}}
   \renewenvironment*{remark}           {\begin{merknad}}           {\end{merknad}}
   \renewenvironment*{result}           {\begin{resultat}}          {\end{resultat}}
   \renewenvironment*{securitygoal}     {\begin{sikkerhetsmål}}     {\end{sikkerhetsmål}}
