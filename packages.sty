@@ -249,6 +249,7 @@
 \makeatletter
 \ifpdftex\ifusepxortx
   \let\mathscr\undefined
+  \let\openbox\undefined
   \ifdefstring{\packages@font}{newpx}{
     \RequirePackage{newpxmath}
   }{
@@ -264,30 +265,50 @@
 \interdisplaylinepenalty=2500
 \allowdisplaybreaks
 
+\newtheoremstyle{goal}{\topsep}{\topsep}{\normalfont}{0em}{\bfseries}{:}{ }{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+\newtheoremstyle{prop}{0.15em} {0.15em} {\itshape}   {0em}{\itshape} {:}{ }{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+
 % Both English and Norwegian versions:
-\declaretheorem[numberwithin=section]{
+\declaretheorem[
+  numberwithin=section,
+  style=plain,
+]{
   example, eksempel,
   exercise,oppgave,
   problem,
   solution,løsning,
   theorem % Cannot have trailing comma
 }
-\declaretheorem[sibling=theorem]{
-  assumption,  antakelse,
-  claim,       påstand,
-  conjecture,  konjektur,
-  construction,konstruksjon,
-  corollary,   korollar,
-  definition,  definisjon,
-  fact,        faktum,
+\declaretheorem[
+  sibling=theorem,
+  style=plain,
+]{
+  assumption, antakelse,
+  corollary,  korollar,
   lemma,
-  observation, observasjon,
-  principle,   prinsipp,
-  property,    egenskap,
-  proposition, proposisjon,
-  result,      resultat,
+  observation,observasjon,
+  principle,  prinsipp,
+  property,   egenskap,
+  result,     resultat,
   teorem
 }
+\declaretheorem[
+  numbered=no,
+  style=plain,
+]{claim,påstand}
+\declaretheorem[
+  sibling=theorem,
+  style=definition,
+]{
+  conjecture,  konjektur,
+  construction,konstruksjon,
+  definition,  definisjon,
+  fact,        faktum
+}
+\declaretheorem[
+  sibling=theorem,
+  style=prop,
+]{proposition,proposisjon}
 \declaretheorem[
   numbered=no,
   style=remark,
@@ -295,14 +316,40 @@
   aside, avsporing,
   remark,merknad
 }
-\declaretheorem[sibling=theorem, name={Attack Game}]       {attackgame}
-\declaretheorem[sibling=theorem, name={Angrepsspill}]      {angrepsspill}
-\declaretheorem[sibling=theorem, name={Functionality Goal}]{functionalitygoal}
-\declaretheorem[sibling=theorem, name={Funksjonalitetsmål}]{funksjonalitetsmål}
-\declaretheorem[sibling=theorem, name={Informal Theorem}]  {informaltheorem}
-\declaretheorem[sibling=theorem, name={Uformelt teorem}]   {uformeltteorem}
-\declaretheorem[sibling=theorem, name={Security Goal}]     {securitygoal}
-\declaretheorem[sibling=theorem, name={Sikkerhetsmål}]     {sikkerhetsmål}
+\declaretheorem[
+  sibling=theorem,
+  style=definition,
+  name={Attack Game},
+]{attackgame}
+\declaretheorem[
+  sibling=theorem,
+  style=definition,
+  name={Angrepsspill},
+]{angrepsspill}
+\declaretheorem[
+  style=goal,
+  name={Functionality Goal},
+]{functionalitygoal}
+\declaretheorem[
+  style=goal,
+  name={Funksjonalitetsmål},
+]{funksjonalitetsmål}
+\declaretheorem[
+  sibling=theorem,
+  name={Informal Theorem},
+]{informaltheorem}
+\declaretheorem[
+  sibling=theorem,
+  name={Uformelt teorem},
+]{uformeltteorem}
+\declaretheorem[
+  style=goal,
+  name={Security Goal},
+]{securitygoal}
+\declaretheorem[
+  style=goal,
+  name={Sikkerhetsmål},
+]{sikkerhetsmål}
 
 \newcommand*{\proofideatext}  {Proof Idea}
 \newcommand*{\proofsketchtext}{Proof Sketch}
@@ -412,6 +459,7 @@
 \DeclareMathOperator {\sgn}       {sgn}     % signum
 \DeclareMathOperator {\tr}        {tr}      % trace
 \DeclareMathOperator {\Var}       {Var}     % variance
+\DeclareMathOperator*{\per}       {per}
 \DeclareMathOperator*{\softmax}   {softmax} % softmax
 
 \newcommand*{\logtwo}{\log_2}
@@ -1117,7 +1165,6 @@
 \cref@addlanguagedefs{american}{
   \setcrefenglish{assumption}       {Assumption}        {Assumptions}
   \setcrefenglish{attackgame}       {Attack Game}       {Attack Games}
-  \setcrefenglish{claim}            {Claim}             {Claims}
   \setcrefenglish{construction}     {Construction}      {Constructions}
   \setcrefenglish{exercise}         {Exercise}          {Exercises}
   \setcrefenglish{fact}             {Fact}              {Facts}
@@ -1135,7 +1182,6 @@
 \cref@addlanguagedefs{british}{
   \setcrefenglish{assumption}       {Assumption}        {Assumptions}
   \setcrefenglish{attackgame}       {Attack Game}       {Attack Games}
-  \setcrefenglish{claim}            {Claim}             {Claims}
   \setcrefenglish{construction}     {Construction}      {Constructions}
   \setcrefenglish{exercise}         {Exercise}          {Exercises}
   \setcrefenglish{fact}             {Fact}              {Facts}
