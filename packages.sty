@@ -86,8 +86,8 @@
         \RequirePackage{newpxtext}
       }{
         \ifdefstring{\packages@font}{newtx}{
-          \RequirePackage{newtxtext}
           \usepxortxtrue
+          \RequirePackage{newtxtext}
         }{
           \PackageError{packages}{Undefined font}{}
         }
@@ -269,6 +269,7 @@
   example, eksempel,
   exercise,oppgave,
   problem,
+  solution,løsning,
   theorem % Cannot have trailing comma
 }
 \declaretheorem[sibling=theorem]{
@@ -283,7 +284,8 @@
   observation, observasjon,
   principle,   prinsipp,
   property,    egenskap,
-  proposition, forslag,
+  proposition, proposisjon,
+  result,      resultat,
   teorem
 }
 \declaretheorem[
@@ -291,7 +293,7 @@
   style=remark,
 ]{
   aside, avsporing,
-  remark,merk
+  remark,merknad
 }
 \declaretheorem[sibling=theorem, name={Attack Game}]       {attackgame}
 \declaretheorem[sibling=theorem, name={Angrepsspill}]      {angrepsspill}
@@ -1126,7 +1128,9 @@
   \setcrefenglish{problem}          {Problem}           {Problems}
   \setcrefenglish{procedure}        {Procedure}         {Procedures}
   \setcrefenglish{property}         {Property}          {Properties}
+  \setcrefenglish{result}           {Result}            {Results}
   \setcrefenglish{securitygoal}     {Security Goal}     {Security Goals}
+  \setcrefenglish{solution}         {Solution}          {Solutions}
 }
 \cref@addlanguagedefs{british}{
   \setcrefenglish{assumption}       {Assumption}        {Assumptions}
@@ -1142,7 +1146,9 @@
   \setcrefenglish{problem}          {Problem}           {Problems}
   \setcrefenglish{procedure}        {Procedure}         {Procedures}
   \setcrefenglish{property}         {Property}          {Properties}
+  \setcrefenglish{result}           {Result}            {Results}
   \setcrefenglish{securitygoal}     {Security Goal}     {Security Goals}
+  \setcrefenglish{solution}         {Solution}          {Solutions}
 }
 \cref@addlanguagedefs{norsk}{
   \setcrefnorsk{angrepsspill}      {Angrepsspill}      {Angrepsspillene}
@@ -1151,16 +1157,18 @@
   \setcrefnorsk{egenskap}          {Egenskap}          {Egenskapene}
   \setcrefnorsk{eksempel}          {Eksempel}          {Eksemplene}
   \setcrefnorsk{faktum}            {Faktum}            {Faktaene}
-  \setcrefnorsk{forslag}           {Forslag}           {Forslagene}
   \setcrefnorsk{funksjonalitetsmål}{Funksjonalitetsmål}{Funksjonalitetsmålene}
   \setcrefnorsk{konstruksjon}      {Konstruksjon}      {Konstruksjonene}
   \setcrefnorsk{korollar}          {Korrolar}          {Korollarene}
+  \setcrefnorsk{løsning}           {Løsning}           {Løsningene}
   \setcrefnorsk{observasjon}       {Observasjon}       {Observasjonene}
   \setcrefnorsk{oppgave}           {Oppgave}           {Oppgavene}
   \setcrefnorsk{prinsipp}          {Prinsipp}          {Prinsippene}
   \setcrefnorsk{problem}           {Problem}           {Problemene}
+  \setcrefnorsk{proposisjon}       {Proposisjon}       {Proposisjonene}
   \setcrefnorsk{procedure}         {Prosedyre}         {Prosedyrene}
   \setcrefnorsk{påstand}           {Påstand}           {Påstandene}
+  \setcrefnorsk{resultat}          {Resultat}          {Resultatene}
   \setcrefnorsk{sikkerhetsmål}     {Sikkerhetsmål}     {Sikkerhetsmålene}
   \setcrefnorsk{teorem}            {Teorem}            {Teoremene}
   \setcrefnorsk{uformeltteorem}    {Uformelt teorem}   {Uformelle teoremene}
@@ -1376,9 +1384,11 @@
   \renewenvironment*{observation}      {\begin{observasjon}}       {\end{observasjon}}
   \renewenvironment*{principle}        {\begin{prinsipp}}          {\end{prinsipp}}
   \renewenvironment*{property}         {\begin{egenskap}}          {\end{egenskap}}
-  \renewenvironment*{proposition}      {\begin{forslag}}           {\end{forslag}}
-  \renewenvironment*{remark}           {\begin{merk}}              {\end{merk}}
+  \renewenvironment*{proposition}      {\begin{proposisjon}}       {\end{proposisjon}}
+  \renewenvironment*{remark}           {\begin{merknad}}           {\end{merknad}}
+  \renewenvironment*{result}           {\begin{resultat}}          {\end{resultat}}
   \renewenvironment*{securitygoal}     {\begin{sikkerhetsmål}}     {\end{sikkerhetsmål}}
+  \renewenvironment*{solution}         {\begin{løsning}}           {\end{løsning}}
   \renewenvironment*{theorem}          {\begin{teorem}}            {\end{teorem}}
   \renewcommand*{\ntnulogo}{NTNU_logo_NB}
   \crefname{ineq}{Ulikhet}  {Ulikhetene}
