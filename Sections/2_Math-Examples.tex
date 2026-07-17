@@ -37,7 +37,7 @@ The number of permutations of $r$ items from a set of $n$ elements is given by:
 
 The number of combinations (binomial coefficient) is:
 \begin{equation*}
-    \choose{n}{r} = \comb{n}{r} = \frac{\fac{n}}{\fac{r}\fac{\pbr{n - r}}}
+    \choose{n}{r} = \comb{n}{r} = \frac{\fac{n}}{\fac{r}2\fac{\pbr{n - r}}}
 \end{equation*}
 
 We can also use bracket functions:
@@ -505,7 +505,7 @@ Some crypto functions:
     &\request,
     \quad \rerandomize,
     \quad \respond,
-    \quad \rotate,
+    \quad \Rotate,
     \quad \seal,
     \quad \setup,
     \quad \share,
@@ -524,6 +524,11 @@ Some crypto functions:
     \quad \viewv,
     \quad \Write
 \end{align*}
+
+And evaluating:
+\begin{equation*}
+    \eval\pbr{\mlq +\mrq}, \vect{a}, \vect{b}
+\end{equation*}
 
 Modified base algorithms from the package:
 \begin{equation*}

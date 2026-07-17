@@ -21,10 +21,12 @@
 % ----------- Page setup ------------
 \newcommand*{\hmmax}{0}
 \newcommand*{\bmmax}{0}
+\RequirePackage{anyfontsize}
 \RequirePackage[main=]{babel}
 \RequirePackage[
   babel,
   factor=1100,
+  nopatch=footnote,
   shrink=10,
   step=1,
   stretch=10,
@@ -43,14 +45,18 @@
   right=30mm,
   top=26mm,
 ]{geometry}
+\RequirePackage{pifont}
+\RequirePackage{relsize}
 \RequirePackage[onehalfspacing]{setspace}
+\RequirePackage{seqsplit}
+\RequirePackage{soul}
 \RequirePackage[
   dvipsnames,
   svgnames,
   table,
+  x11names,
   xcdraw,
 ]{xcolor}
-\RequirePackage{anyfontsize}
 
 \RequirePackage{iftex}
 \RequirePackage{kvoptions}
@@ -59,14 +65,13 @@
   prefix=packages@,
 }
 
+\newif\ifusepxortx
 \DeclareStringOption[lmodern]   {font}
 \DeclareStringOption[varnothing]{setnotation}
 \DeclareBoolOption[false]{glscount}
 \DeclareBoolOption[true] {knuth}
 \DeclareBoolOption[false]{slant}
 \ProcessKeyvalOptions*
-
-\newif\ifusepxortx
 
 \ifpdftex
   \RequirePackage[utf8]{inputenc}
@@ -81,15 +86,23 @@
     \ifdefstring{\packages@font}{lmodern}{
       \RequirePackage{lmodern}
     }{
-      \ifdefstring{\packages@font}{newpx}{
-        \usepxortxtrue
-        \RequirePackage{newpxtext}
+      \ifdefstring{\packages@font}{mathpazo}{
+        \RequirePackage{mathpazo}
       }{
-        \ifdefstring{\packages@font}{newtx}{
+        \ifdefstring{\packages@font}{newpx}{
           \usepxortxtrue
-          \RequirePackage{newtxtext}
+          \RequirePackage{newpxtext}
         }{
-          \PackageError{packages}{Undefined font}{}
+          \ifdefstring{\packages@font}{newtx}{
+            \usepxortxtrue
+            \RequirePackage{newtxtext}
+          }{
+            \ifdefstring{\packages@font}{stix}{
+              \RequirePackage{stix}
+            }{
+              \PackageError{packages}{Undefined font}{}
+            }
+          }
         }
       }
     }
@@ -208,7 +221,12 @@
   \clearpage
 }
 
-\newcommand*{\footnotenonumber}[1]{{\renewcommand*{\thempfn}{}\footnotetext{#1}}}
+\newcommand*{\footnotenonumber}[1]{%
+  \begingroup
+    \renewcommand*{\thempfn}{}
+    \footnotetext{#1}
+  \endgroup
+}
 
 \RequirePackage[
   obeyFinal,
@@ -218,7 +236,6 @@
 
 % ----------- Mathematics -----------
 \RequirePackage{amsmath}
-\RequirePackage{amssymb}
 \RequirePackage{amsthm}
 \RequirePackage{bbm}
 \RequirePackage{bm}
@@ -233,6 +250,12 @@
 \RequirePackage{faktor}
 \RequirePackage{mathrsfs}
 \RequirePackage{thmtools}
+
+\makeatletter
+\ifdefstring{\packages@font}{stix}{}{
+  \RequirePackage{amssymb}
+}
+\makeatother
 
 \RequirePackage{stmaryrd}
 \SetSymbolFont{stmry}{bold}{U}{stmry}{m}{n}
@@ -270,8 +293,8 @@
 \interdisplaylinepenalty=2500
 \allowdisplaybreaks
 
-\newtheoremstyle{goal}{\topsep}{\topsep}{\normalfont}{0em}{\bfseries}{:}{ }{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
-\newtheoremstyle{prop}{0.15em} {0.15em} {\itshape}   {0em}{\itshape} {:}{ }{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+\newtheoremstyle{goal}       {\topsep}{\topsep}{\normalfont}{0em}{\bfseries}{:}{ }{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+\newtheoremstyle{proposition}{0.15em} {0.15em} {\itshape}   {0em}{\itshape} {:}{ }{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
 
 % Both English and Norwegian versions:
 \declaretheorem[
@@ -315,7 +338,7 @@
 }
 \declaretheorem[
   sibling=theorem,
-  style=prop,
+  style=proposition,
 ]{proposition,proposisjon}
 \declaretheorem[
   numbered=no,
@@ -456,6 +479,8 @@
 \DeclareMathOperator {\Cov}       {Cov}     % covariance
 \DeclareMathOperator {\distance}  {d}       % distance/period
 \DeclareMathOperator {\divergence}{div}     % divergence
+\DeclareMathOperator {\erf}       {erf}     % error function
+\DeclareMathOperator {\erfc}      {erfc}    % complementary error function
 \DeclareMathOperator {\Fix}       {Fix}     % fixate
 \DeclareMathOperator {\fraction}  {frac}    % fractional part
 \DeclareMathOperator {\id}        {id}      % identity relation
@@ -716,6 +741,16 @@
 \newcommand*{\fac}[1]{% TODO: Add more cases continuously
   #1!
     \peek_catcode_ignore_spaces:NTF a     {\,}{
+    \peek_meaning_ignore_spaces:NTF 0     {\,}{
+    \peek_meaning_ignore_spaces:NTF 1     {\,}{
+    \peek_meaning_ignore_spaces:NTF 2     {\,}{
+    \peek_meaning_ignore_spaces:NTF 3     {\,}{
+    \peek_meaning_ignore_spaces:NTF 4     {\,}{
+    \peek_meaning_ignore_spaces:NTF 5     {\,}{
+    \peek_meaning_ignore_spaces:NTF 6     {\,}{
+    \peek_meaning_ignore_spaces:NTF 7     {\,}{
+    \peek_meaning_ignore_spaces:NTF 8     {\,}{
+    \peek_meaning_ignore_spaces:NTF 9     {\,}{
     \peek_meaning_ignore_spaces:NTF \abr  {\,}{
     \peek_meaning_ignore_spaces:NTF \abs  {\,}{
     \peek_meaning_ignore_spaces:NTF \Angle{\,}{
@@ -730,12 +765,13 @@
     \peek_meaning_ignore_spaces:NTF \pi   {\,}{
     \peek_meaning_ignore_spaces:NTF \round{\,}{
     \peek_meaning_ignore_spaces:NTF \tau  {\,}{
-  }}}}}}}}}}}}}}}
+  }}}}}}}}}}}}}}}}}}}}}}}}}
 }
 \ExplSyntaxOff
 
 % ------- Figures and tables --------
 \RequirePackage{capt-of}
+\RequirePackage{rotating}
 \RequirePackage[list=true]{subcaption}
 \RequirePackage{tabularray}
 \RequirePackage[nottoc]{tocbibind}
@@ -812,6 +848,14 @@
 \RequirePackage{flafter}
 \RequirePackage[section]{placeins}
 
+\RequirePackage{dcolumn}
+\makeatletter
+\newcolumntype{T}[3]{>{\textfont0 =\the\font\DC@{#1}{#2}{#3}}c<{\DC@end}}
+\newcolumntype{X}{>{\hspace{1ex}}c@{\hspace{2ex}}c@{\hspace{2ex}}c<{\hspace{1ex}}}
+\makeatother
+\newcolumntype{d}[1]{D{.}{.}{#1}}
+\newcolumntype{j}[1]{T{.}{.}{#1}}
+
 \RequirePackage{multicol}
 \setlength{\multicolsep}{0em}
 
@@ -824,6 +868,7 @@
 \newcommand*{\ntnulogo}{NTNU_logo_EN}
 \newcommand*{\snulogo} {SNU_logo}
 
+% TODO: Add school option
 \makeatletter
 \newcommand*{\@logo}{\ntnulogo}
 \makeatother
@@ -842,8 +887,10 @@
 \makeatother
 
 % -------------- Code ---------------
-\RequirePackage{listings}
+% Check out: https://github.com/jubobs/lstautodedent
 \RequirePackage{dirtree}
+% \RequirePackage{gitinfo}
+\RequirePackage{listings}
 
 \RequirePackage{minted}
 \setminted{
@@ -914,6 +961,31 @@
   uniquename=init,
   urldate=long,
 ]{biblatex}
+
+\renewcommand{\multicitedelim}{\addcomma}
+\AtEveryBibitem{
+  \ifentrytype{article}{
+    \renewbibmacro{in:}{}
+	\renewcommand*{\jourvoldelim}{\addcomma\space}
+	\renewcommand*{\volnumdatedelim}{\addcomma\space}
+	\renewbibmacro*{issue+date}{%
+      \iffieldundef{issue}{}{%
+        \printfield{issue}%
+        \setunit*{\addcomma\space}%
+      }%
+      \printdate%
+	}
+  }{}
+}
+\renewbibmacro*{volume+number+eid}{%
+  \printtext[bold]{\printfield{volume}}%
+  \iffieldundef{number}{}{%
+    \printtext[parens]{\printfield{number}}%
+  }%
+  \setunit{\bibeidpunct}%
+  \printfield{eid}%
+}
+
 \DeclareNameAlias{sortname}{family-given}
 \DeclareDelimFormat{nameyeardelim}{\addcomma\space}
 
@@ -927,11 +999,17 @@
 
 % ----------- Referencing -----------
 \RequirePackage[
-  unicode,
+  bookmarksnumbered=true,
+  bookmarksopen=true,
+  bookmarksopenlevel=1,
   breaklinks=true,
   hidelinks,
+  unicode,
+  pdfnewwindow=true,
+  psdextra,
 ]{hyperref}
 \RequirePackage{bookmark}
+\RequirePackage{doi} % Must be loaded after hyperref
 \RequirePackage[norefs]{refcheck} % Remove "norefs" for debugging
 
 \let\eval\undefined
@@ -1040,7 +1118,7 @@
 \newcommand*{\request}        {\pcalgostyle{Request}}
 \newcommand*{\rerandomize}    {\pcalgostyle{ReRand}}
 \newcommand*{\respond}        {\pcalgostyle{Respond}}
-\newcommand*{\rotate}         {\pcalgostyle{Rotate}}
+\newcommand*{\Rotate}         {\pcalgostyle{Rotate}}
 \newcommand*{\seal}           {\pcalgostyle{Seal}}
 \newcommand*{\setup}          {\pcalgostyle{Setup}}
 \newcommand*{\share}          {\pcalgostyle{Share}}
@@ -1267,9 +1345,11 @@
   translate=babel,
 ]{glossaries-extra} % Must load after hyperref
 
-\newcommand*{\symboltype}    {symbols}
+\newcommand*{\alsoidx}[1]{\glsadd{index-#1}}
+
 \newcommand*{\initialismtype}{initialism}
 \newcommand*{\initialismname}{Initialisms}
+\newcommand*{\symboltype}    {symbols}
 
 \newglossary*{\initialismtype}{\initialismname}
 \NewDocumentCommand{\newinitialism}{O{} m m m}{
@@ -1336,6 +1416,8 @@
   strict=true,
 ]{csquotes} % Must load after minted
 \MakeOuterQuote{"}
+\newcommand*{\mlq}{\text{\csname csq@thequote@oopen\endcsname}}
+\newcommand*{\mrq}{\text{\csname csq@thequote@oclose\endcsname}}
 
 \RequirePackage{booktabs}
 \UseTblrLibrary{booktabs}
@@ -1354,6 +1436,7 @@
 
 % --- Page layout and formatting ----
 \RequirePackage{fancyhdr}
+\RequirePackage{lastpage}
 \pagestyle{fancy}
 \fancyhf{}
 \newcommand*{\HRule}{\rule{\linewidth}{0.1em}}
@@ -1361,6 +1444,7 @@
 \renewcommand*{\footrulewidth}{0.05em}
 \fancyfoot[C]{\thepage}
 
+\RequirePackage{mfirstuc}
 \RequirePackage{nth}
 \newcommand*{\Romannumeral}[1]{\MakeUppercase{\romannumeral #1}}
 
@@ -1389,6 +1473,16 @@
 \RequirePackage{xspace}
 \newcommand*{\naive}{na{\"\i}ve\xspace}
 \newcommand*{\Naive}{Na{\"\i}ve\xspace}
+
+\ifthenelse{\equal{\languagename}{norsk}}{
+  \RequirePackage{icomma}
+}{
+  \PassOptionsToPackage{indent}{parskip}
+}
+\RequirePackage[
+  parfill,
+  tocskip,
+]{parskip}
 
 \addto{\captionsamerican}{
   \floatname{procedure}{Procedure}
@@ -1455,26 +1549,6 @@
   \renewcommand*{\ntnulogo}{NTNU_logo_NB}
   \crefname{ineq}{Ulikhet}  {Ulikhetene}
   \crefname{inva}{Invariant}{Invariantene}
-}
-
-\DeclareSymbolFont{operatorsT1}{T1}{cmr}{m}{n} % Slots: https://en.wikipedia.org/wiki/Cork_encoding
-\ifthenelse{\equal{\languagename}{norsk}}{
-  \RequirePackage{icomma}
-  \RequirePackage[tocskip]{parskip}
-  \DeclareMathSymbol{\mlq}{\mathord}{operatorsT1}{19}
-  \DeclareMathSymbol{\mrq}{\mathord}{operatorsT1}{20}
-}{%
-  \RequirePackage[
-    indent,
-    tocskip,
-  ]{parskip}
-  \ifthenelse{\equal{\languagename}{american}}{
-    \DeclareMathSymbol{\mlq}{\mathord}{operatorsT1}{16}
-    \DeclareMathSymbol{\mrq}{\mathord}{operatorsT1}{17}
-  }{\ifthenelse{\equal{\languagename}{british}}{
-    \DeclareMathSymbol{\mlq}{\mathord}{operatorsT1}{96}
-    \DeclareMathSymbol{\mrq}{\mathord}{operatorsT1}{39}
-  }{\PackageError{latex}{Unsupported language}{}}}
 }
 
 \endinput
