@@ -848,7 +848,9 @@
          at = ($(#1)!0.5!(#2)$)
     }
 }
-\newcommand*{\relcoord}[3]{($(#1.south west)!#3!(#1.north west) + (#1.south west)!#2!(#1.south east) - (#1.south west)$)}
+\newcommand*{\relcoord}[3]{%
+  ($(#1.south west)!#3!(#1.north west)+(#1.south west)!#2!(#1.south east)-(#1.south west)$)%
+}
 
 \RequirePackage{pgfplots}
 \pgfplotsset{
@@ -1295,74 +1297,59 @@
 \newcommand*{\creflastconjunction}     {, and~}
 \newcommand*{\creflastgroupconjunction}{, and~}
 
+\newcommand*{\setcrefnorsk}[2]{
+  \crefformat{#1}{#2~##2##1##3}
+  \crefrangeformat{#1}{#2~##3##1##4 til~##5##2##6}
+  \crefmultiformat{#1}{#2~##2##1##3}{ og~##2##1##3}{, ##2##1##3}{ og~##2##1##3}
+}
 \newcommand*{\setcrefenglish}[3]{
   \crefformat{#1}{#2~##2##1##3}
   \crefrangeformat{#1}{#3~##3##1##4 to~##5##2##6}
   \crefmultiformat{#1}{#3~##2##1##3}{ and~##2##1##3}{, ##2##1##3}{, and~##2##1##3}
 }
-\newcommand*{\setcrefnorsk}[3]{
-  \crefformat{#1}{#2~##2##1##3}
-  \crefrangeformat{#1}{#3~##3##1##4 til~##5##2##6}
-  \crefmultiformat{#1}{#3~##2##1##3}{ og~##2##1##3}{, ##2##1##3}{ og~##2##1##3}
+\newcommand*{\setupcrefenglish}{
+  \setcrefenglish{assumption}        {Assumption}        {Assumptions}
+  \setcrefenglish{attackgame}        {Attack Game}       {Attack Games}
+  \setcrefenglish{construction}      {Construction}      {Constructions}
+  \setcrefenglish{exercise}          {Exercise}          {Exercises}
+  \setcrefenglish{fact}              {Fact}              {Facts}
+  \setcrefenglish{functionalitygoal} {Functionality Goal}{Functionality Goals}
+  \setcrefenglish{informaltheorem}   {Informal Theorem}  {Informal Theorems}
+  \setcrefenglish{observation}       {Observation}       {Observations}
+  \setcrefenglish{principle}         {Principle}         {Principles}
+  \setcrefenglish{problem}           {Problem}           {Problems}
+  \setcrefenglish{procedure}         {Procedure}         {Procedures}
+  \setcrefenglish{property}          {Property}          {Properties}
+  \setcrefenglish{result}            {Result}            {Results}
+  \setcrefenglish{securitygoal}      {Security Goal}     {Security Goals}
+  \setcrefenglish{solution}          {Solution}          {Solutions}
 }
 
 \makeatletter
-\cref@addlanguagedefs{american}{
-  \setcrefenglish{assumption}       {Assumption}        {Assumptions}
-  \setcrefenglish{attackgame}       {Attack Game}       {Attack Games}
-  \setcrefenglish{construction}     {Construction}      {Constructions}
-  \setcrefenglish{exercise}         {Exercise}          {Exercises}
-  \setcrefenglish{fact}             {Fact}              {Facts}
-  \setcrefenglish{functionalitygoal}{Functionality Goal}{Functionality Goals}
-  \setcrefenglish{informaltheorem}  {Informal Theorem}  {Informal Theorems}
-  \setcrefenglish{observation}      {Observation}       {Observations}
-  \setcrefenglish{principle}        {Principle}         {Principles}
-  \setcrefenglish{problem}          {Problem}           {Problems}
-  \setcrefenglish{procedure}        {Procedure}         {Procedures}
-  \setcrefenglish{property}         {Property}          {Properties}
-  \setcrefenglish{result}           {Result}            {Results}
-  \setcrefenglish{securitygoal}     {Security Goal}     {Security Goals}
-  \setcrefenglish{solution}         {Solution}          {Solutions}
-}
-\cref@addlanguagedefs{british}{
-  \setcrefenglish{assumption}       {Assumption}        {Assumptions}
-  \setcrefenglish{attackgame}       {Attack Game}       {Attack Games}
-  \setcrefenglish{construction}     {Construction}      {Constructions}
-  \setcrefenglish{exercise}         {Exercise}          {Exercises}
-  \setcrefenglish{fact}             {Fact}              {Facts}
-  \setcrefenglish{functionalitygoal}{Functionality Goal}{Functionality Goals}
-  \setcrefenglish{informaltheorem}  {Informal Theorem}  {Informal Theorems}
-  \setcrefenglish{observation}      {Observation}       {Observations}
-  \setcrefenglish{principle}        {Principle}         {Principles}
-  \setcrefenglish{problem}          {Problem}           {Problems}
-  \setcrefenglish{procedure}        {Procedure}         {Procedures}
-  \setcrefenglish{property}         {Property}          {Properties}
-  \setcrefenglish{result}           {Result}            {Results}
-  \setcrefenglish{securitygoal}     {Security Goal}     {Security Goals}
-  \setcrefenglish{solution}         {Solution}          {Solutions}
-}
-\cref@addlanguagedefs{norsk}{
-  \setcrefnorsk{angrepsspill}      {Angrepsspill}      {Angrepsspillene}
-  \setcrefnorsk{antakelse}         {Antakelse}         {Antakelsene}
-  \setcrefnorsk{definisjon}        {Definisjon}        {Definisjonene}
-  \setcrefnorsk{egenskap}          {Egenskap}          {Egenskapene}
-  \setcrefnorsk{eksempel}          {Eksempel}          {Eksemplene}
-  \setcrefnorsk{faktum}            {Faktum}            {Faktaene}
-  \setcrefnorsk{funksjonalitetsmål}{Funksjonalitetsmål}{Funksjonalitetsmålene}
-  \setcrefnorsk{konstruksjon}      {Konstruksjon}      {Konstruksjonene}
-  \setcrefnorsk{korollar}          {Korrolar}          {Korollarene}
-  \setcrefnorsk{løsning}           {Løsning}           {Løsningene}
-  \setcrefnorsk{observasjon}       {Observasjon}       {Observasjonene}
-  \setcrefnorsk{oppgave}           {Oppgave}           {Oppgavene}
-  \setcrefnorsk{prinsipp}          {Prinsipp}          {Prinsippene}
-  \setcrefnorsk{problem}           {Problem}           {Problemene}
-  \setcrefnorsk{proposisjon}       {Proposisjon}       {Proposisjonene}
-  \setcrefnorsk{procedure}         {Prosedyre}         {Prosedyrene}
-  \setcrefnorsk{påstand}           {Påstand}           {Påstandene}
-  \setcrefnorsk{resultat}          {Resultat}          {Resultatene}
-  \setcrefnorsk{sikkerhetsmål}     {Sikkerhetsmål}     {Sikkerhetsmålene}
-  \setcrefnorsk{teorem}            {Teorem}            {Teoremene}
-  \setcrefnorsk{uformeltteorem}    {Uformelt teorem}   {Uformelle teoremene}
+\cref@addlanguagedefs{american}{\setupcrefenglish}
+\cref@addlanguagedefs{british} {\setupcrefenglish}
+\cref@addlanguagedefs{norsk}   {
+  \setcrefnorsk{angrepsspill}      {Angrepsspill}
+  \setcrefnorsk{antakelse}         {Antakelse}
+  \setcrefnorsk{definisjon}        {Definisjon}
+  \setcrefnorsk{egenskap}          {Egenskap}
+  \setcrefnorsk{eksempel}          {Eksempel}
+  \setcrefnorsk{faktum}            {Faktum}
+  \setcrefnorsk{funksjonalitetsmål}{Funksjonalitetsmål}
+  \setcrefnorsk{konstruksjon}      {Konstruksjon}
+  \setcrefnorsk{korollar}          {Korrolar}
+  \setcrefnorsk{løsning}           {Løsning}
+  \setcrefnorsk{observasjon}       {Observasjon}
+  \setcrefnorsk{oppgave}           {Oppgave}
+  \setcrefnorsk{prinsipp}          {Prinsipp}
+  \setcrefnorsk{problem}           {Problem}
+  \setcrefnorsk{proposisjon}       {Proposisjon}
+  \setcrefnorsk{procedure}         {Prosedyre}
+  \setcrefnorsk{påstand}           {Påstand}
+  \setcrefnorsk{resultat}          {Resultat}
+  \setcrefnorsk{sikkerhetsmål}     {Sikkerhetsmål}
+  \setcrefnorsk{teorem}            {Teorem}
+  \setcrefnorsk{uformeltteorem}    {Uformelt teorem}
 }
 \makeatother
 
