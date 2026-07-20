@@ -50,6 +50,7 @@
 \RequirePackage[onehalfspacing]{setspace}
 \RequirePackage{seqsplit}
 \RequirePackage{soul}
+\RequirePackage[normalem]{ulem}
 \RequirePackage[
   dvipsnames,
   svgnames,
@@ -175,6 +176,7 @@
 \newcommand*{\@department}{}
 \newcommand*{\@coursecode}{}
 \newcommand*{\@coursename}{}
+\newcommand*{\@logo}{}
 \makeatother
 
 \newcommand*{\mitlogo} {MIT_logo}
@@ -183,13 +185,13 @@
 
 \makeatletter
 \ifdefstring{\packages@university}{mit}{
-  \newcommand*{\@logo}{\mitlogo}
+  \renewcommand*{\@logo}{\mitlogo}
 }{
   \ifdefstring{\packages@university}{ntnu}{
-    \newcommand*{\@logo}{\ntnulogo}
+    \renewcommand*{\@logo}{\ntnulogo}
   }{
     \ifdefstring{\packages@university}{snu}{
-      \newcommand*{\@logo}{\snulogo}
+      \renewcommand*{\@logo}{\snulogo}
     }{
     \PackageError{packages}{Undefined university}{}
     }
@@ -479,6 +481,13 @@
 
 \NewDocumentEnvironment{pvector}{+b}{\pbr{\begin{comma@array}#1\end{comma@array}}}{}
 
+\newcommand*{\avector}[2]{
+  \begin{pvector}
+    #1_1 & #1_2 & \ldots & #1_{#2}
+  \end{pvector}
+} 
+\newcommand*{\aset}[2]{\set{#1_1, #1_2, \ldots, #1_{#2}}}
+
 \newcommand*{\defeq} {\overset{\mathrm{def}}{=}}
 \newcommand*{\meq}   {\overset{\mathrm{m}}{=}}
 \newcommand*{\qmeq}  {\overset{?}{=}}
@@ -710,10 +719,12 @@
 ]{siunitx}
 \DeclareSIUnit{\nothing}{\relax}
 \DeclareSIUnit{\bit}    {b}
+\DeclareSIUnit{\flops}  {FLOPS}
 \DeclareSIUnit{\mile}   {mile}
 \DeclareSIUnit{\miles}  {miles}
 \DeclareSIUnit{\packet} {packet}
 \DeclareSIUnit{\packets}{packets}
+\DeclareSIUnit{\pixel}  {px}
 \DeclareSIUnit{\symbol} {sym}
 
 \RequirePackage{fontawesome5} % This is somewhat unnecessary. Used for faApple
@@ -816,17 +827,30 @@
 \fnbelowfloat
 
 \RequirePackage{tikz}
+\RequirePackage{tikz-3dplot}
+\RequirePackage{tikzscale}
 \RequirePackage[edges]{forest}
-\RequirePackage{pgfplots}
 \usetikzlibrary{
   arrows,
   calc,
   decorations.markings,
+  decorations.pathreplacing,
   fit,
+  math,
+  matrix,
   % overlay-beamer-styles,
   positioning,
   shapes.geometric,
+  spy,
 }
+\tikzset{
+    between/.style args={#1 and #2}{
+         at = ($(#1)!0.5!(#2)$)
+    }
+}
+\newcommand*{\relcoord}[3]{($(#1.south west)!#3!(#1.north west) + (#1.south west)!#2!(#1.south east) - (#1.south west)$)}
+
+\RequirePackage{pgfplots}
 \pgfplotsset{
   compat=newest,
   cycle list name=color list,
@@ -945,6 +969,22 @@
     \oldinputminted[#1]{#2}{#3}
   \end{tcolorbox}
 }
+
+\newcommand*{\newmintenv}[2][]{
+  \newminted{#2}{#1}
+  \newmintinline{#2}{#1}
+  \expandafter\newcommand\csname #2file\endcsname[2][]{
+    \inputminted[#1, ##1]{#2}{##2}%
+  }
+}
+
+\newmintenv              {bash}
+\newmintenv              {c}
+\newmintenv              {cpp}
+\newmintenv              {csharp}
+\newmintenv              {latex}
+\newmintenv              {matlab}
+\newmintenv[python3=true]{python}
 
 % ----------- Algorithms ------------
 % Alternatively, check out: https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/11599/clrscode4e.pdf
@@ -1357,7 +1397,7 @@
   translate=babel,
 ]{glossaries-extra} % Must load after hyperref
 
-\newcommand*{\alsoidx}[1]{\glsadd{index-#1}}
+\newcommand*{\alsoidx}[1]{\glsadd{#1}}
 
 \newcommand*{\initialismtype}{initialism}
 \newcommand*{\initialismname}{Initialisms}
@@ -1428,8 +1468,10 @@
   strict=true,
 ]{csquotes} % Must load after minted
 \MakeOuterQuote{"}
-\newcommand*{\mlq}{\text{\csname csq@thequote@oopen\endcsname}}
-\newcommand*{\mrq}{\text{\csname csq@thequote@oclose\endcsname}}
+\newcommand*{\mlq} {\text{\csname csq@thequote@oopen\endcsname}}
+\newcommand*{\milq}{\text{\csname csq@thequote@iopen\endcsname}}
+\newcommand*{\mrq} {\text{\csname csq@thequote@oclose\endcsname}}
+\newcommand*{\mirq}{\text{\csname csq@thequote@iclose\endcsname}}
 
 \RequirePackage{booktabs}
 \UseTblrLibrary{booktabs}
