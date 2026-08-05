@@ -1308,27 +1308,32 @@
   \crefmultiformat{#1}{#3~##2##1##3}{ and~##2##1##3}{, ##2##1##3}{, and~##2##1##3}
 }
 \newcommand*{\setupcrefenglish}{
-  \setcrefenglish{assumption}        {Assumption}        {Assumptions}
-  \setcrefenglish{attackgame}        {Attack Game}       {Attack Games}
-  \setcrefenglish{construction}      {Construction}      {Constructions}
-  \setcrefenglish{exercise}          {Exercise}          {Exercises}
-  \setcrefenglish{fact}              {Fact}              {Facts}
-  \setcrefenglish{functionalitygoal} {Functionality Goal}{Functionality Goals}
-  \setcrefenglish{informaltheorem}   {Informal Theorem}  {Informal Theorems}
-  \setcrefenglish{observation}       {Observation}       {Observations}
-  \setcrefenglish{principle}         {Principle}         {Principles}
-  \setcrefenglish{problem}           {Problem}           {Problems}
-  \setcrefenglish{procedure}         {Procedure}         {Procedures}
-  \setcrefenglish{property}          {Property}          {Properties}
-  \setcrefenglish{result}            {Result}            {Results}
-  \setcrefenglish{securitygoal}      {Security Goal}     {Security Goals}
-  \setcrefenglish{solution}          {Solution}          {Solutions}
+  \setcrefenglish{assumption}       {Assumption}        {Assumptions}
+  \setcrefenglish{attackgame}       {Attack Game}       {Attack Games}
+  \setcrefenglish{construction}     {Construction}      {Constructions}
+  \setcrefenglish{exercise}         {Exercise}          {Exercises}
+  \setcrefenglish{fact}             {Fact}              {Facts}
+  \setcrefenglish{functionalitygoal}{Functionality Goal}{Functionality Goals}
+  \setcrefenglish{informaltheorem}  {Informal Theorem}  {Informal Theorems}
+  \setcrefenglish{observation}      {Observation}       {Observations}
+  \setcrefenglish{principle}        {Principle}         {Principles}
+  \setcrefenglish{problem}          {Problem}           {Problems}
+  \setcrefenglish{procedure}        {Procedure}         {Procedures}
+  \setcrefenglish{property}         {Property}          {Properties}
+  \setcrefenglish{result}           {Result}            {Results}
+  \setcrefenglish{securitygoal}     {Security Goal}     {Security Goals}
+  \setcrefenglish{solution}         {Solution}          {Solutions}
 }
 
 \makeatletter
 \cref@addlanguagedefs{american}{\setupcrefenglish}
 \cref@addlanguagedefs{british} {\setupcrefenglish}
 \cref@addlanguagedefs{norsk}   {
+  \NewCommandCopy{\orig@crefname}{\crefname}
+  \renewcommand*{\crefname}[3]{
+    \setcrefnorsk{#1}{#2}
+    \orig@crefname{#1}{#2}{#2}
+  }
   \setcrefnorsk{angrepsspill}      {Angrepsspill}
   \setcrefnorsk{antakelse}         {Antakelse}
   \setcrefnorsk{definisjon}        {Definisjon}
@@ -1337,7 +1342,7 @@
   \setcrefnorsk{faktum}            {Faktum}
   \setcrefnorsk{funksjonalitetsmål}{Funksjonalitetsmål}
   \setcrefnorsk{konstruksjon}      {Konstruksjon}
-  \setcrefnorsk{korollar}          {Korrolar}
+  \setcrefnorsk{korollar}          {Korollar}
   \setcrefnorsk{løsning}           {Løsning}
   \setcrefnorsk{observasjon}       {Observasjon}
   \setcrefnorsk{oppgave}           {Oppgave}
