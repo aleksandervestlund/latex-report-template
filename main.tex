@@ -1,5 +1,5 @@
 \RequirePackage[l2tabu,orthodox]{nag}
-\documentclass[12pt,norsk]{extarticle} % american, british, or norsk
+\documentclass[12pt,american]{extarticle} % american, british, or norsk
 \usepackage[
   font=lmodern,                           % libertine, lmodern, mathpazo, newpx, or newtx
   glscount=false,
@@ -12,9 +12,10 @@
 \loadglsentries{glossary}                 % Loading "glossary.tex"
 
 \title     {Title}
-\author    {Aleksander Thornes Vestlund}  % Can define multiple
+\author    {Aleksander Thornes Vestlund}
+\author    {Aleksander Thornes Vestlund}
 \department{Department of Information Security and Communication Technology}
-\course    {TTMxxx}{xxx}
+\course    {TTMxxxx}{xxx}
 
 \begin{document}
     \input{00_Title}
@@ -29,7 +30,7 @@
     \listofalgorithms
     \listoflistings
     \listofprocedures
-    \listoftheorems
+    \listofkeytheorems
 
     \mainmatter
     \input{1_Introduction}

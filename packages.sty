@@ -157,7 +157,6 @@
 \newcommand*{\AB@fnsymbols}[1]{%
   \def\AB@sep{}%
   \@for\AB@tmp:=#1\do{%
-    \AB@sep\@fnsymbol{\AB@tmp}%
     \def\AB@sep{,}%
   }%
 }
@@ -271,8 +270,8 @@
 ]{diffcoeff}
 \RequirePackage{dsfont}
 \RequirePackage{faktor}
+\RequirePackage{keytheorems}
 \RequirePackage{mathrsfs}
-\RequirePackage{thmtools}
 
 \makeatletter
 \ifdefstring{\packages@font}{stix}{}{
@@ -316,96 +315,113 @@
 \interdisplaylinepenalty=2500
 \allowdisplaybreaks
 
-\newtheoremstyle{goal}       {\topsep}{\topsep}{\normalfont}{0em}{\bfseries}{:}{ }{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
-\newtheoremstyle{proposition}{0.15em} {0.15em} {\itshape}   {0em}{\itshape} {:}{ }{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+\newkeytheoremstyle{goal}{
+  spaceabove=\topsep,
+  spacebelow=\topsep,
+  bodyfont=\normalfont,
+  headindent=0em,
+  headfont=\bfseries,
+  headpunct={:},
+  postheadspace={ },
+  notebraces={(}{)},
+}
+\newkeytheoremstyle{proposition}{
+  spaceabove=0.15em,
+  spacebelow=0.15em,
+  bodyfont=\itshape,
+  headindent=0em,
+  headfont=\itshape,
+  headpunct={:},
+  postheadspace={ },
+  notebraces={(}{)},
+}
 
-% Both English and Norwegian versions:
-\declaretheorem[
-  numberwithin=section,
-  style=plain,
-]{
-  example, eksempel,
+\newkeytheorem{
+  example,eksempel,
   exercise,oppgave,
   solution,løsning,
-  theorem % Cannot have trailing comma
-}
-\declaretheorem[
-  sibling=theorem,
+  theorem,
+}[
+  numberwithin=section,
   style=plain,
-]{
-  assumption, antakelse,
-  corollary,  korollar,
+]
+\newkeytheorem{
+  assumption,antakelse,
+  corollary,korollar,
   lemma,
   observation,observasjon,
-  principle,  prinsipp,
+  principle,prinsipp,
   problem,
-  property,   egenskap,
-  result,     resultat,
-  teorem
-}
-\declaretheorem[
-  numbered=no,
+  property,egenskap,
+  result,resultat,
+  teorem,
+}[
+  sibling=theorem,
   style=plain,
-]{
-  claim,   påstand,
-  question,spørsmål
-}
-\declaretheorem[
+]
+\newkeytheorem{
+  claim,påstand,
+  question,spørsmål,
+}[
+  numbered=false,
+  style=plain,
+]
+\newkeytheorem{
+  conjecture,konjektur,
+  construction,konstruksjon,
+  definition,definisjon,
+  fact,faktum,
+}[
   sibling=theorem,
   style=definition,
-]{
-  conjecture,  konjektur,
-  construction,konstruksjon,
-  definition,  definisjon,
-  fact,        faktum
-}
-\declaretheorem[
+]
+\newkeytheorem{proposition,proposisjon}[
   sibling=theorem,
   style=proposition,
-]{proposition,proposisjon}
-\declaretheorem[
-  numbered=no,
+]
+\newkeytheorem{
+  aside,avsporing,
+  remark,merknad,
+}[
+  numbered=false,
   style=remark,
-]{
-  aside, avsporing,
-  remark,merknad
-}
-\declaretheorem[
+]
+\newkeytheorem{attackgame}[
   sibling=theorem,
   style=definition,
   name={Attack Game},
-]{attackgame}
-\declaretheorem[
+]
+\newkeytheorem{angrepsspill}[
   sibling=theorem,
   style=definition,
   name={Angrepsspill},
-]{angrepsspill}
-\declaretheorem[
+]
+\newkeytheorem{functionalitygoal}[
   style=goal,
   name={Functionality Goal},
-]{functionalitygoal}
-\declaretheorem[
+]
+\newkeytheorem{funksjonalitetsmål}[
   style=goal,
   name={Funksjonalitetsmål},
-]{funksjonalitetsmål}
-\declaretheorem[
+]
+\newkeytheorem{informaltheorem}[
   sibling=theorem,
   name={Informal Theorem},
-]{informaltheorem}
-\declaretheorem[
+]
+\newkeytheorem{uformeltteorem}[
   sibling=theorem,
   name={Uformelt teorem},
-]{uformeltteorem}
-\declaretheorem[
+]
+\newkeytheorem{securitygoal}[
   style=goal,
   name={Security Goal},
-]{securitygoal}
-\declaretheorem[
+]
+\newkeytheorem{sikkerhetsmål}[
   style=goal,
   name={Sikkerhetsmål},
-]{sikkerhetsmål}
+]
 
-\newcommand*{\proofideatext}  {Proof Idea}
+\newcommand*{\proofideatext} {Proof Idea}
 \newcommand*{\proofsketchtext}{Proof Sketch}
 \newenvironment*{proofidea}  {\begin{proof}[\proofideatext]\pushQED{}}{\end{proof}}
 \newenvironment*{proofsketch}{\begin{proof}[\proofsketchtext]}        {\end{proof}}
@@ -523,6 +539,8 @@
 \DeclareMathOperator {\rank}      {rank}    % rank
 \DeclareMathOperator {\sinc}      {sinc}    % sine cardinal
 \DeclareMathOperator {\sgn}       {sgn}     % signum
+\DeclareMathOperator {\slpsp}     {slpsp}   % strong Lucas pseudoprime
+\DeclareMathOperator {\spsp}      {spsp}    % strong pseudoprime
 \DeclareMathOperator {\tr}        {tr}      % trace
 \DeclareMathOperator {\Var}       {Var}     % variance
 \DeclareMathOperator*{\per}       {per}     % permanent
@@ -629,18 +647,6 @@
   \mathit{#1}/\mathit{#2}/#3/#4/\mathit{#5}%
 }
 
-\newcommand*{\getsx}[2][]{\mathrel{\GETSX{#1}{#2}}}
-\newcommand*{\GETSX}[2]  {%
-  \tikz[
-    baseline=-0.1873em,
-    inner sep=0em,
-    outer sep=0em,
-  ]{
-    \ifblank{#2}{}{\node at (0.05,0.165) {$\scriptscriptstyle\mathrm{#2}$};}
-    \node at (0,0) {$\gets$};
-    \ifblank{#1}{}{\node at (0.05,-0.11) {$\scriptscriptstyle\mathrm{#1}$};}
-  }%
-}
 \newcommand*{\xgets}[2][]{\mathrel{\mathpalette{\XGETS{#1}}{#2}}}
 \newcommand*{\XGETS}[3]  {%
   \ooalign{%
@@ -675,7 +681,7 @@
 \newcommand*{\nperp}  {\centernot{\perp}}
 \newcommand*{\npropto}{\centernot{\propto}}
 
-% From unicode-math when using newpx or newtx:
+% From unicode-math:
 \providecommand*{\napprox}{\centernot{\approx}}
 \providecommand*{\nequiv} {\centernot{\equiv}}
 \providecommand*{\nsubset}{\centernot{\subset}}
@@ -713,6 +719,12 @@
 }
 \makeatother
 
+\newlength{\bottomdepth}
+\newcommand*{\bottompunct}[2]{%
+  \settodepth{\bottomdepth}{$\displaystyle #1$}
+  #1\raisebox{-\bottomdepth}{#2}
+}
+
 \RequirePackage[
   exponent-product=\cdot,
   per-mode=symbol,
@@ -727,7 +739,6 @@
 \DeclareSIUnit{\pixel}  {px}
 \DeclareSIUnit{\symbol} {sym}
 
-\RequirePackage{fontawesome5} % This is somewhat unnecessary. Used for faApple
 \RequirePackage{newunicodechar}
 \makeatletter
 \NewCommandCopy{\renewunicodechar}{\newunicodechar}
@@ -736,7 +747,6 @@
 
 \newunicodechar{≈}{\approx}
 \newunicodechar{∆}{\Delta}
-\newunicodechar{}{\faApple}
 \newunicodechar{≥}{\geq}
 \newunicodechar{∞}{\infty}
 \newunicodechar{∫}{\int}
@@ -754,12 +764,8 @@
 \renewunicodechar{°}{\ensuremath{\unit{\degree}}}
 \renewunicodechar{±}{\ensuremath{\pm}}
 
-\RequirePackage{aliascnt}
-\newaliascnt{ineq}{equation}
-\newaliascnt{inva}{equation}
-\aliascntresetthe{ineq}
-\aliascntresetthe{inva}
-
+\newcounteralias{ineq}{equation}
+\newcounteralias{inva}{equation}
 \makeatletter
 \newcommand*{\inequality}{$$\refstepcounter{ineq}}
 \newcommand*{\invariant} {$$\refstepcounter{inva}}
@@ -844,9 +850,9 @@
   spy,
 }
 \tikzset{
-    between/.style args={#1 and #2}{
-         at = ($(#1)!0.5!(#2)$)
-    }
+  between/.style args={#1 and #2}{
+    at = ($(#1)!0.5!(#2)$)
+  }
 }
 \newcommand*{\relcoord}[3]{%
   ($(#1.south west)!#3!(#1.north west)+(#1.south west)!#2!(#1.south east)-(#1.south west)$)%
@@ -898,7 +904,7 @@
 \RequirePackage{dcolumn}
 \makeatletter
 \newcolumntype{T}[3]{>{\textfont0 =\the\font\DC@{#1}{#2}{#3}}c<{\DC@end}}
-\newcolumntype{X}{>{\hspace{1ex}}c@{\hspace{2ex}}c@{\hspace{2ex}}c<{\hspace{1ex}}}
+\newcolumntype{X}{>{\hspace{0.5em}}c@{\hspace{1em}}c@{\hspace{1em}}c<{\hspace{0.5em}}}
 \makeatother
 \newcolumntype{d}[1]{D{.}{.}{#1}}
 \newcolumntype{j}[1]{T{.}{.}{#1}}
@@ -909,7 +915,6 @@
 \makeatletter
 \newcommand*{\input@path}{{Sections/}}
 \makeatother
-
 \graphicspath{{Images/}}
 
 \makeatletter
@@ -1015,17 +1020,20 @@
   uniquename=init,
   urldate=long,
 ]{biblatex}
+\pretocmd{\cite}{\ifvmode\else\unskip\addnbspace\fi}{}{}
 
+\providecommand*{\jourvoldelim}   {}
+\providecommand*{\volnumdatedelim}{}
 \renewcommand*{\multicitedelim}{\addcomma}
 \AtEveryBibitem{
   \ifentrytype{article}{
     \renewbibmacro*{in:}{}
-	\renewcommand*{\jourvoldelim}{\addcomma\space}
-	\renewcommand*{\volnumdatedelim}{\addcomma\space}
+	\renewcommand*{\jourvoldelim}   {\addcomma\addspace}
+	\renewcommand*{\volnumdatedelim}{\addcomma\addspace}
 	\renewbibmacro*{issue+date}{%
       \iffieldundef{issue}{}{%
         \printfield{issue}%
-        \setunit*{\addcomma\space}%
+        \setunit*{\addcomma\addspace}%
       }%
       \printdate%
 	}
@@ -1041,14 +1049,18 @@
 }
 
 \DeclareNameAlias{sortname}{family-given}
-\DeclareDelimFormat{nameyeardelim}{\addcomma\space}
+\DeclareDelimFormat          {nameyeardelim}  {\addcomma\addspace}
+\DeclareDelimFormat[textcite]{nameyeardelim}  {\addnbspace}
+\DeclareDelimFormat[textcite]{nonameyeardelim}{\addnbspace}
 
 \DeclareOuterCiteDelims{cite}    {\bibopenbracket}{\bibclosebracket} % Comment out if using alphabetic style
 \DeclareInnerCiteDelims{textcite}{\bibopenbracket}{\bibclosebracket} % Comment out if using alphabetic style
 
 \newcommand*{\possessivestring}{'s}
-\NewDocumentCommand{\textscite}{O{} m}{%
-  \citeauthor{#2}\possessivestring{} [\citeyear[#1]{#2}]%
+\NewDocumentCommand{\textscite}{o m}{%
+  \citeauthor{#2}\possessivestring\addnbspace[%
+    \IfValueTF{#1}{\citeyear[#1]{#2}}{\citeyear{#2}}
+  ]%
 }
 
 % ----------- Referencing -----------
@@ -1087,11 +1099,11 @@
   sets,
 ]{cryptocode} % Must load after hyperref and before cleveref
 \let\AC\undefined % Conflicts with glossaries-extra
-\let\sequence\undefined % Broken by patch below
-\let\texpect\undefined
-\let\texpsub\undefined
-\let\tprob\undefined
-\let\tprobsub\undefined
+\RenewCommandCopy{\sequence}{\pbr}
+\RenewCommandCopy{\texpect} {\expect}
+\RenewCommandCopy{\texpsub} {\expsub}
+\RenewCommandCopy{\tprob}   {\prob}
+\RenewCommandCopy{\tprobsub}{\probsub}
 
 \makeatletter
 \RenewDocumentCommand{\pc@elrk}{s m}{\abr{#2}}
@@ -1263,17 +1275,17 @@
 \newcommand*{\perms}[1]{\pcalgostyle{Perms}\abr{#1}}    % func
 \newcommand*{\pok}  [2]{\pcalgostyle{PoK}\cbr{#1 : #2}} % witness, statement
 
-\newcommand*{\cpaadv}  {\cpa\pcadvantagename}
-\newcommand*{\ddhadv}  {\ddh\pcadvantagename}
-\newcommand*{\distadv} {\dist\pcadvantagename}
-\newcommand*{\piradv}  {\pir\pcadvantagename}
-\newcommand*{\pprfadv} {\pcalgostyle{p}\prfadv}
-\newcommand*{\pprfadvu}{\pprfadv^{\pcalgostyle{unp}}}
-\newcommand*{\prfadv}  {\prf\pcadvantagename}
-\newcommand*{\prgadv}  {\prg\pcadvantagename}
-\newcommand*{\prpadv}  {\prp\pcadvantagename}
-\newcommand*{\psadv}   {\ps\pcadvantagename}
-\newcommand*{\psseladv}{\ps\pcalgostyle{sel}\pcadvantagename}
+\newcommand*{\cpaadv}    {\cpa\pcadvantagename}
+\newcommand*{\ddhadv}    {\ddh\pcadvantagename}
+\newcommand*{\distadv}   {\dist\pcadvantagename}
+\newcommand*{\piradv}    {\pir\pcadvantagename}
+\newcommand*{\pprfadv}   {\pcalgostyle{p}\prfadv}
+\newcommand*{\pprfadvunp}{\pprfadv^{\pcalgostyle{unp}}}
+\newcommand*{\prfadv}    {\prf\pcadvantagename}
+\newcommand*{\prgadv}    {\prg\pcadvantagename}
+\newcommand*{\prpadv}    {\prp\pcadvantagename}
+\newcommand*{\psadv}     {\ps\pcadvantagename}
+\newcommand*{\psseladv}  {\ps\pcalgostyle{sel}\pcadvantagename}
 
 \newcommand*{\expectsq}[1]         {\expectationname\sq\abr{#1}}
 \newcommand*{\gf}      [1]         {\pcalgostyle{GF}\abr{#1}}
@@ -1490,18 +1502,19 @@
 \renewcommand*{\footrulewidth}{0.05em}
 \fancyfoot[C]{\thepage}
 
+\RequirePackage{fmtcount}
 \RequirePackage{mfirstuc}
 \RequirePackage{nth}
+
 \newcommand*{\Romannumeral}[1]{\MakeUppercase{\romannumeral #1}}
 
 % ---- Numbering within sections ----
 % \setcounter{secnumdepth}{0}
+% \setcounter{tocdepth}{4}
 \ifnum\value{secnumdepth} > 0
   \numberwithin{algorithm}{section}
   \numberwithin{equation} {section}
   \numberwithin{figure}   {section}
-  \numberwithin{ineq}     {section}
-  \numberwithin{inva}     {section}
   \numberwithin{listing}  {section}
   \numberwithin{procedure}{section}
   \numberwithin{table}    {section}
@@ -1520,6 +1533,7 @@
 \newcommand*{\naive}{na{\"\i}ve\xspace}
 \newcommand*{\Naive}{Na{\"\i}ve\xspace}
 
+\RequirePackage{ifthen}
 \ifthenelse{\equal{\languagename}{norsk}}{
   \RequirePackage{icomma}
 }{
@@ -1564,8 +1578,8 @@
   \renewcommand*{\listoflistingscaption}   {Opplistinger}
   \renewcommand*{\listprocedurename}       {Prosedyrer}
   \renewcommand*{\listtheoremname}         {Teorem}
-  \renewcommand*{\naive}                   {naiv}
-  \renewcommand*{\Naive}                   {Naiv}
+  \renewcommand*{\naive}                   {naiv\xspace}
+  \renewcommand*{\Naive}                   {Naiv\xspace}
   \renewcommand*{\possessivestring}        {s}
   \renewcommand*{\proofideatext}           {Bevisidé}
   \renewcommand*{\proofsketchtext}         {Bevisutkast}
@@ -1593,8 +1607,8 @@
   \renewenvironment*{solution}         {\begin{løsning}}           {\end{løsning}}
   \renewenvironment*{theorem}          {\begin{teorem}}            {\end{teorem}}
   \renewcommand*{\ntnulogo}{NTNU_logo_NB}
-  \crefname{ineq}{Ulikhet}  {Ulikhetene}
-  \crefname{inva}{Invariant}{Invariantene}
+  \crefname{ineq}{Ulikhet}  {Ulikhet}
+  \crefname{inva}{Invariant}{Invariant}
 }
 
 \endinput
