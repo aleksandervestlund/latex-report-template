@@ -157,6 +157,7 @@
 \newcommand*{\AB@fnsymbols}[1]{%
   \def\AB@sep{}%
   \@for\AB@tmp:=#1\do{%
+    \AB@sep\@fnsymbol{\AB@tmp}%
     \def\AB@sep{,}%
   }%
 }
@@ -337,7 +338,7 @@
 }
 
 \newkeytheorem{
-  example,eksempel,
+  example, eksempel,
   exercise,oppgave,
   solution,løsning,
   theorem,
@@ -346,14 +347,14 @@
   style=plain,
 ]
 \newkeytheorem{
-  assumption,antakelse,
-  corollary,korollar,
+  assumption, antakelse,
+  corollary,  korollar,
   lemma,
   observation,observasjon,
-  principle,prinsipp,
+  principle,  prinsipp,
   problem,
-  property,egenskap,
-  result,resultat,
+  property,   egenskap,
+  result,     resultat,
   teorem,
 }[
   sibling=theorem,
@@ -367,10 +368,10 @@
   style=plain,
 ]
 \newkeytheorem{
-  conjecture,konjektur,
+  conjecture,  konjektur,
   construction,konstruksjon,
-  definition,definisjon,
-  fact,faktum,
+  definition,  definisjon,
+  fact,        faktum,
 }[
   sibling=theorem,
   style=definition,
@@ -380,7 +381,7 @@
   style=proposition,
 ]
 \newkeytheorem{
-  aside,avsporing,
+  aside, avsporing,
   remark,merknad,
 }[
   numbered=false,
@@ -421,7 +422,7 @@
   name={Sikkerhetsmål},
 ]
 
-\newcommand*{\proofideatext} {Proof Idea}
+\newcommand*{\proofideatext}  {Proof Idea}
 \newcommand*{\proofsketchtext}{Proof Sketch}
 \newenvironment*{proofidea}  {\begin{proof}[\proofideatext]\pushQED{}}{\end{proof}}
 \newenvironment*{proofsketch}{\begin{proof}[\proofsketchtext]}        {\end{proof}}
@@ -1165,6 +1166,7 @@
 \newcommand*{\macverify}      {\mac\pcalgostyle{.}\verify}
 \newcommand*{\macsign}        {\mac\pcalgostyle{.}\sign}
 \newcommand*{\Mark}           {\pcalgostyle{Mark}}
+\newcommand*{\nextprime}      {\pcalgostyle{nextPrime}}
 \newcommand*{\nextstep}       {\pcalgostyle{NextStep}}
 \newcommand*{\obliviousaccess}{\pcalgostyle{OAccess}}
 \newcommand*{\open}           {\pcalgostyle{Open}}
@@ -1189,6 +1191,7 @@
 \newcommand*{\setup}          {\pcalgostyle{Setup}}
 \newcommand*{\share}          {\pcalgostyle{Share}}
 \newcommand*{\shift}          {\pcalgostyle{Shift}}
+\newcommand*{\smult}          {\pcalgostyle{sMult}}
 \newcommand*{\store}          {\pcalgostyle{store}}
 \newcommand*{\test}           {\pcalgostyle{Test}}
 \newcommand*{\toblock}        {\pcalgostyle{ToBlock}}
@@ -1212,7 +1215,10 @@
 \newcommand*{\FFp}  {\FF_p}
 \newcommand*{\FFq}  {\FF_q}
 \newcommand*{\FFtwo}{\FF_2}
+\newcommand*{\GGp}  {\GG_p}
+\newcommand*{\GGq}  {\GG_q}
 \newcommand*{\QQbar}{\overline{\QQ}}
+\newcommand*{\ZZn}  {\ZZ_n}
 \newcommand*{\ZZp}  {\ZZ_p}
 \newcommand*{\ZZq}  {\ZZ_q}
 \newcommand*{\ZZtwo}{\ZZ_2}
