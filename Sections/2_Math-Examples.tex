@@ -305,18 +305,30 @@ Can fuse characters:
 
 Common probability distributions in aligned notation:
 \begin{align*}
-    X &\sim \gaussian{\mu}{\sigmasq}  \\
-    X &\sim \bernoulli{p}             \\
-    X &\sim \binomial{n}{p}           \\
-    X &\sim \poisson{\lambda}         \\
-    X &\sim \exponential{\lambda}     \\
-    X &\sim \uniform{a}{b}            \\
-    X &\sim \geometric{p}             \\
-    X &\sim \negativebinomial{k}{p}   \\
-    X &\sim \hypergeometric{N}{k}{n}  \\
-    X &\sim \gammadist{\alpha}{\beta} \\
-    X &\sim \chisq{\nu}               \\
-    X &\sim \studentt{\nu}
+    X        &\sim \bernoulli{p}                            \\
+    X        &\sim \binomial{n}{p}                          \\
+    X        &\sim \poisson{\mu}                            \\
+    X        &\sim \hgeometric{N}{n}{k}                     \\
+    X        &\sim \geometric{p}                            \\
+    X        &\sim \negbinomial{k}{p}                       \\
+    \vect{X} &\sim \multinomial{\vect{p}}{n}                \\
+    X        &\sim \gaussian{\mu}{\sigma}                   \\
+    X        &\sim \exponential{\beta}                      \\
+    X        &\sim \chisq{\nu}                              \\
+    X        &\sim \studentt{\nu}                           \\
+    X        &\sim \gammadist{\alpha}{\beta}                \\
+    X        &\sim \weibull{\alpha}{\beta}                  \\
+    X        &\sim \fdist{\nu_1}{\nu_2}                     \\
+    X        &\sim \uniform{a}{b}                           \\
+    X        &\sim \betadist{\alpha}{\beta}                 \\
+    X        &\sim \pareto{\alpha}{\beta}                   \\
+    X        &\sim \loggaussian{\mu}{\sigma}                \\
+    X        &\sim \cauchy{\theta}{\sigma}                  \\
+    X        &\sim \laplacedist{\mu}{\beta}                 \\
+    X        &\sim \logistic{\mu}{\beta}                    \\
+    X        &\sim \invgaussian{\mu}{\lambda}               \\
+    X        &\sim \invgamma{\alpha}{\beta}                 \\
+    \vect{X} &\sim \multigaussian{\vect{\mu}}{\mat{\Sigma}}
 \end{align*}
 
 \subsection{ISO}

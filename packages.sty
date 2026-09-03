@@ -1,3 +1,4 @@
+% \NeedsTeXFormat{LaTeX3e}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{packages}
 
@@ -631,18 +632,30 @@
 \newcommand*{\cif}[1]{\text{if $#1$}}
 \newcommand*{\cow}   {\text{otherwise}}
 
-\newcommand*{\bernoulli}       [1]{\operatorname{Bernoulli}\abr{#1}}  % p
-\newcommand*{\binomial}        [2]{\operatorname{Bin}\abr{#1, #2}}    % n, p
-\newcommand*{\chisq}           [1]{\chi\sq_{#1}}                      % nu
-\newcommand*{\exponential}     [1]{\operatorname{Exp}\abr{#1}}        % lambda
-\newcommand*{\hypergeometric}  [3]{\operatorname{h}\abr{#1, #2, #3}}  % N, k, n
-\newcommand*{\gammadist}       [2]{\operatorname{Ga}\abr{#1, #2}}     % alpha, beta
-\newcommand*{\gaussian}        [2]{\mathcal{N}\abr{#1, #2}}           % mu, sigma^2
-\newcommand*{\geometric}       [1]{\operatorname{Geom}\abr{#1}}       % p
-\newcommand*{\negativebinomial}[2]{\operatorname{NegBin}\abr{#1, #2}} % k, p
-\newcommand*{\poisson}         [1]{\operatorname{Pois}\abr{#1}}       % mu = lambda*t
-\newcommand*{\studentt}        [1]{\ensuremath{t}_{#1}}               % nu
-\newcommand*{\uniform}         [2]{\operatorname{Unif}\abr{#1, #2}}   % a, b
+\newcommand*{\bernoulli}    [1]{\operatorname{Bernoulli}\abr{#1}}       % p
+\newcommand*{\betadist}     [2]{\operatorname{Beta}\abr{#1, #2}}        % alpha, beta
+\newcommand*{\binomial}     [2]{\operatorname{Bin}\abr{#1, #2}}         % p, n
+\newcommand*{\cauchy}       [2]{\operatorname{Cauchy}\abr{#1, #2}}      % x_0, gamma
+\newcommand*{\chisq}        [1]{\chi\sq_{#1}}                           % nu
+\newcommand*{\exponential}  [1]{\operatorname{Exp}\abr{#1}}             % lambda
+\newcommand*{\fdist}        [2]{\ensuremath{F}_{#1, #2}}                % d1, d2
+\newcommand*{\gammadist}    [2]{\operatorname{Ga}\abr{#1, #2}}          % alpha, beta
+\newcommand*{\gaussian}     [2]{\mathcal{N}\abr{#1, #2}}                % mu, sigma^2
+\newcommand*{\geometric}    [1]{\operatorname{Geom}\abr{#1}}            % p
+\newcommand*{\hgeometric}   [3]{\operatorname{h}\abr{#1, #2, #3}}       % N, n, k
+\newcommand*{\invgamma}     [2]{\operatorname{Inv}\!\gammadist{#1}{#2}} % alpha, beta
+\newcommand*{\invgaussian}  [2]{\operatorname{Inv}\!\gaussian{#1}{#2}}  % mu, lambda
+\newcommand*{\laplacedist}  [2]{\operatorname{Laplace}\abr{#1, #2}}     % mu, b
+\newcommand*{\loggaussian}  [2]{\operatorname{Log}\!\gaussian{#1}{#2}}  % mu, sigma^2
+\newcommand*{\logistic}     [2]{\operatorname{Logistic}\abr{#1, #2}}    % mu, s
+\newcommand*{\multigaussian}[2]{\mathcal{N}_k\abr{#1, #2}}              % mu, Sigma
+\newcommand*{\multinomial}  [2]{\operatorname{Mult}\abr{#1, #2}}        % n, p
+\newcommand*{\negbinomial}  [2]{\operatorname{Neg}\!\binomial{#1}{#2}}  % k, p
+\newcommand*{\pareto}       [2]{\operatorname{Pareto}\abr{#1, #2}}      % x_m, alpha
+\newcommand*{\poisson}      [1]{\operatorname{Pois}\abr{#1}}            % mu = lambda*t
+\newcommand*{\studentt}     [1]{t_{#1}}                                 % nu
+\newcommand*{\uniform}      [2]{\mathcal{U}\abr{#1, #2}}                % a, b
+\newcommand*{\weibull}      [2]{\operatorname{Wei}\abr{#1, #2}}         % lambda, k
 
 \NewDocumentCommand{\kendall}{O{M} O{M} O{1} O{\infty} O{FIFO}}{%
   \mathit{#1}/\mathit{#2}/#3/#4/\mathit{#5}%
@@ -667,14 +680,14 @@
     \ialign{\hfil$\m@th#1##$\hfil\cr#2\crcr}%
   }%
 }
+\makeatother
 \newcommand*{\charfusion}[3][\mathord]{%
   #1{%
     \ifx#1\mathop\vphantom{#2}\fi%
-    \mathpalette\mov@rlay{#2\cr#3}%
+    \moverlay{#2\cr#3}%
   }%
   \ifx#1\mathop\expandafter\displaylimits\fi%
 }
-\makeatother
 
 \RequirePackage{centernot}
 \newcommand*{\ndashv} {\centernot{\dashv}}
