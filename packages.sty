@@ -1,4 +1,3 @@
-% \NeedsTeXFormat{LaTeX3e}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{packages}
 
@@ -499,20 +498,20 @@
 
 \NewDocumentEnvironment{pvector}{+b}{\pbr{\begin{comma@array}#1\end{comma@array}}}{}
 
-\newcommand*{\avector}[2]{
+\newcommand*{\avector}[2]{%
   \begin{pvector}
     #1_1 & #1_2 & \ldots & #1_{#2}
   \end{pvector}
 } 
 \newcommand*{\aset}[2]{\set{#1_1, #1_2, \ldots, #1_{#2}}}
 
-\newcommand*{\defeq} {\overset{\mathrm{def}}{=}}
-\newcommand*{\meq}   {\overset{\mathrm{m}}{=}}
+\newcommand*{\defeq} {\overset{\text{def}}{=}}
+\newcommand*{\meq}   {\overset{\text{m}}{=}}
 \newcommand*{\qmeq}  {\overset{?}{=}}
 \newcommand*{\hateq} {\mathrel{\hat{=}}}
 \newcommand*{\whateq}{\mathrel{\widehat{=}}}
 \newcommand*{\mineq} {\mathrel{-}=}
-\newcommand*{\pluseq}{\mathrel{+}=}
+\newcommand*{\pleq}  {\mathrel{+}=}
 
 \makeatletter
 \ifbool{packages@knuth}{}{
@@ -808,6 +807,7 @@
     \peek_meaning_ignore_spaces:NTF \Angle{\,}{
     \peek_meaning_ignore_spaces:NTF \ceil {\,}{
     \peek_meaning_ignore_spaces:NTF \eu   {\,}{
+    \peek_meaning_ignore_spaces:NTF \fac  {\,}{
     \peek_meaning_ignore_spaces:NTF \floor{\,}{
     \peek_meaning_ignore_spaces:NTF \Gamma{\,}{
     \peek_meaning_ignore_spaces:NTF \iu   {\,}{
@@ -817,7 +817,7 @@
     \peek_meaning_ignore_spaces:NTF \pi   {\,}{
     \peek_meaning_ignore_spaces:NTF \round{\,}{
     \peek_meaning_ignore_spaces:NTF \tau  {\,}{
-  }}}}}}}}}}}}}}}}}}}}}}}}}
+  }}}}}}}}}}}}}}}}}}}}}}}}}}
 }
 \ExplSyntaxOff
 
@@ -1003,8 +1003,10 @@
 \newmintenv              {c}
 \newmintenv              {cpp}
 \newmintenv              {csharp}
+\newmintenv              {go}
 \newmintenv              {latex}
 \newmintenv              {matlab}
+\newmintenv              {rust}
 \newmintenv[python3=true]{python}
 
 % ----------- Algorithms ------------
@@ -1020,7 +1022,7 @@
 % ---------- Bibliography -----------
 \RequirePackage[
   backend=biber,
-  dashed=false, % Comment out if using alphabetic style
+  % dashed=false,
   dateabbrev=false,
   doi=true,
   giveninits=true,
@@ -1029,8 +1031,8 @@
   maxcitenames=3,
   minalphanames=3,
   sortcites=true,
-  % style=alphabetic,
-  style=ext-authoryear-ecomp,
+  style=alphabetic,
+  % style=ext-authoryear-ecomp,
   uniquename=init,
   urldate=long,
 ]{biblatex}
@@ -1038,7 +1040,7 @@
 
 \providecommand*{\jourvoldelim}   {}
 \providecommand*{\volnumdatedelim}{}
-\renewcommand*{\multicitedelim}{\addcomma}
+\renewcommand*{\multicitedelim}{\addsemicolon}
 \AtEveryBibitem{
   \ifentrytype{article}{
     \renewbibmacro*{in:}{}
@@ -1063,12 +1065,11 @@
 }
 
 \DeclareNameAlias{sortname}{family-given}
-\DeclareDelimFormat          {nameyeardelim}  {\addcomma\addspace}
 \DeclareDelimFormat[textcite]{nameyeardelim}  {\addnbspace}
 \DeclareDelimFormat[textcite]{nonameyeardelim}{\addnbspace}
-
-\DeclareOuterCiteDelims{cite}    {\bibopenbracket}{\bibclosebracket} % Comment out if using alphabetic style
-\DeclareInnerCiteDelims{textcite}{\bibopenbracket}{\bibclosebracket} % Comment out if using alphabetic style
+% \DeclareDelimFormat{nameyeardelim}{\addcomma\addspace}
+% \DeclareOuterCiteDelims{cite}{\bibopenbracket}{\bibclosebracket}
+% \DeclareInnerCiteDelims{textcite}{\bibopenbracket}{\bibclosebracket}
 
 \newcommand*{\possessivestring}{'s}
 \NewDocumentCommand{\textscite}{o m}{%
@@ -1252,12 +1253,14 @@
 \newcommand*{\pspace}{\pccomplexitystyle{PSPACE}}
 
 \newcommand*{\aes}           {\pcalgostyle{AES}}
+\newcommand*{\bbs}           {\pcalgostyle{BBS}}
 \newcommand*{\groth}         {\pcalgostyle{Groth16}}
 \newcommand*{\mimc}          {\pcalgostyle{MiMC}}
 \newcommand*{\pinocchio}     {\pcalgostyle{Pinocchio}}
 \newcommand*{\poseidon}      {\pcalgostyle{Poseidon}}
 \newcommand*{\plonk}         {\mathcal{P}\mathfrak{lon}\mathcal{K}}
 \newcommand*{\rescue}        {\pcalgostyle{Rescue}}
+\newcommand*{\rsa}           {\pcalgostyle{RSA}}
 \newcommand*{\sha}           {\pcalgostyle{SHA}}
 \newcommand*{\shatwofiftysix}{\sha\pcmathhyphen\pcalgostyle{256}}
 \newcommand*{\shafivetwelve} {\sha\pcmathhyphen\pcalgostyle{512}}
@@ -1596,7 +1599,6 @@
   \renewcommand*{\listingscaption}         {Opplisting}
   \renewcommand*{\listoflistingscaption}   {Opplistinger}
   \renewcommand*{\listprocedurename}       {Prosedyrer}
-  \renewcommand*{\listtheoremname}         {Teorem}
   \renewcommand*{\naive}                   {naiv\xspace}
   \renewcommand*{\Naive}                   {Naiv\xspace}
   \renewcommand*{\possessivestring}        {s}

@@ -5,13 +5,13 @@ In this section, we demonstrate how to include and format both figures and table
 \begin{figure}
     \centering
     \includegraphics{the_way}
-    \caption{A single image example using \mintinline{latex}{graphicx}.}
+    \caption{A single image example using \latexinline{graphicx}.}
     \label{fig:theway}
 \end{figure}
 
 \begin{figure}
     \centering
-    \caption{A 2x2 grid of subfigures using the \mintinline{latex}{subcaption} package.}
+    \caption{A 2x2 grid of subfigures using the \latexinline{subcaption} package.}
     \label{fig:subfigures}
     \begin{subfigure}{0.45\linewidth}
         \centering
@@ -39,7 +39,7 @@ In this section, we demonstrate how to include and format both figures and table
 \end{figure}
 
 \FloatBarrier
-A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \mintinline{latex}{tikzpicture}:
+A simple plot using \latexinline{pgfplots} and drawing manually using \latexinline{tikzpicture}:
 
 \begin{figure}
     \centering
@@ -137,14 +137,14 @@ A simple plot using \mintinline{latex}{pgfplots} and drawing manually using \min
         Oranges & $\qty{2}{\kilo\gram}$   & $3.20$ \\
         \bottomrule
     \end{tblr}
-    \caption{Example of a standard table using \mintinline{latex}{tabularray} and \mintinline{latex}{booktabs}.}
+    \caption{Example of a standard table using \latexinline{tabularray} and \latexinline{booktabs}.}
     \label{tab:standard}
 \end{table}
 
 \FloatBarrier
-The \mintinline{latex}{siunitx} package provides consistent number and unit formatting.
+The \latexinline{siunitx} package provides consistent number and unit formatting.
 
-\mintinline{latex}{\footnotenonumber}\footnote{Numbered.} adds an unnumbered footnote\footnotenonumber{Unnumbered.}. The\footnote{Numbered again.} \mintinline{latex}{multirow} and \mintinline{latex}{multicol} packages allow spanning rows and columns:
+\latexinline{\footnotenonumber}\footnote{Numbered.} adds an unnumbered footnote\footnotenonumber{Unnumbered.}. The\footnote{Numbered again.} \latexinline{multirow} and \latexinline{multicol} packages allow spanning rows and columns:
 
 \begin{table}
     \centering
@@ -157,7 +157,7 @@ The \mintinline{latex}{siunitx} package provides consistent number and unit form
         Other & 7 & 8 & 9 \\
         \bottomrule
     \end{tblr}
-    \caption{Row spanning using \mintinline{latex}{tabularray}'s \mintinline{latex}{\SetCell}.}
+    \caption{Row spanning using \latexinline{tabularray}'s \latexinline{\SetCell}.}
 \end{table}
 
 \begin{landscape}
@@ -165,7 +165,7 @@ The \mintinline{latex}{siunitx} package provides consistent number and unit form
     \renewcommand*{\arraystretch}{1.18}
     \scriptsize
     \begin{longtable}{ | l *{13}{| r} | }
-        \caption{Budget \mintinline{latex}{longtable} example.} \label{tab:budget} \\
+        \caption{Budget \latexinline{longtable} example.} \label{tab:budget} \\
         \hline
         & \multicolumn{4}{c|}{\textbf{YEAR 1}} & \multicolumn{4}{c|}{\textbf{YEAR 2}} & \multicolumn{4}{c|}{\textbf{YEAR 3}} & \\
         \hline

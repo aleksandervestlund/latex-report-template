@@ -1,5 +1,5 @@
 \section{Math Examples}
-This section demonstrates various mathematical features supported by the template. Every package listed under the \enquote{Mathematics} category in \mintinline{latex}{packages.sty} is represented here with a usage example. Some of these examples are purely illustrative and are not necessarily mathematically meaningful.
+This section demonstrates various mathematical features supported by the template. Every package listed under the \enquote{Mathematics} category in \latexinline{packages.sty} is represented here with a usage example. Some of these examples are purely illustrative and are not necessarily mathematically meaningful.
 
 The \gls{gcd} and \gls{lcm} are fundamental concepts in number theory. The \gls{lcm} of two numbers is the smallest number that is a multiple of both. We begin with examples of custom\-/defined relation symbols:
 \begin{equation*}
@@ -7,7 +7,7 @@ The \gls{gcd} and \gls{lcm} are fundamental concepts in number theory. The \gls{
     \quad M \meq N,
     \quad p \hateq q,
     \quad a \whateq b,
-    \quad x \pluseq 3,
+    \quad x \pleq 3,
     \quad y \mineq 4
 \end{equation*}
 
@@ -26,9 +26,9 @@ Superscript shorthands for inverse and transpose:
     \quad {A\inv}\transpose
 \end{equation*}
 
-The \mintinline{latex}{defn} command is used to introduce a \defn{defined term} in bold italic.
+The \latexinline{defn} command is used to introduce a \defn{defined term} in bold italic.
 
-The \mintinline{latex}{amortized} command denotes amortized cost: $\amortized{T}\pbr{n}$.
+The \latexinline{amortized} command denotes amortized cost: $\amortized{T}\pbr{n}$.
 
 The number of permutations of $r$ items from a set of $n$ elements is given by:
 \begin{equation*}
@@ -50,7 +50,7 @@ We can also use bracket functions:
     \quad \round{2.4} = 2
 \end{equation*}
 
-The \mintinline{latex}{narrowarray} and \mintinline{latex}{normalarray} commands adjust column spacing in arrays:
+The \latexinline{narrowarray} and \latexinline{normalarray} commands adjust column spacing in arrays:
 \begin{equation*}
     \narrowarray{0.5}
     \begin{pmatrix}
@@ -124,7 +124,7 @@ Declared math operators:
     \quad \polylog
 \end{align*}
 
-The \mintinline{latex}{rgets}/\mintinline{latex}{sgets} commands render a random\-/sampling arrow:
+The \latexinline{rgets}/\latexinline{sgets} commands render a random\-/sampling arrow:
 \begin{equation*}
     k \rgets \bin = k \xleftarrow{R} \bin = k \sgets \bin = k \sample \bin
 \end{equation*}
@@ -161,7 +161,7 @@ Defining a function:
     \quad \func{g}{X \times Y}{Z}[\pbr{x, y}][x + y]
 \end{equation*}
 
-Ordinary and partial derivatives using \mintinline{latex}{diffcoeff}:
+Ordinary and partial derivatives using \latexinline{diffcoeff}:
 \begin{equation*}
     \dl f,
     \quad \diff{f}{x},
@@ -171,27 +171,27 @@ Ordinary and partial derivatives using \mintinline{latex}{diffcoeff}:
 
 \subsection{Equations}
 
-An equation with a label and number, demonstrating \mintinline{latex}{amsmath}:
+An equation with a label and number, demonstrating \latexinline{amsmath}:
 \begin{equation}\label{eq:euler}
     \eu^{\iu\pi} + 1 = 0
 \end{equation}
 
-The custom \mintinline{latex}{inequality} environment assigns a label like an equation:
+The custom \latexinline{inequality} environment assigns a label like an equation:
 \begin{inequality}\label{ineq:example}
     n\sq \geq n \quad \text{for all } n \geq 1
 \end{inequality}
 
-The custom \mintinline{latex}{invariant} environment also assigns a label like an equation:
+The custom \latexinline{invariant} environment also assigns a label like an equation:
 \begin{invariant}\label{inv:example}
     n\sq \geq n \quad \text{for all } n \geq 1
 \end{invariant}
 
-\cref{eq:euler,ineq:example,inv:example}. Equations, partially to demonstrate the package \mintinline{latex}{glossaries-extra}:
+\cref{eq:euler,ineq:example,inv:example}. Equations, partially to demonstrate the package \latexinline{glossaries-extra}:
 \begin{equation*}
     E = m\gls{c}\sq
 \end{equation*}
 
-A piecewise\-/defined function using \mintinline{latex}{cif} and \mintinline{latex}{cow}:
+A piecewise\-/defined function using \latexinline{cif} and \latexinline{cow}:
 \begin{equation*}
     f\pbr{x} = \begin{cases}
         x\sq & \cif{x \geq 0} \\
@@ -199,14 +199,14 @@ A piecewise\-/defined function using \mintinline{latex}{cif} and \mintinline{lat
     \end{cases}
 \end{equation*}
 
-We also use \mintinline{latex}{mathclap} to fix spacing in subscripts:
+We also use \latexinline{mathclap} to fix spacing in subscripts:
 \begin{equation*}
     \sum_{1 \leq i < j \leq n} a_{ij}
     \quad \text{vs.} \quad
     \sum_{\mathclap{1 \leq i < j \leq n}} a_{ij}
 \end{equation*}
 
-Quotient group notation using \mintinline{latex}{faktor}:
+Quotient group notation using \latexinline{faktor}:
 \begin{equation*}
     \faktor{G}{N}, \quad \faktor{\ZZ}{n\ZZ}
 \end{equation*}
@@ -226,7 +226,7 @@ Logical symbols:
     \quad \top
 \end{equation*}
 
-Negated relations from \mintinline{latex}{centernot}:
+Negated relations from \latexinline{centernot}:
 \begin{equation*}
     \napprox,
     \quad \nequiv,
@@ -262,24 +262,24 @@ And bitshifting:
 
 \subsection{Unicode Shortcuts}
 
-The \mintinline{latex}{newunicodechar} package allows direct use of Unicode symbols in math mode:
+The \latexinline{newunicodechar} package allows direct use of Unicode symbols in math mode:
 \begin{equation*}
     ≈,\ ∆,\ ≥,\ ∞,\ ∫,\ ∧,\ ≤,\ ∨,\ ◊,\ ≠,\ Ω,\ ∂,\ π,\ ∏,\ ∑,\ √,\ °,\ ±
 \end{equation*}
 
 \subsection{Miscellaneous}
 
-For matrices and vectors, use the respective commands \mintinline{latex}{\mat} and \mintinline{latex}{\vect} for ease of switching notation, which depends on the setting. Here, \mintinline{latex}{\mat} produces \mintinline{latex}{\mathbf}, while \mintinline{latex}{\vect} produces \mintinline{latex}{\bm}:
+For matrices and vectors, use the respective commands \latexinline{\mat} and \latexinline{\vect} for ease of switching notation, which depends on the setting. Here, \latexinline{\mat} produces \latexinline{\mathbf}, while \latexinline{\vect} produces \latexinline{\bm}:
 \begin{equation*}
     \mat{C}\vect{u} = \lambda \vect{u}
 \end{equation*}
 
-Cancellation of terms using \mintinline{latex}{cancel}:
+Cancellation of terms using \latexinline{cancel}:
 \begin{equation*}
     \frac{\cancel{a} \cdot b}{\cancel{a}} = b
 \end{equation*}
 
-The \mintinline{latex}{xfrac} package provides better inline fractions: $\sfrac{a}{b}$ is cleaner than $\frac{a}{b}$ or $a/b$.
+The \latexinline{xfrac} package provides better inline fractions: $\sfrac{a}{b}$ is cleaner than $\frac{a}{b}$ or $a/b$.
 
 Decision rule:
 \begin{equation*}
@@ -359,7 +359,7 @@ According to \href{https://webusers.imj-prg.fr/~jean-yves.ducloux/Typographie/IS
 
 \subsection{Theorem Environments}
 
-The template declares a wide range of theorem-like environments using \mintinline{latex}{thmtools} and \mintinline{latex}{amsthm}.
+The template declares a wide range of theorem-like environments using \latexinline{thmtools} and \latexinline{amsthm}.
 
 \begin{theorem}[Extreme Value Theorem]
     Let $f$ be a continuous function on a closed interval $\intcc{a}{b}$. Then $f$ attains both its maximum and minimum on $\intcc{a}{b}$.
@@ -450,7 +450,7 @@ The template declares a wide range of theorem-like environments using \mintinlin
 
 \subsection{Cryptocode Examples}
 
-This subsection demonstrates the custom cryptographic commands and naming conventions configured via the \mintinline{latex}{cryptocode} package.
+This subsection demonstrates the custom cryptographic commands and naming conventions configured via the \latexinline{cryptocode} package.
 
 \subsubsection{Algorithmic Styles and Operations}
 
@@ -567,6 +567,7 @@ Common cryptographic fields and sets:
     \quad \FFq,
     \quad \FFtwo,
     \quad \QQbar,
+    \quad \ZZn,
     \quad \ZZp,
     \quad \ZZq,
     \quad \ZZtwo,
@@ -599,21 +600,23 @@ Complexity classes:
 Concrete primitive implementations and constructions:
 \begin{align*}
     &\aes,
+    \quad \bbs,
     \quad \groth,
     \quad \mimc,
     \quad \pinocchio,
     \quad \poseidon,
     \quad \plonk,
-    \quad \rescue,
-    \quad \sha, \\
-    &\shatwofiftysix,
+    \quad \rescue, \\
+    &\rsa,
+    \quad \sha,
+    \quad \shatwofiftysix,
     \quad \shafivetwelve,
     \quad \vision
 \end{align*}
 
 \subsubsection{Key and Variable Styles}
 
-Uniform notation for keys, parameters, and ciphertexts using \mintinline{latex}{\key}:
+Uniform notation for keys, parameters, and ciphertexts using \latexinline{\key}:
 \begin{align*}
     &\ans,
     \quad \cert,
