@@ -732,10 +732,10 @@
 }
 \makeatother
 
-\newlength{\bottomdepth}
-\newcommand*{\bottompunct}[2]{%
-  \settodepth{\bottomdepth}{$\displaystyle #1$}
-  #1\raisebox{-\bottomdepth}{#2}
+\newlength{\eqdepth}
+\newcommand*{\eqpunct}[2]{%
+  \settodepth{\eqdepth}{$\displaystyle #1$}
+  #1\raisebox{-\eqdepth}{#2}
 }
 
 \RequirePackage[
@@ -1464,18 +1464,18 @@
   }
 }
 
-\newcommand*{\cGlsshort}  [1]{\texorpdfstring{\Glsxtrshort*{#1}}  {\glsentryshort{#1}}}
-\newcommand*{\cglsshort}  [1]{\texorpdfstring{\glsxtrshort*{#1}}  {\glsentryshort{#1}}}
-\newcommand*{\cGlsshortpl}[1]{\texorpdfstring{\Glsxtrshortpl*{#1}}{\glsentryshort{#1}}}
-\newcommand*{\cglsshortpl}[1]{\texorpdfstring{\glsxtrshortpl*{#1}}{\glsentryshort{#1}}}
-\newcommand*{\cGlslong}   [1]{\texorpdfstring{\Glsxtrlong*{#1}}   {\glsentryshort{#1}}}
-\newcommand*{\cglslong}   [1]{\texorpdfstring{\glsxtrlong*{#1}}   {\glsentryshort{#1}}}
-\newcommand*{\cGlslongpl} [1]{\texorpdfstring{\Glsxtrlongpl*{#1}} {\glsentryshort{#1}}}
-\newcommand*{\cglslongpl} [1]{\texorpdfstring{\glsxtrlongpl*{#1}} {\glsentryshort{#1}}}
-\newcommand*{\cGlsfull}   [1]{\texorpdfstring{\Glsxtrfull*{#1}}   {\glsentryshort{#1}}}
-\newcommand*{\cglsfull}   [1]{\texorpdfstring{\glsxtrfull*{#1}}   {\glsentryshort{#1}}}
-\newcommand*{\cGlsfullpl} [1]{\texorpdfstring{\Glsxtrfullpl*{#1}} {\glsentryshort{#1}}}
-\newcommand*{\cglsfullpl} [1]{\texorpdfstring{\glsxtrfullpl*{#1}} {\glsentryshort{#1}}}
+\newcommand*{\cGlsshort}  [1]{\texorpdfstring{\Glsentryshort{#1}}  {\glsentryshort{#1}}}
+\newcommand*{\cglsshort}  [1]{\texorpdfstring{\glsentryshort{#1}}  {\glsentryshort{#1}}}
+\newcommand*{\cGlsshortpl}[1]{\texorpdfstring{\Glsentryshortpl{#1}}{\glsentryshortpl{#1}}}
+\newcommand*{\cglsshortpl}[1]{\texorpdfstring{\glsentryshortpl{#1}}{\glsentryshortpl{#1}}}
+\newcommand*{\cGlslong}   [1]{\texorpdfstring{\Glsentrylong{#1}}   {\glsentrylong{#1}}}
+\newcommand*{\cglslong}   [1]{\texorpdfstring{\glsentrylong{#1}}   {\glsentrylong{#1}}}
+\newcommand*{\cGlslongpl} [1]{\texorpdfstring{\Glsentrylongpl{#1}} {\glsentrylongpl{#1}}}
+\newcommand*{\cglslongpl} [1]{\texorpdfstring{\glsentrylongpl{#1}} {\glsentrylongpl{#1}}}
+\newcommand*{\cGlsfull}   [1]{\texorpdfstring{\Glsentryfull{#1}}   {\glsentryfull{#1}}}
+\newcommand*{\cglsfull}   [1]{\texorpdfstring{\glsentryfull{#1}}   {\glsentryfull{#1}}}
+\newcommand*{\cGlsfullpl} [1]{\texorpdfstring{\Glsentryfullpl{#1}} {\glsentryfullpl{#1}}}
+\newcommand*{\cglsfullpl} [1]{\texorpdfstring{\glsentryfullpl{#1}} {\glsentryfullpl{#1}}}
 
 % ------------- General -------------
 \RequirePackage{comment}
@@ -1601,35 +1601,41 @@
   \renewcommand*{\listprocedurename}       {Prosedyrer}
   \renewcommand*{\naive}                   {naiv\xspace}
   \renewcommand*{\Naive}                   {Naiv\xspace}
+  \renewcommand*{\ntnulogo}                {NTNU_logo_NB}
   \renewcommand*{\possessivestring}        {s}
   \renewcommand*{\proofideatext}           {Bevisidé}
   \renewcommand*{\proofsketchtext}         {Bevisutkast}
-  \renewenvironment*{aside}            {\begin{avsporing}}         {\end{avsporing}}
-  \renewenvironment*{assumption}       {\begin{antakelse}}         {\end{antakelse}}
-  \renewenvironment*{attackgame}       {\begin{angrepsspill}}      {\end{angrepsspill}}
-  \renewenvironment*{claim}            {\begin{påstand}}           {\end{påstand}}
-  \renewenvironment*{conjecture}       {\begin{konjektur}}         {\end{konjektur}}
-  \renewenvironment*{construction}     {\begin{konstruksjon}}      {\end{konstruksjon}}
-  \renewenvironment*{corollary}        {\begin{korollar}}          {\end{korollar}}
-  \renewenvironment*{definition}       {\begin{definisjon}}        {\end{definisjon}}
-  \renewenvironment*{example}          {\begin{eksempel}}          {\end{eksempel}}
-  \renewenvironment*{exercise}         {\begin{oppgave}}           {\end{oppgave}}
-  \renewenvironment*{fact}             {\begin{faktum}}            {\end{faktum}}
-  \renewenvironment*{functionalitygoal}{\begin{funksjonalitetsmål}}{\end{funksjonalitetsmål}}
-  \renewenvironment*{informaltheorem}  {\begin{uformeltteorem}}    {\end{uformeltteorem}}
-  \renewenvironment*{observation}      {\begin{observasjon}}       {\end{observasjon}}
-  \renewenvironment*{principle}        {\begin{prinsipp}}          {\end{prinsipp}}
-  \renewenvironment*{property}         {\begin{egenskap}}          {\end{egenskap}}
-  \renewenvironment*{proposition}      {\begin{proposisjon}}       {\end{proposisjon}}
-  \renewenvironment*{question}         {\begin{spørsmål}}          {\end{spørsmål}}
-  \renewenvironment*{remark}           {\begin{merknad}}           {\end{merknad}}
-  \renewenvironment*{result}           {\begin{resultat}}          {\end{resultat}}
-  \renewenvironment*{securitygoal}     {\begin{sikkerhetsmål}}     {\end{sikkerhetsmål}}
-  \renewenvironment*{solution}         {\begin{løsning}}           {\end{løsning}}
-  \renewenvironment*{theorem}          {\begin{teorem}}            {\end{teorem}}
-  \renewcommand*{\ntnulogo}{NTNU_logo_NB}
   \crefname{ineq}{Ulikhet}  {Ulikhet}
   \crefname{inva}{Invariant}{Invariant}
 }
+
+\newcommand*{\mapenv}[2]{
+  \addto{\captionsamerican}{\renewenvironment*{#2}{\begin{#1}}{\end{#1}}}
+  \addto{\captionsbritish} {\renewenvironment*{#2}{\begin{#1}}{\end{#1}}}
+  \addto{\captionsnorsk}   {\renewenvironment*{#1}{\begin{#2}}{\end{#2}}}
+}
+\mapenv{aside}            {avsporing}
+\mapenv{assumption}       {antakelse}
+\mapenv{attackgame}       {angrepsspill}
+\mapenv{claim}            {påstand}
+\mapenv{conjecture}       {konjektur}
+\mapenv{construction}     {konstruksjon}
+\mapenv{corollary}        {korollar}
+\mapenv{definition}       {definisjon}
+\mapenv{example}          {eksempel}
+\mapenv{exercise}         {oppgave}
+\mapenv{fact}             {faktum}
+\mapenv{functionalitygoal}{funksjonalitetsmål}
+\mapenv{informaltheorem}  {uformeltteorem}
+\mapenv{observation}      {observasjon}
+\mapenv{principle}        {prinsipp}
+\mapenv{property}         {egenskap}
+\mapenv{proposition}      {proposisjon}
+\mapenv{question}         {spørsmål}
+\mapenv{remark}           {merknad}
+\mapenv{result}           {resultat}
+\mapenv{securitygoal}     {sikkerhetsmål}
+\mapenv{solution}         {løsning}
+\mapenv{theorem}          {teorem}
 
 \endinput
