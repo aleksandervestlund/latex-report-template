@@ -316,6 +316,13 @@
 \interdisplaylinepenalty=2500
 \allowdisplaybreaks
 
+\newcommand*{\xqed}[1]{%
+  \leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill
+  \quad\hbox{$#1$}%
+}
+\newcommand*{\exampleqed}{\xqed{\triangle}}
+\newcommand*{\remarkqed} {\xqed{\Diamond}}
+
 \newkeytheoremstyle{goal}{
   spaceabove=\topsep,
   spacebelow=\topsep,
@@ -338,12 +345,16 @@
 }
 
 \newkeytheorem{
-  example, eksempel,
   exercise,oppgave,
   solution,løsning,
   theorem,
 }[
   numberwithin=section,
+  style=plain,
+]
+\newkeytheorem{example,eksempel}[
+  numberwithin=section,
+  qed=\exampleqed,
   style=plain,
 ]
 \newkeytheorem{
@@ -385,6 +396,7 @@
   remark,merknad,
 }[
   numbered=false,
+  qed=\remarkqed,
   style=remark,
 ]
 \newkeytheorem{attackgame}[
@@ -883,9 +895,9 @@
   },
   hide obscured x ticks=false,
   major tick length=0.5em,
-  width=0.95\linewidth,
   samples=101,
   scale=1.0,
+  width=0.95\linewidth,
 }
 
 \RequirePackage{floatrow}
