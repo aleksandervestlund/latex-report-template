@@ -837,8 +837,11 @@
 \RequirePackage{capt-of}
 \RequirePackage{rotating}
 \RequirePackage[list=true]{subcaption}
-\RequirePackage{tabularray}
 \RequirePackage[nottoc]{tocbibind}
+
+\RequirePackage{tabularray}
+\SetTblrInner{width=0.95\linewidth}
+\SetTblrStyle{caption-tag}{font=\bfseries}
 
 \RequirePackage{graphicx}
 \setkeys{Gin}{
@@ -922,7 +925,6 @@
 
 \RequirePackage[export]{adjustbox}
 \RequirePackage{float} % Must load after floatrow
-\RequirePackage{longtable}
 \RequirePackage{lscape}
 \RequirePackage{flafter}
 \RequirePackage[section]{placeins}
@@ -1080,7 +1082,7 @@
 \DeclareDelimFormat[textcite]{nameyeardelim}  {\addnbspace}
 \DeclareDelimFormat[textcite]{nonameyeardelim}{\addnbspace}
 % \DeclareDelimFormat{nameyeardelim}{\addcomma\addspace}
-% \DeclareOuterCiteDelims{cite}{\bibopenbracket}{\bibclosebracket}
+% \DeclareOuterCiteDelims{cite}    {\bibopenbracket}{\bibclosebracket}
 % \DeclareInnerCiteDelims{textcite}{\bibopenbracket}{\bibclosebracket}
 
 \newcommand*{\possessivestring}{'s}
@@ -1126,11 +1128,6 @@
   sets,
 ]{cryptocode} % Must load after hyperref and before cleveref
 \let\AC\undefined % Conflicts with glossaries-extra
-\RenewCommandCopy{\sequence}{\pbr}
-\RenewCommandCopy{\texpect} {\expect}
-\RenewCommandCopy{\texpsub} {\expsub}
-\RenewCommandCopy{\tprob}   {\prob}
-\RenewCommandCopy{\tprobsub}{\probsub}
 
 \makeatletter
 \RenewDocumentCommand{\pc@elrk}{s m}{\abr{#2}}
@@ -1138,6 +1135,12 @@
 \makeatother
 \patchcmd{\expsub} {\operatorname}{\operatorname*}{}{}
 \patchcmd{\probsub}{\operatorname}{\operatorname*}{}{}
+
+\RenewCommandCopy{\sequence}{\pbr}
+\RenewCommandCopy{\texpect} {\expect}
+\RenewCommandCopy{\texpsub} {\expsub}
+\RenewCommandCopy{\tprob}   {\prob}
+\RenewCommandCopy{\tprobsub}{\probsub}
 
 \renewcommand*{\smallO}[1]{\ensuremath{o}\abr{#1}}
 \renewcommand*{\kgen}     {\pcalgostyle{Key}\gen}
@@ -1305,8 +1308,8 @@
 \newcommand*{\row}   {\key[row]}
 \newcommand*{\seed}  {\key[seed]}
 
-\newcommand*{\funs} [2]{\pcalgostyle{Funs}\abr{#1, #2}} % func1, func2
-\newcommand*{\perms}[1]{\pcalgostyle{Perms}\abr{#1}}    % func
+\newcommand*{\funs} [2]{\pcalgostyle{Funs}\abr{#1, #2}} % fun1, fun2
+\newcommand*{\perms}[1]{\pcalgostyle{Perms}\abr{#1}}    % fun
 \newcommand*{\pok}  [2]{\pcalgostyle{PoK}\cbr{#1 : #2}} % witness, statement
 
 \newcommand*{\cpaadv}    {\cpa\pcadvantagename}
