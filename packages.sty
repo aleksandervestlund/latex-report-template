@@ -134,6 +134,7 @@
 \fi\fi\fi
 
 \RequirePackage[all]{nowidow}
+% \flushbottom
 \raggedbottom
 
 \RequirePackage[blocks]{authblk}
@@ -233,7 +234,7 @@
 \newcommand*{\blankinfo}{This page was intentionally left blank}
 \newcommand*{\blankpage}{
   \clearpage
-  \hbox{}
+  \null
   \vfill
   \begingroup
     \centering \MakeUppercase{\blankinfo}\par
@@ -246,8 +247,8 @@
 
 \newcommand*{\footnotenonumber}[1]{%
   \begingroup
-    \renewcommand*{\thempfn}{}
-    \footnotetext{#1}
+    \renewcommand*{\thempfn}{}%
+    \footnotetext{#1}%
   \endgroup
 }
 
@@ -317,7 +318,7 @@
 \allowdisplaybreaks
 
 \newcommand*{\xqed}[1]{%
-  \leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill
+  \leavevmode\unskip\penalty9999 \null\nobreak\hfill
   \quad\hbox{$#1$}%
 }
 \newcommand*{\exampleqed}{\xqed{\triangle}}
@@ -498,7 +499,7 @@
 \makeatletter
 \newif\if@firstcol
 \def\env@vectorlogic{%
-  \setlength{\arraycolsep}{0em}
+  \setlength{\arraycolsep}   {0em}
   \setlength{\extrarowheight}{-0.25em}
   \global\@firstcoltrue
   \let\org@arraycr\@arraycr
@@ -752,11 +753,14 @@
 
 \RequirePackage[
   exponent-product=\cdot,
+  group-digits=integer,
+  group-minimum-digits=4,
+  list-final-separator={,~and~},
   per-mode=symbol,
+  text-series-to-math=true,
 ]{siunitx}
 \DeclareSIUnit{\nothing}{\relax}
 \DeclareSIUnit{\bit}    {b}
-\DeclareSIUnit{\flops}  {FLOPS}
 \DeclareSIUnit{\mile}   {mile}
 \DeclareSIUnit{\miles}  {miles}
 \DeclareSIUnit{\packet} {packet}
@@ -842,6 +846,7 @@
 \RequirePackage{tabularray}
 \SetTblrInner{width=0.95\linewidth}
 \SetTblrStyle{caption-tag}{font=\bfseries}
+\UseTblrLibrary{siunitx}
 
 \RequirePackage{graphicx}
 \setkeys{Gin}{
@@ -928,14 +933,6 @@
 \RequirePackage{lscape}
 \RequirePackage{flafter}
 \RequirePackage[section]{placeins}
-
-\RequirePackage{dcolumn}
-\makeatletter
-\newcolumntype{T}[3]{>{\textfont0 =\the\font\DC@{#1}{#2}{#3}}c<{\DC@end}}
-\newcolumntype{X}{>{\hspace{0.5em}}c@{\hspace{1em}}c@{\hspace{1em}}c<{\hspace{0.5em}}}
-\makeatother
-\newcolumntype{d}[1]{D{.}{.}{#1}}
-\newcolumntype{j}[1]{T{.}{.}{#1}}
 
 \RequirePackage{multicol}
 \setlength{\multicolsep}{0em}
@@ -1580,6 +1577,9 @@
   parfill,
   tocskip,
 ]{parskip}
+\AddToHook{env/longtblr/begin}{\setlength{\parfillskip}{0em plus 1fil}}
+\pretocmd{\dirtree}{\begingroup\setlength{\parfillskip}{0em plus 1fil}}{}{}
+\apptocmd{\dirtree}{\endgroup}{}{}                                     {}{}
 
 \addto{\captionsamerican}{
   \floatname{procedure}{Procedure}
