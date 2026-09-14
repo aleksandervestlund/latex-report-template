@@ -1480,14 +1480,18 @@
 \newcommand*{\cglsshort}  [1]{\texorpdfstring{\glsentryshort{#1}}  {\glsentryshort{#1}}}
 \newcommand*{\cGlsshortpl}[1]{\texorpdfstring{\Glsentryshortpl{#1}}{\glsentryshortpl{#1}}}
 \newcommand*{\cglsshortpl}[1]{\texorpdfstring{\glsentryshortpl{#1}}{\glsentryshortpl{#1}}}
-\newcommand*{\cGlslong}   [1]{\texorpdfstring{\Glsentrylong{#1}}   {\glsentrylong{#1}}}
-\newcommand*{\cglslong}   [1]{\texorpdfstring{\glsentrylong{#1}}   {\glsentrylong{#1}}}
-\newcommand*{\cGlslongpl} [1]{\texorpdfstring{\Glsentrylongpl{#1}} {\glsentrylongpl{#1}}}
-\newcommand*{\cglslongpl} [1]{\texorpdfstring{\glsentrylongpl{#1}} {\glsentrylongpl{#1}}}
-\newcommand*{\cGlsfull}   [1]{\texorpdfstring{\Glsentryfull{#1}}   {\glsentryfull{#1}}}
-\newcommand*{\cglsfull}   [1]{\texorpdfstring{\glsentryfull{#1}}   {\glsentryfull{#1}}}
-\newcommand*{\cGlsfullpl} [1]{\texorpdfstring{\Glsentryfullpl{#1}} {\glsentryfullpl{#1}}}
-\newcommand*{\cglsfullpl} [1]{\texorpdfstring{\glsentryfullpl{#1}} {\glsentryfullpl{#1}}}
+\newcommand*{\cGlslong}   [1]{\texorpdfstring{\Glsentrylong{#1}}   {\glsentryshort{#1}}}
+\newcommand*{\cglslong}   [1]{\texorpdfstring{\glsentrylong{#1}}   {\glsentryshort{#1}}}
+\newcommand*{\cGlslongpl} [1]{\texorpdfstring{\Glsentrylongpl{#1}} {\glsentryshortpl{#1}}}
+\newcommand*{\cglslongpl} [1]{\texorpdfstring{\glsentrylongpl{#1}} {\glsentryshortpl{#1}}}
+\newcommand*{\cGlsfull}   [1]{\texorpdfstring{\Glsentryfull{#1}}   {\glsentryshort{#1}}}
+\newcommand*{\cglsfull}   [1]{\texorpdfstring{\glsentryfull{#1}}   {\glsentryshort{#1}}}
+\newcommand*{\cGlsfullpl} [1]{\texorpdfstring{\Glsentryfullpl{#1}} {\glsentryshortpl{#1}}}
+\newcommand*{\cglsfullpl} [1]{\texorpdfstring{\glsentryfullpl{#1}} {\glsentryshortpl{#1}}}
+
+\MFUhyphentrue
+\newcommand*{\tgls}  [1]{\glsentrytitlecase{#1}{long}}
+\newcommand*{\tglspl}[1]{\glsentrytitlecase{#1}{longpl}}
 
 % ------------- General -------------
 \RequirePackage{comment}
