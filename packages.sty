@@ -205,6 +205,45 @@
 \WarningFilter{latex}{Command \showhyphens has changed} % https://github.com/schlcht/microtype/issues/53
 \WarningFilter{latex}{Command `\theH}                   % https://github.com/arnomi/cryptocode/issues/28
 
+\AddToHook{bfseries}{\boldmath}
+
+\makeatletter
+\renewcommand{\maketitle}{%
+  \begin{titlepage}
+    \null
+    \null
+    \begin{center}
+      \begin{figure}[H]
+        \includegraphics[width=0.4\linewidth]{\@logo}
+      \end{figure}
+      \textsc{\LARGE{\@department}}                   \\[2.5em]
+      \textsc{\Large{\@coursecode \--- \@coursename}} \\[2.5em]
+      \HRule
+
+      \begingroup
+        \LARGE
+        \textbf{\@title}
+      \endgroup
+      \HRule
+
+      \begingroup
+        \large
+        \emph{\printauthorstring:} \\
+        \AB@authlist \\[1em]
+
+        \emph{xxx:} \\
+        xxxx % \\[1em]
+
+        \vfill
+
+        \emph{\datestring:} \\
+        \today
+      \endgroup
+    \end{center}
+  \end{titlepage}
+}
+\makeatother
+
 \newcommand*{\frontmatter}{\pagenumbering{roman}}
 \newcommand*{\mainmatter} {
   \clearpage
@@ -292,9 +331,9 @@
 \NewCommandCopy{\oldsfrac}{\sfrac}
 \RenewDocumentCommand{\sfrac}{o m o m}{%
   \IfValueTF{#1}{%
-    \IfValueTF{#3}{\oldsfrac[#1]{{#2}}[#3]{{#4}}}{\oldsfrac[#1]{{#2}}{{#4}}}%
+    \IfValueTF{#3}{\oldsfrac[#1]{\begingroup#2\endgroup}[#3]{\begingroup#4\endgroup}}{\oldsfrac[#1]{\begingroup#2\endgroup}{\begingroup#4\endgroup}}%
   }{%
-    \IfValueTF{#3}{\oldsfrac{{#2}}[#3]{{#4}}}    {\oldsfrac{{#2}}{{#4}}}%
+    \IfValueTF{#3}{\oldsfrac{\begingroup#2\endgroup}[#3]{\begingroup#4\endgroup}}    {\oldsfrac{\begingroup#2\endgroup}{\begingroup#4\endgroup}}%
   }%
 }
 
@@ -445,12 +484,22 @@
 \newcommand*{\narrowarray}[1]{\setlength{\arraycolsep}{#1\savearraycolsep}}
 \newcommand*{\normalarray}   {\narrowarray{1}}
 
-\DeclarePairedDelimiter{\pdelim} {(}      {)}
-\DeclarePairedDelimiter{\bdelim} {[}      {]}
-\DeclarePairedDelimiter{\cdelim} {\{}     {\}}
-\DeclarePairedDelimiter{\pbdelim}{(}      {]}
-\DeclarePairedDelimiter{\bpdelim}{[}      {)}
-\DeclarePairedDelimiter{\rdelim} {\lfloor}{\rceil}
+\newcommand*{\givensymbol}[1][]{\nonscript\:#1\vert\allowbreak\nonscript\:\mathopen{}}
+\newcommand*{\given}           {\givensymbol}
+
+\newcommand*{\DeclarePairedDelimiterWithGiven}[3]{%
+  \DeclarePairedDelimiterX{#1}[1]{#2}{#3}{%
+    \renewcommand*{\given}{\givensymbol[\delimsize]}%
+    ##1%
+  }%
+}
+
+\DeclarePairedDelimiterWithGiven{\pdelim} {(}      {)}
+\DeclarePairedDelimiterWithGiven{\bdelim} {[}      {]}
+\DeclarePairedDelimiterWithGiven{\cdelim} {\{}     {\}}
+\DeclarePairedDelimiterWithGiven{\pbdelim}{(}      {]}
+\DeclarePairedDelimiterWithGiven{\bpdelim}{[}      {)}
+\DeclarePairedDelimiterWithGiven{\rdelim} {\lfloor}{\rceil}
 
 \newcommand*{\pbr}  [1]{\pdelim*{#1}}
 \newcommand*{\sbr}  [1]{\bdelim*{#1}}
@@ -755,7 +804,7 @@
   exponent-product=\cdot,
   group-digits=integer,
   group-minimum-digits=4,
-  list-final-separator={,~and~},
+  list-final-separator={, and~},
   per-mode=symbol,
   text-series-to-math=true,
 ]{siunitx}
@@ -938,9 +987,9 @@
 \setlength{\multicolsep}{0em}
 
 \makeatletter
-\newcommand*{\input@path}{{Sections/}}
+\newcommand*{\input@path}{{sections/}}
 \makeatother
-\graphicspath{{Images/}}
+\graphicspath{{images/}}
 
 \makeatletter
 \renewcommand*{\listof}[2]{
@@ -975,19 +1024,19 @@
   hyphenationfix,
   oversize,
 }
-\newtcolorbox{resultbox}[1][]{
-  boxrule=0.1em,
-  colback=blue!5,
-  colframe=blue!40!black,
-  fonttitle=\bfseries,
-  sharp corners,
-  title={#1},
-}
 \newtcolorbox{remarkbox}[1][Remark]{
   boxrule=0.05em,
   colback=orange!5,
   colframe=orange!60!black,
   fonttitle=\bfseries\itshape,
+  sharp corners,
+  title={#1},
+}
+\newtcolorbox{resultbox}[1][]{
+  boxrule=0.1em,
+  colback=blue!5,
+  colframe=blue!40!black,
+  fonttitle=\bfseries,
   sharp corners,
   title={#1},
 }
@@ -1041,6 +1090,7 @@
   maxbibnames=99,
   maxcitenames=3,
   minalphanames=3,
+  mincrossrefs=1000,
   sortcites=true,
   style=alphabetic,
   % style=ext-authoryear-ecomp,
@@ -1434,6 +1484,7 @@
   symbols,          % Comment out this line if not using symbols
   translate=babel,
 ]{glossaries-extra} % Must load after hyperref
+\RequirePackage{mfirstuc-english}
 
 \newcommand*{\alsoidx}[1]{\glsadd{#1}}
 
@@ -1548,7 +1599,7 @@
 
 % ---- Numbering within sections ----
 % \setcounter{secnumdepth}{0}
-% \setcounter{tocdepth}{4}
+% \setcounter{tocdepth}   {4}
 \ifnum\value{secnumdepth} > 0
   \numberwithin{algorithm}{section}
   \numberwithin{equation} {section}

@@ -57,13 +57,13 @@ A simple plot using \latexinline{pgfplots} and drawing manually using \latexinli
             axis lines=middle,
         ]
             \addplot+{0.5 * exp(-abs(x + 2))};
-            \addlegendentry{$f_{r | s}\pbr{r | s_0} = \frac{1}{2} \eu^{-\abs{r + \sqrt{E}}}$}
+            \addlegendentry{$f_{r \given s}\pbr{r \given s_0} = \frac{1}{2} \eu^{-\abs{r + \sqrt{E}}}$}
 
             \addplot+{0.5 * exp(-abs(x - 2))};
-            \addlegendentry{$f_{r | s}\pbr{r | s_1} = \frac{1}{2} \eu^{-\abs{r - \sqrt{E}}}$}
+            \addlegendentry{$f_{r \given s}\pbr{r \given s_1} = \frac{1}{2} \eu^{-\abs{r - \sqrt{E}}}$}
         \end{axis}
     \end{tikzpicture}
-    \caption{$f_{r | s}\pbr{r | s_i}$.}
+    \caption{$f_{r \given s}\pbr{r \given s_i}$.}
     \label{fig:pgfplot}
 \end{figure}
 
@@ -129,6 +129,37 @@ A simple plot using \latexinline{pgfplots} and drawing manually using \latexinli
 
 \begin{table}
     \begin{tblr}{
+        colspec={ccc},
+        row{1}={font=\bfseries},
+    }
+        \toprule
+        A & B & C \\
+        \midrule
+        1 & 2 & 3 \\
+        4 & 5 & 6 \\
+        \bottomrule
+    \end{tblr}
+    \caption{Basic table.}
+\end{table}
+
+\begin{table}
+    \begin{tblr}{
+        colspec={*{3}{X[l]}},
+        row{1}={font=\bfseries},
+        hline{3},
+    }
+        \toprule
+        A & B & C \\
+        \midrule
+        1 & 2 & 3 \\
+        4 & 5 & 6 \\
+        \bottomrule
+    \end{tblr}
+    \caption{Basic full table.}
+\end{table}
+
+\begin{table}
+    \begin{tblr}{
         colspec={
             l
             S[table-format=1.1]
@@ -178,7 +209,7 @@ The \latexinline{siunitx} package provides consistent number and unit formatting
     ]{
         colspec={
             |[0.08em]
-            X[l]
+            l
             |[0.05em]
             *{3}{*{4}{S[table-format=-7.0]}|}
             S[table-format=-8.0]
@@ -188,7 +219,7 @@ The \latexinline{siunitx} package provides consistent number and unit formatting
         cell{2}{2-14}={c},
         cell{3,6-7,10-12,27-Z}{1}={font=\scriptsize\bfseries},
         cell{1,11,Z}{1}={cmd=\MakeUppercase},
-        colsep=0.21em,
+        colsep=0.13em,
         hline{2,7,11-12,28},
         row{1-2}={font=\scriptsize\bfseries},
         rowhead=2,
