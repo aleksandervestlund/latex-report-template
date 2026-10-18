@@ -324,11 +324,15 @@
 \SetSymbolFont{stmry}{bold}{U}{stmry}{m}{n}
 
 \RequirePackage{mathtools}
-\mathtoolsset{centercolon}
+\mathtoolsset{
+  centercolon,
+  mathic,
+}
 \renewenvironment*{cases}{\begin{dcases}}{\end{dcases}}
 
 \RequirePackage{xfrac}
 \NewCommandCopy{\oldsfrac}{\sfrac}
+% TODO: Research "\mathopen{}#1" instead of group
 \RenewDocumentCommand{\sfrac}{o m o m}{%
   \IfValueTF{#1}{%
     \IfValueTF{#3}{\oldsfrac[#1]{\begingroup#2\endgroup}[#3]{\begingroup#4\endgroup}}{\oldsfrac[#1]{\begingroup#2\endgroup}{\begingroup#4\endgroup}}%
@@ -484,7 +488,7 @@
 \newcommand*{\narrowarray}[1]{\setlength{\arraycolsep}{#1\savearraycolsep}}
 \newcommand*{\normalarray}   {\narrowarray{1}}
 
-\newcommand*{\givensymbol}[1][]{\nonscript\:#1\vert\allowbreak\nonscript\:\mathopen{}}
+\newcommand*{\givensymbol}[1][]{\nonscript\;#1\vert\allowbreak\nonscript\;\mathopen{}}
 \newcommand*{\given}           {\givensymbol}
 
 \newcommand*{\DeclarePairedDelimiterWithGiven}[3]{%
@@ -584,35 +588,51 @@
 }
 \makeatother
 
-\DeclareMathOperator {\Adj}       {Adj}     % adjugate
-\DeclareMathOperator {\Cov}       {Cov}     % covariance
-\DeclareMathOperator {\distance}  {d}       % distance/period
-\DeclareMathOperator {\divergence}{div}     % divergence
-\DeclareMathOperator {\erf}       {erf}     % error function
-\DeclareMathOperator {\erfc}      {erfc}    % complementary error function
-\DeclareMathOperator {\Fix}       {Fix}     % fixate
-\DeclareMathOperator {\fraction}  {frac}    % fractional part
-\DeclareMathOperator {\id}        {id}      % identity relation
-\DeclareMathOperator {\integer}   {int}     % integer part
-\DeclareMathOperator {\Law}       {Law}     % law
-\DeclareMathOperator {\lb}        {lb}      % log2
-\DeclareMathOperator {\lcm}       {lcm}     % least common multiple
-\DeclareMathOperator {\Maj}       {Maj}     % majority
-\DeclareMathOperator {\ord}       {ord}     % order
-\DeclareMathOperator {\rank}      {rank}    % rank
-\DeclareMathOperator {\sinc}      {sinc}    % sine cardinal
-\DeclareMathOperator {\sgn}       {sgn}     % signum
-\DeclareMathOperator {\slpsp}     {slpsp}   % strong Lucas pseudoprime
-\DeclareMathOperator {\spsp}      {spsp}    % strong pseudoprime
-\DeclareMathOperator {\tr}        {tr}      % trace
-\DeclareMathOperator {\Var}       {Var}     % variance
-\DeclareMathOperator*{\per}       {per}     % permanent
-\DeclareMathOperator*{\softmax}   {softmax} % softmax
+\DeclareMathOperator{\adj}       {adj}   % adjacent
+\DeclareMathOperator{\Adj}       {Adj}   % adjugate
+\DeclareMathOperator{\Cov}       {Cov}   % covariance
+\DeclareMathOperator{\distance}  {d}     % distance/period
+\DeclareMathOperator{\divergence}{div}   % divergence
+\DeclareMathOperator{\erf}       {erf}   % error function
+\DeclareMathOperator{\erfc}      {erfc}  % complementary error function
+\DeclareMathOperator{\Fix}       {Fix}   % fixate
+\DeclareMathOperator{\fraction}  {frac}  % fractional part
+\DeclareMathOperator{\id}        {id}    % identity relation
+\DeclareMathOperator{\integer}   {int}   % integer part
+\DeclareMathOperator{\Law}       {Law}   % law
+\DeclareMathOperator{\lb}        {lb}    % log_2
+\DeclareMathOperator{\lcm}       {lcm}   % least common multiple
+\DeclareMathOperator{\Maj}       {Maj}   % majority
+\DeclareMathOperator{\ord}       {ord}   % order
+\DeclareMathOperator{\rank}      {rank}  % rank
+\DeclareMathOperator{\sinc}      {sinc}  % sine cardinal
+\DeclareMathOperator{\sgn}       {sgn}   % signum
+\DeclareMathOperator{\slpsp}     {slpsp} % strong Lucas pseudoprime
+\DeclareMathOperator{\spsp}      {spsp}  % strong pseudoprime
+\DeclareMathOperator{\tr}        {tr}    % trace
+\DeclareMathOperator{\Var}       {Var}   % variance
+
+\DeclareMathOperator*{\per}    {per}     % permanent
+\DeclareMathOperator*{\softmax}{softmax} % softmax
 
 \newcommand*{\logtwo}{\log_2}
 \newcommand*{\logten}{\log_{10}}
 \newcommand*{\grad}  {\mathop{\mathbf{grad}}} % gradient
 \newcommand*{\rot}   {\mathop{\mathbf{rot}}}  % rotation
+
+\makeatletter
+\DeclareRobustCommand{\brem}    {\nonscript\mskip\medmuskip\mkern5mu\mathbin{\operator@font rem}\penalty900\mkern5mu\nonscript\mskip-\medmuskip}
+\DeclareRobustCommand*{\prem}[1]{\pod{{\operator@font rem}\mkern6mu#1}}
+\DeclareRobustCommand*{\rem} [1]{%
+  \allowbreak%
+  \if@display
+    \mkern18mu
+  \else
+    \mkern12mu
+  \fi
+  {\operator@font rem}\,\,#1%
+}
+\makeatother
 
 % Upright "e", "i", and "j", per ISO 80000:
 \newcommand*{\eu}{\mathrm{e}}
@@ -806,7 +826,7 @@
   group-minimum-digits=4,
   list-final-separator={, and~},
   per-mode=symbol,
-  text-series-to-math=true,
+  reset-math-version=false,
 ]{siunitx}
 \DeclareSIUnit{\nothing}{\relax}
 \DeclareSIUnit{\bit}    {b}
@@ -841,6 +861,61 @@
 \newunicodechar{√}{\surd}
 \renewunicodechar{°}{\ensuremath{\unit{\degree}}}
 \renewunicodechar{±}{\ensuremath{\pm}}
+
+\newcommand*{\va}{\vect{a}}
+\newcommand*{\vb}{\vect{b}}
+\newcommand*{\vc}{\vect{c}}
+\newcommand*{\vd}{\vect{d}}
+\newcommand*{\ve}{\vect{e}}
+\newcommand*{\vf}{\vect{f}}
+\newcommand*{\vg}{\vect{g}}
+\newcommand*{\vh}{\vect{h}}
+\newcommand*{\vi}{\vect{i}}
+\newcommand*{\vj}{\vect{j}}
+\newcommand*{\vl}{\vect{l}}
+\newcommand*{\vm}{\vect{m}}
+\newcommand*{\vn}{\vect{n}}
+\newcommand*{\vo}{\vect{o}}
+\newcommand*{\vp}{\vect{p}}
+\newcommand*{\vq}{\vect{q}}
+\newcommand*{\vr}{\vect{r}}
+\newcommand*{\vs}{\vect{s}}
+\newcommand*{\vt}{\vect{t}}
+\newcommand*{\vu}{\vect{u}}
+\newcommand*{\vv}{\vect{v}}
+\newcommand*{\vw}{\vect{w}}
+\newcommand*{\vx}{\vect{x}}
+\newcommand*{\vy}{\vect{y}}
+\newcommand*{\vz}{\vect{z}}
+
+\newcommand*{\mA}{\mat{A}}
+\newcommand*{\mB}{\mat{B}}
+\newcommand*{\mC}{\mat{C}}
+\newcommand*{\mD}{\mat{D}}
+\newcommand*{\mE}{\mat{E}}
+\newcommand*{\mF}{\mat{F}}
+\newcommand*{\mG}{\mat{G}}
+\newcommand*{\mH}{\mat{H}}
+\newcommand*{\mJ}{\mat{J}}
+\newcommand*{\mK}{\mat{K}}
+\newcommand*{\mL}{\mat{L}}
+\newcommand*{\mM}{\mat{M}}
+\newcommand*{\mN}{\mat{N}}
+\newcommand*{\mO}{\mat{O}}
+\newcommand*{\mP}{\mat{P}}
+\newcommand*{\mQ}{\mat{Q}}
+\newcommand*{\mR}{\mat{R}}
+\newcommand*{\mS}{\mat{S}}
+\newcommand*{\mT}{\mat{T}}
+\newcommand*{\mU}{\mat{U}}
+\newcommand*{\mV}{\mat{V}}
+\newcommand*{\mW}{\mat{W}}
+\newcommand*{\mX}{\mat{X}}
+\newcommand*{\mY}{\mat{Y}}
+\newcommand*{\mZ}{\mat{Z}}
+
+\newcommand{\mI}[1][2]{\mat{I}_{#1}}
+\newcommand{\vzero}   {\vect{0}}
 
 \newcounteralias{ineq}{equation}
 \newcounteralias{inva}{equation}
@@ -889,8 +964,14 @@
 % ------- Figures and tables --------
 \RequirePackage{capt-of}
 \RequirePackage{rotating}
-\RequirePackage[list=true]{subcaption}
 \RequirePackage[nottoc]{tocbibind}
+
+\RequirePackage[list=true]{subcaption}
+\captionsetup[subfigure]{
+  labelformat=simple,
+  subrefformat=simple,
+}
+\renewcommand*{\thesubfigure}{(\alph{subfigure})}
 
 \RequirePackage{tabularray}
 \SetTblrInner{width=0.95\linewidth}
@@ -919,8 +1000,9 @@
 \RequirePackage{tikz-3dplot}
 \RequirePackage{tikzscale}
 \RequirePackage[edges]{forest}
+\RequirePackage{pgfgantt}
 \usetikzlibrary{
-  arrows,
+  arrows.meta,
   calc,
   decorations.markings,
   decorations.pathreplacing,
@@ -1295,8 +1377,11 @@
 \newcommand*{\GGq}  {\GG_q}
 \newcommand*{\QQbar}{\overline{\QQ}}
 \newcommand*{\ZZn}  {\ZZ_n}
+\newcommand*{\ZZns} {\ZZ_n^*}
 \newcommand*{\ZZp}  {\ZZ_p}
+\newcommand*{\ZZps} {\ZZ_p^*}
 \newcommand*{\ZZq}  {\ZZ_q}
+\newcommand*{\ZZqs} {\ZZ_q^*}
 \newcommand*{\ZZtwo}{\ZZ_2}
 
 \newcommand*{\cdh} {\pcalgostyle{CDH}}
