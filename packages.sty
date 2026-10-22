@@ -305,7 +305,6 @@
 \RequirePackage{calc}
 \RequirePackage[makeroom]{cancel}
 \RequirePackage[
-  ISO,
   mleftright,
   spaced=-1,
 ]{diffcoeff}
@@ -331,15 +330,7 @@
 \renewenvironment*{cases}{\begin{dcases}}{\end{dcases}}
 
 \RequirePackage{xfrac}
-\NewCommandCopy{\oldsfrac}{\sfrac}
-% TODO: Research "\mathopen{}#1" instead of group
-\RenewDocumentCommand{\sfrac}{o m o m}{%
-  \IfValueTF{#1}{%
-    \IfValueTF{#3}{\oldsfrac[#1]{\begingroup#2\endgroup}[#3]{\begingroup#4\endgroup}}{\oldsfrac[#1]{\begingroup#2\endgroup}{\begingroup#4\endgroup}}%
-  }{%
-    \IfValueTF{#3}{\oldsfrac{\begingroup#2\endgroup}[#3]{\begingroup#4\endgroup}}    {\oldsfrac{\begingroup#2\endgroup}{\begingroup#4\endgroup}}%
-  }%
-}
+\RenewDocumentCommand{\sfrac}{o m o m}{\UseInstance{xfrac}{mathdefault}{\mathopen{}#2}{#3}{\mathopen{}#4}}
 
 \makeatletter
 \ifpdftex\ifusepxortx
@@ -1259,6 +1250,7 @@
 \let\AC\undefined % Conflicts with glossaries-extra
 
 \makeatletter
+\AddToHook{env/pccenter/begin}{\let\@captype\@undefined}
 \RenewDocumentCommand{\pc@elrk}{s m}{\abr{#2}}
 \RenewDocumentCommand{\pc@olrk}{s m}{\abr{#2}}
 \makeatother
