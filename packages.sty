@@ -216,8 +216,8 @@
 \renewcommand*{\Authands} {\\}
 \renewcommand*{\Authsep}  {\\}
 
-\newcommand*{\authorstring}     {Author}
-\newcommand*{\authorsstring}    {Authors}
+\newcommand*{\authorstring}     {}
+\newcommand*{\authorsstring}    {}
 \newcommand*{\printauthorstring}{%
   \ifnum\value{authors} = 1
     \authorstring
@@ -254,7 +254,7 @@
 \makeatother
 
 \newcommand*{\mitlogo} {MIT_logo}
-\newcommand*{\ntnulogo}{NTNU_logo_EN}
+\newcommand*{\ntnulogo}{}
 \newcommand*{\snulogo} {SNU_logo}
 
 \makeatletter
@@ -327,7 +327,7 @@
 \patchcmd{\abstract}{\small}{}{}{}
 \AtEndEnvironment{abstract}{\glsresetall}
 
-\newcommand*{\keywordsname}{Keywords}
+\newcommand*{\keywordsname}{}
 \newcommand*{\keywords} [1]{\textbf{\emph{\keywordsname}} \--- #1}
 
 \RequirePackage[
@@ -343,7 +343,7 @@
 }
 
 \RequirePackage{afterpage}
-\newcommand*{\blankinfo}{This page was intentionally left blank}
+\newcommand*{\blankinfo}{}
 \newcommand*{\blankpage}{
   \clearpage
   \null
@@ -389,8 +389,8 @@
 \makeatletter
 \ifdefstring{\packages@font}{stix}{
   \ifpdftex
-    \let\mathbbm\mathbb
-    \let\mathds \mathbb
+    \RenewCommandCopy{\mathbbm}{\mathbb}
+    \RenewCommandCopy{\mathds} {\mathbb}
   \fi
 }{
   \RequirePackage{amssymb}
@@ -547,8 +547,8 @@
   name={Sikkerhetsmål},
 ]
 
-\newcommand*{\proofideatext}  {Proof Idea}
-\newcommand*{\proofsketchtext}{Proof Sketch}
+\newcommand*{\proofideatext}  {}
+\newcommand*{\proofsketchtext}{}
 \newenvironment*{proofidea}  {\begin{proof}[\proofideatext]\pushQED{}}{\end{proof}}
 \newenvironment*{proofsketch}{\begin{proof}[\proofsketchtext]}        {\end{proof}}
 
@@ -657,37 +657,37 @@
 }
 \makeatother
 
-\DeclareMathOperator{\adj}       {adj}   % adjacent
-\DeclareMathOperator{\Adj}       {Adj}   % adjugate
-\DeclareMathOperator{\Cov}       {Cov}   % covariance
-\DeclareMathOperator{\distance}  {d}     % distance/period
-\DeclareMathOperator{\divergence}{div}   % divergence
-\DeclareMathOperator{\erf}       {erf}   % error function
-\DeclareMathOperator{\erfc}      {erfc}  % complementary error function
-\DeclareMathOperator{\Fix}       {Fix}   % fixate
-\DeclareMathOperator{\fraction}  {frac}  % fractional part
-\DeclareMathOperator{\id}        {id}    % identity relation
-\DeclareMathOperator{\integer}   {int}   % integer part
-\DeclareMathOperator{\Law}       {Law}   % law
-\DeclareMathOperator{\lb}        {lb}    % log_2
-\DeclareMathOperator{\lcm}       {lcm}   % least common multiple
-\DeclareMathOperator{\Maj}       {Maj}   % majority
-\DeclareMathOperator{\ord}       {ord}   % order
-\DeclareMathOperator{\rank}      {rank}  % rank
-\DeclareMathOperator{\sinc}      {sinc}  % sine cardinal
-\DeclareMathOperator{\sgn}       {sgn}   % signum
-\DeclareMathOperator{\slpsp}     {slpsp} % strong Lucas pseudoprime
-\DeclareMathOperator{\spsp}      {spsp}  % strong pseudoprime
-\DeclareMathOperator{\tr}        {tr}    % trace
-\DeclareMathOperator{\Var}       {Var}   % variance
+\DeclareMathOperator{\adj}       {adj}           % adjacent
+\DeclareMathOperator{\Adj}       {Adj}           % adjugate
+\DeclareMathOperator{\Cov}       {Cov}           % covariance
+\DeclareMathOperator{\distance}  {d}             % distance/period
+\DeclareMathOperator{\divergence}{div}           % divergence
+\DeclareMathOperator{\erf}       {erf}           % error function
+\DeclareMathOperator{\erfc}      {erfc}          % complementary error function
+\DeclareMathOperator{\Fix}       {Fix}           % fixate
+\DeclareMathOperator{\fraction}  {frac}          % fractional part
+\DeclareMathOperator{\grad}      {\mathbf{grad}} % gradient
+\DeclareMathOperator{\id}        {id}            % identity relation
+\DeclareMathOperator{\integer}   {int}           % integer part
+\DeclareMathOperator{\Law}       {Law}           % law
+\DeclareMathOperator{\lb}        {lb}            % log_2
+\DeclareMathOperator{\lcm}       {lcm}           % least common multiple
+\DeclareMathOperator{\Maj}       {Maj}           % majority
+\DeclareMathOperator{\ord}       {ord}           % order
+\DeclareMathOperator{\rank}      {rank}          % rank
+\DeclareMathOperator{\rot}       {\mathbf{rot}}  % rotation
+\DeclareMathOperator{\sinc}      {sinc}          % sine cardinal
+\DeclareMathOperator{\sgn}       {sgn}           % signum
+\DeclareMathOperator{\slpsp}     {slpsp}         % strong Lucas pseudoprime
+\DeclareMathOperator{\spsp}      {spsp}          % strong pseudoprime
+\DeclareMathOperator{\tr}        {tr}            % trace
+\DeclareMathOperator{\Var}       {Var}           % variance
 
 \DeclareMathOperator*{\per}    {per}     % permanent
 \DeclareMathOperator*{\softmax}{softmax} % softmax
 
 \newcommand*{\logtwo}{\log_2}
 \newcommand*{\logten}{\log_{10}}
-\newcommand*{\grad}  {\mathop{\mathbf{grad}}} % gradient
-\newcommand*{\rot}   {\mathop{\mathbf{rot}}}  % rotation
 
 \makeatletter
 \DeclareRobustCommand{\brem}    {\nonscript\mskip\medmuskip\mkern5mu\mathbin{\operator@font rem}\penalty900\mkern5mu\nonscript\mskip-\medmuskip}
@@ -984,17 +984,11 @@
 \newcommand*{\mY}{\mat{Y}}
 \newcommand*{\mZ}{\mat{Z}}
 
-\newcommand{\mI}[1][2]{\mat{I}_{#1}}
-\newcommand{\vzero}   {\vect{0}}
+\newcommand*{\mI}[1][2]{\mat{I}_{#1}}
+\newcommand*{\vzero}   {\vect{0}}
 
-\newcounteralias{ineq}{equation}
-\newcounteralias{inva}{equation}
-\makeatletter
-\newcommand*{\inequality}{$$\refstepcounter{ineq}}
-\newcommand*{\invariant} {$$\refstepcounter{inva}}
-\def\endinequality{\eqno\hbox{\@eqnnum}$$\@ignoretrue}
-\def\endinvariant {\eqno\hbox{\@eqnnum}$$\@ignoretrue}
-\makeatother
+\newenvironment*{inequality}{\crefalias{equation}{ineq}\begin{equation}}{\end{equation}}
+\newenvironment*{invariant} {\crefalias{equation}{inva}\begin{equation}}{\end{equation}}
 
 % WIP:
 \RequirePackage{xparse}
@@ -1131,7 +1125,7 @@
 \RequirePackage[export]{adjustbox}
 \RequirePackage{float} % Must load after floatrow
 \RequirePackage{lscape}
-\RequirePackage{flafter}
+% \RequirePackage{flafter}
 \RequirePackage[section]{placeins}
 
 \RequirePackage{multicol}
@@ -1227,7 +1221,7 @@
 
 \RequirePackage{newfloat}
 \newfloat{procedure}{tbp}{lop}
-\newcommand*{\listprocedurename}{List of Procedures}
+\newcommand*{\listprocedurename}{}
 \newcommand*{\listofprocedures} {\listof{procedure}{\listprocedurename}}
 
 % ---------- Bibliography -----------
@@ -1279,11 +1273,8 @@
 \DeclareNameAlias{sortname}{family-given}
 \DeclareDelimFormat[textcite]{nameyeardelim}  {\addnbspace}
 \DeclareDelimFormat[textcite]{nonameyeardelim}{\addnbspace}
-% \DeclareDelimFormat{nameyeardelim}{\addcomma\addspace}
-% \DeclareOuterCiteDelims{cite}    {\bibopenbracket}{\bibclosebracket}
-% \DeclareInnerCiteDelims{textcite}{\bibopenbracket}{\bibclosebracket}
 
-\newcommand*{\possessivestring}{'s}
+\newcommand*{\possessivestring}{}
 \NewDocumentCommand{\textscite}{o m}{%
   \citeauthor{#2}\possessivestring\addnbspace[%
     \IfValueTF{#1}{\citeyear[#1]{#2}}{\citeyear{#2}}%
@@ -1436,7 +1427,7 @@
 \newcommand*{\viewv}          {\view_{\mathcal{V}^*}}
 \newcommand*{\Write}          {\pcalgostyle{Write}}
 
-\newcommand*{\bins}   {\bin^\secpar}
+\newcommand*{\bins}   {\bin^{\secpar}}
 \newcommand*{\circuit}{\mathcal{C}}
 \newcommand*{\FFbar}  {\overline{\FF}}
 \newcommand*{\FFp}    {\FF_p}
@@ -1536,16 +1527,18 @@
 \newcommand*{\smallOtilde}    [1]{\tilde{\ensuremath{o}}\abr{#1}}
 
 % TODO: Switch to zref-clever when it supports Norwegian
+\providecommand*{\extrasenglish}{}
 \RequirePackage[
   capitalise,
+  english,
   nameinlink,
   noabbrev,
 ]{cleveref} % Must load after amsmath, babel and hyperref
 \creflabelformat{ineq}{#2\textup{(#1)}#3}
 \creflabelformat{inva}{#2\textup{(#1)}#3}
 
-\newcommand*{\creflastconjunction}     {, and~}
-\newcommand*{\creflastgroupconjunction}{, and~}
+\newcommand*{\creflastconjunction}     {}
+\newcommand*{\creflastgroupconjunction}{}
 
 \newcommand*{\setcrefnorsk}[2]{
   \crefformat{#1}{#2~##2##1##3}
@@ -1577,14 +1570,9 @@
 }
 
 \makeatletter
-\cref@addlanguagedefs{american}{\setupcrefenglish}
-\cref@addlanguagedefs{british} {\setupcrefenglish}
+\cref@addlanguagedefs{american}{\csuse{extrasenglish}\setupcrefenglish}
+\cref@addlanguagedefs{british} {\csuse{extrasenglish}\setupcrefenglish}
 \cref@addlanguagedefs{norsk}   {
-  \NewCommandCopy{\orig@crefname}{\crefname}
-  \renewcommand*{\crefname}[3]{
-    \setcrefnorsk{#1}{#2}
-    \orig@crefname{#1}{#2}{#2}
-  }
   \setcrefnorsk{angrepsspill}      {Angrepsspill}
   \setcrefnorsk{antakelse}         {Antakelse}
   \setcrefnorsk{definisjon}        {Definisjon}
@@ -1609,6 +1597,7 @@
   \setcrefnorsk{uformeltteorem}    {Uformelt teorem}
 }
 \makeatother
+\AfterEndPreamble{\expandafter\selectlanguage\expandafter{\languagename}}
 
 \makeatletter
 \newcommand*{\refcheckize}[1]{%
@@ -1646,7 +1635,7 @@
 \newcommand*{\alsoidx}[1]{\glsadd{#1}}
 
 \newcommand*{\initialismtype}{initialism}
-\newcommand*{\initialismname}{Initialisms}
+\newcommand*{\initialismname}{}
 \newcommand*{\symboltype}    {symbols}
 
 \newglossary*{\initialismtype}{\initialismname}
@@ -1684,8 +1673,24 @@
   }
 }
 
-\newcommand*{\tgls}  [1]{\glsentrytitlecase{#1}{long}}
-\newcommand*{\tglspl}[1]{\glsentrytitlecase{#1}{longpl}}
+\makeatletter
+\ExplSyntaxOn
+\newcommand*{\packages@titlecase}[1]{\text_titlecase_all:n{#1}}
+\ExplSyntaxOff
+
+\newcommand*{\packages@tglspdfsentence}[2]{\MFUsentencecase{\csuse{glsentry#1}{#2}}}
+\newcommand*{\packages@tglspdftitle}   [2]{\packages@titlecase{\csuse{glsentry#1}{#2}}}
+\newcommand*{\packages@tglssentence}   [2]{\csuse{Glsentry#1}{#2}}
+\newcommand*{\packages@tglstitle}      [2]{\glsentrytitlecase{#2}{#1}}
+\NewCommandCopy{\packages@tgls}   {\packages@tglstitle}
+\NewCommandCopy{\packages@tglspdf}{\packages@tglspdftitle}
+\NewDocumentCommand{\tgls}  {m}{\packages@tgls{long}{#1}}
+\NewDocumentCommand{\tglspl}{m}{\packages@tgls{longpl}{#1}}
+\pdfstringdefDisableCommands{%
+  \renewcommand*{\tgls}  [1]{\packages@tglspdf{long}{#1}}%
+  \renewcommand*{\tglspl}[1]{\packages@tglspdf{longpl}{#1}}%
+}
+\makeatother
 
 % ------------- General -------------
 \RequirePackage{comment}
@@ -1696,7 +1701,7 @@
 \RequirePackage{lipsum}
 \RequirePackage{pdfpages}
 
-\newcommand*{\datestring}{Date}
+\newcommand*{\datestring}{}
 \RequirePackage[useregional]{datetime2}
 
 \RequirePackage[
@@ -1761,8 +1766,8 @@
 
 % ------------ Language -------------
 \RequirePackage{xspace}
-\newcommand*{\naive}{na{\"\i}ve\xspace}
-\newcommand*{\Naive}{Na{\"\i}ve\xspace}
+\newcommand*{\naive}{}
+\newcommand*{\Naive}{}
 
 \RequirePackage{ifthen}
 \ifthenelse{\equal{\languagename}{norsk}}{
@@ -1779,19 +1784,44 @@
 \pretocmd{\dirtree}{\begingroup\setlength{\parfillskip}{0em plus 1fil}}{}{}
 \apptocmd{\dirtree}{\endgroup}{}{}                                     {}{}
 
-\addto{\captionsamerican}{
+\makeatletter
+\newcommand*{\packages@captionsenglish}{
   \floatname{procedure}{Procedure}
-  \renewcommand*{\contentsname}     {Table of Contents}
-  \renewcommand*{\abbreviationsname}{Abbreviations}
+  \renewcommand*{\abbreviationsname}       {Abbreviations}
+  \renewcommand*{\algorithmname}           {Algorithm}
+  \renewcommand*{\authorstring}            {Author}
+  \renewcommand*{\authorsstring}           {Authors}
+  \renewcommand*{\blankinfo}               {This page was intentionally left blank}
+  \renewcommand*{\contentsname}            {Table of Contents}
+  \renewcommand*{\creflastconjunction}     {, and~}
+  \renewcommand*{\creflastgroupconjunction}{, and~}
+  \renewcommand*{\datestring}              {Date}
+  \renewcommand*{\initialismname}          {Initialisms}
+  \renewcommand*{\keywordsname}            {Keywords}
+  \renewcommand*{\listalgorithmname}       {List of Algorithms}
+  \renewcommand*{\listingscaption}         {Listing}
+  \renewcommand*{\listoflistingscaption}   {List of Listings}
+  \renewcommand*{\listprocedurename}       {List of Procedures}
+  \renewcommand*{\naive}                   {na{\"\i}ve\xspace}
+  \renewcommand*{\Naive}                   {Na{\"\i}ve\xspace}
+  \renewcommand*{\ntnulogo}                {NTNU_logo_EN}
+  \renewcommand*{\possessivestring}        {'s}
+  \renewcommand*{\proofideatext}           {Proof Idea}
+  \renewcommand*{\proofsketchtext}         {Proof Sketch}
   \crefname{ineq}{Inequality}{Inequalities}
   \crefname{inva}{Invariant} {Invariants}
 }
+\addto{\captionsamerican}{
+  \packages@captionsenglish
+  \renewcommand*{\EXD@emdash}{\hbox{---}}
+  \RenewCommandCopy{\packages@tgls}   {\packages@tglstitle}
+  \RenewCommandCopy{\packages@tglspdf}{\packages@tglspdftitle}
+}
 \addto{\captionsbritish}{
-  \floatname{procedure}{Procedure}
-  \renewcommand*{\contentsname}     {Table of Contents}
-  \renewcommand*{\abbreviationsname}{Abbreviations}
-  \crefname{ineq}{Inequality}{Inequalities}
-  \crefname{inva}{Invariant} {Invariants}
+  \packages@captionsenglish
+  \renewcommand*{\EXD@emdash}{\hbox{--}}
+  \RenewCommandCopy{\packages@tgls}   {\packages@tglssentence}
+  \RenewCommandCopy{\packages@tglspdf}{\packages@tglspdfsentence}
 }
 \addto{\captionsnorsk}{
   \floatname{procedure}{Prosedyre}
@@ -1806,6 +1836,7 @@
   \renewcommand*{\creflastconjunction}     { og~}
   \renewcommand*{\creflastgroupconjunction}{ og~}
   \renewcommand*{\datestring}              {Dato}
+  \renewcommand*{\EXD@emdash}              {\hbox{--}}
   \renewcommand*{\initialismname}          {Forbokstavord}
   \renewcommand*{\keywordsname}            {Nøkkelord}
   \renewcommand*{\listalgorithmname}       {Algoritmer}
@@ -1818,9 +1849,12 @@
   \renewcommand*{\possessivestring}        {s}
   \renewcommand*{\proofideatext}           {Bevisidé}
   \renewcommand*{\proofsketchtext}         {Bevisutkast}
+  \RenewCommandCopy{\packages@tgls}   {\packages@tglssentence}
+  \RenewCommandCopy{\packages@tglspdf}{\packages@tglspdfsentence}
   \crefname{ineq}{Ulikhet}  {Ulikhet}
   \crefname{inva}{Invariant}{Invariant}
 }
+\makeatother
 
 \newcommand*{\mapenv}[2]{
   \addto{\captionsamerican}{\renewenvironment*{#2}{\begin{#1}}{\end{#1}}}

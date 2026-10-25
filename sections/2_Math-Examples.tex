@@ -10,22 +10,22 @@ The \gls{gcd} and \gls{lcm} are fundamental concepts in number theory. The \gls{
   \quad p \hateq q,
   \quad a \whateq b,
   \quad x \pleq 3,
-  \quad y \mineq 4
+  \quad y \mineq 4.
 \end{equation*}
 
 There are three (four) ways to define a variable:
 \begin{equation*}
   x \defeq y + z,
   \quad a \triangleq b + c,
-  \quad i \coloneq j + k
-  \quad \pbr{A \eqcolon B}
+  \quad i \coloneq j + k,
+  \quad \pbr{A \eqcolon B}.
 \end{equation*}
 
 Superscript shorthands for inverse and transpose:
 \begin{equation*}
   A\inv,
   \quad A\transpose,
-  \quad {A\inv}\transpose
+  \quad {A\inv}\transpose.
 \end{equation*}
 
 The \latexinline{defn} command is used to introduce a \defn{defined term} in bold italic.
@@ -34,12 +34,12 @@ The \latexinline{amortized} command denotes amortized cost: $\amortized{T}\pbr{n
 
 The number of permutations of $r$ items from a set of $n$ elements is given by:
 \begin{equation*}
-  \perm{n}{r} = \frac{\fac{n}}{\fac{\pbr{n - r}}}
+  \perm{n}{r} = \eqpunct{\frac{\fac{n}}{\fac{\pbr{n - r}}}}{.}
 \end{equation*}
 
 The number of combinations (binomial coefficient) is:
 \begin{equation*}
-  \choose{n}{r} = \comb{n}{r} = \frac{\fac{n}}{\fac{r}\fac{\pbr{n - r}}}
+  \choose{n}{r} = \comb{n}{r} = \eqpunct{\frac{\fac{n}}{\fac{r}\fac{\pbr{n - r}}}}{.}
 \end{equation*}
 
 We can also use bracket functions:
@@ -49,13 +49,13 @@ We can also use bracket functions:
   \quad \Angle{x, y},
   \quad \abs{-2} = 2,
   \quad \round{2.6} = 3,
-  \quad \round{2.4} = 2
+  \quad \round{2.4} = 2,
 \end{equation*}
 
 \noindent
 and \latexinline{\mod} clones:
 \begin{equation*}
-  c \rem q = c \prem{q} = c \brem q = c - \round{\frac{c}{q}}q
+  c \rem q = c \prem{q} = c \brem q = c - \round{\frac{c}{q}}q.
 \end{equation*}
 
 The \latexinline{narrowarray} and \latexinline{normalarray} commands adjust column spacing in arrays:
@@ -67,46 +67,51 @@ The \latexinline{narrowarray} and \latexinline{normalarray} commands adjust colu
   \end{pmatrix}
   \quad \text{vs.} \quad
   \normalarray
-  \begin{pmatrix}
-    a & b \\
-    c & d
-  \end{pmatrix}
+  \eqpunct{
+    \begin{pmatrix}
+      a & b \\
+      c & d
+    \end{pmatrix}
+  }{.}
 \end{equation*}
 
 Intervals:
 \begin{equation*}
-  \intoo{1}{2}, \quad \intoc{1}{2}, \quad \intco{1}{2}, \quad \intcc{1}{2}
+  \intoo{1}{2},
+  \quad \intoc{1}{2},
+  \quad \intco{1}{2},
+  \quad \intcc{1}{2}.
 \end{equation*}
 
 \noindent
-And comma\-/separated matrix environment:
+There is also a comma\-/separated matrix environment:
 \begin{equation*}
   \begin{pvector}
     a & b & \ldots & z
-  \end{pvector}
+  \end{pvector}.
 \end{equation*}
 
 \noindent
-And shorthands for indexed sets and vectors:
+Indexed sets and vectors have shorthands as well:
 \begin{equation*}
   \aset{x}{n},
-  \quad \avector{x}{n}
+  \quad \avector{x}{n}.
 \end{equation*}
 
 \noindent
-And automatic sizing of delimiters, including the \latexinline{\given} bar:
+Delimiters are sized automatically, including the \latexinline{\given} bar:
 \begin{equation*}
   \pbr{1 + \frac{1}{2}},
   \quad \sbr{2 + \frac{2}{3}},
   \quad \cbr{3 + \frac{3}{4}},
   \quad \set{4 + \frac{4}{5}},
-  \quad \pbr{\frac{a}{b} \given c}
+  \quad \pbr{\frac{a}{b} \given c}.
 \end{equation*}
 
 \noindent
 Further, automatic type of delimiters:
 \begin{equation*}
-  a + \abr{b + \abr{c + \abr{d + \abr{e + \abr{f + \abr{g + h} + \abr{i + j} + k} + l} + m} + n} + o} + p
+  a + \abr{b + \abr{c + \abr{d + \abr{e + \abr{f + \abr{g + h} + \abr{i + j} + k} + l} + m} + n} + o} + p.
 \end{equation*}
 
 Some machine learning and signal processing constants:
@@ -114,7 +119,7 @@ Some machine learning and signal processing constants:
   \data,
   \quad \loss,
   \quad \hypothesis,
-  \quad \snr
+  \quad \snr.
 \end{equation*}
 
 \subsection{Operators}
@@ -149,28 +154,27 @@ Declared math operators:
   \quad \tr\pbr{n},
   \quad \softmax_n\pbr{n},
   \quad \logtwo\sq\pbr{n},
-  \quad \logten\pbr{n},
-  \quad \polylog
+  \quad \logten\pbr{n}.
 \end{align*}
 
 The \latexinline{rgets}/\latexinline{sgets} commands render a random\-/sampling arrow:
 \begin{equation*}
-  k \rgets \bin = k \xleftarrow{R} \bin = k \sgets \bin = k \sample \bin
+  k \rgets \bin = k \xleftarrow{R} \bin = k \sgets \bin = k \sample \bin.
 \end{equation*}
 
 \subsection{Expected Value and Variance}
 
 Expected value and variance:
 \begin{align*}
-  \expect{X}     &= \sum_{x \in \mathcal{X}} x \cdot \prob{X = x}                                     \\
-  \Var\pbr{X}    &= \sigmasq\pbr{X} = \expect{\abr{X - \expect{X}}\sq} = \expect{X\sq} - \expectsq{X} \\
-  \Cov\pbr{X, Y} &= \expect{XY} - \expect{X}\expect{Y}
+  \expect{X}     &= \sum_{x \in \mathcal{X}} x \cdot \prob{X = x},                                     \\
+  \Var\pbr{X}    &= \sigmasq\pbr{X} = \expect{\abr{X - \expect{X}}\sq} = \expect{X\sq} - \expectsq{X}, \\
+  \Cov\pbr{X, Y} &= \expect{XY} - \expect{X}\expect{Y}.
 \end{align*}
 
 \noindent
-And the indicator function:
+The indicator function is also available:
 \begin{equation*}
-  n = \sum_i \indicator{i > \frac{2\abr{n + 1}}{3}}
+  n = \sum_i \indicator{i > \frac{2\abr{n + 1}}{3}}.
 \end{equation*}
 
 \subsection{Sets, Transforms, and Notation}
@@ -180,7 +184,7 @@ Commonly used mathematical sets and transforms:
   \NN \subset \ZZ \subset \QQ \subset \RR \subset \CC,
   \quad \laplaceinvt{\laplacet{x}} = x,
   \quad \fourierinvt{\fouriert{x}} = x,
-  \quad \compl{A}
+  \quad \compl{A}.
 \end{equation*}
 
 Indicator functions and blackboard bold from \latexinline{bbm} and \latexinline{dsfont}, and semantic brackets and the contradiction symbol from \latexinline{stmaryrd}:
@@ -190,7 +194,7 @@ Indicator functions and blackboard bold from \latexinline{bbm} and \latexinline{
   \quad \mathds{R},
   \quad \llbracket 1, n \rrbracket,
   \quad \llbracket P \rrbracket,
-  \quad \lightning
+  \quad \lightning.
 \end{equation*}
 
 \subsection{Calculus and Differentials}
@@ -198,7 +202,7 @@ Indicator functions and blackboard bold from \latexinline{bbm} and \latexinline{
 Defining a function:
 \begin{equation*}
   \func{f}{A \times B}{C},
-  \quad \func{g}{X \times Y}{Z}[\pbr{x, y}][x + y]
+  \quad \eqpunct{\func{g}{X \times Y}{Z}[\pbr{x, y}][x + y]}{.}
 \end{equation*}
 
 Ordinary and partial derivatives using \latexinline{diffcoeff}:
@@ -206,37 +210,37 @@ Ordinary and partial derivatives using \latexinline{diffcoeff}:
   \dl f,
   \quad \diff{f}{x},
   \quad \diff[2]{f}{x},
-  \quad \diffp*{\pbr{f + g}}{x}
+  \quad \diffp*{\pbr{f + g}}{x},
 \end{equation*}
 
 \noindent
 and their definition as a limit, using \latexinline{goesto}:
 \begin{equation*}
-  \diff{f}{x} = \lim_{h \goesto 0} \frac{f\pbr{x + h} - f\pbr{x}}{h}
+  \diff{f}{x} = \lim_{h \goesto 0} \eqpunct{\frac{f\pbr{x + h} - f\pbr{x}}{h}}{.}
 \end{equation*}
 
 \subsection{Equations}
 
 An equation with a label and number, demonstrating \latexinline{amsmath}:
 \begin{equation}\label{eq:euler}
-  \eu^{\iu\pi} + 1 = 0
+  \eu^{\iu\pi} + 1 = 0.
 \end{equation}
 
 The custom \latexinline{inequality} environment assigns a label like an equation:
 \begin{inequality}\label{ineq:example}
-  n\sq \geq n \quad \text{for all } n \geq 1
+  n\sq \geq n \quad \text{for all } n \geq 1.
 \end{inequality}
 
 The custom \latexinline{invariant} environment also assigns a label like an equation:
 \begin{invariant}\label{inv:example}
-  n\sq \geq n \quad \text{for all } n \geq 1
+  n\sq \geq n \quad \text{for all } n \geq 1.
 \end{invariant}
 
 \cref{eq:euler,ineq:example,inv:example}. A piecewise\-/defined function using \latexinline{cif} and \latexinline{cow}:
 \begin{equation*}
   f\pbr{x} = \begin{cases}
     x\sq & \cif{x \geq 0} \\
-    -x   & \cow
+    -x   & \cow.
   \end{cases}
 \end{equation*}
 
@@ -244,13 +248,13 @@ We also use \latexinline{mathclap} to fix spacing in subscripts:
 \begin{equation*}
   \sum_{1 \leq i < j \leq n} a_{ij}
   \quad \text{vs.} \quad
-  \sum_{\mathclap{1 \leq i < j \leq n}} a_{ij}
+  \sum_{\mathclap{1 \leq i < j \leq n}} a_{ij}.
 \end{equation*}
 
 Quotient group notation using \latexinline{faktor}:
 \begin{equation*}
   \faktor{G}{N},
-  \quad \faktor{\ZZ}{n\ZZ}
+  \quad \eqpunct{\faktor{\ZZ}{n\ZZ}}{.}
 \end{equation*}
 
 \subsection{Logic and Negations}
@@ -265,7 +269,7 @@ Logical symbols:
   \quad \neg/\lnot,
   \quad \land,
   \quad \lor,
-  \quad \top
+  \quad \top.
 \end{equation*}
 
 Negated relations from \latexinline{centernot}:
@@ -277,13 +281,13 @@ Negated relations from \latexinline{centernot}:
   \quad \nsubset,
   \quad \nsupset,
   \quad \nmodels,
-  \quad \ndashv
+  \quad \ndashv.
 \end{equation*}
 
 Empty set notation (both will produce the same and is decided by the option passed in the main file):
 \begin{equation*}
   \emptyset,
-  \quad \varnothing
+  \quad \varnothing.
 \end{equation*}
 
 \subsection{Bitwise and Shift Operators}
@@ -291,23 +295,23 @@ Empty set notation (both will produce the same and is decided by the option pass
 Bitwise and shift operators for use in algorithms or hardware descriptions:
 \begin{equation*}
   a \band b,
-  \quad a \bor b
+  \quad a \bor b.
 \end{equation*}
 
 \noindent
-And bitshifting:
+Bit shifts have both a custom and a standard form:
 \begin{equation*}
   a \sll b = a \ll b,
   \quad a \sgg b = a \gg b,
   \quad a \ull b = a \lll b,
-  \quad a \ugg b = a \ggg b
+  \quad a \ugg b = a \ggg b.
 \end{equation*}
 
 \subsection{Unicode Shortcuts}
 
 The \latexinline{newunicodechar} package allows direct use of Unicode symbols in math mode:
 \begin{equation*}
-  ≈,\ ∆,\ ≥,\ ∞,\ ∫,\ ∧,\ ≤,\ ∨,\ ◊,\ ≠,\ Ω,\ ∂,\ π,\ ∏,\ ∑,\ √,\ °,\ ±
+  ≈,\ ∆,\ ≥,\ ∞,\ ∫,\ ∧,\ ≤,\ ∨,\ ◊,\ ≠,\ Ω,\ ∂,\ π,\ ∏,\ ∑,\ √,\ °,\ ±.
 \end{equation*}
 
 \subsection{Miscellaneous}
@@ -317,7 +321,7 @@ For matrices and vectors, use the respective commands \latexinline{\mat} and \la
   \mC\vu = \lambda \vu,
   \quad \mA\vx = \vzero,
   \quad \mI[3]\vx = \vx,
-  \quad \vw = \va \cross \vb
+  \quad \vw = \va \cross \vb.
 \end{equation*}
 
 The identity matrix \latexinline{\mI} defaults to $\mI$, and \latexinline{eqpunct} aligns punctuation with the bottom of a tall expression:
@@ -327,14 +331,14 @@ The identity matrix \latexinline{\mI} defaults to $\mI$, and \latexinline{eqpunc
 
 Cancellation of terms using \latexinline{cancel}:
 \begin{equation*}
-  \frac{\cancel{a} \cdot b}{\cancel{a}} = b
+  \frac{\cancel{a} \cdot b}{\cancel{a}} = b.
 \end{equation*}
 
 The \latexinline{xfrac} package provides better inline fractions: $\sfrac{a}{b}$ is cleaner than $\frac{a}{b}$ or $a/b$.
 
 Decision rule:
 \begin{equation*}
-  \ell \decisionrule{a = 1}{a = -1} \eta
+  \ell \decisionrule{a = 1}{a = -1} \eta.
 \end{equation*}
 
 Kendall notation:
@@ -344,12 +348,12 @@ Kendall notation:
   \quad &&\kendall[D][D], \\
   &\kendall[D][D][2],
   \quad &&\kendall[D][D][2][2],
-  \quad &&\kendall[D][D][2][2][LIFO]
+  \quad &&\kendall[D][D][2][2][LIFO].
 \end{align*}
 
 Can fuse characters:
 \begin{equation*}
-  \charfusion{\cdot}{\cup}\charfusion{\cdot}{\cup} \quad \charfusion{|\!\mkern 1.4mu{}^{\sim}\!\mkern 1.4mu|}{\charfusion{\mathbf{\_}}{\mathsf{c}\enspace\enspace\mkern 1.4mu}}
+  \charfusion{\cdot}{\cup}\charfusion{\cdot}{\cup} \quad \charfusion{|\!\mkern 1.4mu{}^{\sim}\!\mkern 1.4mu|}{\charfusion{\mathbf{\_}}{\mathsf{c}\enspace\enspace\mkern 1.4mu}}.
 \end{equation*}
 
 \subsection{Numbers and Units}
@@ -360,7 +364,7 @@ The \latexinline{siunitx} package formats numbers, lists, and ranges consistentl
   \quad \num{6.022e23},
   \quad \num{-0.5e-3},
   \quad \numlist{1;2;3},
-  \quad \numrange{10}{20}
+  \quad \numrange{10}{20},
 \end{equation*}
 
 \noindent
@@ -371,7 +375,7 @@ as well as quantities and angles:
   \quad \qtyrange{20}{25}{\celsius},
   \quad \qtylist{1;2;4}{\giga\byte},
   \quad \ang{45},
-  \quad \ang{12;30;15}
+  \quad \ang{12;30;15}.
 \end{equation*}
 
 The template declares some extra units:
@@ -383,7 +387,7 @@ The template declares some extra units:
   &\qty{2}{\symbol\per\second},
   \quad \qty{1}{\mile},
   \quad \qty{26.2}{\miles},
-  \quad \qty{5}{\mega\nothing}
+  \quad \qty{5}{\mega\nothing}.
 \end{align*}
 
 Quantities also work in running text, such as a link speed of \qty{100}{\mega\bit\per\second} or \qty{4}{\pixel} of padding.
@@ -392,59 +396,59 @@ Quantities also work in running text, such as a link speed of \qty{100}{\mega\bi
 
 Common probability distributions in aligned notation:
 \begin{align*}
-  X        &\sim \bernoulli{p}                            \\
-  X        &\sim \binomial{n}{p}                          \\
-  X        &\sim \poisson{\mu}                            \\
-  X        &\sim \hgeometric{N}{n}{k}                     \\
-  X        &\sim \geometric{p}                            \\
-  X        &\sim \negbinomial{k}{p}                       \\
-  \vect{X} &\sim \multinomial{\vp}{n}                     \\
-  X        &\sim \gaussian{\mu}{\sigma}                   \\
-  X        &\sim \exponential{\beta}                      \\
-  X        &\sim \chisq{\nu}                              \\
-  X        &\sim \studentt{\nu}                           \\
-  X        &\sim \gammadist{\alpha}{\beta}                \\
-  X        &\sim \weibull{\alpha}{\beta}                  \\
-  X        &\sim \fisher{\nu_1}{\nu_2}                    \\
-  X        &\sim \uniform{a}{b}                           \\
-  X        &\sim \betadist{\alpha}{\beta}                 \\
-  X        &\sim \pareto{\alpha}{\beta}                   \\
-  X        &\sim \loggaussian{\mu}{\sigma}                \\
-  X        &\sim \cauchy{\theta}{\sigma}                  \\
-  X        &\sim \laplacedist{\mu}{\beta}                 \\
-  X        &\sim \logistic{\mu}{\beta}                    \\
-  X        &\sim \invgaussian{\mu}{\lambda}               \\
-  X        &\sim \invgamma{\alpha}{\beta}                 \\
-  \vect{X} &\sim \multigaussian{\vect{\mu}}{\mat{\Sigma}}
+  X        &\sim \bernoulli{p},                            \\
+  X        &\sim \binomial{n}{p},                          \\
+  X        &\sim \poisson{\mu},                            \\
+  X        &\sim \hgeometric{N}{n}{k},                     \\
+  X        &\sim \geometric{p},                            \\
+  X        &\sim \negbinomial{k}{p},                       \\
+  \vect{X} &\sim \multinomial{\vp}{n},                     \\
+  X        &\sim \gaussian{\mu}{\sigma},                   \\
+  X        &\sim \exponential{\beta},                      \\
+  X        &\sim \chisq{\nu},                              \\
+  X        &\sim \studentt{\nu},                           \\
+  X        &\sim \gammadist{\alpha}{\beta},                \\
+  X        &\sim \weibull{\alpha}{\beta},                  \\
+  X        &\sim \fisher{\nu_1}{\nu_2},                    \\
+  X        &\sim \uniform{a}{b},                           \\
+  X        &\sim \betadist{\alpha}{\beta},                 \\
+  X        &\sim \pareto{\alpha}{\beta},                   \\
+  X        &\sim \loggaussian{\mu}{\sigma},                \\
+  X        &\sim \cauchy{\theta}{\sigma},                  \\
+  X        &\sim \laplacedist{\mu}{\beta},                 \\
+  X        &\sim \logistic{\mu}{\beta},                    \\
+  X        &\sim \invgaussian{\mu}{\lambda},               \\
+  X        &\sim \invgamma{\alpha}{\beta},                 \\
+  \vect{X} &\sim \multigaussian{\vect{\mu}}{\mat{\Sigma}}.
 \end{align*}
 
 \subsection{ISO}
 
 According to \href{https://webusers.imj-prg.fr/~jean-yves.ducloux/Typographie/ISO80000-2.pdf}{ISO 80000}, some math characters should be upright:
 \begin{align*}
-  \eu                                &= \lim_{n\to\infty}\pbr{1 + \frac{1}{n}}^n                                                                                                           \\
-  \iu = \ju                          &= \sqrt{-1}                                                                                                                                          \\
-  \legendre{n}\pbr{z}                &= \frac{1}{2^n\fac{n}}\diff*[n]{\pbr{z\sq - 1}^n}{z}                                                                                                 \\
-  \legendre{n}[m]\pbr{z}             &= \pbr{-1}^m \pbr{1 - z\sq}^{\sfrac{m}{2}} \diff*[n]{\legendre{n}\pbr{z}}{z}                                                                         \\
-  \harmonics{l}{m}\pbr{\nu, \varphi} &= \abr{\frac{\abr{2l + 1}\fac{\abr{l - \abs{m}}}}{4\pi\fac{\abr{l + \abs{m}}}}}^{\sfrac{1}{2}} \legendre{l}[\abs{m}] \cos\pbr{\nu}\eu^{\iu m\varphi} \\
-  \hermite{n}\pbr{z}                 &= \pbr{-1}^n \eu^{z\sq} \diff*[n]{\eu^{-z\sq}}{z}                                                                                                    \\
-  \laguerre{n}\pbr{z}                &= \eu^z \diff*[n]{\pbr{z^n \eu^{-z}}}{z}                                                                                                             \\
-  \laguerre{n}[m]\pbr{z}             &= \diff*[m]{\laguerre{n}\pbr{z}}{z}                                                                                                                  \\
-  \chebyshev{n}\pbr{z}               &= \cos\abr{n\arccos\abr{z}}                                                                                                                          \\
-  \chebyshevsecond{n}\pbr{z}         &= \sin\abr{\frac{\abr{n + 1}\arccos\abr{z}}{\sin\abr{\arccos\abr{z}}}}                                                                               \\
-  \besselj{v}\pbr{z}                 &= \sum_{k = 0}^\infty \frac{\pbr{-1}^k \pbr{\sfrac{z}{2}}^{v + 2k}}{\fac{k}\Gamma\pbr{v + k + 1}}                                                    \\
-  \neumann{v}\pbr{z}                 &= \frac{\besselj{v}\pbr{z}\cos\pbr{v\pi} - \besselj{-v}\pbr{z}}{\sin\pbr{v\pi}}                                                                      \\
-  \hankel{v}\pbr{z}                  &= \besselj{v}\pbr{z} + \iu\neumann{v}\pbr{z}                                                                                                         \\
-  \hankelsecond{v}\pbr{z}            &= \besselj{v}\pbr{z} - \iu\neumann{v}\pbr{z}                                                                                                         \\
-  \besseli{v}\pbr{z}                 &= \eu^{\sfrac{-\iu v\pi}{2}} \besselj{v}\pbr{\eu^{\sfrac{\iu\pi}{2}} z}                                                                              \\
-  \besselk{v}\pbr{z}                 &= \frac{\iu\pi}{2} \eu^{\sfrac{\iu v\pi}{2}} \hankel{v}\pbr{\eu^{\sfrac{\iu\pi}{2}} z}                                                               \\
-  \besseljs{l}\pbr{z}                &= \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \besselj{l + \sfrac{1}{2}}\pbr{z}                                                                              \\
-  \neumanns{l}\pbr{z}                &= \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \neumann{l + \sfrac{1}{2}}\pbr{z}                                                                              \\
-  \hankels{l}\pbr{z}                 &= \besseljs{l}\pbr{z} + \iu\neumanns{l}\pbr{z} = \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \hankel{l + \sfrac{1}{2}}\pbr{z}                                \\
-  \hankelseconds{l}\pbr{z}           &= \besseljs{l}\pbr{z} - \iu\neumanns{l}\pbr{z} = \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \hankelsecond{l + \sfrac{1}{2}}\pbr{z}                          \\
-  \besselis{l}\pbr{z}                &= \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \besseli{l + \sfrac{1}{2}}\pbr{z}                                                                              \\
-  \besselks{l}\pbr{z}                &= \pbr{\frac{2}{\pi z}}^{\sfrac{1}{2}} \besselk{l + \sfrac{1}{2}}\pbr{z}                                                                             \\
-  \frac{t}{\eu^t - 1}                &= \sum_{n = 0}^\infty \bernoullinumber{n} \frac{t^n}{\fac{n}}
+  \eu                                &= \lim_{n\to\infty}\pbr{1 + \frac{1}{n}}^n,                                                                                                           \\
+  \iu = \ju                          &= \sqrt{-1},                                                                                                                                          \\
+  \legendre{n}\pbr{z}                &= \frac{1}{2^n\fac{n}}\diff*[n]{\pbr{z\sq - 1}^n}{z},                                                                                                 \\
+  \legendre{n}[m]\pbr{z}             &= \pbr{-1}^m \pbr{1 - z\sq}^{\sfrac{m}{2}} \diff*[n]{\legendre{n}\pbr{z}}{z},                                                                         \\
+  \harmonics{l}{m}\pbr{\nu, \varphi} &= \abr{\frac{\abr{2l + 1}\fac{\abr{l - \abs{m}}}}{4\pi\fac{\abr{l + \abs{m}}}}}^{\sfrac{1}{2}} \legendre{l}[\abs{m}] \cos\pbr{\nu}\eu^{\iu m\varphi}, \\
+  \hermite{n}\pbr{z}                 &= \pbr{-1}^n \eu^{z\sq} \diff*[n]{\eu^{-z\sq}}{z},                                                                                                    \\
+  \laguerre{n}\pbr{z}                &= \eu^z \diff*[n]{\pbr{z^n \eu^{-z}}}{z},                                                                                                             \\
+  \laguerre{n}[m]\pbr{z}             &= \diff*[m]{\laguerre{n}\pbr{z}}{z},                                                                                                                  \\
+  \chebyshev{n}\pbr{z}               &= \cos\abr{n\arccos\abr{z}},                                                                                                                          \\
+  \chebyshevsecond{n}\pbr{z}         &= \sin\abr{\frac{\abr{n + 1}\arccos\abr{z}}{\sin\abr{\arccos\abr{z}}}},                                                                               \\
+  \besselj{v}\pbr{z}                 &= \sum_{k = 0}^\infty \eqpunct{\frac{\pbr{-1}^k \pbr{\sfrac{z}{2}}^{v + 2k}}{\fac{k}\Gamma\pbr{v + k + 1}}}{,}                                        \\
+  \neumann{v}\pbr{z}                 &= \eqpunct{\frac{\besselj{v}\pbr{z}\cos\pbr{v\pi} - \besselj{-v}\pbr{z}}{\sin\pbr{v\pi}}}{,}                                                          \\
+  \hankel{v}\pbr{z}                  &= \besselj{v}\pbr{z} + \iu\neumann{v}\pbr{z},                                                                                                         \\
+  \hankelsecond{v}\pbr{z}            &= \besselj{v}\pbr{z} - \iu\neumann{v}\pbr{z},                                                                                                         \\
+  \besseli{v}\pbr{z}                 &= \eu^{\sfrac{-\iu v\pi}{2}} \besselj{v}\pbr{\eu^{\sfrac{\iu\pi}{2}} z},                                                                              \\
+  \besselk{v}\pbr{z}                 &= \frac{\iu\pi}{2} \eu^{\sfrac{\iu v\pi}{2}} \hankel{v}\pbr{\eu^{\sfrac{\iu\pi}{2}} z},                                                               \\
+  \besseljs{l}\pbr{z}                &= \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \besselj{l + \sfrac{1}{2}}\pbr{z},                                                                              \\
+  \neumanns{l}\pbr{z}                &= \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \neumann{l + \sfrac{1}{2}}\pbr{z},                                                                              \\
+  \hankels{l}\pbr{z}                 &= \besseljs{l}\pbr{z} + \iu\neumanns{l}\pbr{z} = \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \hankel{l + \sfrac{1}{2}}\pbr{z},                                \\
+  \hankelseconds{l}\pbr{z}           &= \besseljs{l}\pbr{z} - \iu\neumanns{l}\pbr{z} = \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \hankelsecond{l + \sfrac{1}{2}}\pbr{z},                          \\
+  \besselis{l}\pbr{z}                &= \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \besseli{l + \sfrac{1}{2}}\pbr{z},                                                                              \\
+  \besselks{l}\pbr{z}                &= \pbr{\frac{2}{\pi z}}^{\sfrac{1}{2}} \besselk{l + \sfrac{1}{2}}\pbr{z},                                                                             \\
+  \frac{t}{\eu^t - 1}                &= \sum_{n = 0}^\infty \bernoullinumber{n} \eqpunct{\frac{t^n}{\fac{n}}}{.}
 \end{align*}
 
 \subsection{Theorem Environments}
@@ -634,14 +638,14 @@ Some crypto functions:
   &\validate,
   \quad \view,
   \quad \viewv,
-  \quad \Write
+  \quad \Write.
 \end{align*}
 
 \noindent
-And evaluating:
+Evaluation is written with \latexinline{\eval}:
 \begin{equation*}
   \eval\pbr{\mlq\mathord{+}\mrq, \va, \vb},
-  \quad \eval\pbr{\milq\mathord{\times}\mirq, \va, \vb}
+  \quad \eval\pbr{\milq\mathord{\times}\mirq, \va, \vb}.
 \end{equation*}
 
 Modified base algorithms from the package:
@@ -650,7 +654,7 @@ Modified base algorithms from the package:
   \quad \puncture,
   \quad \prover,
   \quad \verifier
-  \quad \verify
+  \quad \verify.
 \end{equation*}
 
 \subsubsection{Parties and Algebraic Structures}
@@ -673,7 +677,7 @@ Common cryptographic fields, groups, and sets:
   \quad \ZZps,
   \quad \ZZq,
   \quad \ZZqs,
-  \quad \ZZtwo
+  \quad \ZZtwo.
 \end{align*}
 
 \subsubsection{Hardness Assumptions, Systems, and Primitives}
@@ -689,14 +693,14 @@ Standard cryptographic assumptions and system models:
   \quad \mpc,
   \quad \pir,
   \quad \pprf,
-  \quad \ps
+  \quad \ps.
 \end{equation*}
 
 Complexity classes:
 \begin{equation*}
   \dtime,
   \quad \ip,
-  \quad \pspace
+  \quad \pspace.
 \end{equation*}
 
 Concrete primitive implementations and constructions:
@@ -713,7 +717,7 @@ Concrete primitive implementations and constructions:
   \quad \sha,
   \quad \shatwofiftysix,
   \quad \shafivetwelve,
-  \quad \vision
+  \quad \vision.
 \end{align*}
 
 \subsubsection{Key and Variable Styles}
@@ -746,7 +750,7 @@ Uniform notation for keys, parameters, and ciphertexts using \latexinline{\key}:
   \quad \rchk, \\
   &\rchpk,
   \quad \row,
-  \quad \seed
+  \quad \seed.
 \end{align*}
 
 \subsubsection{Functions, Sets, and Proofs}
@@ -755,7 +759,7 @@ Function spaces, permutations, proofs of knowledge, and sequences:
 \begin{equation*}
   \funs{\mathcal{X}}{\mathcal{Y}},
   \quad \perms{\mathcal{X}},
-  \quad \pok{w}{\mathcal{R}\pbr{x, w}},
+  \quad \pok{w}{\mathcal{R}\pbr{x, w}}.
 \end{equation*}
 
 \subsubsection{Security Advantages}
@@ -772,7 +776,7 @@ Advantage expressions for concrete security proofs:
   &\prgadv,
   \quad \prpadv,
   \quad \psadv,
-  \quad \psseladv
+  \quad \psseladv.
 \end{align*}
 
 \subsubsection{Probability, Expectation, and Asymptotics}
@@ -788,7 +792,7 @@ Asymptotic notation variants:
   \quad \bigO{n},
   \quad \bigOtilde{n},
   \quad \smallO{n},
-  \quad \smallOtilde{n}
+  \quad \smallOtilde{n}.
 \end{equation*}
 
 Custom landau definitions:
@@ -796,7 +800,7 @@ Custom landau definitions:
   \poly,
   \quad \poly[n],
   \quad \polylog,
-  \quad \polylog[n]
+  \quad \polylog[n].
 \end{equation*}
 
 \FloatBarrier

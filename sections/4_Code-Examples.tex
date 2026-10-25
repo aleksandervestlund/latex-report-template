@@ -2,7 +2,7 @@
 
 This section demonstrates how to include source code using the \latexinline{minted} package, which provides syntax highlighting for a wide range of languages. Code is typically presented in a \latexinline{listing} environment and can be customised with captions and labels for cross\-/referencing. The \latexinline{minted} package also supports inputting external files and allows for inline maths, though care must be taken when combining code and mathematical symbols.
 
-The use of \gls{recursion} in this algorithm makes it efficient in solving \gls{fibonacci}. Its time \gls{complexity} is $\bigO{n}$.
+The use of \gls{recursion} in the algorithm in \cref{lst:fibonacci} makes it efficient in solving \gls{fibonacci}. Its time \gls{complexity} is $\bigO{n}$.
 
 \begin{listing}[H]
   \begin{pythoncode}
@@ -30,7 +30,7 @@ print(f"The answer is {result}")
 
 Short snippets can be set inline with the \latexinline{\pythoninline} family of commands: \pythoninline{sum(Math.fib(42))}.
 
-External files can also be included, making it easy to manage larger projects:
+External files can also be included, as in \cref{lst:matlabHelloWorld}, making it easy to manage larger projects.
 
 \begin{listing}[H]
   \matlabfile{code/HelloWorld.m}
@@ -38,7 +38,7 @@ External files can also be included, making it easy to manage larger projects:
   \label{lst:matlabHelloWorld}
 \end{listing}
 
-Mathematical expressions can be embedded in code blocks but should be commented on properly or placed in strings to avoid confusion with the syntax:
+Mathematical expressions can be embedded in code blocks but should be commented on properly or placed in strings to avoid confusion with the syntax, as shown in \cref{lst:mathMinted}.
 
 \begin{listing}[H]
   \begin{pythoncode}
@@ -54,7 +54,7 @@ test
   \label{lst:mathMinted}
 \end{listing}
 
-The following example shows how one might embed \LaTeX\-/style maths within comments and strings in C\#:
+\Cref{lst:csharpMath} shows how one might embed \LaTeX\-/style maths within comments and strings in C\#.
 
 \begin{listing}[H]
   \begin{csharpcode}
