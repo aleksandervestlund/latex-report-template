@@ -5,7 +5,7 @@ This section demonstrates how to include source code using the \latexinline{mint
 The use of \gls{recursion} in this algorithm makes it efficient in solving \gls{fibonacci}. Its time \gls{complexity} is $\bigO{n}$.
 
 \begin{listing}[H]
-    \begin{pythoncode}
+  \begin{pythoncode}
 from collections.abc import Generator
 
 # This is an example. The next line is 67 (65 + 2) characters long:
@@ -23,23 +23,23 @@ class Math:
 
 result = sum(Math.fib(42))
 print(f"The answer is {result}")
-    \end{pythoncode}
-    \caption{Python implementation of the Fibonacci sequence.}
-    \label{lst:fibonacci}
+  \end{pythoncode}
+  \caption{Python implementation of the Fibonacci sequence.}
+  \label{lst:fibonacci}
 \end{listing}
 
 External files can also be included, making it easy to manage larger projects:
 
 \begin{listing}[H]
-    \matlabfile{Code/HelloWorld.m}
-    \caption{A simple MATLAB programme.}
-    \label{lst:matlabHelloWorld}
+  \matlabfile{Code/HelloWorld.m}
+  \caption{A simple MATLAB programme.}
+  \label{lst:matlabHelloWorld}
 \end{listing}
 
 Mathematical expressions can be embedded in code blocks but should be commented on properly or placed in strings to avoid confusion with the syntax:
 
 \begin{listing}[H]
-    \begin{pythoncode}
+  \begin{pythoncode}
 test
 $A \wedge B$
 test
@@ -47,21 +47,21 @@ test
 test
 |$A \wedge B$|
 test
-    \end{pythoncode}
-    \caption{Using math inside \latexinline{minted} environments.}
-    \label{lst:mathMinted}
+  \end{pythoncode}
+  \caption{Using math inside \latexinline{minted} environments.}
+  \label{lst:mathMinted}
 \end{listing}
 
 The following example shows how one might embed \LaTeX\-/style maths within comments and strings in C\#:
 
 \begin{listing}[H]
-    \begin{csharpcode}
+  \begin{csharpcode}
 string title = "This is a Unicode $\pi$ in the sky"
 /**
  * Defined as $\pi=\lim_{n\to\infty}\frac{P_n}{d}$ where $P$ is the perimeter of an $n$-sided regular polygon circumscribing a circle of diameter $d$.
  */
 const double pi = 3.1415926535
-    \end{csharpcode}
-    \caption{Using mathematical notation in C\# code comments and strings.}
-    \label{lst:csharpMath}
+  \end{csharpcode}
+  \caption{Using mathematical notation in C\# code comments and strings.}
+  \label{lst:csharpMath}
 \end{listing}

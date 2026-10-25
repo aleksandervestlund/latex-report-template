@@ -14,9 +14,9 @@ References to academic works should be made using \latexinline{\cite} or \latexi
 
 Different dashes are used for different purposes in English typesetting:
 \begin{itemize}
-    \item \textbf{Hyphen (\-/)} is used to join words, as in \textquote[][.]{well\-/known algorithm}
-    \item \textbf{En dash (\-/\-/)} is used for numeric ranges, such as "pages 10\--20" or \textquote[][.]{January\==March}
-    \item \textbf{Em dash (\-/\-/\-/)} is used as a parenthetical break \--- like this \--- in a sentence.
+  \item \textbf{Hyphen (\-/)} is used to join words, as in \textquote[][.]{well\-/known algorithm}
+  \item \textbf{En dash (\-/\-/)} is used for numeric ranges, such as "pages 10\--20" or \textquote[][.]{January\==March}
+  \item \textbf{Em dash (\-/\-/\-/)} is used as a parenthetical break \--- like this \--- in a sentence.
 \end{itemize}
 
 \subsection{Quotations}
@@ -29,11 +29,11 @@ To ensure proper quotation formatting across languages and document styles, the 
 The \latexinline{glossaries-extra} package is useful for defining glossary entries, acronyms, initialisms, and symbols. Basic glossary and acronym usage:
 
 \begin{itemize}
-    \item \latexinline{\gls{}} on first use expands to the full form: \gls{api}.
-    \item \latexinline{\glspl{}} gives the plural: \glspl{api}.
-    \item Subsequent uses are abbreviated: \gls{api}, \gls{cpu}, \gls{os}, \gls{dr}, \gls{etc}.
-    \item \latexinline{\glsxtrshort{}} forces the short form: \glsxtrshort{cpu}.
-    \item \latexinline{\newinitialism{}} defines initialisms separately from acronyms, appearing in their own glossary list.
+  \item \latexinline{\gls{}} on first use expands to the full form: \gls{api}.
+  \item \latexinline{\glspl{}} gives the plural: \glspl{api}.
+  \item Subsequent uses are abbreviated: \gls{api}, \gls{cpu}, \gls{os}, \gls{dr}, \gls{etc}.
+  \item \latexinline{\glsxtrshort{}} forces the short form: \glsxtrshort{cpu}.
+  \item \latexinline{\newinitialism{}} defines initialisms separately from acronyms, appearing in their own glossary list.
 \end{itemize}
 
 Symbol entries defined with the \latexinline{symbols} glossary type are listed in the symbols glossary. All glossaries are printed via \latexinline{\printglossaries}, which is called in the main file after the appendix.
@@ -43,40 +43,40 @@ Symbol entries defined with the \latexinline{symbols} glossary type are listed i
 The \latexinline{enumitem} package provides flexible list customization. The template configures five levels of nested enumeration:
 
 \begin{enumerate}
-    \item First level (arabic)
+  \item First level (arabic)
+  \begin{enumerate}
+    \item Second level (alphabetic)
     \begin{enumerate}
-        \item Second level (alphabetic)
+      \item Third level (roman)
+      \begin{enumerate}
+        \item Fourth level (Alphabetic)
         \begin{enumerate}
-            \item Third level (roman)
-            \begin{enumerate}
-                \item Fourth level (Alphabetic)
-                \begin{enumerate}
-                    \item Fifth level (Roman)
-                \end{enumerate}
-            \end{enumerate}
+          \item Fifth level (Roman)
         \end{enumerate}
+      \end{enumerate}
     \end{enumerate}
+  \end{enumerate}
 \end{enumerate}
 
 For now, only four levels of \latexinline{itemize} are defined:
 
 \begin{itemize}
-    \item First level.
+  \item First level.
+  \begin{itemize}
+    \item Second level.
     \begin{itemize}
-        \item Second level.
-        \begin{itemize}
-            \item Third level.
-            \begin{itemize}
-                \item Fourth level.
-            \end{itemize}
-        \end{itemize}
+      \item Third level.
+      \begin{itemize}
+        \item Fourth level.
+      \end{itemize}
     \end{itemize}
+  \end{itemize}
 \end{itemize}
 
 Inline lists are sometimes useful: \begin{enumerate*}
-    \item Something
-    \item something else
-    \item something else entirely
+  \item Something
+  \item something else
+  \item something else entirely
 \end{enumerate*}.
 
 \subsection{Miscellaneous}
@@ -85,8 +85,8 @@ URLs should be typeset using \latexinline{\url{}} from the \latexinline{xurl} pa
 
 The \latexinline{comment} package allows entire blocks of content to be suppressed without deleting them.
 \begin{comment}
-    This content is inside a comment environment and will not appear in the output.
-    It can span multiple lines and contain arbitrary LaTeX commands.
+  This content is inside a comment environment and will not appear in the output.
+  It can span multiple lines and contain arbitrary LaTeX commands.
 \end{comment}
 The block above is invisible in the compiled output.
 

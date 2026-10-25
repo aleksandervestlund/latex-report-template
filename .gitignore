@@ -1,0 +1,60 @@
+# LaTeX build output
+/main.pdf
+/build/
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.dvi
+*.fdb_latexmk
+*.fls
+*.loa
+*.lof
+*.log
+*.lol
+*.lot
+*.out
+*.run.xml
+*.synctex
+*.synctex.gz
+*.synctex(busy)
+*.synctex.gz(busy)
+*.lop
+*.mw
+*.thlist
+*.toc
+*.xdv
+
+# biblatex/biber
+*-blx.bib
+*.bbl-SAVE-ERROR
+*.bcf-SAVE-ERROR
+
+# glossaries
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.ist
+*.slg
+*.slo
+*.sls
+*.glg-*
+*.glo-*
+*.gls-*
+*-glg
+*-glo
+*-gls
+
+# minted
+_minted*/
+*.pyg
+
+# MacOS
+.DS_Store
+
+# VS Code
+.vscode/
