@@ -5,21 +5,31 @@
 
   \dirtree{%
     .1 ..
+    .2 {.}github/workflows/build-pdf.yml\DTcomment{Builds the PDF on GitHub}.
+    .2 {.}gitignore\DTcomment{Keeps build files out of Git}.
+    .2 {.}latexmkrc\DTcomment{Extra build files for \bashinline{latexmk} to clean}.
     .2 main.tex\DTcomment{Your main file}.
     .2 packages.sty\DTcomment{Contains package imports and commands}.
     .2 references.bib\DTcomment{Your bibliography file}.
     .2 glossary.tex\DTcomment{Your glossary file}.
-    .2 Makefile\DTcomment{To run \bashinline{pdflatex}}.
+    .2 Makefile\DTcomment{To build and clean with \bashinline{latexmk}}.
     .2 README.md\DTcomment{For info on GitHub}.
-    .2 Sections\DTcomment{Folder for text}.
-    .3 00\_Title\DTcomment{Title page}.
-    .3 01\_Frontmatter\DTcomment{Front page}.
-    .3 99\_Appendix\DTcomment{Appendix}.
-    .2 Images\DTcomment{Folder for images}.
+    .2 sections\DTcomment{Folder for text}.
+    .3 0\_Abstract.tex\DTcomment{Abstract and keywords}.
+    .3 1\_Introduction.tex\DTcomment{Introduction}.
+    .3 2\_Math-Examples.tex\DTcomment{Math examples}.
+    .3 3\_Figures-and-Tables.tex\DTcomment{Figure and table examples}.
+    .3 4\_Code-Examples.tex\DTcomment{Code examples}.
+    .3 5\_Algorithm-Example.tex\DTcomment{Algorithm examples}.
+    .3 6\_Language.tex\DTcomment{Language and referencing guide}.
+    .3 99\_Appendix.tex\DTcomment{Appendix}.
+    .2 images\DTcomment{Folder for images}.
     .3 MIT\_logo.png\DTcomment{\latexinline{\mitlogo}}.
     .3 NTNU\_logo\_EN.png\DTcomment{\latexinline{\ntnulogo} (language$\in$\{american,  british\})}.
     .3 NTNU\_logo\_NB.png\DTcomment{\latexinline{\ntnulogo} (language=norsk)}.
     .3 SNU\_logo.png\DTcomment{\latexinline{\snulogo}}.
-    .2 Code\DTcomment{Folder for code snippets}.
+    .3 the\_way.jpg\DTcomment{Example image}.
+    .2 code\DTcomment{Folder for code snippets}.
+    .3 HelloWorld.m\DTcomment{Example MATLAB file}.
   }
 \end{appendices}

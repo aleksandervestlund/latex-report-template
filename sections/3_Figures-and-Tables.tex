@@ -1,6 +1,6 @@
 \section{Figures and Tables}
 
-In this section, we demonstrate how to include and format both figures and tables using \LaTeX. Note that by convention, table captions are placed above the table, while figure captions are placed below the image. This reflects common typesetting standards to help readers interpret the content before or after viewing it. Examples are shown in \cref{fig:theway,fig:subfigures,fig:pgfplot,fig:pulses,tab:standard,tab:budget}.
+In this section, we demonstrate how to include and format both figures and tables using \LaTeX. Note that by convention, table captions are placed above the table, while figure captions are placed below the image. This reflects common typesetting standards to help readers interpret the content before or after viewing it. Examples are shown in \cref{fig:theway,fig:subfigures,fig:pgfplot,fig:pulses,fig:tikzLibraries,fig:gantt,fig:adjustbox,fig:rotating,tab:standard,tab:budget}.
 
 \begin{figure}
   \centering
@@ -127,6 +127,128 @@ A simple plot using \latexinline{pgfplots} and drawing manually using \latexinli
   \label{fig:pulses}
 \end{figure}
 
+The loaded TikZ libraries cover relative positioning, geometric shapes, fitting nodes around others, braces and markings along paths, coordinate calculations, matrices of nodes, magnifying parts of a picture, and computations:
+
+\begin{figure}
+  \centering
+  \begin{subfigure}{\linewidth}
+    \centering
+    \begin{tikzpicture}[
+      block/.style={draw, rounded corners, minimum height=2em, minimum width=5em},
+    ]
+      \node[block]                                    (in)  {Input};
+      \node[block, right=3em of in]                   (pr)  {Process};
+      \node[draw, diamond, aspect=2, right=3em of pr] (ok)  {Valid?};
+      \node[block, right=3em of ok]                   (out) {Output};
+      \node[draw, dashed, inner sep=1.5em, fit=(in) (pr) (ok) (out)] (box) {};
+
+      \draw[->] (in) -- (pr);
+      \draw[->] (pr) -- (ok);
+      \draw[
+        postaction={decorate},
+        decoration={markings, mark=at position 0.5 with {\arrow{>}}},
+      ] (ok) -- node[above] {yes} (out);
+      \draw[->] (ok.south) -- ++(0,-0.75em) -| node[pos=0.25, above] {no} (pr.south);
+      \draw[decorate, decoration={brace, amplitude=0.5em}]
+        ($(box.north west) + (0,0.25em)$) -- ($(box.north east) + (0,0.25em)$) node[midway, above=0.75em] {Pipeline};
+    \end{tikzpicture}
+    \caption{Flowchart.}
+  \end{subfigure}
+  \vskip\baselineskip
+  \begin{subfigure}{0.45\linewidth}
+    \centering
+    \begin{tikzpicture}[
+      spy using outlines={circle, magnification=3, size=1.5cm, connect spies},
+    ]
+      \matrix (m) [
+        matrix of math nodes,
+        left delimiter=(,
+        right delimiter=),
+        nodes={font=\tiny},
+      ] {
+        1 & 2 & 3 \\
+        4 & 5 & 6 \\
+        7 & 8 & 9 \\
+      };
+      \spy on (m-2-2) in node at ($(m.east) + (1.5cm,0)$);
+    \end{tikzpicture}
+    \caption{\latexinline{matrix} and \latexinline{spy}.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.45\linewidth}
+    \centering
+    \begin{tikzpicture}
+      \tikzmath{
+        integer \n;
+        \n = 7;
+        \sector = 360 / \n;
+      }
+      \foreach \i in {1,...,\n} {
+        \draw ({\i * \sector}:1cm) -- ({(\i + 1) * \sector}:1cm);
+        \fill ({\i * \sector}:1cm) circle (0.05cm);
+      }
+    \end{tikzpicture}
+    \caption{\latexinline{math}.}
+  \end{subfigure}
+  \caption{The TikZ libraries loaded by the template.}
+  \label{fig:tikzLibraries}
+\end{figure}
+
+Project plans can be drawn with \latexinline{pgfgantt}:
+
+\begin{figure}
+  \centering
+  \begin{ganttchart}[
+    hgrid,
+    vgrid,
+    x unit=0.6cm,
+    y unit chart=0.6cm,
+  ]{1}{12}
+    \gantttitle{2026}{12}                \\
+    \gantttitlelist{1,...,12}{1}         \\
+    \ganttgroup{Project}{1}{12}          \\
+    \ganttbar{Research}{1}{4}            \\
+    \ganttbar{Implementation}{4}{9}      \\
+    \ganttmilestone{Prototype}{9}        \\
+    \ganttbar{Writing}{9}{12}
+    \ganttlink{elem1}{elem2}
+    \ganttlink{elem2}{elem3}
+    \ganttlink{elem3}{elem4}
+  \end{ganttchart}
+  \caption{A Gantt chart using \latexinline{pgfgantt}.}
+  \label{fig:gantt}
+\end{figure}
+
+Images can be trimmed, framed, and rotated with \latexinline{adjustbox}, and text can be rotated with \latexinline{rotating}:
+
+\begin{figure}
+  \centering
+  \begin{subfigure}{0.45\linewidth}
+    \centering
+    \adjincludegraphics[width=0.8\linewidth, trim={0 {0.25\height} 0 {0.25\height}}, clip, frame]{the_way}
+    \caption{Trimmed and framed.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.45\linewidth}
+    \centering
+    \adjustbox{frame, rotate=10, width=0.8\linewidth}{\includegraphics{the_way}}
+    \caption{Framed and rotated.}
+  \end{subfigure}
+  \caption{Image manipulation using \latexinline{adjustbox}.}
+  \label{fig:adjustbox}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \begin{sideways}Sideways\end{sideways}
+  \hspace{3em}
+  \begin{turn}{30}Turned \ang{30}\end{turn}
+  \hspace{3em}
+  \begin{turn}{-30}Turned \ang{-30}\end{turn}
+  \caption{Rotated text using \latexinline{rotating}.}
+  \label{fig:rotating}
+\end{figure}
+
 \begin{table}
   \begin{tblr}{
     colspec={ccc},
@@ -181,7 +303,7 @@ A simple plot using \latexinline{pgfplots} and drawing manually using \latexinli
 
 The \latexinline{siunitx} package provides consistent number and unit formatting.
 
-\latexinline{\footnotenonumber}\footnote{Numbered.} adds an unnumbered footnote\footnotenonumber{Unnumbered.}. The\footnote{Numbered again.} \latexinline{multirow} and \latexinline{multicol} packages allow spanning rows and columns:
+\latexinline{\footnotenonumber}\footnote{Numbered.} adds an unnumbered footnote\footnotenonumber{Unnumbered.}. The\footnote{Numbered again.} \latexinline{\SetCell} command from \latexinline{tabularray} lets cells span rows and columns:
 
 \begin{table}
   \begin{tblr}{

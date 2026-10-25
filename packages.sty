@@ -359,8 +359,8 @@
 \newcommand*{\remarkqed} {\xqed{\Diamond}}
 
 \newkeytheoremstyle{goal}{
-  spaceabove=\topsep,
-  spacebelow=\topsep,
+  spaceabove=0.15em,
+  spacebelow=0.15em,
   bodyfont=\normalfont,
   headindent=0em,
   headfont=\bfseries,
@@ -815,7 +815,7 @@
   exponent-product=\cdot,
   group-digits=integer,
   group-minimum-digits=4,
-  list-final-separator={, and~},
+  list-final-separator={,\text{ and}~},
   per-mode=symbol,
   reset-math-version=false,
 ]{siunitx}
@@ -953,7 +953,6 @@
 \ExplSyntaxOff
 
 % ------- Figures and tables --------
-\RequirePackage{capt-of}
 \RequirePackage{rotating}
 \RequirePackage[nottoc]{tocbibind}
 
@@ -1208,7 +1207,7 @@
 \newcommand*{\possessivestring}{'s}
 \NewDocumentCommand{\textscite}{o m}{%
   \citeauthor{#2}\possessivestring\addnbspace[%
-    \IfValueTF{#1}{\citeyear[#1]{#2}}{\citeyear{#2}}
+    \IfValueTF{#1}{\citeyear[#1]{#2}}{\citeyear{#2}}%
   ]%
 }
 
@@ -1267,7 +1266,9 @@
 \renewcommand*{\kgen}     {\pcalgostyle{Key}\gen}
 \renewcommand*{\pp}       {\key[pp]}
 \renewcommand*{\probname} {\mathbb{P}}
+\renewcommand*{\prover}   {\mathcal{P}}
 \renewcommand*{\puncture} {\pcalgostyle{Punc}}
+\renewcommand*{\verifier} {\mathcal{V}}
 \renewcommand*{\verify}   {\pcalgostyle{Ver}}
 
 \createprocedureblock {expprocb}{center,boxed}{}{$\mathrm{Experiment}$}{}
@@ -1356,25 +1357,22 @@
 \newcommand*{\viewv}          {\view_{\mathcal{V}^*}}
 \newcommand*{\Write}          {\pcalgostyle{Write}}
 
-\newcommand*{\circuit}     {\mathcal{C}}
-\newcommand*{\proveralgo}  {\mathcal{P}}
-\newcommand*{\verifieralgo}{\mathcal{V}}
-
-\newcommand*{\bins} {\bin^\secpar}
-\newcommand*{\FFbar}{\overline{\FF}}
-\newcommand*{\FFp}  {\FF_p}
-\newcommand*{\FFq}  {\FF_q}
-\newcommand*{\FFtwo}{\FF_2}
-\newcommand*{\GGp}  {\GG_p}
-\newcommand*{\GGq}  {\GG_q}
-\newcommand*{\QQbar}{\overline{\QQ}}
-\newcommand*{\ZZn}  {\ZZ_n}
-\newcommand*{\ZZns} {\ZZ_n^*}
-\newcommand*{\ZZp}  {\ZZ_p}
-\newcommand*{\ZZps} {\ZZ_p^*}
-\newcommand*{\ZZq}  {\ZZ_q}
-\newcommand*{\ZZqs} {\ZZ_q^*}
-\newcommand*{\ZZtwo}{\ZZ_2}
+\newcommand*{\bins}   {\bin^\secpar}
+\newcommand*{\circuit}{\mathcal{C}}
+\newcommand*{\FFbar}  {\overline{\FF}}
+\newcommand*{\FFp}    {\FF_p}
+\newcommand*{\FFq}    {\FF_q}
+\newcommand*{\FFtwo}  {\FF_2}
+\newcommand*{\GGp}    {\GG_p}
+\newcommand*{\GGq}    {\GG_q}
+\newcommand*{\QQbar}  {\overline{\QQ}}
+\newcommand*{\ZZn}    {\ZZ_n}
+\newcommand*{\ZZns}   {\ZZ_n^*}
+\newcommand*{\ZZp}    {\ZZ_p}
+\newcommand*{\ZZps}   {\ZZ_p^*}
+\newcommand*{\ZZq}    {\ZZ_q}
+\newcommand*{\ZZqs}   {\ZZ_q^*}
+\newcommand*{\ZZtwo}  {\ZZ_2}
 
 \newcommand*{\cdh} {\pcalgostyle{CDH}}
 \newcommand*{\cpa} {\pcalgostyle{CPA}}
@@ -1483,6 +1481,7 @@
 \newcommand*{\setupcrefenglish}{
   \setcrefenglish{assumption}       {Assumption}        {Assumptions}
   \setcrefenglish{attackgame}       {Attack Game}       {Attack Games}
+  \setcrefenglish{conjecture}       {Conjecture}        {Conjectures}
   \setcrefenglish{construction}     {Construction}      {Constructions}
   \setcrefenglish{exercise}         {Exercise}          {Exercises}
   \setcrefenglish{fact}             {Fact}              {Facts}
@@ -1514,6 +1513,7 @@
   \setcrefnorsk{eksempel}          {Eksempel}
   \setcrefnorsk{faktum}            {Faktum}
   \setcrefnorsk{funksjonalitetsmål}{Funksjonalitetsmål}
+  \setcrefnorsk{konjektur}         {Konjektur}
   \setcrefnorsk{konstruksjon}      {Konstruksjon}
   \setcrefnorsk{korollar}          {Korollar}
   \setcrefnorsk{løsning}           {Løsning}
@@ -1562,6 +1562,7 @@
   translate=babel,
 ]{glossaries-extra} % Must load after hyperref
 \RequirePackage{mfirstuc-english}
+\MFUhyphentrue
 
 \newcommand*{\alsoidx}[1]{\glsadd{#1}}
 
@@ -1604,20 +1605,6 @@
   }
 }
 
-\newcommand*{\cGlsshort}  [1]{\texorpdfstring{\Glsentryshort{#1}}  {\glsentryshort{#1}}}
-\newcommand*{\cglsshort}  [1]{\texorpdfstring{\glsentryshort{#1}}  {\glsentryshort{#1}}}
-\newcommand*{\cGlsshortpl}[1]{\texorpdfstring{\Glsentryshortpl{#1}}{\glsentryshortpl{#1}}}
-\newcommand*{\cglsshortpl}[1]{\texorpdfstring{\glsentryshortpl{#1}}{\glsentryshortpl{#1}}}
-\newcommand*{\cGlslong}   [1]{\texorpdfstring{\Glsentrylong{#1}}   {\glsentryshort{#1}}}
-\newcommand*{\cglslong}   [1]{\texorpdfstring{\glsentrylong{#1}}   {\glsentryshort{#1}}}
-\newcommand*{\cGlslongpl} [1]{\texorpdfstring{\Glsentrylongpl{#1}} {\glsentryshortpl{#1}}}
-\newcommand*{\cglslongpl} [1]{\texorpdfstring{\glsentrylongpl{#1}} {\glsentryshortpl{#1}}}
-\newcommand*{\cGlsfull}   [1]{\texorpdfstring{\Glsentryfull{#1}}   {\glsentryshort{#1}}}
-\newcommand*{\cglsfull}   [1]{\texorpdfstring{\glsentryfull{#1}}   {\glsentryshort{#1}}}
-\newcommand*{\cGlsfullpl} [1]{\texorpdfstring{\Glsentryfullpl{#1}} {\glsentryshortpl{#1}}}
-\newcommand*{\cglsfullpl} [1]{\texorpdfstring{\glsentryfullpl{#1}} {\glsentryshortpl{#1}}}
-
-\MFUhyphentrue
 \newcommand*{\tgls}  [1]{\glsentrytitlecase{#1}{long}}
 \newcommand*{\tglspl}[1]{\glsentrytitlecase{#1}{longpl}}
 
@@ -1709,6 +1696,7 @@
   parfill,
   tocskip,
 ]{parskip}
+\setlength{\emergencystretch}{1em}
 \AddToHook{env/longtblr/begin}{\setlength{\parfillskip}{0em plus 1fil}}
 \pretocmd{\dirtree}{\begingroup\setlength{\parfillskip}{0em plus 1fil}}{}{}
 \apptocmd{\dirtree}{\endgroup}{}{}                                     {}{}

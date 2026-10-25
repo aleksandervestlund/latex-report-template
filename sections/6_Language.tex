@@ -8,7 +8,9 @@ Cross\-/referencing is done using the \latexinline{cleveref} package, which auto
 
 The \latexinline{hyperref} package enables clickable links throughout the document, including cross\-/references, citations, and the table of contents. The \latexinline{bookmark} package extends this with improved PDF bookmark generation. The \latexinline{refcheck} package warns about unused labels \--- remove \latexinline{norefs} to display the labels.
 
-References to academic works should be made using \latexinline{\cite} or \latexinline{\textcite}. For example, \cite{xx00} discusses some of the concepts used here while \textcite{xx00} provides an in\-/depth explanation. The difference is that \latexinline{\textcite} integrates the citation naturally into the sentence structure.
+References to academic works should be made using \latexinline{\cite} or \latexinline{\textcite}. For example, \cite{xx00} discusses some of the concepts used here while \textcite{xx00} provides an in\-/depth explanation. The difference is that \latexinline{\textcite} integrates the citation naturally into the sentence structure. For the possessive form, \latexinline{\textscite} gives \textscite{xx00} explanation. DOIs are typeset as links with \latexinline{\doi}, as in \doi{10.1000/182}.
+
+When sections are unnumbered, i.e., when \latexinline{secnumdepth} is set to \num{0}, \latexinline{\cref} has no number to print, so \latexinline{\nameref} is commonly used instead to refer to a section by its title: \nameref{sec:math}. The \latexinline{lastpage} package provides the number of the last page, \pageref{LastPage}, for page footers such as \enquote{Page 3 of \pageref{LastPage}}.
 
 \subsection{Hyphenation and Punctuation}
 
@@ -34,9 +36,21 @@ The \latexinline{glossaries-extra} package is useful for defining glossary entri
   \item Subsequent uses are abbreviated: \gls{api}, \gls{cpu}, \gls{os}, \gls{dr}, \gls{etc}.
   \item \latexinline{\glsxtrshort{}} forces the short form: \glsxtrshort{cpu}.
   \item \latexinline{\newinitialism{}} defines initialisms separately from acronyms, appearing in their own glossary list.
+  \item \latexinline{\tgls{}} and \latexinline{\tglspl{}} give the long form in title case, which is useful in headings: \tgls{etc} and \tglspl{os}.
+  \item Symbols are referenced in the same way: $E = m\gls{c}\sq$.
 \end{itemize}
 
-Symbol entries defined with the \latexinline{symbols} glossary type are listed in the symbols glossary. All glossaries are printed via \latexinline{\printglossaries}, which is called in the main file after the appendix.
+Symbol entries defined with the \latexinline{symbols} glossary type are listed in the symbols glossary. All glossaries are printed via \latexinline{\printglossaries}, which is called in the main file before the appendix.
+
+\subsection{Text Formatting}
+
+The \latexinline{pifont} package provides dingbats such as \ding{51}, \ding{55}, and \ding{43}, which are handy for checklists. With \latexinline{relsize}, text can be made \textlarger{larger} or \textsmaller{smaller} relative to the current size, and $\mathlarger{\sum}$ enlarges an operator.
+
+Long unbreakable strings, such as hashes, can be broken anywhere with \latexinline{seqsplit}: \seqsplit{e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855}.
+
+The \latexinline{soul} package offers \hl{highlighting}, \st{strikethrough}, \so{letterspacing}, and \ul{underlining} that allows hyphenation, while \latexinline{ulem} offers \uline{single}, \uuline{double}, \uwave{wavy}, \dashuline{dashed}, and \dotuline{dotted} underlines, as well as \sout{struck through} and \xout{crossed out} text.
+
+Numbers can be written out with \latexinline{fmtcount} (\numberstringnum{42}, \Numberstringnum{7}, \ordinalnum{3}, and \ordinalstringnum{21}), \latexinline{nth} (\nth{1}, \nth{22}, and \nth{103}), and \latexinline{\Romannumeral} (\Romannumeral{2026}). Words with diacritics have shorthands that adapt to the language: a \naive approach and \Naive Bayes.
 
 \subsection{Lists}
 
@@ -81,7 +95,7 @@ Inline lists are sometimes useful: \begin{enumerate*}
 
 \subsection{Miscellaneous}
 
-URLs should be typeset using \latexinline{\url{}} from the \latexinline{xurl} package, which allows line\-/breaking at sensible points.
+URLs should be typeset using \latexinline{\url{}} from the \latexinline{xurl} package, which allows line\-/breaking at sensible points: \url{https://ctan.org/pkg/xurl}.
 
 The \latexinline{comment} package allows entire blocks of content to be suppressed without deleting them.
 \begin{comment}

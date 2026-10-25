@@ -1,4 +1,6 @@
 \section{Math Examples}
+\label{sec:math}
+
 This section demonstrates various mathematical features supported by the template. Every package listed under the \enquote{Mathematics} category in \latexinline{packages.sty} is represented here with a usage example. Some of these examples are purely illustrative and are not necessarily mathematically meaningful.
 
 The \gls{gcd} and \gls{lcm} are fundamental concepts in number theory. The \gls{lcm} of two numbers is the smallest number that is a multiple of both. We begin with examples of custom\-/defined relation symbols:
@@ -11,7 +13,7 @@ The \gls{gcd} and \gls{lcm} are fundamental concepts in number theory. The \gls{
   \quad y \mineq 4
 \end{equation*}
 
-There are three (four) ways to defined a variable:
+There are three (four) ways to define a variable:
 \begin{equation*}
   x \defeq y + z,
   \quad a \triangleq b + c,
@@ -50,6 +52,7 @@ We can also use bracket functions:
   \quad \round{2.4} = 2
 \end{equation*}
 
+\noindent
 and \latexinline{\mod} clones:
 \begin{equation*}
   c \rem q = c \prem{q} = c \brem q = c - \round{\frac{c}{q}}q
@@ -75,6 +78,7 @@ Intervals:
   \intoo{1}{2}, \quad \intoc{1}{2}, \quad \intco{1}{2}, \quad \intcc{1}{2}
 \end{equation*}
 
+\noindent
 And comma\-/separated matrix environment:
 \begin{equation*}
   \begin{pvector}
@@ -82,47 +86,67 @@ And comma\-/separated matrix environment:
   \end{pvector}
 \end{equation*}
 
-And automatic sizing of delimiters:
+\noindent
+And shorthands for indexed sets and vectors:
+\begin{equation*}
+  \aset{x}{n},
+  \quad \avector{x}{n}
+\end{equation*}
+
+\noindent
+And automatic sizing of delimiters, including the \latexinline{\given} bar:
 \begin{equation*}
   \pbr{1 + \frac{1}{2}},
   \quad \sbr{2 + \frac{2}{3}},
   \quad \cbr{3 + \frac{3}{4}},
-  \quad \set{4 + \frac{4}{5}}
+  \quad \set{4 + \frac{4}{5}},
+  \quad \pbr{\frac{a}{b} \given c}
 \end{equation*}
 
+\noindent
 Further, automatic type of delimiters:
 \begin{equation*}
   a + \abr{b + \abr{c + \abr{d + \abr{e + \abr{f + \abr{g + h} + \abr{i + j} + k} + l} + m} + n} + o} + p
 \end{equation*}
 
-Some machine learning constants:
+Some machine learning and signal processing constants:
 \begin{equation*}
   \data,
   \quad \loss,
-  \quad \hypothesis
+  \quad \hypothesis,
+  \quad \snr
 \end{equation*}
 
 \subsection{Operators}
 
 Declared math operators:
 \begin{align*}
-  &\Adj\pbr{A},
+  &\adj\pbr{G},
+  \quad \Adj\pbr{A},
+  \quad \distance\pbr{x, y},
   \quad \divergence\pbr{n},
-  \quad \fraction\pbr{n},
-  \quad \grad\pbr{n},
+  \quad \erf\pbr{x},
+  \quad \erfc\pbr{x},
+  \quad \Fix\pbr{f},
+  \quad \fraction\pbr{n}, \\
+  &\grad\pbr{n},
   \quad \id\pbr{n},
   \quad \Im\pbr{n},
   \quad \integer\pbr{n},
-  \quad \Law\pbr{n}, \\
-  &\lb\pbr{n},
+  \quad \Law\pbr{n},
+  \quad \lb\pbr{n},
   \quad \lcm\pbr{n},
-  \quad \ord\pbr{n},
+  \quad \Maj\pbr{a, b, c}, \\
+  &\ord\pbr{n},
+  \quad \per\pbr{A},
   \quad \rank\pbr{n},
   \quad \Re\pbr{n},
   \quad \rot\pbr{n},
   \quad \sinc\pbr{\omega},
-  \quad \sgn\pbr{n}, \\
-  &\tr\pbr{n},
+  \quad \sgn\pbr{n},
+  \quad \slpsp\pbr{n}, \\
+  &\spsp\pbr{n},
+  \quad \tr\pbr{n},
   \quad \softmax_n\pbr{n},
   \quad \logtwo\sq\pbr{n},
   \quad \logten\pbr{n},
@@ -143,6 +167,7 @@ Expected value and variance:
   \Cov\pbr{X, Y} &= \expect{XY} - \expect{X}\expect{Y}
 \end{align*}
 
+\noindent
 And the indicator function:
 \begin{equation*}
   n = \sum_i \indicator{i > \frac{2\abr{n + 1}}{3}}
@@ -156,6 +181,16 @@ Commonly used mathematical sets and transforms:
   \quad \laplaceinvt{\laplacet{x}} = x,
   \quad \fourierinvt{\fouriert{x}} = x,
   \quad \compl{A}
+\end{equation*}
+
+Indicator functions and blackboard bold from \latexinline{bbm} and \latexinline{dsfont}, and semantic brackets and the contradiction symbol from \latexinline{stmaryrd}:
+\begin{equation*}
+  \mathbbm{1}_A,
+  \quad \mathds{1}_A,
+  \quad \mathds{R},
+  \quad \llbracket 1, n \rrbracket,
+  \quad \llbracket P \rrbracket,
+  \quad \lightning
 \end{equation*}
 
 \subsection{Calculus and Differentials}
@@ -172,6 +207,12 @@ Ordinary and partial derivatives using \latexinline{diffcoeff}:
   \quad \diff{f}{x},
   \quad \diff[2]{f}{x},
   \quad \diffp*{\pbr{f + g}}{x}
+\end{equation*}
+
+\noindent
+and their definition as a limit, using \latexinline{goesto}:
+\begin{equation*}
+  \diff{f}{x} = \lim_{h \goesto 0} \frac{f\pbr{x + h} - f\pbr{x}}{h}
 \end{equation*}
 
 \subsection{Equations}
@@ -250,9 +291,10 @@ Empty set notation (both will produce the same and is decided by the option pass
 Bitwise and shift operators for use in algorithms or hardware descriptions:
 \begin{equation*}
   a \band b,
-  \quad a \bor b,
+  \quad a \bor b
 \end{equation*}
 
+\noindent
 And bitshifting:
 \begin{equation*}
   a \sll b = a \ll b,
@@ -272,7 +314,15 @@ The \latexinline{newunicodechar} package allows direct use of Unicode symbols in
 
 For matrices and vectors, use the respective commands \latexinline{\mat} and \latexinline{\vect} for ease of switching notation, which depends on the setting. Here, \latexinline{\mat} produces \latexinline{\mathbf}, while \latexinline{\vect} produces \latexinline{\bm}:
 \begin{equation*}
-  \mC\vu = \lambda \vu
+  \mC\vu = \lambda \vu,
+  \quad \mA\vx = \vzero,
+  \quad \mI[3]\vx = \vx,
+  \quad \vw = \va \cross \vb
+\end{equation*}
+
+The identity matrix \latexinline{\mI} defaults to $\mI$, and \latexinline{eqpunct} aligns punctuation with the bottom of a tall expression:
+\begin{equation*}
+  \int_0^1 x \dl x = \eqpunct{\frac{1}{2}}{.}
 \end{equation*}
 
 Cancellation of terms using \latexinline{cancel}:
@@ -301,6 +351,42 @@ Can fuse characters:
 \begin{equation*}
   \charfusion{\cdot}{\cup}\charfusion{\cdot}{\cup} \quad \charfusion{|\!\mkern 1.4mu{}^{\sim}\!\mkern 1.4mu|}{\charfusion{\mathbf{\_}}{\mathsf{c}\enspace\enspace\mkern 1.4mu}}
 \end{equation*}
+
+\subsection{Numbers and Units}
+
+The \latexinline{siunitx} package formats numbers, lists, and ranges consistently:
+\begin{equation*}
+  \num{1234567.891},
+  \quad \num{6.022e23},
+  \quad \num{-0.5e-3},
+  \quad \numlist{1;2;3},
+  \quad \numrange{10}{20}
+\end{equation*}
+
+\noindent
+as well as quantities and angles:
+\begin{equation*}
+  \qty{9.81}{\metre\per\second\squared},
+  \quad \qty{3}{\kilo\watt\hour},
+  \quad \qtyrange{20}{25}{\celsius},
+  \quad \qtylist{1;2;4}{\giga\byte},
+  \quad \ang{45},
+  \quad \ang{12;30;15}
+\end{equation*}
+
+The template declares some extra units:
+\begin{align*}
+  &\qty{256}{\bit},
+  \quad \qty{1}{\packet},
+  \quad \qty{1500}{\packets\per\second},
+  \quad \qty{1920}{\pixel}, \\
+  &\qty{2}{\symbol\per\second},
+  \quad \qty{1}{\mile},
+  \quad \qty{26.2}{\miles},
+  \quad \qty{5}{\mega\nothing}
+\end{align*}
+
+Quantities also work in running text, such as a link speed of \qty{100}{\mega\bit\per\second} or \qty{4}{\pixel} of padding.
 
 \subsection{Probability Distributions}
 
@@ -355,17 +441,20 @@ According to \href{https://webusers.imj-prg.fr/~jean-yves.ducloux/Typographie/IS
   \besseljs{l}\pbr{z}                &= \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \besselj{l + \sfrac{1}{2}}\pbr{z}                                                                              \\
   \neumanns{l}\pbr{z}                &= \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \neumann{l + \sfrac{1}{2}}\pbr{z}                                                                              \\
   \hankels{l}\pbr{z}                 &= \besseljs{l}\pbr{z} + \iu\neumanns{l}\pbr{z} = \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \hankel{l + \sfrac{1}{2}}\pbr{z}                                \\
-  \hankelseconds{l}\pbr{z}           &= \besseljs{l}\pbr{z} - \iu\neumanns{l}\pbr{z} = \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \hankelsecond{l + \sfrac{1}{2}}\pbr{z}
+  \hankelseconds{l}\pbr{z}           &= \besseljs{l}\pbr{z} - \iu\neumanns{l}\pbr{z} = \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \hankelsecond{l + \sfrac{1}{2}}\pbr{z}                          \\
+  \besselis{l}\pbr{z}                &= \pbr{\frac{\pi}{2z}}^{\sfrac{1}{2}} \besseli{l + \sfrac{1}{2}}\pbr{z}                                                                              \\
+  \besselks{l}\pbr{z}                &= \pbr{\frac{2}{\pi z}}^{\sfrac{1}{2}} \besselk{l + \sfrac{1}{2}}\pbr{z}                                                                             \\
+  \frac{t}{\eu^t - 1}                &= \sum_{n = 0}^\infty \bernoullinumber{n} \frac{t^n}{\fac{n}}
 \end{align*}
 
 \subsection{Theorem Environments}
 
-The template declares a wide range of theorem-like environments using \latexinline{thmtools} and \latexinline{amsthm}.
+The template declares a wide range of theorem-like environments using \latexinline{keytheorems} and \latexinline{amsthm}.
 
-\begin{theorem}[Extreme Value Theorem]
+\begin{theorem}[Extreme Value Theorem]\label{thm:theorem}
   Let $f$ be a continuous function on a closed interval $\intcc{a}{b}$. Then $f$ attains both its maximum and minimum on $\intcc{a}{b}$.
 \end{theorem}
-\begin{informaltheorem}
+\begin{informaltheorem}\label{thm:informalTheorem}
   Informal theorem.
 \end{informaltheorem}
 \begin{proof}
@@ -378,69 +467,77 @@ The template declares a wide range of theorem-like environments using \latexinli
   Cover $\intcc{a}{b}$ by open sets, extract a finite subcover, and simply apply continuity.
 \end{proofsketch}
 
-\begin{assumption}
+\begin{assumption}\label{thm:assumption}
   We assume throughout that all graphs are simple and undirected.
 \end{assumption}
-\begin{corollary}
+\begin{corollary}\label{thm:corollary}
   In particular, $n\sq - n \geq 0$ for all $n \in \NN$.
 \end{corollary}
 \begin{claim}
   The sum of two even integers is even.
 \end{claim}
-\begin{construction}
+\begin{conjecture}\label{thm:conjecture}
+  Every even integer greater than $2$ is the sum of two primes.
+\end{conjecture}
+\begin{construction}\label{thm:construction}
   Construction.
 \end{construction}
-\begin{definition}
+\begin{definition}\label{thm:definition}
   A \defn{prime number} is a natural number greater than $1$ with no positive divisors other than $1$ and itself.
 \end{definition}
-\begin{fact}
+\begin{fact}\label{thm:fact}
   Every finite group of prime order is cyclic.
 \end{fact}
-\begin{lemma}
+\begin{lemma}\label{thm:lemma}
   For all $n \in \NN$, we have $n\sq \geq n$.
 \end{lemma}
-\begin{observation}
+\begin{observation}\label{thm:observation}
   The degree sequence of a tree on $n$ vertices sums to $2\pbr{n - 1}$.
 \end{observation}
-\begin{principle}
+\begin{principle}\label{thm:principle}
   By the pigeonhole principle, if $n + 1$ items are placed in $n$ containers, at least one container holds more than one item.
 \end{principle}
-\begin{property}
+\begin{property}\label{thm:property}
   The identity element of a group is unique.
 \end{property}
-\begin{proposition}
+\begin{proposition}\label{thm:proposition}
   Every prime greater than $2$ is odd.
 \end{proposition}
-\begin{result}
+\begin{result}\label{thm:result}
   Result.
 \end{result}
-\begin{example}
+\begin{example}\label{thm:example}
   The numbers $2, 3, 5, 7$, and $11$ are all prime.
 \end{example}
-\begin{exercise}
+\begin{exercise}\label{thm:exercise}
   Prove that $\sqrt{2}$ is irrational.
 \end{exercise}
-\begin{problem}
+\begin{problem}\label{thm:problem}
   Find all $x \in \RR$ such that $x\sq = -1$.
 \end{problem}
-\begin{solution}
+\begin{solution}\label{thm:solution}
   There exists no such $x$.
 \end{solution}
+\begin{question}
+  Are there infinitely many twin primes?
+\end{question}
 \begin{aside}
-  Peter er gei.
+  An aside is a short digression from the main argument.
 \end{aside}
 \begin{remark}
   Note that $1$ is not considered a prime number by convention.
 \end{remark}
-\begin{attackgame}
+\begin{attackgame}\label{thm:attackGame}
   Attack game.
 \end{attackgame}
-\begin{functionalitygoal}
+\begin{functionalitygoal}\label{thm:functionalityGoal}
   Functionality goal.
 \end{functionalitygoal}
-\begin{securitygoal}
+\begin{securitygoal}\label{thm:securityGoal}
   Security goal.
 \end{securitygoal}
+
+Every numbered theorem type above is labelled and referenced here, so it is easy to check that each type has a name: \cref{thm:theorem,thm:informalTheorem,thm:assumption,thm:corollary,thm:conjecture,thm:construction,thm:definition,thm:fact,thm:lemma,thm:observation,thm:principle,thm:property,thm:proposition,thm:result,thm:example,thm:exercise,thm:problem,thm:solution,thm:attackGame,thm:functionalityGoal,thm:securityGoal}. The unnumbered types (\latexinline{claim}, \latexinline{question}, \latexinline{aside}, and \latexinline{remark}) cannot be referenced.
 
 \begin{resultbox}
   Hence, stuff.
@@ -463,29 +560,29 @@ Some crypto functions:
   \quad \answer,
   \quad \apply,
   \quad \auth,
-  \quad \Choose,
-  \quad \combine,
-  \quad \commit, \\
-  &\constrain,
+  \quad \Choose, \\
+  &\combine,
+  \quad \commit,
+  \quad \constrain,
   \quad \conv,
   \quad \corr,
   \quad \decide,
-  \quad \decomp,
-  \quad \delegate,
+  \quad \decomp, \\
+  &\delegate,
   \quad \derive,
   \quad \detect,
-  \quad \enroll, \\
-  &\evict,
+  \quad \enroll,
+  \quad \evict,
   \quad \expand,
-  \quad \extend,
-  \quad \fetch,
+  \quad \extend, \\
+  &\fetch,
   \quad \finalize,
   \quad \findcover,
   \quad \forward,
-  \quad \gen, \\
-  &\gentoken,
-  \quad \genwith,
-  \quad \Hint,
+  \quad \gen,
+  \quad \gentoken,
+  \quad \genwith, \\
+  &\Hint,
   \quad \hyb,
   \quad \ideal,
   \quad \Index,
@@ -498,34 +595,36 @@ Some crypto functions:
   \quad \link,
   \quad \macverify,
   \quad \macsign,
-  \quad \Mark,
-  \quad \nextstep, \\
-  &\obliviousaccess,
+  \quad \Mark, \\
+  &\nextprime,
+  \quad \nextstep,
+  \quad \obliviousaccess,
   \quad \open,
   \quad \preprocess,
   \quad \prfeval,
-  \quad \prfgen,
-  \quad \prfpuncture,
-  \quad \prove, \\
-  &\query,
+  \quad \prfgen, \\
+  &\prfpuncture,
+  \quad \prove,
+  \quad \query,
   \quad \rand,
   \quad \Read,
   \quad \real,
-  \quad \recomp,
-  \quad \reconstruct,
+  \quad \recomp, \\
+  &\reconstruct,
   \quad \recover,
-  \quad \register, \\
-  &\request,
+  \quad \register,
+  \quad \request,
   \quad \rerandomize,
   \quad \respond,
-  \quad \Rotate,
-  \quad \seal,
+  \quad \Rotate, \\
+  &\seal,
   \quad \setup,
   \quad \share,
   \quad \shift,
-  \quad \store, \\
-  &\test,
-  \quad \toblock,
+  \quad \smult,
+  \quad \store,
+  \quad \test, \\
+  &\toblock,
   \quad \tostring,
   \quad \tofun,
   \quad \tofuns,
@@ -538,6 +637,7 @@ Some crypto functions:
   \quad \Write
 \end{align*}
 
+\noindent
 And evaluating:
 \begin{equation*}
   \eval\pbr{\mlq\mathord{+}\mrq, \va, \vb},
@@ -560,20 +660,25 @@ Standard algorithmic structures for entities:
   \quad \verifieralgo
 \end{equation*}
 
-Common cryptographic fields and sets:
-\begin{equation*}
-  \bins,
+Common cryptographic fields, groups, and sets:
+\begin{align*}
+  &\bins,
   \quad \FFbar,
   \quad \FFp,
   \quad \FFq,
   \quad \FFtwo,
-  \quad \QQbar,
-  \quad \ZZn,
+  \quad \gf{p^n},
+  \quad \GGp,
+  \quad \GGq,
+  \quad \QQbar, \\
+  &\ZZn,
+  \quad \ZZns,
   \quad \ZZp,
+  \quad \ZZps,
   \quad \ZZq,
-  \quad \ZZtwo,
-  \quad \gf{p^n}
-\end{equation*}
+  \quad \ZZqs,
+  \quad \ZZtwo
+\end{align*}
 
 \subsubsection{Hardness Assumptions, Systems, and Primitives}
 
@@ -650,9 +755,12 @@ Uniform notation for keys, parameters, and ciphertexts using \latexinline{\key}:
 
 \subsubsection{Functions, Sets, and Proofs}
 
-Function spaces, permutations, and proofs of knowledge:
+Function spaces, permutations, proofs of knowledge, and sequences:
 \begin{equation*}
-  \funs{\mathcal{X}}{\mathcal{Y}}, \quad \perms{\mathcal{X}}, \quad \pok{w}{\mathcal{R}\pbr{x, w}}
+  \funs{\mathcal{X}}{\mathcal{Y}},
+  \quad \perms{\mathcal{X}},
+  \quad \pok{w}{\mathcal{R}\pbr{x, w}},
+  \quad \sequence{x_i}_{i \in \NN}
 \end{equation*}
 
 \subsubsection{Security Advantages}
