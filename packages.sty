@@ -117,14 +117,12 @@
     protrusion=true,
   }
 \else\ifluatex
-  \RequirePackage{fontspec}
   \microtypesetup{
     expansion=true,
     kerning=false,
     protrusion=false,
   }
 \else\ifxetex
-  \RequirePackage{fontspec}
   \RequirePackage{morewrites}
   \microtypesetup{
     expansion=false,
@@ -132,6 +130,81 @@
     protrusion=false,
   }
 \fi\fi\fi
+
+\iftutex
+  \RequirePackage[no-math]{fontspec}
+  \makeatletter
+  \ifboolexpr{
+    test {\ifdefstring{\packages@font}{newpx}}
+    or
+    test {\ifdefstring{\packages@font}{newtx}}
+  }{
+    \setsansfont{texgyreheros}[
+      Extension=.otf,
+      UprightFont=*-regular,
+      BoldFont=*-bold,
+      ItalicFont=*-italic,
+      BoldItalicFont=*-bolditalic,
+      NFSSFamily=qhv,
+    ]
+  }{}
+  \ifdefstring{\packages@font}{libertine}{
+    \setmainfont{LibertinusSerif}[
+      Extension=.otf,
+      UprightFont=*-Regular,
+      BoldFont=*-Bold,
+      ItalicFont=*-Italic,
+      BoldItalicFont=*-BoldItalic,
+    ]
+    \setsansfont{LibertinusSans}[
+      Extension=.otf,
+      UprightFont=*-Regular,
+      BoldFont=*-Bold,
+      ItalicFont=*-Italic,
+    ]
+    \setmonofont{LibertinusMono-Regular.otf}[
+      AutoFakeBold=2,
+      AutoFakeSlant=0.2,
+    ]
+  }{
+    \ifdefstring{\packages@font}{mathpazo}{
+      \RequirePackage{mathpazo}
+      \setmainfont{texgyrepagella}[
+        Extension=.otf,
+        UprightFont=*-regular,
+        BoldFont=*-bold,
+        ItalicFont=*-italic,
+        BoldItalicFont=*-bolditalic,
+      ]
+    }{
+      \ifdefstring{\packages@font}{newpx}{
+        \usepxortxtrue
+        \RequirePackage[no-math]{newpxtext}
+      }{
+        \ifdefstring{\packages@font}{newtx}{
+          \usepxortxtrue
+          \RequirePackage{newtxtext}
+        }{
+          \ifdefstring{\packages@font}{stix}{
+            \RequirePackage[notext]{stix}
+            \setmainfont{STIXTwoText}[
+              Extension=.otf,
+              UprightFont=*-Regular,
+              BoldFont=*-Bold,
+              ItalicFont=*-Italic,
+              BoldItalicFont=*-BoldItalic,
+            ]
+          }{
+            \ifdefstring{\packages@font}{lmodern}{}{
+              \PackageError{packages}{Undefined font}{}
+            }
+          }
+        }
+      }
+    }
+  }
+  \makeatother
+\fi
 
 \RequirePackage[all]{nowidow}
 % \flushbottom
@@ -314,7 +387,12 @@
 \RequirePackage{mathrsfs}
 
 \makeatletter
-\ifdefstring{\packages@font}{stix}{}{
+\ifdefstring{\packages@font}{stix}{
+  \ifpdftex
+    \let\mathbbm\mathbb
+    \let\mathds \mathbb
+  \fi
+}{
   \RequirePackage{amssymb}
 }
 \makeatother
@@ -333,7 +411,7 @@
 \RenewDocumentCommand{\sfrac}{o m o m}{\UseInstance{xfrac}{mathdefault}{\mathopen{}#2}{#3}{\mathopen{}#4}}
 
 \makeatletter
-\ifpdftex\ifusepxortx
+\ifusepxortx
   \let\mathscr\undefined
   \let\openbox\undefined
   \ifdefstring{\packages@font}{newpx}{
@@ -345,7 +423,7 @@
 \else\ifdefstring{\packages@font}{libertine}{
   \RequirePackage{libertinust1math}
 }
-\fi\fi
+\fi
 \makeatother
 
 \interdisplaylinepenalty=2500
@@ -853,6 +931,7 @@
 \renewunicodechar{°}{\ensuremath{\unit{\degree}}}
 \renewunicodechar{±}{\ensuremath{\pm}}
 
+\let\vv\undefined
 \newcommand*{\va}{\vect{a}}
 \newcommand*{\vb}{\vect{b}}
 \newcommand*{\vc}{\vect{c}}
@@ -1656,8 +1735,7 @@
 \fancyfoot[C]{\thepage}
 
 \RequirePackage{fmtcount}
-\RequirePackage{mfirstuc}
-\RequirePackage{nth}
+\FCloadlang{english}
 
 \newcommand*{\Romannumeral}[1]{\MakeUppercase{\romannumeral #1}}
 
