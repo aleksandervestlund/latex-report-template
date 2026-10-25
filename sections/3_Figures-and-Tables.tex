@@ -204,12 +204,12 @@ Project plans can be drawn with \latexinline{pgfgantt}:
     x unit=0.6cm,
     y unit chart=0.6cm,
   ]{1}{12}
-    \gantttitle{2026}{12}                \\
-    \gantttitlelist{1,...,12}{1}         \\
-    \ganttgroup{Project}{1}{12}          \\
-    \ganttbar{Research}{1}{4}            \\
-    \ganttbar{Implementation}{4}{9}      \\
-    \ganttmilestone{Prototype}{9}        \\
+    \gantttitle{2026}{12}           \\
+    \gantttitlelist{1,...,12}{1}    \\
+    \ganttgroup{Project}{1}{12}     \\
+    \ganttbar{Research}{1}{4}       \\
+    \ganttbar{Implementation}{4}{9} \\
+    \ganttmilestone{Prototype}{9}   \\
     \ganttbar{Writing}{9}{12}
     \ganttlink{elem1}{elem2}
     \ganttlink{elem2}{elem3}
@@ -225,13 +225,22 @@ Images can be trimmed, framed, and rotated with \latexinline{adjustbox}, and tex
   \centering
   \begin{subfigure}{0.45\linewidth}
     \centering
-    \adjincludegraphics[width=0.8\linewidth, trim={0 {0.25\height} 0 {0.25\height}}, clip, frame]{the_way}
+    \adjincludegraphics[
+      width=0.8\linewidth,
+      trim={0 {0.25\height} 0 {0.25\height}},
+      clip,
+      frame,
+    ]{the_way}
     \caption{Trimmed and framed.}
   \end{subfigure}
   \hfill
   \begin{subfigure}{0.45\linewidth}
     \centering
-    \adjustbox{frame, rotate=10, width=0.8\linewidth}{\includegraphics{the_way}}
+    \adjustbox{
+      frame,
+      rotate=10,
+      width=0.8\linewidth,
+    }{\includegraphics{the_way}}
     \caption{Framed and rotated.}
   \end{subfigure}
   \caption{Image manipulation using \latexinline{adjustbox}.}
@@ -240,11 +249,17 @@ Images can be trimmed, framed, and rotated with \latexinline{adjustbox}, and tex
 
 \begin{figure}
   \centering
-  \begin{sideways}Sideways\end{sideways}
+  \begin{sideways}
+    Sideways
+  \end{sideways}
   \hspace{3em}
-  \begin{turn}{30}Turned \ang{30}\end{turn}
+  \begin{turn}{30}
+    Turned \ang{30}
+  \end{turn}
   \hspace{3em}
-  \begin{turn}{-30}Turned \ang{-30}\end{turn}
+  \begin{turn}{-30}
+    Turned \ang{-30}
+  \end{turn}
   \caption{Rotated text using \latexinline{rotating}.}
   \label{fig:rotating}
 \end{figure}

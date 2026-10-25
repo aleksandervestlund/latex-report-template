@@ -228,27 +228,28 @@ An equation with a label and number, demonstrating \latexinline{amsmath}:
 
 The custom \latexinline{inequality} environment assigns a label like an equation:
 \begin{inequality}\label{ineq:example}
-  n\sq \geq n \quad \text{for all } n \geq 1.
+  n\sq ≥ n
+  \quad \text{for all } n ≥ 1.
 \end{inequality}
 
 The custom \latexinline{invariant} environment also assigns a label like an equation:
 \begin{invariant}\label{inv:example}
-  n\sq \geq n \quad \text{for all } n \geq 1.
+  n\sq ≥ n \quad \text{for all } n ≥ 1.
 \end{invariant}
 
 \cref{eq:euler,ineq:example,inv:example}. A piecewise\-/defined function using \latexinline{cif} and \latexinline{cow}:
 \begin{equation*}
   f\pbr{x} = \begin{cases}
-    x\sq & \cif{x \geq 0} \\
+    x\sq & \cif{x ≥ 0} \\
     -x   & \cow.
   \end{cases}
 \end{equation*}
 
 We also use \latexinline{mathclap} to fix spacing in subscripts:
 \begin{equation*}
-  \sum_{1 \leq i < j \leq n} a_{ij}
+  \sum_{1 ≤ i < j ≤ n} a_{ij}
   \quad \text{vs.} \quad
-  \sum_{\mathclap{1 \leq i < j \leq n}} a_{ij}.
+  \sum_{\mathclap{1 ≤ i < j ≤ n}} a_{ij}.
 \end{equation*}
 
 Quotient group notation using \latexinline{faktor}:
@@ -475,7 +476,7 @@ The template declares a wide range of theorem-like environments using \latexinli
   We assume throughout that all graphs are simple and undirected.
 \end{assumption}
 \begin{corollary}\label{thm:corollary}
-  In particular, $n\sq - n \geq 0$ for all $n \in \NN$.
+  In particular, $n\sq - n ≥ 0$ for all $n \in \NN$.
 \end{corollary}
 \begin{claim}
   The sum of two even integers is even.
@@ -493,7 +494,7 @@ The template declares a wide range of theorem-like environments using \latexinli
   Every finite group of prime order is cyclic.
 \end{fact}
 \begin{lemma}\label{thm:lemma}
-  For all $n \in \NN$, we have $n\sq \geq n$.
+  For all $n \in \NN$, we have $n\sq ≥ n$.
 \end{lemma}
 \begin{observation}\label{thm:observation}
   The degree sequence of a tree on $n$ vertices sums to $2\pbr{n - 1}$.
@@ -653,7 +654,7 @@ Modified base algorithms from the package:
   \kgen,
   \quad \puncture,
   \quad \prover,
-  \quad \verifier
+  \quad \verifier,
   \quad \verify.
 \end{equation*}
 
@@ -806,7 +807,7 @@ Custom landau definitions:
 \FloatBarrier
 \subsubsection{Procedure}
 
-\begin{figure}
+\begin{figure}[!b]
   \centering
   \begin{pcimage}
     \procb[colspace=0em]{ZK Battleship}{
